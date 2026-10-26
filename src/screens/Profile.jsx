@@ -1,6 +1,6 @@
 import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
-import { TopBar, Button, Kicker, Icon, DemoNote, Sprig, useToast } from '../ui.jsx';
+import { TopBar, Button, Kicker, Icon, DemoNote, Sprig, useToast, ConfirmTap } from '../ui.jsx';
 import { fmtDate } from '../lib.js';
 import { WORDMARK } from '../assets.js';
 
@@ -48,7 +48,9 @@ export default function Profile({ onSignOut }) {
           </div>
           <p className="small muted" style={{ marginTop: 10 }}>Move the preview date to see care checks and gift reminders come due.</p>
         </div>
-        <Button block variant="ghost" style={{ marginTop: 12 }} onClick={() => { if (window.confirm('Reset the whole preview? All local changes will be cleared.')) { resetDemo(); nav.resetAll(); } }}>Reset demo</Button>
+        <ConfirmTap onConfirm={() => { resetDemo(); nav.resetAll(); }} render={(armed, tap) => (
+          <Button block variant="ghost" style={{ marginTop: 12 }} onClick={tap}>{armed ? 'Tap again to clear everything' : 'Reset demo'}</Button>
+        )} />
         <div style={{ marginTop: 12 }}><DemoNote>Everything here is simulated and stored only in this browser. No production accounts, counters or emails are involved.</DemoNote></div>
       </div>
     </>

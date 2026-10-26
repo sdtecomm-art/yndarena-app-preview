@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
 import { useActions } from '../actions.js';
-import { TopBar, Segmented, Chip, Icon, IconButton, Button, Empty, Stars, Kicker, PhotoPending, useToast } from '../ui.jsx';
+import { TopBar, Segmented, Chip, Icon, IconButton, Button, Empty, Stars, Kicker, PhotoPending, useToast, ConfirmTap } from '../ui.jsx';
 import { BoardThumb, ItemIcon, NotesBlock } from '../components.jsx';
 import BoardView from '../board/BoardView.jsx';
 import { PRESENTATIONS } from '../data/presentations.js';
@@ -202,11 +202,13 @@ export function DesignItem({ params }) {
       </div>
 
       <div className="pad section">
-        <button className="link" style={{ color: '#8c3f33', borderColor: '#c9a49c' }} onClick={() => {
-          if (!window.confirm('Remove this design from your collection?')) return;
-          nav.pop();
-          updateUser((u) => { delete u.designs[d.id]; u.made = u.made.filter((m) => !(m.kind === 'design' && m.refId === d.id)); if (u.recent?.id === d.id) u.recent = null; });
-        }}>Remove design</button>
+        <ConfirmTap
+          onConfirm={() => {
+            nav.pop();
+            updateUser((u) => { delete u.designs[d.id]; u.made = u.made.filter((m) => !(m.kind === 'design' && m.refId === d.id)); if (u.recent?.id === d.id) u.recent = null; });
+          }}
+          render={(armed, tap) => <button className="link" style={{ color: '#8c3f33', borderColor: '#c9a49c' }} onClick={tap}>{armed ? 'Tap again to remove' : 'Remove design'}</button>}
+        />
       </div>
     </>
   );

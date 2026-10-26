@@ -172,6 +172,13 @@ export function Screen({ children, className = '', bar }) {
   );
 }
 
+// Two-step confirmation inside the UI (no native dialogs, which some webviews block).
+export function ConfirmTap({ render, onConfirm, ms = 3500 }) {
+  const [armed, setArmed] = useState(false);
+  useEffect(() => { if (!armed) return; const t = setTimeout(() => setArmed(false), ms); return () => clearTimeout(t); }, [armed, ms]);
+  return render(armed, () => { if (armed) { setArmed(false); onConfirm(); } else setArmed(true); });
+}
+
 // ---------- Sheet ----------
 export function Sheet({ open, onClose, title, children, tall }) {
   const [show, setShow] = useState(open);

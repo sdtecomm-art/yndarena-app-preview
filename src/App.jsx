@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StoreProvider, useStore, DEMO_CODE, RETURNING_EMAIL } from './store.jsx';
 import { NavProvider, useNav, TABS } from './nav.jsx';
-import { ToastProvider, ToastHost, useToast, Icon, Kicker, Sprig } from './ui.jsx';
+import { ToastProvider, ToastHost, useToast, Icon, Kicker, Sprig, ConfirmTap } from './ui.jsx';
 import { useActions } from './actions.js';
 import { pad4 } from './lib.js';
 import { COMMUNITY } from './data/community.js';
@@ -233,7 +233,7 @@ function SidePanels({ children, setShared }) {
           ))}
         </ul>
         <div className="row" style={{ marginTop: 18, gap: 10 }}>
-          <button className="link" onClick={() => { if (window.confirm('Reset the whole preview? All local changes will be cleared.')) { resetDemo(); nav.resetAll(); setShared(null); } }}>Reset demo</button>
+          <ConfirmTap onConfirm={() => { resetDemo(); nav.resetAll(); setShared(null); toast('Preview reset.'); }} render={(armed, tap) => <button className="link" onClick={tap}>{armed ? 'Tap again to clear everything' : 'Reset demo'}</button>} />
           <Sprig style={{ height: 34, marginLeft: 'auto' }} />
         </div>
       </aside>
