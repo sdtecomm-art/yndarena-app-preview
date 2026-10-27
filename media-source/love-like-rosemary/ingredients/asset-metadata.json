@@ -1,0 +1,194 @@
+[
+  {
+    "file": "brie-four-wedges-fan.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      43,
+      217,
+      1169,
+      813
+    ],
+    "transparentPixels": 1003419,
+    "nonTransparentPixels": 569097,
+    "alphaVerified": true,
+    "bytes": 1083534,
+    "sha256": "4aa3470e6482824f44c1206412639bd7ee6728218d80277762353a9099ae7be0"
+  },
+  {
+    "file": "brie-wheel-cut-wedge.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      133,
+      153,
+      1015,
+      938
+    ],
+    "transparentPixels": 850306,
+    "nonTransparentPixels": 722210,
+    "alphaVerified": true,
+    "bytes": 1567318,
+    "sha256": "f433705efa1345cc89b4ee95a914e1d9b33a27481b1f1a5bf55fdf2d6394b95e"
+  },
+  {
+    "file": "cheddar-cubes-group.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      112,
+      124,
+      1031,
+      1020
+    ],
+    "transparentPixels": 894665,
+    "nonTransparentPixels": 677851,
+    "alphaVerified": true,
+    "bytes": 1321591,
+    "sha256": "4c7a4b9427c2b7f82c0c551f1d9853b649fab258111f93e741b0591cb4cbade1"
+  },
+  {
+    "file": "cheddar-six-triangles-fan.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      21,
+      159,
+      1216,
+      943
+    ],
+    "transparentPixels": 880879,
+    "nonTransparentPixels": 691637,
+    "alphaVerified": true,
+    "bytes": 1355315,
+    "sha256": "5d8c2c02635a721234d3513ef0914b54702615242446c16502e6c9fbfd28d7c2"
+  },
+  {
+    "file": "fig-rosemary-jam-ivory-ramekin.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      188,
+      191,
+      871,
+      874
+    ],
+    "transparentPixels": 957227,
+    "nonTransparentPixels": 615289,
+    "alphaVerified": true,
+    "bytes": 1484385,
+    "sha256": "15d36e0e6e6e4cf041eb2e7ead34133de840eb5788fbfc3aff9a71345727d3da"
+  },
+  {
+    "file": "fresh-fig-two-halves.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      98,
+      225,
+      1069,
+      805
+    ],
+    "transparentPixels": 1030403,
+    "nonTransparentPixels": 542113,
+    "alphaVerified": true,
+    "bytes": 1413293,
+    "sha256": "fa5673598ecad44146d5ea395de007a34c012a86e8b6cc0cc4031afb38345687"
+  },
+  {
+    "file": "plain-round-cracker-single.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      106,
+      108,
+      1043,
+      1030
+    ],
+    "transparentPixels": 737769,
+    "nonTransparentPixels": 834747,
+    "alphaVerified": true,
+    "bytes": 2004217,
+    "sha256": "4b72fe3ec55a3fd2c46c553e7807c8f9290080a4f5df4f8f0d77265be7f4206d"
+  },
+  {
+    "file": "prosciutto-ribbon-group.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      72,
+      112,
+      1119,
+      1057
+    ],
+    "transparentPixels": 874040,
+    "nonTransparentPixels": 698476,
+    "alphaVerified": true,
+    "bytes": 1525360,
+    "sha256": "a211e52f65d65a0099c22bb41eb9125c76f711211b1bd5c73277d09daec172b5"
+  },
+  {
+    "file": "prosciutto-single-rose.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      108,
+      124,
+      1057,
+      1006
+    ],
+    "transparentPixels": 797520,
+    "nonTransparentPixels": 774996,
+    "alphaVerified": true,
+    "bytes": 1644062,
+    "sha256": "236d39a714d79d35a8d2b39c3eac06e05159aa340f33faf244b60d658e3e2ca2"
+  },
+  {
+    "file": "red-grapes-small-cluster.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      134,
+      153,
+      986,
+      937
+    ],
+    "transparentPixels": 917184,
+    "nonTransparentPixels": 655332,
+    "alphaVerified": true,
+    "bytes": 1791113,
+    "sha256": "d71697fc0eb7e2747dc6c173ce01d3ba74c00b65b0a017299b5a770254bc84a4"
+  },
+  {
+    "file": "rosemary-honey-walnuts-pile.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      142,
+      167,
+      981,
+      944
+    ],
+    "transparentPixels": 936043,
+    "nonTransparentPixels": 636473,
+    "alphaVerified": true,
+    "bytes": 1659775,
+    "sha256": "734b8fb7e2cee50212ad149b0bbf8a7a15984573d970548231e8296105276563"
+  },
+  {
+    "file": "rosemary-single-sprig.png",
+    "width": 1254,
+    "height": 1254,
+    "alphaBounds": [
+      442,
+      54,
+      444,
+      1157
+    ],
+    "transparentPixels": 1299064,
+    "nonTransparentPixels": 273452,
+    "alphaVerified": true,
+    "bytes": 843382,
+    "sha256": "aa3bbfd665b76896799cac68361391df3f06c1b387bb424f4f6cb2cf5e3cccde"
+  }
+]

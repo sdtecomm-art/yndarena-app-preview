@@ -54,22 +54,14 @@ Ported from the existing care plan spec (`lib.js`): first check at week 3 from t
 
 ## Visual resources (pilot: Love, Like Rosemary)
 
-Registry: `src/data/media.js`. Every asset declares its role (`cover`, `layout-top`, `step`, `cutout`, `video`), provenance and status, and the UI labels it accordingly. Images live in `src/media/`, optimized to WebP (alpha preserved for cutouts), loaded lazily and with `srcset`.
+Registry: `src/data/media.js`. Every asset declares its role, provenance and status. Source files, their manifest and generation prompts are kept in `media-source/` (not bundled); the app uses optimized WebP copies in `src/media/`, cropped to their visible area with alpha preserved.
 
-| Resource | Role | Status |
-|---|---|---|
-| `llr-two-halves-top` | Overhead photo of the Two Halves layout (also used as card image while there is no editorial cover) | Integrated, provisional: AI reference, generic board, portions not verified |
-| `cheddar-fan` | Designer cutout for aged cheddar, triangles | Integrated, provisional: AI sample; one fan assumed to be about 2 oz |
-| Cover photo for Love, Like Rosemary | Editorial cover | Pending |
-| Photos for The Sprig and Gathered layouts | Layout top views | Pending (illustrations shown, labelled) |
-| Build step photos | Steps | Pending |
-| Other Designer cutouts | Cutouts | Pending (illustrations remain) |
-| Prosciutto Rose video, poster, segments, captions | Technique video | Pending (player ready, state shown as pending) |
-
-- A layout photo is linked to one composition (`compositions[].media.topView`) with the lists of what matches and what differs, shown on the presentation page. The editable positions remain the reference for Designer and the build guide.
-- Photo pieces repeat groups for more quantity instead of stretching (`PHOTO_PIECES` in `media.js`).
-- Technique videos: fill `video` in `techniques.js` with `status: 'ready'`, `src`, `poster`, optional `captions` (WebVTT) and `segments` (`{ step, start, end }` in seconds). The player supports play/pause, replay, loop, 0.5× speed and step navigation, and only loads the clip when play is pressed.
-- To test the player in development only: `localStorage.setItem('ynd-video-fixture', '<url of a test clip>')`. This code path is removed from production builds.
+- `llr-two-halves-top`: AI reference photo of the Two Halves layout, used as the cover of the original presentation.
+- 12 AI ingredient cutouts (`media-source/love-like-rosemary/ingredients/`) mapped to item type and serving style in `PHOTO_PIECES`. Modes: `group` (one image inside the item's approximate footprint), `cluster` (visual count only) and `units` (one image per cracker, fig or sprig, so the picture matches the count).
+- The same renderer (`BoardView`) draws Designer, layout thumbnails, build-by-layers, saved versions and shared links. Quantities and lists never depend on images.
+- Reviewer notes (sources, hashes, coverage by layout, photo vs. layout differences, checks and pending items) live in the in-app **Review panel** (Profile → Preview tools, or the desktop side panel), outside the customer journey. Text in `src/data/review.js`.
+- Pending: real photos on the product board with weighed portions, editorial cover, step photos, the Prosciutto Rose video, cutouts for the rest of the library.
+- Technique videos: fill `video` in `techniques.js` with `status: 'ready'`, `src`, `poster`, optional `captions` (WebVTT) and `segments` (`{ step, start, end }` in seconds). In development only, `localStorage.setItem('ynd-video-fixture', '<url>')` loads a test clip; production builds drop that path.
 
 ## Not real yet
 

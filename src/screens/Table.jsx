@@ -185,7 +185,7 @@ export default function Table({ params }) {
                 <div style={{ marginTop: 18, textAlign: 'left' }}>
                   <div className="label" style={{ marginBottom: 8 }}>Reference photo of this layout</div>
                   <div className="photo-hero" style={{ borderRadius: 12, overflow: 'hidden' }}><MediaImg id={comp.media.topView} /></div>
-                  <p className="small muted" style={{ marginTop: 8 }}>The guide above follows the editable layout. See the presentation for where the photo differs.</p>
+                  <p className="small muted" style={{ marginTop: 8 }}>Yours doesn’t need to match it. The guide above follows the layout you chose.</p>
                 </div>
               )}
             </div>

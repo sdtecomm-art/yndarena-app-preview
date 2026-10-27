@@ -39,6 +39,10 @@ export default function Profile({ onSignOut }) {
 
       <div className="pad section">
         <Kicker>Preview tools</Kicker>
+        <button className="list-row" onClick={() => nav.push('review')}>
+          <div className="grow"><div>Review panel</div><div className="sub">Image sources, checks and differences for reviewers</div></div>
+          <Icon name="chevron" size={18} />
+        </button>
         <div className="card card-pad" style={{ marginTop: 10 }}>
           <div className="small">Preview date: <strong style={{ fontWeight: 500, color: 'var(--c-black)' }}>{fmtDate(today, true)}</strong>{offset ? ` (${offset > 0 ? '+' : ''}${offset} days)` : ''}</div>
           <div className="row wrap" style={{ gap: 8, marginTop: 10 }}>

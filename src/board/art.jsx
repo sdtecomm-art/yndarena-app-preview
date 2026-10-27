@@ -1,7 +1,8 @@
 // Top-down illustrations for each ready-to-place group. Drawn in local
 // coordinates centered on 0,0 within a w x h footprint.
 import { ROSEMARY_PATH } from './rosemaryPath.js';
-import { MEDIA, photoPiece, photoGroups } from '../data/media.js';
+import { MEDIA, photoPiece, photoLayout } from '../data/media.js';
+import { baseSize } from '../data/catalog.js';
 
 export function rng(seedStr) {
   let h = 1779033703 ^ seedStr.length;
@@ -476,32 +477,24 @@ export function ItemArt({ it, w, h, style, qty, seed }) {
   return <Art it={it} w={w} h={h} style={style} qty={qty} rand={rand} />;
 }
 
-// Photographic group: the same cutout repeated, never stretched to fake a quantity.
-function PhotoPiece({ piece, qty, seed }) {
+// Photographic group: one or more cutouts laid out by photoLayout, drawn as a single group.
+function PhotoPiece({ piece, qty, base }) {
   const m = MEDIA[piece.asset];
-  const n = photoGroups(piece, qty);
-  const [w0, h0] = piece.footprint;
-  const step = w0 * 0.62;
-  const total = w0 + (n - 1) * step;
-  const rand = rng('photo:' + seed);
+  const { parts } = photoLayout(piece, qty, base);
   return (
     <g>
-      {Array.from({ length: n }, (_, i) => {
-        const cx = -total / 2 + w0 / 2 + i * step;
-        const rot = n > 1 ? (i % 2 ? 5 : -5) + (rand() - 0.5) * 4 : 0;
-        return (
-          <image
-            key={i}
-            href={m.src}
-            x={-w0 * piece.anchor[0]}
-            y={-h0 * piece.anchor[1]}
-            width={w0}
-            height={h0}
-            preserveAspectRatio="xMidYMid meet"
-            transform={`translate(${cx} ${(i % 2) * 4 - 2}) rotate(${rot})`}
-          />
-        );
-      })}
+      {parts.map((p, i) => (
+        <image
+          key={i}
+          href={m.src}
+          x={-p.w / 2}
+          y={p.origin === 'bottom' ? -p.h : -p.h / 2}
+          width={p.w}
+          height={p.h}
+          preserveAspectRatio="xMidYMid meet"
+          transform={`translate(${p.x} ${p.y}) rotate(${p.r})`}
+        />
+      ))}
     </g>
   );
 }
@@ -509,6 +502,6 @@ function PhotoPiece({ piece, qty, seed }) {
 // Chooses the photographic piece when one exists for this item and style, otherwise the illustration.
 export function ItemVisual({ type, it, w, h, style, qty, seed }) {
   const piece = photoPiece(type, style);
-  if (piece) return <PhotoPiece piece={piece} qty={qty} seed={seed} />;
+  if (piece) return <PhotoPiece piece={piece} qty={qty} base={baseSize(type, qty)} />;
   return <ItemArt it={it} w={w} h={h} style={style} qty={qty} seed={seed} />;
 }

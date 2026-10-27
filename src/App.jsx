@@ -20,6 +20,7 @@ import Collection, { DesignItem, MadeItem } from './screens/Collection.jsx';
 import Community, { ShareDesign, SharedView, decodeShare, encodeShare } from './screens/Community.jsx';
 import Care, { WaterTest } from './screens/Care.jsx';
 import Profile, { Story } from './screens/Profile.jsx';
+import Review from './screens/Review.jsx';
 import { WORDMARK } from './assets.js';
 
 const TAB_META = {
@@ -53,6 +54,7 @@ function ScreenFor({ route, onSignOut, openProfile }) {
     case 'water-test': return <WaterTest />;
     case 'profile': return <Profile onSignOut={onSignOut} />;
     case 'story': return <Story />;
+    case 'review': return <Review />;
     default: return null;
   }
 }
@@ -194,6 +196,7 @@ function SidePanels({ children, setShared }) {
       if (k === 'collection') nav.switchTab('collection');
       if (k === 'h2h') nav.switchTab('discover', { name: 'community', params: { id: 'h2h-midnight' } });
       if (k === 'care') nav.switchTab('care');
+      if (k === 'review') nav.switchTab('home', { name: 'review', params: {} });
       if (k === 'gifts') nav.switchTab('care', { name: 'care', params: { seg: 'gifts' } });
     }, 30);
   };
@@ -233,6 +236,7 @@ function SidePanels({ children, setShared }) {
           ))}
         </ul>
         <div className="row" style={{ marginTop: 18, gap: 10 }}>
+          <button className="link" onClick={() => run('review')}>Review panel</button>
           <ConfirmTap onConfirm={() => { resetDemo(); nav.resetAll(); setShared(null); toast('Preview reset.'); }} render={(armed, tap) => <button className="link" onClick={tap}>{armed ? 'Tap again to clear everything' : 'Reset demo'}</button>} />
           <Sprig style={{ height: 34, marginLeft: 'auto' }} />
         </div>

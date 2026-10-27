@@ -1,4 +1,4 @@
-import { photoPiece, photoFootprint } from './media.js';
+import { photoPiece, photoLayout } from './media.js';
 
 // Board models and the visual library used by Designer, presentations and lists.
 // Coordinates live in a 600 x 400 board space. Footprints are approximate on purpose:
@@ -348,14 +348,22 @@ export const ITEMS = {
   },
 };
 
-// Approximate footprint in board units. Photographic pieces repeat groups instead of stretching.
-export function sizeFor(type, qty, style) {
+// Approximate footprint in board units for an illustrated group.
+export function baseSize(type, qty) {
   const it = ITEMS[type];
-  const piece = photoPiece(type, style || it.styles[0].id);
-  if (piece) return photoFootprint(piece, qty);
   const k = Math.max(0.62, Math.min(1.55, Math.sqrt(qty / it.baseQty)));
   if (it.art === 'rosemary') return [it.fp[0], it.fp[1]];
   return [it.fp[0] * k, it.fp[1] * k];
+}
+
+// Size of a group as drawn: photographic pieces keep their own proportions inside the same footprint.
+export function sizeFor(type, qty, style) {
+  const it = ITEMS[type];
+  const piece = photoPiece(type, style || it.styles[0].id);
+  const base = baseSize(type, qty);
+  if (!piece) return base;
+  const l = photoLayout(piece, qty, base);
+  return [l.w, l.h];
 }
 
 export function styleOf(type, styleId) {

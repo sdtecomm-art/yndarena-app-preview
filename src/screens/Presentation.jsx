@@ -3,7 +3,10 @@ import { useNav } from '../nav.jsx';
 import { useActions } from '../actions.js';
 import { TopBar, Kicker, Button, Icon, PhotoPending, DemoNote, Sprig, Segmented } from '../ui.jsx';
 import { MediaImg } from '../components.jsx';
-import { MEDIA } from '../data/media.js';
+import { photoPiece } from '../data/media.js';
+import { styleOf } from '../data/catalog.js';
+
+const usesPhotoPieces = (items) => items.some((i) => photoPiece(i.type, styleOf(i.type, i.style).id));
 import { SaveButton, RecipeRow } from '../components.jsx';
 import BoardView from '../board/BoardView.jsx';
 import { PRESENTATIONS, OCCASIONS } from '../data/presentations.js';
@@ -103,14 +106,15 @@ export default function Presentation({ params }) {
           <div className="hero-board" style={{ position: 'relative' }}>
             <div style={{ height: 'calc(var(--safe-top) + 40px)' }} />
             <BoardView key={compId} boardId={p.board} items={items} uid={'pres-' + compId} label={`${p.name}, ${comp.name} layout`} />
-            <span className="photo-tag">Editable layout</span>
+            <span className="photo-tag">{usesPhotoPieces(items) ? 'AI preview' : 'Illustration'}</span>
             <div className="view-toggle"><Segmented value={view} onChange={setView} options={[{ id: 'photo', label: 'Photo' }, { id: 'layout', label: 'Layout' }]} /></div>
           </div>
         ) : (
-          <PhotoPending className="hero-board">
+          <div className="hero-board" style={{ position: 'relative' }}>
             <div style={{ height: 'calc(var(--safe-top) + 40px)' }} />
             <BoardView key={compId} boardId={p.board} items={items} uid={'pres-' + compId} label={`${p.name}, ${comp.name} layout`} />
-          </PhotoPending>
+            <span className="photo-tag">{usesPhotoPieces(items) ? 'AI preview' : 'Photo pending'}</span>
+          </div>
         )}
       </div>
 
@@ -131,25 +135,9 @@ export default function Presentation({ params }) {
             ))}
           </div>
           <p className="small pad" style={{ margin: '10px 0 0' }}><em>{comp.name}.</em> {comp.desc}</p>
-          {!photo && <p className="small pad muted" style={{ margin: '6px 0 0' }}>No photo of this layout yet. The illustration follows the editable positions.</p>}
         </div>
       )}
 
-      {photo && (
-        <div className="pad" style={{ marginTop: 16 }}>
-          <div className="card card-pad">
-            <div className="row-between">
-              <div className="label">Photo and layout check</div>
-              <span className="tag is-lav">{MEDIA[photo].label}</span>
-            </div>
-            <p className="small" style={{ margin: '8px 0 0' }}>{MEDIA[photo].note} The editable layout is the reference for Designer and the build guide.</p>
-            <div className="label" style={{ marginTop: 12 }}>Same in both</div>
-            <ul className="check-list">{comp.media.matches.map((m) => <li key={m}><span className="mk">=</span>{m}</li>)}</ul>
-            <div className="label" style={{ marginTop: 10 }}>Different in the photo</div>
-            <ul className="check-list">{comp.media.differs.map((m) => <li key={m}><span className="mk">≠</span>{m}</li>)}</ul>
-          </div>
-        </div>
-      )}
 
       <div className="pad" style={{ marginTop: 22 }}>
         <Kicker>{occ.label} · {p.context}</Kicker>
@@ -219,7 +207,7 @@ export default function Presentation({ params }) {
       </div>
 
       <div className="pad" style={{ marginTop: 20 }}>
-        <DemoNote>Preview content. Quantities and steps are representative and have not been kitchen-tested yet. Illustrations and AI reference images stand in for real photos.</DemoNote>
+        <DemoNote>Preview content. Quantities and steps are representative and have not been kitchen-tested yet. Images are AI previews or illustrations, not photos of a tested board.</DemoNote>
       </div>
       <div className="sticky-cta">
         <Button variant="ghost" small className="grow" icon="edit" onClick={() => { const id = a.fromPresentation(params.id, compId); nav.push('designer', { id }); }}>Make it yours</Button>

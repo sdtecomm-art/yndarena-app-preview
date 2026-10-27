@@ -20,6 +20,8 @@ export const PRESENTATIONS = {
     board: 'cheese-bread',
     intro: 'A small board for two, with a spoonful of fig jam at its heart and a sprig of rosemary on each side.',
     memory: 'Rosemary is for love and memory. This one is for the evenings you will want to keep.',
+    // The reference photo shows the Two Halves layout and doubles as the cover of the original.
+    media: { cover: 'llr-two-halves-top' },
     groups: [
       { type: 'bowl-jam', qty: 0.25 },
       { type: 'brie', qty: 6 },

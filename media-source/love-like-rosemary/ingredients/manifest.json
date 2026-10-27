@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "collection": "Love, Like Rosemary",
+  "created": "2026-10-27",
+  "purpose": "Photorealistic transparent ingredient assets for Designer and assembly layers.",
+  "generation": "Built-in image_gen; 11 selected new images and 1 previously generated cheddar fan.",
+  "assetCount": 12,
+  "physicalCalibration": "Not measured; keep recipe quantities independent from visual units.",
+  "bindingsAreSuggestions": "Check the actual existing model IDs before integrating.",
+  "assets": [
+    {
+      "id": "fig-rosemary-jam-ivory-ramekin",
+      "file": "assets/fig-rosemary-jam-ivory-ramekin.png",
+      "ingredient": "Fig & Rosemary Jam",
+      "format": "in a small bowl",
+      "suggestedBinding": {
+        "ingredientKey": "bowl-jam",
+        "formatKey": "bowl"
+      },
+      "techniqueLabel": "Bowls First",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 188,
+        "y": 191,
+        "width": 871,
+        "height": 874,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 0.9966,
+      "pivotInSource": {
+        "x": 0.4972089314194577,
+        "y": 0.5007974481658692
+      },
+      "alphaVerified": true,
+      "sha256": "15d36e0e6e6e4cf041eb2e7ead34133de840eb5788fbfc3aff9a71345727d3da",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "brie-four-wedges-fan",
+      "file": "assets/brie-four-wedges-fan.png",
+      "ingredient": "Brie",
+      "format": "wedges",
+      "suggestedBinding": {
+        "ingredientKey": "brie",
+        "formatKey": "wedges"
+      },
+      "techniqueLabel": "Brie Wedges",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 43,
+        "y": 217,
+        "width": 1169,
+        "height": 813,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.4379,
+      "pivotInSource": {
+        "x": 0.5003987240829346,
+        "y": 0.4972089314194577
+      },
+      "alphaVerified": true,
+      "sha256": "4aa3470e6482824f44c1206412639bd7ee6728218d80277762353a9099ae7be0",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "brie-wheel-cut-wedge",
+      "file": "assets/brie-wheel-cut-wedge.png",
+      "ingredient": "Brie",
+      "format": "whole, one wedge cut",
+      "suggestedBinding": {
+        "ingredientKey": "brie",
+        "formatKey": "whole"
+      },
+      "techniqueLabel": "Brie Wedges",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 133,
+        "y": 153,
+        "width": 1015,
+        "height": 938,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.0821,
+      "pivotInSource": {
+        "x": 0.5107655502392344,
+        "y": 0.4960127591706539
+      },
+      "alphaVerified": true,
+      "sha256": "f433705efa1345cc89b4ee95a914e1d9b33a27481b1f1a5bf55fdf2d6394b95e",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "cheddar-six-triangles-fan",
+      "file": "assets/cheddar-six-triangles-fan.png",
+      "ingredient": "Aged cheddar",
+      "format": "triangles",
+      "suggestedBinding": {
+        "ingredientKey": "cheddar",
+        "formatKey": "triangles"
+      },
+      "techniqueLabel": "Cheese Triangles",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 21,
+        "y": 159,
+        "width": 1216,
+        "height": 943,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.2895,
+      "pivotInSource": {
+        "x": 0.5015948963317385,
+        "y": 0.5027910685805422
+      },
+      "alphaVerified": true,
+      "sha256": "5d8c2c02635a721234d3513ef0914b54702615242446c16502e6c9fbfd28d7c2",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "reused-ai-cutout"
+    },
+    {
+      "id": "cheddar-cubes-group",
+      "file": "assets/cheddar-cubes-group.png",
+      "ingredient": "Aged cheddar",
+      "format": "cubes",
+      "suggestedBinding": {
+        "ingredientKey": "cheddar",
+        "formatKey": "cubes"
+      },
+      "techniqueLabel": "Cheese Cubes",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 112,
+        "y": 124,
+        "width": 1031,
+        "height": 1020,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.0108,
+      "pivotInSource": {
+        "x": 0.5003987240829346,
+        "y": 0.5055821371610846
+      },
+      "alphaVerified": true,
+      "sha256": "4c7a4b9427c2b7f82c0c551f1d9853b649fab258111f93e741b0591cb4cbade1",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "prosciutto-single-rose",
+      "file": "assets/prosciutto-single-rose.png",
+      "ingredient": "Prosciutto",
+      "format": "roses",
+      "suggestedBinding": {
+        "ingredientKey": "prosciutto",
+        "formatKey": "roses"
+      },
+      "techniqueLabel": "Prosciutto Rose",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 108,
+        "y": 124,
+        "width": 1057,
+        "height": 1006,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.0507,
+      "pivotInSource": {
+        "x": 0.5075757575757576,
+        "y": 0.5
+      },
+      "alphaVerified": true,
+      "sha256": "236d39a714d79d35a8d2b39c3eac06e05159aa340f33faf244b60d658e3e2ca2",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "prosciutto-ribbon-group",
+      "file": "assets/prosciutto-ribbon-group.png",
+      "ingredient": "Prosciutto",
+      "format": "ribbons",
+      "suggestedBinding": {
+        "ingredientKey": "prosciutto",
+        "formatKey": "ribbons"
+      },
+      "techniqueLabel": "Prosciutto Ribbons",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 72,
+        "y": 112,
+        "width": 1119,
+        "height": 1057,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.0587,
+      "pivotInSource": {
+        "x": 0.5035885167464115,
+        "y": 0.5107655502392344
+      },
+      "alphaVerified": true,
+      "sha256": "a211e52f65d65a0099c22bb41eb9125c76f711211b1bd5c73277d09daec172b5",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "red-grapes-small-cluster",
+      "file": "assets/red-grapes-small-cluster.png",
+      "ingredient": "Red grapes",
+      "format": "small clusters",
+      "suggestedBinding": {
+        "ingredientKey": "grapes",
+        "formatKey": "clusters"
+      },
+      "techniqueLabel": "Grape Clusters",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 134,
+        "y": 153,
+        "width": 986,
+        "height": 937,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.0523,
+      "pivotInSource": {
+        "x": 0.5,
+        "y": 0.4956140350877193
+      },
+      "alphaVerified": true,
+      "sha256": "d71697fc0eb7e2747dc6c173ce01d3ba74c00b65b0a017299b5a770254bc84a4",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "fresh-fig-two-halves",
+      "file": "assets/fresh-fig-two-halves.png",
+      "ingredient": "Fresh figs",
+      "format": "halved",
+      "suggestedBinding": {
+        "ingredientKey": "figs",
+        "formatKey": "halved"
+      },
+      "techniqueLabel": "Fig Halves",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 98,
+        "y": 225,
+        "width": 1069,
+        "height": 805,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.328,
+      "pivotInSource": {
+        "x": 0.5043859649122807,
+        "y": 0.5003987240829346
+      },
+      "alphaVerified": true,
+      "sha256": "fa5673598ecad44146d5ea395de007a34c012a86e8b6cc0cc4031afb38345687",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "wholeFigsPerImage": 1,
+        "halvesPerImage": 2
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "rosemary-honey-walnuts-pile",
+      "file": "assets/rosemary-honey-walnuts-pile.png",
+      "ingredient": "Rosemary Honey Walnuts",
+      "format": "loose pile",
+      "suggestedBinding": {
+        "ingredientKey": "walnuts",
+        "formatKey": "pile"
+      },
+      "techniqueLabel": "Filling the Gaps",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 142,
+        "y": 167,
+        "width": 981,
+        "height": 944,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.0392,
+      "pivotInSource": {
+        "x": 0.5043859649122807,
+        "y": 0.5095693779904307
+      },
+      "alphaVerified": true,
+      "sha256": "734b8fb7e2cee50212ad149b0bbf8a7a15984573d970548231e8296105276563",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "group",
+        "unitCount": null,
+        "quantity": "Use the existing recipe quantity; visual count does not establish weight."
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "rosemary-single-sprig",
+      "file": "assets/rosemary-single-sprig.png",
+      "ingredient": "Fresh rosemary",
+      "format": "whole sprigs",
+      "suggestedBinding": {
+        "ingredientKey": "rosemary",
+        "formatKey": "sprig"
+      },
+      "techniqueLabel": "Rosemary Sprigs",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 442,
+        "y": 54,
+        "width": 444,
+        "height": 1157,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 0.3838,
+      "pivotInSource": {
+        "x": 0.529505582137161,
+        "y": 0.5043859649122807
+      },
+      "alphaVerified": true,
+      "sha256": "aa3bbfd665b76896799cac68361391df3f06c1b387bb424f4f6cb2cf5e3cccde",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "repeat-unit",
+        "unitsPerImage": 1,
+        "unit": "sprig"
+      },
+      "source": "new-ai-cutout"
+    },
+    {
+      "id": "plain-round-cracker-single",
+      "file": "assets/plain-round-cracker-single.png",
+      "ingredient": "Crackers",
+      "format": "single piece used to build an exact-count fan",
+      "suggestedBinding": {
+        "ingredientKey": "crackers",
+        "formatKey": "fan"
+      },
+      "techniqueLabel": "Cracker Fan",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": {
+        "x": 106,
+        "y": 108,
+        "width": 1043,
+        "height": 1030,
+        "threshold": 16
+      },
+      "visibleAspectRatio": 1.0126,
+      "pivotInSource": {
+        "x": 0.5003987240829346,
+        "y": 0.49681020733652315
+      },
+      "alphaVerified": true,
+      "sha256": "4b72fe3ec55a3fd2c46c553e7807c8f9290080a4f5df4f8f0d77265be7f4206d",
+      "calibratedWeightGrams": null,
+      "rendering": {
+        "mode": "repeat-unit",
+        "unitsPerImage": 1,
+        "unit": "cracker",
+        "fanCount": "Take from the group's piece quantity; six instances for a six-cracker fan."
+      },
+      "source": "new-ai-cutout"
+    }
+  ],
+  "compositeRecipes": [
+    {
+      "id": "cracker-fan-six",
+      "source": "plain-round-cracker-single",
+      "instances": 6,
+      "keepAsOneSelectableGroup": true,
+      "placement": "Overlap six round cracker instances along a short arc; preserve each circle's aspect ratio.",
+      "note": "Use this in place of a baked-in fan. Two groups give the presentation's twelve crackers."
+    }
+  ]
+}
