@@ -11,6 +11,7 @@ export const BOARDS = {
     wood: 'Acacia',
     tone: ['#9a6644', '#7c4f33'],
     grain: '#6a4029',
+    tint: .5, // how much of the tone is laid over the generic surface texture
     note: 'Dense and richly grained, with a depth of color built for the table.',
   },
   'fruits-veg': {
@@ -19,6 +20,7 @@ export const BOARDS = {
     wood: 'Rubberwood',
     tone: ['#dcc199', '#cdae82'],
     grain: '#b8956a',
+    tint: .55, // how much of the tone is laid over the generic surface texture
     note: 'Light, durable, and built for volume.',
   },
   'meat-fish': {
@@ -27,6 +29,7 @@ export const BOARDS = {
     wood: 'Acacia',
     tone: ['#93603f', '#774a2f'],
     grain: '#633c26',
+    tint: .5, // how much of the tone is laid over the generic surface texture
     note: 'Use it for cutting. For serving, most presentations start on Cheese & Bread.',
   },
 };

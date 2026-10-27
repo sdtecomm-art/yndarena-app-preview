@@ -12,6 +12,7 @@ export const PANTRY = new Set(['salt', 'flaky-salt', 'pepper', 'olive-oil', 'sug
 
 export const RECIPES = {
   'whipped-feta': {
+    media: { cover: 'recipe-whipped-feta-with-honey' },
     name: 'Whipped Feta with Honey',
     type: 'dip',
     item: 'bowl-feta',
@@ -43,6 +44,7 @@ export const RECIPES = {
     makeAhead: 'Keeps covered in the fridge for up to 3 days. Stir before serving.',
   },
   'fig-jam': {
+    media: { cover: 'recipe-fig-rosemary-jam' },
     name: 'Fig & Rosemary Jam',
     type: 'spread',
     item: 'bowl-jam',
@@ -71,6 +73,7 @@ export const RECIPES = {
     makeAhead: 'Keeps in a clean jar in the fridge for up to 2 weeks.',
   },
   'rosemary-walnuts': {
+    media: { cover: 'recipe-rosemary-honey-walnuts' },
     name: 'Rosemary Honey Walnuts',
     type: 'bite',
     item: 'walnuts',
@@ -98,6 +101,7 @@ export const RECIPES = {
     makeAhead: 'Keeps in an airtight jar for up to 1 week.',
   },
   'lemon-hummus': {
+    media: { cover: 'recipe-lemon-herb-hummus' },
     name: 'Lemon Herb Hummus',
     type: 'dip',
     item: 'bowl-hummus',
@@ -128,6 +132,7 @@ export const RECIPES = {
     makeAhead: 'Keeps covered in the fridge for up to 4 days.',
   },
   'citrus-olives': {
+    media: { cover: 'recipe-citrus-marinated-olives' },
     name: 'Citrus Marinated Olives',
     type: 'side',
     item: 'bowl-olives',

@@ -3,7 +3,7 @@ import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
 import { useActions } from '../actions.js';
 import { TopBar, Kicker, Button, Icon, PhotoPending, Stepper, Stars, DemoNote } from '../ui.jsx';
-import { SaveButton, ItemIcon, AddToBoardSheet, ReviewSheet, BoardThumb } from '../components.jsx';
+import { SaveButton, ItemIcon, AddToBoardSheet, ReviewSheet, BoardThumb, MediaImg } from '../components.jsx';
 import { TechPills } from './Presentation.jsx';
 import { RECIPES, RECIPE_TYPES } from '../data/recipes.js';
 import { ITEMS } from '../data/catalog.js';
@@ -26,12 +26,16 @@ export default function Recipe({ params }) {
     <>
       <TopBar transparent title="" right={<SaveButton kind="recipe" id={params.id} />} />
       <div style={{ marginTop: 'calc(-1 * (var(--safe-top) + 54px))' }}>
-        <PhotoPending className="hero-board" >
-          <div style={{ height: 'calc(var(--safe-top) + 46px)' }} />
-          <div style={{ display: 'grid', placeItems: 'center', padding: '6px 0 10px' }}>
-            <ItemIcon type={r.item} size={190} />
-          </div>
-        </PhotoPending>
+        {r.media?.cover ? (
+          <div className="photo-hero"><MediaImg id={r.media.cover} eager /></div>
+        ) : (
+          <PhotoPending className="hero-board">
+            <div style={{ height: 'calc(var(--safe-top) + 46px)' }} />
+            <div style={{ display: 'grid', placeItems: 'center', padding: '6px 0 10px' }}>
+              <ItemIcon type={r.item} size={190} />
+            </div>
+          </PhotoPending>
+        )}
       </div>
 
       <div className="pad" style={{ marginTop: 20 }}>

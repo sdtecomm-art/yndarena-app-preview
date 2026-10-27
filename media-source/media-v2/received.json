@@ -1,0 +1,756 @@
+[
+  {
+    "id": "recipe-fig-rosemary-jam",
+    "kind": "recipe-cover",
+    "received": "recipe-fig-rosemary-jam.webp",
+    "receivedSha256": "65565782760768f9f5ee2d8b3c6fed6dbe49e38e3c6ad890de8c057c405771a5",
+    "manifestSha256": "257042b5300283c71cf068a00bee205cd70ed0e22a4e773505fb26d952292173",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/recipes/recipe-fig-rosemary-jam-1080.webp",
+        102576
+      ],
+      [
+        "src/media/recipes/recipe-fig-rosemary-jam-640.webp",
+        43832
+      ]
+    ]
+  },
+  {
+    "id": "recipe-whipped-feta-with-honey",
+    "kind": "recipe-cover",
+    "received": "recipe-whipped-feta-with-honey.webp",
+    "receivedSha256": "d7674066ee78b8bb0f2e692091efcb27d1cc60286ba2ccdbf352daa01f317b14",
+    "manifestSha256": "80286e56107ab93a872a05936995908f4d9fcb98d3d75485591f1f94431a06a4",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/recipes/recipe-whipped-feta-with-honey-1080.webp",
+        138152
+      ],
+      [
+        "src/media/recipes/recipe-whipped-feta-with-honey-640.webp",
+        47084
+      ]
+    ]
+  },
+  {
+    "id": "recipe-citrus-marinated-olives",
+    "kind": "recipe-cover",
+    "received": "recipe-citrus-marinated-olives.webp",
+    "receivedSha256": "076a0e67046f9087d54eff7b4dc3d1ea859213be32672233202730c8730d7df4",
+    "manifestSha256": "b8e0a437dd57136577624686b3b7cfaf119bd55066122bbb6539785cd8ae7e25",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/recipes/recipe-citrus-marinated-olives-1080.webp",
+        104050
+      ],
+      [
+        "src/media/recipes/recipe-citrus-marinated-olives-640.webp",
+        41152
+      ]
+    ]
+  },
+  {
+    "id": "recipe-lemon-herb-hummus",
+    "kind": "recipe-cover",
+    "received": "recipe-lemon-herb-hummus.webp",
+    "receivedSha256": "3aa1b82bed38d89201a056ed8a6611d9f0ad52fa05dd564f204cc0fbeab3cf17",
+    "manifestSha256": "3a76b15c5018afbe2686045f0437162ef5bfda2dac95a60527e57bfb951a958a",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/recipes/recipe-lemon-herb-hummus-1080.webp",
+        93532
+      ],
+      [
+        "src/media/recipes/recipe-lemon-herb-hummus-640.webp",
+        37222
+      ]
+    ]
+  },
+  {
+    "id": "recipe-rosemary-honey-walnuts",
+    "kind": "recipe-cover",
+    "received": "recipe-rosemary-honey-walnuts.webp",
+    "receivedSha256": "015b00f7f25778d86c0acb9b02726394d886ac5eb40f3b8cfa9445eb1e16c6f7",
+    "manifestSha256": "dcade1a8f1967f61ac66d3359b35969fa8e34c3e88346244847541e3cb02f8a3",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/recipes/recipe-rosemary-honey-walnuts-1080.webp",
+        115888
+      ],
+      [
+        "src/media/recipes/recipe-rosemary-honey-walnuts-640.webp",
+        48408
+      ]
+    ]
+  },
+  {
+    "id": "generic-honey-wood-surface",
+    "kind": "surface",
+    "received": "generic-honey-wood-surface.webp",
+    "receivedSha256": "9176d6726a2863bd44286b9c4d67a3448990640e1de3bc4f0a16c9f464e727f7",
+    "manifestSha256": "acc966ede628ab83c5714b7e09d0a877d06b313155e38a587301d763bd53ee11",
+    "shaMatchesManifest": false,
+    "out": "src/media/surfaces/generic-honey-wood-surface.webp",
+    "bytes": 63422
+  },
+  {
+    "id": "baguette-slices-group",
+    "kind": "ingredient",
+    "received": "baguette-slices-group.webp",
+    "receivedSha256": "08d0a386bc79ef2585321849a782cb776f0ee1cb632e8c5cc07f8cf0ce656223",
+    "manifestSha256": "66e01741e88acaacf16793d0b231f3b82688317694ce0dae408495cf09e2987e",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.1882,
+    "out": "src/media/ingredients/baguette-slices-group.webp",
+    "bytes": 45866,
+    "size": [
+      420,
+      356
+    ]
+  },
+  {
+    "id": "cherry-tomatoes-group",
+    "kind": "ingredient",
+    "received": "cherry-tomatoes-group.webp",
+    "receivedSha256": "2379d61a068023e10858e177d6c1020b011fc82935f2edb5eb2805649f987194",
+    "manifestSha256": "864ceab95e50d670efa5ed67262d4e0c8a0bde781360b831f831045a3358fc86",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.0291,
+    "out": "src/media/ingredients/cherry-tomatoes-group.webp",
+    "bytes": 41444,
+    "size": [
+      420,
+      412
+    ]
+  },
+  {
+    "id": "seed-cracker-single",
+    "kind": "ingredient",
+    "received": "seed-cracker-single.webp",
+    "receivedSha256": "375527da614021feaa8e614834263bc958f7363d61ee0de1be64e23ba5e2f480",
+    "manifestSha256": "f8d219435a78702f65ddb342508b2add7f636955c7bdb695c9273c17f42ae779",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.3008,
+    "out": "src/media/ingredients/seed-cracker-single.webp",
+    "bytes": 17756,
+    "size": [
+      180,
+      140
+    ]
+  },
+  {
+    "id": "marcona-almonds-pile",
+    "kind": "ingredient",
+    "received": "marcona-almonds-pile.webp",
+    "receivedSha256": "560de8c5164359adb4a7d8a2177c80246e550669f387d4eacdebcfb6583fac5d",
+    "manifestSha256": "60f64faa512170514c6bec603638d434cf9746a5f0bf63076a589dbed5f6e007",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.002,
+    "out": "src/media/ingredients/marcona-almonds-pile.webp",
+    "bytes": 53150,
+    "size": [
+      420,
+      417
+    ]
+  },
+  {
+    "id": "strawberries-halved-group",
+    "kind": "ingredient",
+    "received": "strawberries-halved-group.webp",
+    "receivedSha256": "8a5d871f1d79eb9a308d44c8c2d61200406597174485da7b8ecc2597ab697a04",
+    "manifestSha256": "e37962e1cd364c79852137056ad296b3d8d195f9c30a8830ee0190639da47d3c",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.0826,
+    "out": "src/media/ingredients/strawberries-halved-group.webp",
+    "bytes": 58906,
+    "size": [
+      420,
+      394
+    ]
+  },
+  {
+    "id": "ripe-pear-slice-fan",
+    "kind": "ingredient",
+    "received": "ripe-pear-slice-fan.webp",
+    "receivedSha256": "80a93b0eacd988556126bb98ad7a6db6952a7b269f6760c89eea54b4b7a17628",
+    "manifestSha256": "ed646f51b665dbba03bc37fddffcac90d07baa2d642fd7ca10c9ee58608e424e",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.0762,
+    "out": "src/media/ingredients/ripe-pear-slice-fan.webp",
+    "bytes": 32158,
+    "size": [
+      420,
+      391
+    ]
+  },
+  {
+    "id": "mini-cucumber-ribbons-group",
+    "kind": "ingredient",
+    "received": "mini-cucumber-ribbons-group.webp",
+    "receivedSha256": "f200e459bcd6cceccc37a217cd53bcf289bde3eb28db1abb597e3b50f60af956",
+    "manifestSha256": "fdf0ce06a07704824a26cb246047a87efd86a75f37c08900a9ba43f3fb90fff1",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.1498,
+    "out": "src/media/ingredients/mini-cucumber-ribbons-group.webp",
+    "bytes": 41016,
+    "size": [
+      420,
+      368
+    ]
+  },
+  {
+    "id": "mini-cucumber-rounds-group",
+    "kind": "ingredient",
+    "received": "mini-cucumber-rounds-group.webp",
+    "receivedSha256": "76b7de56f88186401fbac401e89775aa00e6c3770aa8615a681ecf7c70ac80ee",
+    "manifestSha256": "7cfdb2a6f1bd4207bbfc80557ba8611255c32e62936b1a80161e27f3d401724c",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.1041,
+    "out": "src/media/ingredients/mini-cucumber-rounds-group.webp",
+    "bytes": 43350,
+    "size": [
+      420,
+      381
+    ]
+  },
+  {
+    "id": "dried-apricots-pile",
+    "kind": "ingredient",
+    "received": "dried-apricots-pile.webp",
+    "receivedSha256": "9e8fb4b968084b067b5a80e6c28f5dc434e4723059efc689cebe94790f461280",
+    "manifestSha256": "ec684cc10e5ca5af0dbaf1f0a980a81e6743386c97d0273beb02b614da9fd276",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.021,
+    "out": "src/media/ingredients/dried-apricots-pile.webp",
+    "bytes": 58522,
+    "size": [
+      420,
+      411
+    ]
+  },
+  {
+    "id": "crisp-apple-slice-fan",
+    "kind": "ingredient",
+    "received": "crisp-apple-slice-fan.webp",
+    "receivedSha256": "fbd0c515587ff0e7987e674aa6151dde9cdff1b517ed1fac082e8d6a4d7d2c31",
+    "manifestSha256": "989dba6bb323c143c7b8b8d527bd87dfc4f3f640a14215bc61317d1eecab923f",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.1298,
+    "out": "src/media/ingredients/crisp-apple-slice-fan.webp",
+    "bytes": 29738,
+    "size": [
+      420,
+      378
+    ]
+  },
+  {
+    "id": "green-grapes-small-cluster",
+    "kind": "ingredient",
+    "received": "green-grapes-small-cluster.webp",
+    "receivedSha256": "50d30c07930afa23c7d5217d422e31d37bdaa9985ac811a9f72dd0428e7e9889",
+    "manifestSha256": "3fd1cefdbbcac2f911cf7930d54664167ad94fdbab15c0d320870d527ebff73e",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.0453,
+    "out": "src/media/ingredients/green-grapes-small-cluster.webp",
+    "bytes": 40736,
+    "size": [
+      420,
+      402
+    ]
+  },
+  {
+    "id": "soppressata-folded-quarters-group",
+    "kind": "ingredient",
+    "received": "soppressata-folded-quarters-group.webp",
+    "receivedSha256": "89e24246d17e75ba5a46f379eed915099a6d993df6105b07e12970e0b0ad0665",
+    "manifestSha256": "528968f0e8b81020d42f5edfa36cc9303eefc0ab411edc66c48dafe117448f94",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.1713,
+    "out": "src/media/ingredients/soppressata-folded-quarters-group.webp",
+    "bytes": 54422,
+    "size": [
+      420,
+      361
+    ]
+  },
+  {
+    "id": "soppressata-river-group",
+    "kind": "ingredient",
+    "received": "soppressata-river-group.webp",
+    "receivedSha256": "0318c91f5c43c24ed1f6db49368e0cc2288723166e89127653aaf9c5c4c72828",
+    "manifestSha256": "3924b3a6af652c0dd06d889803a52d57ccce0bb2fe263230ce7629407d11bba5",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.6386,
+    "out": "src/media/ingredients/soppressata-river-group.webp",
+    "bytes": 42790,
+    "size": [
+      275,
+      420
+    ]
+  },
+  {
+    "id": "salami-folded-quarters-group",
+    "kind": "ingredient",
+    "received": "salami-folded-quarters-group.webp",
+    "receivedSha256": "09b96dd11885fe825963d47eb679111a9243434b21129658bb5dd070215bfb4d",
+    "manifestSha256": "deaa70d4f365089db933de00840e908c10e7fb80b21b1de82fbe5f5ce8714a5e",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.4013,
+    "out": "src/media/ingredients/salami-folded-quarters-group.webp",
+    "bytes": 46820,
+    "size": [
+      420,
+      306
+    ]
+  },
+  {
+    "id": "serrano-ribbon-group",
+    "kind": "ingredient",
+    "received": "serrano-ribbon-group.webp",
+    "receivedSha256": "19fde6c613cc19a654662ca364681e928ef01411a2bda07e4f6d227a02cc96fe",
+    "manifestSha256": "5599017e474d7682813226f05fdd074567c28c61b2abecb8f79c0842ce73a1f7",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.1918,
+    "out": "src/media/ingredients/serrano-ribbon-group.webp",
+    "bytes": 43756,
+    "size": [
+      420,
+      355
+    ]
+  },
+  {
+    "id": "serrano-single-rose",
+    "kind": "ingredient",
+    "received": "serrano-single-rose.webp",
+    "receivedSha256": "d1810a41dcf9a721bdd01ac931b14e0e5ac6c3f1e02954b7e93914c67c89740c",
+    "manifestSha256": "b87e19984ed8c6321644b2f2f265d874583eba2b34d8e468fd3b0bc8b8db689e",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.006,
+    "out": "src/media/ingredients/serrano-single-rose.webp",
+    "bytes": 49976,
+    "size": [
+      420,
+      417
+    ]
+  },
+  {
+    "id": "goat-cheese-coins-group",
+    "kind": "ingredient",
+    "received": "goat-cheese-coins-group.webp",
+    "receivedSha256": "b01db02097a01a8a87e6a9ab1377a795942ef624faf97ab2522656e49162ae41",
+    "manifestSha256": "1073c329baec733f3dc92485082bfe30c5ef06557b01b85fd732c2e03f1f7c0d",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.1893,
+    "out": "src/media/ingredients/goat-cheese-coins-group.webp",
+    "bytes": 29080,
+    "size": [
+      420,
+      355
+    ]
+  },
+  {
+    "id": "aged-gouda-cubes-group",
+    "kind": "ingredient",
+    "received": "aged-gouda-cubes-group.webp",
+    "receivedSha256": "02001f8774c8c833304e8c0e4f0f6f1337fdaa53b0ccf46ffe5b2439cbc21d26",
+    "manifestSha256": "e0e8f2b2766c9e38b7491069d9d967a6ffdd69b45da002be3bbef6ccbb65d4c3",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.9833,
+    "out": "src/media/ingredients/aged-gouda-cubes-group.webp",
+    "bytes": 53276,
+    "size": [
+      415,
+      420
+    ]
+  },
+  {
+    "id": "salami-river-group",
+    "kind": "ingredient",
+    "received": "salami-river-group.webp",
+    "receivedSha256": "05a567ba1bfecdd0c545bf3f2ac8a7f07e7c596715e8a92e31f2edaaa20c65df",
+    "manifestSha256": "6d000c70204d401c2d242ca62ccb1f3afd390469ea9e61af37ce6d35e0bacbd1",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.8921,
+    "out": "src/media/ingredients/salami-river-group.webp",
+    "bytes": 39098,
+    "size": [
+      376,
+      420
+    ]
+  },
+  {
+    "id": "manchego-triangles-fan",
+    "kind": "ingredient",
+    "received": "manchego-triangles-fan.webp",
+    "receivedSha256": "3e2705188b8aa458205ce64e2baf3deecbb41cc002feba2276e5c6a7826d109b",
+    "manifestSha256": "ef055afbf078dff026081c6e288c0f90f7dc12d4c99441782c2d064d4ef65690",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.292,
+    "out": "src/media/ingredients/manchego-triangles-fan.webp",
+    "bytes": 23562,
+    "size": [
+      420,
+      329
+    ]
+  },
+  {
+    "id": "camembert-wheel-cut-wedge",
+    "kind": "ingredient",
+    "received": "camembert-wheel-cut-wedge.webp",
+    "receivedSha256": "766e21b25f67fa5b0840978964342222bbcfc67050aa2dd0474c028135dad12f",
+    "manifestSha256": "4006e6a669d4bb1cc8ea415bf4a7bb5f30d66b97c149e7daead5185fe8361025",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.0279,
+    "out": "src/media/ingredients/camembert-wheel-cut-wedge.webp",
+    "bytes": 49416,
+    "size": [
+      420,
+      407
+    ]
+  },
+  {
+    "id": "camembert-wedges-fan",
+    "kind": "ingredient",
+    "received": "camembert-wedges-fan.webp",
+    "receivedSha256": "0f31621662823110519236fdb8eabe2bb98933e868b3b18f13315ab00fc60419",
+    "manifestSha256": "b7b050babe49446b6be94af566d864ab54e21059540ac615dada5f27de4aea96",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.1474,
+    "out": "src/media/ingredients/camembert-wedges-fan.webp",
+    "bytes": 38262,
+    "size": [
+      420,
+      370
+    ]
+  },
+  {
+    "id": "aged-gouda-triangles-fan",
+    "kind": "ingredient",
+    "received": "aged-gouda-triangles-fan.webp",
+    "receivedSha256": "211adcbbe815e283bc150178990befa9a52c71efee2e59dfd01cc2150255004a",
+    "manifestSha256": "72474d8419849adfcf5e0fda8abe802e33e80edbc6735c29705cb83cbf6fe928",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.2363,
+    "out": "src/media/ingredients/aged-gouda-triangles-fan.webp",
+    "bytes": 32998,
+    "size": [
+      420,
+      344
+    ]
+  },
+  {
+    "id": "manchego-cubes-group",
+    "kind": "ingredient",
+    "received": "manchego-cubes-group.webp",
+    "receivedSha256": "b5b9267934e30b91e03a5b7a2bfa273d1b1bc39784d6922abb8505de45993a74",
+    "manifestSha256": "9a8c257530cec2a63a9d4e18d3bedcc549d08008e33f4b9d445c3a5c0d192974",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.9877,
+    "out": "src/media/ingredients/manchego-cubes-group.webp",
+    "bytes": 34814,
+    "size": [
+      416,
+      420
+    ]
+  },
+  {
+    "id": "citrus-marinated-olives-ivory-bowl",
+    "kind": "ingredient",
+    "received": "citrus-marinated-olives-ivory-bowl.webp",
+    "receivedSha256": "cf941eb9de7d6272cf16e004424c25dfc5a74646ecf92ea7dbdb29a081d4da05",
+    "manifestSha256": "87fe7309450ab4b218a8e28ac7eb6d28f619f46d1137a490f6a785cb19614ea2",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.9823,
+    "out": "src/media/ingredients/citrus-marinated-olives-ivory-bowl.webp",
+    "bytes": 55336,
+    "size": [
+      413,
+      420
+    ]
+  },
+  {
+    "id": "carrot-batons-group",
+    "kind": "ingredient",
+    "received": "carrot-batons-group.webp",
+    "receivedSha256": "e68766b43cea1302e3763b05de71b2c60827af98401e3fdc0383adf5c1fcd24e",
+    "manifestSha256": "c23bfd1fe4b41d100bc36d514ceae36fb24be54b8349eee8e1945211be4bfb50",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.8566,
+    "out": "src/media/ingredients/carrot-batons-group.webp",
+    "bytes": 44608,
+    "size": [
+      363,
+      420
+    ]
+  },
+  {
+    "id": "lemon-herb-hummus-parchment-swoosh",
+    "kind": "ingredient",
+    "received": "lemon-herb-hummus-parchment-swoosh.webp",
+    "receivedSha256": "8589014fed990640439365a26804fdfbd1fa657e1589bb01585f3462c8d8da5e",
+    "manifestSha256": "1d9b233d762631800d9f96429b9294f621c1b5c542fc5e991bafb7dc2855e0ec",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.2669,
+    "out": "src/media/ingredients/lemon-herb-hummus-parchment-swoosh.webp",
+    "bytes": 41792,
+    "size": [
+      420,
+      335
+    ]
+  },
+  {
+    "id": "bell-pepper-strips-group",
+    "kind": "ingredient",
+    "received": "bell-pepper-strips-group.webp",
+    "receivedSha256": "3c9966a12497ed4641ecde6dffd5e4c50731f514ed1473289533b7932428ac2b",
+    "manifestSha256": "db5f929525e85610b9f12fad4241c8ea4a088a918f7a603f7669ce64017efc24",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.9948,
+    "out": "src/media/ingredients/bell-pepper-strips-group.webp",
+    "bytes": 53230,
+    "size": [
+      418,
+      420
+    ]
+  },
+  {
+    "id": "celery-batons-group",
+    "kind": "ingredient",
+    "received": "celery-batons-group.webp",
+    "receivedSha256": "51d6a221ac8fb529e0a80f13f30f8fccc6150de14598c47cac55e365889c7939",
+    "manifestSha256": "3e5b43c8483550b8f01754060cf3f60b9e06236903440aadffe5f19e2b9a6d6a",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.0966,
+    "out": "src/media/ingredients/celery-batons-group.webp",
+    "bytes": 34778,
+    "size": [
+      420,
+      385
+    ]
+  },
+  {
+    "id": "honey-ivory-bowl",
+    "kind": "ingredient",
+    "received": "honey-ivory-bowl.webp",
+    "receivedSha256": "b6cfb1e6238ee291e307c3d9906a073f78645f32671c2feb19fc3ba336546245",
+    "manifestSha256": "ad6764405d00cab0f7405a275160ed005d750e807d5450da5bb83f79249a08a2",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.0036,
+    "out": "src/media/ingredients/honey-ivory-bowl.webp",
+    "bytes": 27000,
+    "size": [
+      420,
+      419
+    ]
+  },
+  {
+    "id": "whipped-feta-parchment-swoosh",
+    "kind": "ingredient",
+    "received": "whipped-feta-parchment-swoosh.webp",
+    "receivedSha256": "68c8ceec13f62f5a54651447411c8d1a99804b9e5ec3c9e21e48d44750002480",
+    "manifestSha256": "e14a6cb01d06a08136b2e75e3da2870ba29a88b94a99e696c3db99476242dbda",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.9415,
+    "out": "src/media/ingredients/whipped-feta-parchment-swoosh.webp",
+    "bytes": 45116,
+    "size": [
+      397,
+      420
+    ]
+  },
+  {
+    "id": "lemon-herb-hummus-ivory-bowl",
+    "kind": "ingredient",
+    "received": "lemon-herb-hummus-ivory-bowl.webp",
+    "receivedSha256": "24fa9f1c32acbdfbba37b32f192ab5113a98adc4ddb18689344db7708235320c",
+    "manifestSha256": "a3dc2fbf67910c90987b3ccf1d6738e8c6fe9b7317d1e0b552301cd98d354806",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 1.0041,
+    "out": "src/media/ingredients/lemon-herb-hummus-ivory-bowl.webp",
+    "bytes": 48856,
+    "size": [
+      420,
+      419
+    ]
+  },
+  {
+    "id": "whipped-feta-ivory-bowl",
+    "kind": "ingredient",
+    "received": "whipped-feta-ivory-bowl.webp",
+    "receivedSha256": "775a879c05342f994d92ec8732a2aa23376b611013ab51d5d8ef55614233de13",
+    "manifestSha256": "d47e59252d414e3c16468e4d4e7f399884b36b044d03ac34f3d3089388bdd0b1",
+    "shaMatchesManifest": false,
+    "boundsMatchManifest": true,
+    "aspect": 0.9815,
+    "out": "src/media/ingredients/whipped-feta-ivory-bowl.webp",
+    "bytes": 44390,
+    "size": [
+      412,
+      420
+    ]
+  },
+  {
+    "id": "love-like-rosemary-the-sprig",
+    "kind": "presentation-cover",
+    "received": "love-like-rosemary-the-sprig.webp",
+    "receivedSha256": "820b6913fd51627aac20e55bbe1fc3c88ec0e5b5bd816122f718e476687b4d32",
+    "manifestSha256": "99f417b49cf2fbb60b0fb0a6a13830ef55177dac17d10606864034473930ba54",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/presentations/love-like-rosemary-the-sprig-1080.webp",
+        132104
+      ],
+      [
+        "src/media/presentations/love-like-rosemary-the-sprig-640.webp",
+        45584
+      ]
+    ]
+  },
+  {
+    "id": "the-copper-pot-long-table",
+    "kind": "presentation-cover",
+    "received": "the-copper-pot-long-table.webp",
+    "receivedSha256": "94436fdcd3bdee7f3954d761b664c26bcd8c020dceebb1ebc9b32f7d101cf6d5",
+    "manifestSha256": "5979abf4043ae3620b11a8c2fc77c8b9e7fc531eb9d5391abf0239023e8f793a",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/presentations/the-copper-pot-long-table-1080.webp",
+        158532
+      ],
+      [
+        "src/media/presentations/the-copper-pot-long-table-640.webp",
+        61348
+      ]
+    ]
+  },
+  {
+    "id": "sunday-garden-garden-rows",
+    "kind": "presentation-cover",
+    "received": "sunday-garden-garden-rows.webp",
+    "receivedSha256": "60b700b273c2155872e63ec392f99cf92ef7d0b9f3a006c993f5b3ea41354f3c",
+    "manifestSha256": "b261b37a70fb9d3eeab292762ffa722560125985df8d070a6231afca477f1cd5",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/presentations/sunday-garden-garden-rows-1080.webp",
+        122790
+      ],
+      [
+        "src/media/presentations/sunday-garden-garden-rows-640.webp",
+        49326
+      ]
+    ]
+  },
+  {
+    "id": "sunday-garden-rainbow",
+    "kind": "presentation-cover",
+    "received": "sunday-garden-rainbow.webp",
+    "receivedSha256": "e2d0191059cc2908a34f23af9037d5ff97cac53f0a517fff32cdc601e7fb5f48",
+    "manifestSha256": "f8e11eeee2359196873fd61b75c327e6cd5f8eac8a31400793d641d45eb2b67e",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/presentations/sunday-garden-rainbow-1080.webp",
+        138354
+      ],
+      [
+        "src/media/presentations/sunday-garden-rainbow-640.webp",
+        53690
+      ]
+    ]
+  },
+  {
+    "id": "love-like-rosemary-gathered",
+    "kind": "presentation-cover",
+    "received": "love-like-rosemary-gathered.webp",
+    "receivedSha256": "5a29ab1b8aaf82b147de1cd8b798f7626fe7d9ea9452c1e01cfdf00cee86b27b",
+    "manifestSha256": "b15ab6d40c205df8844a4a4af0743284abee7aa2975dd1b94e84af2637e9250e",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/presentations/love-like-rosemary-gathered-1080.webp",
+        153886
+      ],
+      [
+        "src/media/presentations/love-like-rosemary-gathered-640.webp",
+        56166
+      ]
+    ]
+  },
+  {
+    "id": "golden-hour-four-corners",
+    "kind": "presentation-cover",
+    "received": "golden-hour-four-corners.webp",
+    "receivedSha256": "73a6fb843b50745b3928d15a6e13bc57b81d4609c543eea07e05af3051d10f8e",
+    "manifestSha256": "7bfa65c76f13565feb84980d7962e0ce8c3a30add623a49119d32a0eeaee0461",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/presentations/golden-hour-four-corners-1080.webp",
+        152824
+      ],
+      [
+        "src/media/presentations/golden-hour-four-corners-640.webp",
+        59090
+      ]
+    ]
+  },
+  {
+    "id": "golden-hour-salami-river",
+    "kind": "presentation-cover",
+    "received": "golden-hour-salami-river.webp",
+    "receivedSha256": "83be4a260ce473f40d41bdd08b9c4cbe4b01c920f80f9f5c8501cfe2e57132bf",
+    "manifestSha256": "8390ef99d213613fbf75caa3a7e0e483ab69e629d2a0314f05b71993b8a49998",
+    "shaMatchesManifest": false,
+    "outs": [
+      [
+        "src/media/presentations/golden-hour-salami-river-1080.webp",
+        170126
+      ],
+      [
+        "src/media/presentations/golden-hour-salami-river-640.webp",
+        66926
+      ]
+    ]
+  }
+]

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Icon } from '../ui.jsx';
 import { ItemIcon } from '../components.jsx';
+import { MEDIA } from '../data/media.js';
+import { VIDEOS, videoReady } from '../data/videos.js';
 
 export const stepOf = (s) => (typeof s === 'string' ? { text: s } : s);
 
@@ -14,8 +16,21 @@ function devFixture(t) {
   return { status: 'ready', src, poster: null, captions: null, fixture: true, segments: t.steps.map((_, i) => ({ step: i, start: i * 2, end: i * 2 + 2 })) };
 }
 
-export function techniqueVideo(t) {
-  return devFixture(t) || t.video || { status: 'pending', segments: [], shotPlan: [] };
+// Registry entry (videos.js) merged with the technique's own shot plan, in the shape the player uses.
+export function techniqueVideo(t, id) {
+  const fixture = devFixture(t);
+  if (fixture) return fixture;
+  const v = VIDEOS[id] || {};
+  const poster = v.poster ? MEDIA[v.poster] : null;
+  return {
+    status: videoReady(v) ? 'ready' : 'pending',
+    src: v.videoSrc || null,
+    captions: v.captionsSrc || null,
+    poster: videoReady(v) && poster ? poster.src : null,
+    resultImage: poster,
+    segments: v.segments || [],
+    shotPlan: t.video?.shotPlan || [],
+  };
 }
 
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
@@ -40,25 +55,20 @@ export function TechniqueVideo({ t, video, seg, onSeg }) {
     ref.current.play();
   }, [seg]); // eslint-disable-line
 
+  // No clip yet: the finished result and the written steps. No playback controls until a video exists.
   if (!ready) {
+    const img = video.resultImage;
     return (
       <div className="vplayer is-pending">
-        <div className="vplayer-frame">
+        <div className="vplayer-frame result-frame">
           <div className="vplayer-still">
-            <ItemIcon type={t.demoType} style={t.demoStyle} size={150} />
-            <span className="photo-tag">Illustration of the result, not a demonstration</span>
-          </div>
-          <div className="vplayer-pending">
-            <span className="tag is-lav">Video pending</span>
-            <p>The demonstration has not been recorded yet. Use the written steps below for now.</p>
+            {img ? <img src={img.src} alt={img.alt} className="result-img" decoding="async" /> : <ItemIcon type={t.demoType} style={t.demoStyle} size={170} />}
+            <span className="photo-tag">The result · AI image</span>
           </div>
         </div>
-        <div className="vplayer-bar" aria-disabled="true">
-          <button disabled aria-label="Play"><Icon name="play" size={20} /></button>
-          <button disabled aria-label="Repeat"><Icon name="undo" size={18} /></button>
-          <button disabled className="vplayer-speed">0.5×</button>
-          <div className="vplayer-track"><i style={{ width: 0 }} /></div>
-          <span className="vplayer-time">–:––</span>
+        <div className="vplayer-note">
+          <span className="tag is-lav">Video coming soon</span>
+          <p>This shows the finished result, not the movement. Follow the written steps below for now.</p>
         </div>
       </div>
     );

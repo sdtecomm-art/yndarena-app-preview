@@ -223,11 +223,11 @@ export function ToastHost() {
 export const useToast = () => useContext(ToastCtx).show;
 
 // ---------- Media ----------
-export function PhotoPending({ children, className = '' }) {
+export function PhotoPending({ children, className = '', tag = 'Photo pending' }) {
   return (
     <div className={'photo-pending ' + className}>
       {children}
-      <span className="photo-tag">Photo pending</span>
+      <span className="photo-tag">{tag}</span>
     </div>
   );
 }

@@ -1,0 +1,367 @@
+{
+  "package": "yndarena-media-v2",
+  "containsGeneratedVideo": false,
+  "notes": [
+    "Prompts are production drafts, not verified demonstrations.",
+    "Generate separate short actions rather than one complex multi-step clip.",
+    "Check anatomy, utensil movement, food continuity and correspondence to the app's existing steps.",
+    "For board care, reuse existing approved footage and care instructions; a generic wood texture is not an instructional poster of the product."
+  ],
+  "clips": [
+    {
+      "id": "brie-wedges",
+      "title": "Brie Wedges",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "existing-v1:brie-four-wedges-fan",
+      "posterNote": "Resolve this existing file from the earlier package in the app.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Place a small brie wheel flat on the stable board and make one radial wedge cut, with the supporting hand clear of the blade."
+        },
+        {
+          "scene": 2,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Gently separate the cut brie wedges and arrange them in an overlapping fan."
+        }
+      ]
+    },
+    {
+      "id": "cheese-triangles",
+      "title": "Cheese Triangles",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "aged-gouda-triangles-fan",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Place one already cut thin cheese slice flat on the board and divide it diagonally into two triangles, supporting fingers clear of the blade."
+        },
+        {
+          "scene": 2,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Arrange prepared cheese triangles into a small overlapping fan, moving one slice at a time."
+        }
+      ]
+    },
+    {
+      "id": "cheese-cubes",
+      "title": "Cheese Cubes",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "manchego-cubes-group",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Cut one flat stable rectangular slab of firm cheese into even short strips, supporting fingers clear of the blade."
+        },
+        {
+          "scene": 2,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Cut the prepared cheese strips crosswise into small cubes, then move the knife away and gather the cubes."
+        }
+      ]
+    },
+    {
+      "id": "coins-and-rounds",
+      "title": "Coins and Rounds",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "goat-cheese-coins-group",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Slice one coin from a chilled goat-cheese log resting securely on the board, with supporting fingers clear of the blade."
+        },
+        {
+          "scene": 2,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Lay five already cut goat-cheese coins in a gentle overlapping row, one at a time."
+        }
+      ]
+    },
+    {
+      "id": "prosciutto-rose",
+      "title": "Prosciutto Rose",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "existing-v1:prosciutto-single-rose",
+      "posterNote": "Resolve this existing file from the earlier package in the app.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Lay one thin prosciutto slice flat, fold it lengthwise once and slowly roll the folded strip into a loose edible rose."
+        },
+        {
+          "scene": 2,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Set a finished prosciutto rose on its base and gently open the outer folds without tearing the meat."
+        }
+      ]
+    },
+    {
+      "id": "prosciutto-ribbons",
+      "title": "Prosciutto Ribbons",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "existing-v1:prosciutto-ribbon-group",
+      "posterNote": "Resolve this existing file from the earlier package in the app.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Pick up one thin prosciutto slice by its ends and gently drape it into loose wavy folds on the board."
+        }
+      ]
+    },
+    {
+      "id": "salami-river",
+      "title": "Salami River",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "salami-river-group",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Fold one salami slice gently in half and place it partly overlapping a previous folded slice; repeat slowly with three more slices to extend a curved river."
+        }
+      ]
+    },
+    {
+      "id": "folded-quarters",
+      "title": "Folded Quarters",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "salami-folded-quarters-group",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Hold one salami slice, fold it in half and then in half again into a loose quarter; set it down beside a second quarter."
+        }
+      ]
+    },
+    {
+      "id": "grape-clusters",
+      "title": "Grape Clusters",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "green-grapes-small-cluster",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Use kitchen scissors to snip one small grape cluster from a larger bunch by its exposed stem, keeping the grapes intact; lay the cluster on the board."
+        }
+      ]
+    },
+    {
+      "id": "fig-halves",
+      "title": "Fig Halves",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "existing-v1:fresh-fig-two-halves",
+      "posterNote": "Resolve this existing file from the earlier package in the app.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: On a stable board, halve one ripe fig with a controlled knife cut while keeping supporting fingers clear; move the knife aside and turn the halves cut-side up."
+        }
+      ]
+    },
+    {
+      "id": "apple-fan",
+      "title": "Apple Fan",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "crisp-apple-slice-fan",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Gently push seven already cut thin apple slices sideways from a neat aligned stack into an overlapping fan, keeping the slices connected as a group."
+        }
+      ]
+    },
+    {
+      "id": "batons-and-strips",
+      "title": "Batons and Strips",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "carrot-batons-group",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Cut one already flattened stable carrot plank lengthwise into two straight batons, supporting fingers curled and clear of the blade."
+        },
+        {
+          "scene": 2,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Move the knife aside and gather the carrot batons into a small parallel bundle."
+        }
+      ]
+    },
+    {
+      "id": "cucumber-ribbons",
+      "title": "Cucumber Ribbons",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "mini-cucumber-ribbons-group",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Pull a vegetable peeler once along a stable cucumber supported safely at its far end to remove one long thin ribbon, keeping fingers out of the peeler path."
+        },
+        {
+          "scene": 2,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Gently fold one prepared cucumber ribbon back and forth into a loose wave and set it on the board."
+        }
+      ]
+    },
+    {
+      "id": "thin-baguette-slices",
+      "title": "Thin Baguette Slices",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "baguette-slices-group",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Use a serrated bread knife with gentle back-and-forth strokes to cut one thin diagonal baguette slice, holding the loaf steadily with fingers clear of the blade."
+        }
+      ]
+    },
+    {
+      "id": "cracker-fan",
+      "title": "Cracker Fan",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "seed-cracker-single",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Place five seed crackers one at a time, each partly overlapping the previous one, forming a short graceful fan; no crackers appear magically."
+        }
+      ]
+    },
+    {
+      "id": "bowls-first",
+      "title": "Bowls First",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "whipped-feta-ivory-bowl",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Set one small bowl of whipped feta on an empty board, then a second smaller bowl of olives diagonally opposite, leaving open room around both."
+        }
+      ]
+    },
+    {
+      "id": "spoon-swoosh",
+      "title": "Spoon Swoosh",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "lemon-herb-hummus-parchment-swoosh",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: With the back of one spoon, press a dollop of hummus on a small piece of parchment, then pull it in one continuous curved stroke into a thick swoosh; lift the spoon and show the real result."
+        }
+      ]
+    },
+    {
+      "id": "filling-the-gaps",
+      "title": "Filling the Gaps",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "marcona-almonds-pile",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Place a few Marcona almonds one at a time into a small empty space between two existing food groups without covering either group."
+        }
+      ]
+    },
+    {
+      "id": "rosemary-sprigs",
+      "title": "Rosemary Sprigs",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "existing-v1:rosemary-single-sprig",
+      "posterNote": "Resolve this existing file from the earlier package in the app.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: Use clean fingers to place one short fresh rosemary sprig beside a food cluster, then place a second short sprig at a different edge, keeping the food accessible."
+        }
+      ]
+    },
+    {
+      "id": "board-care",
+      "title": "How to care for your boards",
+      "status": "not-generated",
+      "videoSrc": null,
+      "captionsSrc": null,
+      "posterAssetId": "generic-honey-wood-surface",
+      "posterNote": "Resolve through this package manifest. Board care texture is a generic preview only.",
+      "suggestedScenes": [
+        {
+          "scene": 1,
+          "suggestedDurationSeconds": "6–10, adapt to the real action",
+          "prompt": "Photoreal instructional food-preparation video for Yndarena. Locked perfectly overhead camera, natural warm neutral window light from upper left, plain wooden board, cream linen outside, consistent adult hands with natural anatomy. Demonstrate exactly this one action slowly and continuously. Keep all objects persistent and physically plausible; no morphing, disappearing food, extra fingers, floating utensils, cuts or camera moves. No text, music, logos or voiceover; captions are added in the app. Hold the finished result still for two seconds. Action: On a clean dry wooden board, apply a small amount of the existing care-plan-recommended food-contact board oil to a cloth, then spread it evenly following the grain, using only the care plan's established directions."
+        }
+      ]
+    }
+  ]
+}

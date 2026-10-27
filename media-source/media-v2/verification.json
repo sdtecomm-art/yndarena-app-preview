@@ -1,0 +1,15 @@
+{
+  "files": 46,
+  "counts": {
+    "ingredient": 33,
+    "recipe-cover": 5,
+    "presentation-cover": 7,
+    "surface": 1
+  },
+  "newIngredients": 24,
+  "allIngredientAlphaChecksPassed": true,
+  "allImageHashesUnique": true,
+  "sourcePNGsModified": false,
+  "videoFilesGenerated": 0,
+  "appIntegrationVerified": false
+}

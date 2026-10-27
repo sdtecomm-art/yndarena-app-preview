@@ -27,7 +27,7 @@ export default function Technique({ params }) {
   const a = useActions();
   const { updateUser } = useStore();
   const t = TECHNIQUES[params.id];
-  const video = techniqueVideo(t);
+  const video = techniqueVideo(t, params.id);
   const [seg, setSeg] = useState(null);
   const hasSegments = video.status === 'ready' && video.segments.length > 0;
   const use = findUse(params.id);

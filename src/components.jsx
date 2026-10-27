@@ -62,7 +62,13 @@ export function MediaImg({ id, sizes = '(max-width: 500px) 100vw, 390px', eager,
 // otherwise the overhead photo of its first layout, otherwise the layout illustration.
 export function presentationPhoto(id) {
   const p = PRESENTATIONS[id];
-  return p.media?.cover || p.compositions[0].media?.topView || null;
+  const first = p.compositions[0].media;
+  return p.media?.cover || first?.topView || first?.cover || null;
+}
+
+// The photo shown for one layout: its overhead reference when there is one, otherwise its inspiration cover.
+export function compositionPhoto(comp) {
+  return comp.media?.topView || comp.media?.cover || null;
 }
 
 export function PresentationVisual({ id, label, eager }) {
@@ -101,7 +107,7 @@ export function CommunityCard({ id, width = 240 }) {
   const c = COMMUNITY[id];
   return (
     <button className="card board-card tap" style={{ width }} onClick={() => nav.push('community', { id })}>
-      <PhotoPending className="board-art">
+      <PhotoPending className="board-art" tag="Layout view">
         <BoardView boardId={c.board} items={communityItems(id)} uid={'cc-' + id} />
       </PhotoPending>
       <div className="card-body">
@@ -121,7 +127,9 @@ export function RecipeRow({ id, onClick }) {
   const r = RECIPES[id];
   return (
     <button className="list-row" onClick={onClick || (() => nav.push('recipe', { id }))}>
-      <div className="thumb" style={{ width: 56, height: 56, borderRadius: 28 }}><ItemIcon type={r.item} size={56} /></div>
+      <div className="thumb" style={{ width: 56, height: 56, borderRadius: 28 }}>
+        {r.media?.cover ? <img src={MEDIA[r.media.cover].small} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <ItemIcon type={r.item} size={56} />}
+      </div>
       <div className="grow">
         <div>{r.name}</div>
         <div className="sub">{r.time} min · {r.difficulty}</div>

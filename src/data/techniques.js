@@ -1,5 +1,5 @@
 // Technique library. Every serving style offered in Designer links to one of these.
-// Demos are illustrated placeholders until Yndarena films its own videos.
+// Until Yndarena films its own videos, each technique shows a photo of the result (videos.js).
 
 export const TECH_GROUPS = [
   { id: 'cut', label: 'Cuts' },
@@ -100,14 +100,8 @@ export const TECHNIQUES = {
     sizing: 'One or two slices per rose, about 2 in across.',
     compatible: ['prosciutto', 'serrano'],
     simpler: 'Make ribbons instead: drape each slice in loose folds.',
+    // Status, file, captions and step segments live in videos.js. This is what the clip should show.
     video: {
-      status: 'pending',
-      src: null,
-      poster: null,
-      captions: null,
-      // Filled after the shoot: one segment per written step, in seconds.
-      segments: [],
-      reviewedBy: null,
       shotPlan: [
         'Finished rose, a few seconds',
         'The slice and its starting position',

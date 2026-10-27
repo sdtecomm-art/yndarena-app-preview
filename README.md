@@ -52,16 +52,16 @@ src/
 
 Ported from the existing care plan spec (`lib.js`): first check at week 3 from the day the boards came home, then every 12 weeks, 6 checks max, no catch-up bursts. Gift reminders at 21 and 10 days, yearly unless a year is set, Feb 29 falls back to Mar 1 in non-leap years, a date added inside a window only gets that window's reminder. Up to 3 dates, as in the current system.
 
-## Visual resources (pilot: Love, Like Rosemary)
+## Visual resources
 
-Registry: `src/data/media.js`. Every asset declares its role, provenance and status. Source files, their manifest and generation prompts are kept in `media-source/` (not bundled); the app uses optimized WebP copies in `src/media/`, cropped to their visible area with alpha preserved.
+Registry: `src/data/media.js`. Every asset declares its role, provenance (all AI-generated so far) and status. Sources, manifests and generation records are kept in `media-source/` (not bundled); the app uses optimized WebP copies in `src/media/`, cropped to their visible area with alpha preserved.
 
-- `llr-two-halves-top`: AI reference photo of the Two Halves layout, used as the cover of the original presentation.
-- 12 AI ingredient cutouts (`media-source/love-like-rosemary/ingredients/`) mapped to item type and serving style in `PHOTO_PIECES`. Modes: `group` (one image inside the item's approximate footprint), `cluster` (visual count only) and `units` (one image per cracker, fig or sprig, so the picture matches the count).
-- The same renderer (`BoardView`) draws Designer, layout thumbnails, build-by-layers, saved versions and shared links. Quantities and lists never depend on images.
-- Reviewer notes (sources, hashes, coverage by layout, photo vs. layout differences, checks and pending items) live in the in-app **Review panel** (Profile → Preview tools, or the desktop side panel), outside the customer journey. Text in `src/data/review.js`.
-- Pending: real photos on the product board with weighed portions, editorial cover, step photos, the Prosciutto Rose video, cutouts for the rest of the library.
-- Technique videos: fill `video` in `techniques.js` with `status: 'ready'`, `src`, `poster`, optional `captions` (WebVTT) and `segments` (`{ step, start, end }` in seconds). In development only, `localStorage.setItem('ynd-video-fixture', '<url>')` loads a test clip; production builds drop that path.
+- **Cutouts** (45 files, packages `yndarena-ingredients-v1` and `yndarena-media-v2`): every serving style of all 33 library items maps to one in `PHOTO_PIECES`. Modes: `group` (one image inside the item's approximate footprint; `turn` may lay it at 90°, `chain` repeats it along a river), `cluster` (single roses, visual count only) and `units` (one image per cracker, seed cracker, fig or sprig, so the picture matches the count).
+- **Covers**: `media.cover` on recipes, presentations and layouts. They are editorial inspiration: the Photo view says so and points to Layout, which always shows the layout data.
+- **Board surface**: `BOARD_SURFACES` maps each board to a texture drawn inside the existing outline. Today it is a generic AI wood; replace the entry with the real product reference.
+- **Videos**: `src/data/videos.js`, built from `video-plan.json`. Set `status: 'ready'`, `videoSrc`, optional `captionsSrc` (WebVTT) and `segments` (`{ step, start, end }` in seconds) to enable Play, Repeat and 0.5×. Until then techniques show the photo of the result and no playback controls. In development only, `localStorage.setItem('ynd-video-fixture', '<url>')` loads a test clip; production builds drop that path.
+- One renderer (`BoardView`) draws Designer, layout thumbnails, build-by-layers, saved versions, Collection, From home to home and shared links. Quantities and lists never depend on images.
+- Reviewer notes (sources, coverage, covers vs. layouts, videos, checks and pending items) live in the in-app **Review panel** (Profile → Preview tools, or the desktop side panel), outside the customer journey. Text in `src/data/review.js`.
 
 ## Not real yet
 

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { useActions } from '../actions.js';
 import { TopBar, Kicker, Button, Icon, PhotoPending, DemoNote, Sprig, Segmented } from '../ui.jsx';
-import { MediaImg } from '../components.jsx';
-import { photoPiece } from '../data/media.js';
+import { MediaImg, compositionPhoto } from '../components.jsx';
+import { MEDIA, photoPiece } from '../data/media.js';
 import { styleOf } from '../data/catalog.js';
 
 const usesPhotoPieces = (items) => items.some((i) => photoPiece(i.type, styleOf(i.type, i.style).id));
@@ -21,7 +21,7 @@ export function TechPills({ ids }) {
     <div className="row wrap" style={{ gap: 8 }}>
       {ids.map((t) => (
         <button key={t} className="tech-pill" onClick={() => nav.push('technique', { id: t })}>
-          <span className="round"><Icon name="play" size={12} /></span>
+          <span className="round"><Icon name="arrow" size={12} /></span>
           {TECHNIQUES[t].name}
         </button>
       ))}
@@ -82,7 +82,8 @@ export default function Presentation({ params }) {
   const p = PRESENTATIONS[params.id];
   const [compId, setCompId] = useState(params.comp || p.compositions[0].id);
   const comp = p.compositions.find((c) => c.id === compId);
-  const photo = comp.media?.topView || null;
+  const photo = compositionPhoto(comp);
+  const isInspiration = photo && MEDIA[photo].role === 'cover';
   const [view, setView] = useState('photo');
   const items = presentationItems(params.id, compId);
   const techs = techniquesFor(items);
@@ -99,7 +100,7 @@ export default function Presentation({ params }) {
       <div style={{ marginTop: 'calc(-1 * (var(--safe-top) + 54px))' }}>
         {photo && view === 'photo' ? (
           <div className="photo-hero">
-            <MediaImg id={photo} eager />
+            <MediaImg key={photo} id={photo} eager />
             <div className="view-toggle"><Segmented value={view} onChange={setView} options={[{ id: 'photo', label: 'Photo' }, { id: 'layout', label: 'Layout' }]} /></div>
           </div>
         ) : photo ? (
@@ -118,6 +119,10 @@ export default function Presentation({ params }) {
         )}
       </div>
 
+      {isInspiration && view === 'photo' && (
+        <p className="small pad hero-note">An inspiration image for this layout. Switch to Layout for the exact pieces and where they go.</p>
+      )}
+
       {p.compositions.length > 1 && (
         <div style={{ marginTop: 14 }}>
           <div className="pad row-between" style={{ marginBottom: 8 }}>
@@ -130,7 +135,7 @@ export default function Presentation({ params }) {
                 <div style={{ background: 'var(--table)', borderRadius: 6 }}>
                   <BoardView boardId={p.board} items={presentationItems(params.id, c.id)} uid={'cs-' + c.id} />
                 </div>
-                <div className="comp-name">{c.name}{c.media?.topView ? ' · Photo' : ''}</div>
+                <div className="comp-name">{c.name}</div>
               </button>
             ))}
           </div>
@@ -177,7 +182,7 @@ export default function Presentation({ params }) {
 
       <div className="pad section">
         <h2 className="h2">Techniques in this layout</h2>
-        <p className="small" style={{ margin: '4px 0 12px' }}>Cuts and folds change with the layout. Tap one for a short demo.</p>
+        <p className="small" style={{ margin: '4px 0 12px' }}>Cuts and folds change with the layout. Tap one to see how it’s done.</p>
         <TechPills ids={techs} />
       </div>
 

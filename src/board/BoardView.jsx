@@ -1,12 +1,13 @@
 import { useId, useMemo } from 'react';
 import { BOARDS, BOARD_W, BOARD_H, ITEMS, sizeFor } from '../data/catalog.js';
 import { ItemVisual, rng } from './art.jsx';
-import { photoPiece } from '../data/media.js';
+import { MEDIA, BOARD_SURFACES, photoPiece } from '../data/media.js';
 import { ROSEMARY_PATH } from './rosemaryPath.js';
 
 const PAD = 18;
 
 function WoodGrain({ board, uid }) {
+  const surface = MEDIA[BOARD_SURFACES[board.id]] || null;
   const lines = useMemo(() => {
     const rand = rng(board.id);
     return Array.from({ length: 22 }, (_, i) => {
@@ -41,7 +42,13 @@ function WoodGrain({ board, uid }) {
       </defs>
       <rect x="0" y="0" width={BOARD_W} height={BOARD_H} rx="22" fill={`url(#wood-${uid})`} filter={`url(#bsh-${uid})`} />
       <g clipPath={`url(#clip-${uid})`}>
-        {lines.map((d, i) => (
+        {surface ? (
+          <>
+            {/* Generic texture inside the existing outline, tinted toward this board's wood. */}
+            <image href={surface.src} x="0" y={(BOARD_H - BOARD_W) / 2} width={BOARD_W} height={BOARD_W} preserveAspectRatio="xMidYMid slice" />
+            <rect x="0" y="0" width={BOARD_W} height={BOARD_H} fill={`url(#wood-${uid})`} opacity={board.tint} />
+          </>
+        ) : lines.map((d, i) => (
           <path key={i} d={d} fill="none" stroke={board.grain} strokeWidth={i % 4 ? 0.8 : 1.6} opacity={i % 3 ? 0.18 : 0.3} />
         ))}
         <rect x="0" y="0" width={BOARD_W} height={BOARD_H} fill={`url(#light-${uid})`} />

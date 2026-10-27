@@ -1,0 +1,466 @@
+{
+  "version": "yndarena-media-v2",
+  "generatedWith": "built-in image_gen",
+  "assets": [
+    {
+      "id": "honey-ivory-bowl",
+      "ingredient": "Honey",
+      "format": "bowl",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: isolated ingredient cutout for Yndarena's photorealistic top-down serving-board app. Make a single small round ivory ceramic bowl filled with clear golden amber honey, seen perfectly vertically from directly overhead, realistic viscous honey with subtle natural surface reflections, minimalist unglazed cream ceramic rim. No spoon, no honey dipper, no garnish, no other objects. Warm neutral daylight from upper left, subtle realistic texture, restrained highlights, sharp appetizing real food photography, not illustration or 3D render. Bowl centered occupying about 75% of a square canvas, entire bowl visible with space around it, true transparent background outside bowl, no tabletop, no plate, no letters, no watermark. Only a very subtle contact shadow close to the base, no giant gray shadow. Output one independent high resolution PNG with genuine alpha transparency. Asset identifier honey-ivory-bowl.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_honey-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-78d86447-b278-4976-9203-526e7744cc0b.png"
+    },
+    {
+      "id": "whipped-feta-ivory-bowl",
+      "ingredient": "Whipped Feta with Honey",
+      "format": "bowl",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A shallow round warm ivory ceramic bowl filled with thick whipped white feta in a soft spoon swirl, with a fine delicate amber honey drizzle. No spoon, no bread, no flowers or herbs outside the bowl.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_whipped-feta-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-b77bf54a-1c2d-46fe-ad91-58f06c7f5374.png"
+    },
+    {
+      "id": "whipped-feta-parchment-swoosh",
+      "ingredient": "Whipped Feta with Honey",
+      "format": "swoosh",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One thick white whipped feta smear shaped like a broad elegant curved spoon swoosh, with a tiny honey drizzle, on one small naturally torn rectangle of cream parchment paper. Paper fully visible, realistic translucent edges, no bowl or spoon, no other foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_whipped-feta-parchment-swoosh",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-852f645e-471d-44c9-9685-146e2b3436a8.png"
+    },
+    {
+      "id": "lemon-herb-hummus-ivory-bowl",
+      "ingredient": "Lemon Herb Hummus",
+      "format": "bowl",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One round ivory ceramic bowl of creamy pale beige hummus, a shallow spiral swirl holding a thin golden olive-oil pool, sparse finely chopped parsley flecks on the hummus. No lemon slices, whole chickpeas, utensils, bread, paprika or surrounding garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_lemon-herb-hummus-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-cf1cd3b7-7b25-4a50-93a7-75195a348236.png"
+    },
+    {
+      "id": "lemon-herb-hummus-parchment-swoosh",
+      "ingredient": "Lemon Herb Hummus",
+      "format": "swoosh",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One broad curved spoon swoosh of creamy pale beige hummus with a restrained olive oil sheen and very sparse chopped parsley flecks, served directly on one small torn cream parchment rectangle. Entire parchment visible. No bowl, no spoon, no chickpeas or other foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_lemon-herb-hummus-parchment-swoosh",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-ce7b1dde-10b3-4b41-bc30-393edbf95979.png"
+    },
+    {
+      "id": "citrus-marinated-olives-ivory-bowl",
+      "ingredient": "Citrus Marinated Olives",
+      "format": "bowl",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One small round ivory ceramic bowl filled with natural green and purple marinated olives, a few slender orange zest curls and sparse small rosemary needles, modest olive oil gloss. Olives not unnaturally identical. No citrus wedges, spoon or objects outside bowl.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_citrus-marinated-olives-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-b9f9365c-47c2-4d91-be0d-15a69189b4cd.png"
+    },
+    {
+      "id": "carrot-batons-group",
+      "ingredient": "Carrots",
+      "format": "batons",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A compact loose bundle of eight realistic peeled bright orange carrot batons, roughly 8 cm long, squared ends with slight natural variation, arranged nearly parallel with a few overlapping. Fresh moist cut surfaces. No carrot tops, leaves, dip or bowl.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_carrot-batons-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-50abb051-a7e8-4afa-b392-ffd3e84dbca6.png"
+    },
+    {
+      "id": "celery-batons-group",
+      "ingredient": "Celery",
+      "format": "batons",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A compact loose group of six fresh pale green celery batons about 8 cm long, natural curved U-shaped cross sections and fine visible ribs, almost parallel with subtle overlap. No leafy tops, no bowl, no garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_celery-batons-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-65229d37-c434-47ad-b46a-8f5d23f11a3a.png"
+    },
+    {
+      "id": "bell-pepper-strips-group",
+      "ingredient": "Bell pepper",
+      "format": "strips",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A compact group of eight fresh yellow bell pepper strips, long gently curved strips with glossy golden yellow outer skin and pale inner flesh. Natural irregular cuts, loosely aligned with slight overlap. Yellow pepper only, no seeds, stalks, bowl or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_bell-pepper-strips-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-d77ff893-2501-4036-ba43-2258f253c9ad.png"
+    },
+    {
+      "id": "camembert-wedges-fan",
+      "ingredient": "Camembert",
+      "format": "wedges",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Four substantial triangular wedges of Camembert arranged as a tidy overlapping fan, chalky softly wrinkled white bloomy rind, pale creamy yellow center, slightly ripe soft interior but no puddle. Clearly natural cheese texture. No board, garnish or knife.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_camembert-wedges-fan",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-9f1b2ee9-ba9f-4bff-a929-a6456c493fd1.png"
+    },
+    {
+      "id": "camembert-wheel-cut-wedge",
+      "ingredient": "Camembert",
+      "format": "whole",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One small round wheel of Camembert with a single triangular wedge cut out and moved a short distance outward beside its opening; soft wrinkled white bloomy rind and creamy pale yellow cut faces. One wheel plus its one removed wedge, no knife, no additional slices or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_camembert-wheel-cut-wedge",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-a6298529-492a-4e19-a888-703cf3c778c8.png"
+    },
+    {
+      "id": "manchego-triangles-fan",
+      "ingredient": "Manchego",
+      "format": "triangles",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Six thin triangular Manchego cheese slices arranged in one graceful overlapping fan, pale ivory sheep's-milk cheese, recognizable tan basket-weave rind on outer curved edges, fine firm texture. No extra cheese wedge, no plate, no garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_manchego-triangles-fan",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-93924022-8d16-43a0-bcbb-e5628bc9b9c1.png"
+    },
+    {
+      "id": "manchego-cubes-group",
+      "ingredient": "Manchego",
+      "format": "cubes",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One compact irregular pile of ten small rindless ivory Manchego cheese cubes, firm smooth cut faces with tiny natural pores. Rindless cubes only. Natural variation in cube angles. No grated cheese, plate or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_manchego-cubes-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-d71d97fa-9f0a-4451-ab10-336c984b09d9.png"
+    },
+    {
+      "id": "aged-gouda-triangles-fan",
+      "ingredient": "Aged gouda",
+      "format": "triangles",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Six thin triangular aged Gouda slices in a tidy overlapping fan, deep golden amber cheese, subtle white crunchy tyrosine crystals, natural dense firm cheese texture, rind removed. Not processed cheese. No plate or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_aged-gouda-triangles-fan",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-060adfb7-ac81-4104-97f4-7ed1936d5bf4.png"
+    },
+    {
+      "id": "aged-gouda-cubes-group",
+      "ingredient": "Aged gouda",
+      "format": "cubes",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A compact loose pile of ten small aged Gouda cheese cubes, deep golden amber, dense firm cut faces with a few tiny natural white tyrosine crystals. Natural variations in orientation. No rind, wax, plate, garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_aged-gouda-cubes-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-70350dc5-9414-4d7d-bc79-9594d900f53c.png"
+    },
+    {
+      "id": "goat-cheese-coins-group",
+      "ingredient": "Goat cheese log",
+      "format": "coins",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Five small thick round coins cut from a fresh goat cheese log, creamy white crumbly edges, chalky soft cut faces, gently overlapping in a short diagonal row. No dark rind, herbs, ash coating, plate or knife.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_goat-cheese-coins-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-52bbafb6-35b7-4743-94b8-24cfc7971b98.png"
+    },
+    {
+      "id": "serrano-single-rose",
+      "ingredient": "Serrano ham",
+      "format": "roses",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One neatly hand-folded edible rose made from a few thin slices of authentic Serrano ham, rosy cured meat with cream white fat edges, delicate slightly dry translucent folds, irregular natural petals. No green leaves, stem, toothpick or plate. A food fold, not a botanical flower.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_serrano-single-rose",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-eaf10d40-354a-4ccd-8d5b-05698b1a8bd4.png"
+    },
+    {
+      "id": "serrano-ribbon-group",
+      "ingredient": "Serrano ham",
+      "format": "ribbons",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A short compact group of three thin Serrano ham slices draped into loose wavy ribbon folds, rosy cured meat with creamy fat along edges, slightly dry translucent natural texture. One cluster. No garnish, plate or extra foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_serrano-ribbon-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-efe10c18-d28f-44cc-8f14-4fd9ff2f0266.png"
+    },
+    {
+      "id": "salami-river-group",
+      "ingredient": "Salami",
+      "format": "river",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A short flowing S-curve of eight thin overlapping circular salami slices folded gently in half like a charcuterie river. Burgundy pink meat evenly marbled with tiny white fat flecks, thin natural casing rim. One connected compact group, no board, garnish or plate.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_salami-river-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-19d338a5-7497-431b-84c1-2c5d2a8ebff3.png"
+    },
+    {
+      "id": "salami-folded-quarters-group",
+      "ingredient": "Salami",
+      "format": "quarters",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Four thin circular salami slices each folded twice into distinct quarters and loosely nested like small triangular cones in a short fan. Burgundy pink cured meat with fine white fat flecks, realistic folded edges. No plate, skewer or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_salami-folded-quarters-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-b5303732-1149-48ad-b7c8-a0aa31102688.png"
+    },
+    {
+      "id": "soppressata-river-group",
+      "ingredient": "Soppressata",
+      "format": "river",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A short S-shaped charcuterie river made from eight broad thin overlapping soppressata slices loosely folded in half, rich rustic deep red cured meat with noticeably coarse irregular white fat pieces, oval slices and natural casing. No board or garnish. Distinct coarse meat texture.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_soppressata-river-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-de9ddeb4-8f7b-478b-92f0-caedcd389422.png"
+    },
+    {
+      "id": "soppressata-folded-quarters-group",
+      "ingredient": "Soppressata",
+      "format": "quarters",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Four broad thin soppressata slices folded twice into quarters and loosely nested in a compact fan, dark rustic red meat with coarse irregular white fat pieces. Natural irregular folded edges. No skewers, plate, board or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_soppressata-folded-quarters-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-d5926ab9-4ffd-497d-9b2d-dd8dc9c3e035.png"
+    },
+    {
+      "id": "green-grapes-small-cluster",
+      "ingredient": "Green grapes",
+      "format": "clusters",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One small natural cluster of about twelve fresh green seedless grapes connected by a small brown-green branching stem. Pale green translucent skins, soft natural bloom, gentle variation in grape size. No grape leaves, bowl or other fruit.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_green-grapes-small-cluster",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-51f6c96d-0350-402c-b083-0ff25ad139e5.png"
+    },
+    {
+      "id": "crisp-apple-slice-fan",
+      "ingredient": "Crisp apple",
+      "format": "fan",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One tidy fan of seven thin fresh red-skinned apple slices from a single apple cheek, creamy ivory crisp flesh and narrow deep red peel edge, overlapping so each slice is distinguishable. No seeds, brown oxidation, whole apple, plate or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_crisp-apple-slice-fan",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-076b1c57-129a-43c9-9565-e10f2ff37c67.png"
+    },
+    {
+      "id": "ripe-pear-slice-fan",
+      "ingredient": "Ripe pear",
+      "format": "fan",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: One tidy fan of seven thin ripe pear slices from a single pear cheek, pale creamy flesh and fine russet green-yellow peel edges, elongated recognizable pear contour. Slight natural grain in flesh, overlapping slices distinct. No seeds, whole pear, apple, plate or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_ripe-pear-slice-fan",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-b2c9bf8e-4a64-4931-8f66-67e1ffb7c963.png"
+    },
+    {
+      "id": "strawberries-halved-group",
+      "ingredient": "Strawberries",
+      "format": "halved",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A small compact group of six fresh strawberry halves, juicy red cut faces with pale centers and tiny exterior seeds, some little green calyx leaves retained. All fruit fully visible and naturally slightly overlapping, no whole bowl or other fruit.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_strawberries-halved-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-9f0ef31b-4e80-4f22-be25-98a02c7a2b96.png"
+    },
+    {
+      "id": "dried-apricots-pile",
+      "ingredient": "Dried apricots",
+      "format": "pile",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A small loose mound of seven realistic dried apricot halves, warm golden orange color, irregular wrinkled leathery surfaces with subtle translucent edges. No fresh apricot, pit, bowl, garnish or sugar coating.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_dried-apricots-pile",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-d04ff6e6-e68e-4ab4-8fb1-24c02017518d.png"
+    },
+    {
+      "id": "mini-cucumber-rounds-group",
+      "ingredient": "Mini cucumbers",
+      "format": "rounds",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A compact lightly overlapping group of seven thick round slices of small Persian cucumber, thin deep green peel, pale watery green seeded interiors, natural fresh cut texture. Clearly cucumber, not zucchini. No leaves, bowl or whole cucumber.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_mini-cucumber-rounds-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-7158d1a8-6016-4ce8-b882-62aaf2c7f0ee.png"
+    },
+    {
+      "id": "mini-cucumber-ribbons-group",
+      "ingredient": "Mini cucumbers",
+      "format": "ribbons",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Three long paper-thin cucumber ribbons gently folded into loose wavy loops as one compact small group. Translucent pale green watery flesh bordered by narrow dark green skin strips, realistic fresh texture. No pickles, bowl, plate or decorative flowers.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_mini-cucumber-ribbons-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-34918480-7e15-4d06-9098-1e5d31de27bd.png"
+    },
+    {
+      "id": "cherry-tomatoes-group",
+      "ingredient": "Cherry tomatoes",
+      "format": "whole",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A compact loose group of seven ripe red cherry tomatoes, round small glossy fruit with restrained highlights, two with little natural green star-shaped calyxes. All tomatoes whole and fully visible, no vine sprawling outside group, no bowl or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_cherry-tomatoes-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-a1d440a7-1dc8-4cb7-9b57-ce116092813e.png"
+    },
+    {
+      "id": "seed-cracker-single",
+      "ingredient": "Seed crackers (gluten free)",
+      "format": "single",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Exactly ONE thin rectangular gluten-free seed cracker, crisp tan surface densely studded with natural flax, sesame, sunflower and pumpkin seed fragments, slightly irregular baked edges, unmistakably real food. Fully flat and seen overhead, no second cracker, no crumbs, plate or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_seed-cracker-single",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-b8fb583d-4d8d-4d73-8f51-e4f038e74f09.png"
+    },
+    {
+      "id": "baguette-slices-group",
+      "ingredient": "Baguette",
+      "format": "slices",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: Four thin diagonal slices of a small rustic French baguette in a lightly overlapping short fan, golden crust, creamy irregular open crumb with natural air holes. Real unbuttered bread, not toast, no garlic or herbs. No whole loaf, plate, board or knife.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_baguette-slices-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-97a80c5f-15f8-4063-8432-6b5746a773eb.png"
+    },
+    {
+      "id": "marcona-almonds-pile",
+      "ingredient": "Marcona almonds",
+      "format": "pile",
+      "type": "ingredient",
+      "prompt": "Use case: product-mockup. Asset type: one isolated photoreal food cutout for Yndarena's top-down serving-board app. True vertically overhead camera, orthographic-like food photography, warm neutral soft daylight from upper left, natural food texture and restrained highlights. Entire subject fully visible, centered in a square canvas with a generous 12% transparent margin on every side. Genuine alpha transparency outside the object and through any gaps, no table, no board, no background, no text, no logos, no watermark, no illustration, no CGI. Subtle tight contact shadow only. Produce one independent PNG; not a collage or contact sheet. Subject: A small irregular pile of about sixteen peeled Marcona almonds, plump rounded ivory-golden kernels with a subtle olive-oil sheen and very sparse fine salt. Natural shape variation, not standard long brown almonds. No skins, bowl, leaves or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_marcona-almonds-pile",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-4a879b24-8c79-4462-b043-a6386bfbffa2.png"
+    },
+    {
+      "id": "recipe-whipped-feta-with-honey",
+      "type": "recipe-cover",
+      "target": "Whipped Feta with Honey",
+      "format": "cover",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium food editorial recipe cover for Yndarena, an American home and kitchen brand whose story celebrates cooking with love and rosemary as love and memory. Make one believable appetizing finished-dish photograph, overhead camera, soft warm window daylight from upper left, warm ivory ceramic and cream linen on pale natural wood, tactile real food texture, quiet intimate home atmosphere, restrained styling, no text, no logo, no hands, no people, no illustration, no CGI, no collage. Landscape 3:2 framing, main dish centered with generous negative space on every side for flexible mobile crops; entire serving vessel visible. Show only the described dish, no unrelated food props. Subject: A shallow round ivory bowl of creamy whipped white feta with a gentle spoon swirl and a fine delicate golden honey drizzle. A simple small silver spoon rests on the linen beside it. Feta and honey only, no nuts, flowers, fresh fruit or scattered food garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_recipe-whipped-feta-with-honey",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-f507bd2d-6b9e-4a56-83e1-73e739a6e406.png"
+    },
+    {
+      "id": "recipe-fig-rosemary-jam",
+      "type": "recipe-cover",
+      "target": "Fig & Rosemary Jam",
+      "format": "cover",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium food editorial recipe cover for Yndarena, an American home and kitchen brand whose story celebrates cooking with love and rosemary as love and memory. Make one believable appetizing finished-dish photograph, overhead camera, soft warm window daylight from upper left, warm ivory ceramic and cream linen on pale natural wood, tactile real food texture, quiet intimate home atmosphere, restrained styling, no text, no logo, no hands, no people, no illustration, no CGI, no collage. Landscape 3:2 framing, main dish centered with generous negative space on every side for flexible mobile crops; entire serving vessel visible. Show only the described dish, no unrelated food props. Subject: One small ivory ceramic ramekin filled with glossy dark purple-brown homemade fig jam, natural little fig seeds and thick spoonable fruit texture. One short rosemary sprig rests on the linen beside the bowl. A small vintage copper pot is only partially visible and softly out of focus at a far edge, evoking a grandmother's kitchen. No bread, fresh figs or other foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_recipe-fig-rosemary-jam",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-9ecc4337-42b3-45b1-83bb-d04c2f5cd2bd.png"
+    },
+    {
+      "id": "recipe-rosemary-honey-walnuts",
+      "type": "recipe-cover",
+      "target": "Rosemary Honey Walnuts",
+      "format": "cover",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium food editorial recipe cover for Yndarena, an American home and kitchen brand whose story celebrates cooking with love and rosemary as love and memory. Make one believable appetizing finished-dish photograph, overhead camera, soft warm window daylight from upper left, warm ivory ceramic and cream linen on pale natural wood, tactile real food texture, quiet intimate home atmosphere, restrained styling, no text, no logo, no hands, no people, no illustration, no CGI, no collage. Landscape 3:2 framing, main dish centered with generous negative space on every side for flexible mobile crops; entire serving vessel visible. Show only the described dish, no unrelated food props. Subject: A shallow little ivory dish holding a small generous pile of toasted walnut halves with a thin translucent honey glaze and sparse tiny fresh rosemary needles. The walnuts look natural, warmly toasted, not candy or brittle. A few walnuts near the dish, no other nuts, fruits or spices.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_recipe-rosemary-honey-walnuts",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-e818127d-a702-4b66-af11-6d4bcf1cb3ec.png"
+    },
+    {
+      "id": "recipe-lemon-herb-hummus",
+      "type": "recipe-cover",
+      "target": "Lemon Herb Hummus",
+      "format": "cover",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium food editorial recipe cover for Yndarena, an American home and kitchen brand whose story celebrates cooking with love and rosemary as love and memory. Make one believable appetizing finished-dish photograph, overhead camera, soft warm window daylight from upper left, warm ivory ceramic and cream linen on pale natural wood, tactile real food texture, quiet intimate home atmosphere, restrained styling, no text, no logo, no hands, no people, no illustration, no CGI, no collage. Landscape 3:2 framing, main dish centered with generous negative space on every side for flexible mobile crops; entire serving vessel visible. Show only the described dish, no unrelated food props. Subject: One round ivory bowl of silky pale beige homemade hummus with a spoon spiral, a small pool of golden olive oil and sparse finely chopped parsley. A simple teaspoon rests beside it. No chickpea topping, paprika, vegetables, bread, nuts or lemon wedges.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_recipe-lemon-herb-hummus",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-f1e7186f-0cba-4a94-a021-fbe6d1db9aa8.png"
+    },
+    {
+      "id": "recipe-citrus-marinated-olives",
+      "type": "recipe-cover",
+      "target": "Citrus Marinated Olives",
+      "format": "cover",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium food editorial recipe cover for Yndarena, an American home and kitchen brand whose story celebrates cooking with love and rosemary as love and memory. Make one believable appetizing finished-dish photograph, overhead camera, soft warm window daylight from upper left, warm ivory ceramic and cream linen on pale natural wood, tactile real food texture, quiet intimate home atmosphere, restrained styling, no text, no logo, no hands, no people, no illustration, no CGI, no collage. Landscape 3:2 framing, main dish centered with generous negative space on every side for flexible mobile crops; entire serving vessel visible. Show only the described dish, no unrelated food props. Subject: One small ivory ceramic bowl filled with natural green and purple marinated olives with a few slender orange zest curls and very sparse rosemary needles, a light olive-oil gloss. Small silver serving spoon lies beside it. No orange wedges, lemons, cheese, bread or unrelated foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_recipe-citrus-marinated-olives",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-2a2fb041-b51f-4459-8296-34779fc52cfc.png"
+    },
+    {
+      "id": "golden-hour-salami-river",
+      "type": "presentation-cover",
+      "target": "Golden Hour",
+      "format": "Salami River",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial serving-board inspiration cover for Yndarena's home entertaining app. One authentic-looking high-end food photograph, not illustration, CGI or collage. Perfectly overhead vertical view. A single plain rectangular honey-toned natural wood serving board with gently rounded corners, no handle, no grooves, no branding, lying horizontally on warm cream linen. This is a generic preview board, not a depiction of a specific commercial product. Entire board visible with generous linen margin, landscape 3:2 composition and safe central framing for mobile crops. Soft warm window daylight from upper left, natural imperfect food textures, generous but achievable home serving, no hands, no people, no text, no labels, no extra dishes, no food outside the specified ingredient list. Recipe quantities are not visually calibrated. Subject: Golden Hour, a generous appetizer board for friends. A graceful winding river of folded fine-marbled pink salami crosses diagonally from upper left toward lower right, splitting the board into two shores. One shallow bowl of whipped feta with honey and one smaller bowl of green and purple citrus-marinated olives on opposite sides. Separate groups of white-rind brie wedges, golden aged Gouda triangles, two small prosciutto roses, red grape clusters, a red-skinned apple slice fan, plain round cracker fans, honey-rosemary walnuts and four small rosemary sprigs. All these ingredients clearly recognizable, no figs, cucumber, tomatoes, strawberries, baguette or other foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_golden-hour-salami-river",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-ec6a4067-a425-474e-b58a-136e9227a7f7.png"
+    },
+    {
+      "id": "golden-hour-four-corners",
+      "type": "presentation-cover",
+      "target": "Golden Hour",
+      "format": "Four Corners",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial serving-board inspiration cover for Yndarena's home entertaining app. One authentic-looking high-end food photograph, not illustration, CGI or collage. Perfectly overhead vertical view. A single plain rectangular honey-toned natural wood serving board with gently rounded corners, no handle, no grooves, no branding, lying horizontally on warm cream linen. This is a generic preview board, not a depiction of a specific commercial product. Entire board visible with generous linen margin, landscape 3:2 composition and safe central framing for mobile crops. Soft warm window daylight from upper left, natural imperfect food textures, generous but achievable home serving, no hands, no people, no text, no labels, no extra dishes, no food outside the specified ingredient list. Recipe quantities are not visually calibrated. Subject: Golden Hour arranged in four intimate balanced corner clusters rather than one salami river. A shallow ivory bowl of whipped feta with honey near one corner and a smaller bowl of citrus-marinated green and purple olives diagonally opposite. Four corner groupings combine folded salami quarters, brie wedges, aged Gouda triangles, small prosciutto roses, red grapes and a red apple fan. Two plain round cracker fans bridge the groups, honey-rosemary walnuts fill small gaps and four short rosemary sprigs finish it. Keep the center gently open with a little visible wood. No figs, vegetables, strawberries, baguette or other foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_golden-hour-four-corners",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-9a449f3e-dfe5-4f65-bcd6-95ba3418180f.png"
+    },
+    {
+      "id": "sunday-garden-rainbow",
+      "type": "presentation-cover",
+      "target": "Sunday Garden",
+      "format": "Rainbow",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial serving-board inspiration cover for Yndarena's home entertaining app. One authentic-looking high-end food photograph, not illustration, CGI or collage. Perfectly overhead vertical view. A single plain rectangular honey-toned natural wood serving board with gently rounded corners, no handle, no grooves, no branding, lying horizontally on warm cream linen. This is a generic preview board, not a depiction of a specific commercial product. Entire board visible with generous linen margin, landscape 3:2 composition and safe central framing for mobile crops. Soft warm window daylight from upper left, natural imperfect food textures, generous but achievable home serving, no hands, no people, no text, no labels, no extra dishes, no food outside the specified ingredient list. Recipe quantities are not visually calibrated. Subject: Sunday Garden, a bright family sharing board, vegetables arranged in loose rainbow arcs around a round ivory bowl of lemon herb hummus. Red whole cherry tomatoes and halved fresh strawberries, orange carrot batons, yellow bell pepper strips, green small cucumber rounds follow an arc from red to green. Include a separate modest cluster of aged cheddar cubes, two short fans of plain round crackers and two short rosemary sprigs. The color arcs are clear and achievable, never artificial gradients. No meat, grapes, apples, olives, figs, broccoli, radishes, berries other than strawberries or extra foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_sunday-garden-rainbow",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-f309142b-3952-4746-9c1e-72405591107e.png"
+    },
+    {
+      "id": "sunday-garden-garden-rows",
+      "type": "presentation-cover",
+      "target": "Sunday Garden",
+      "format": "Garden Rows",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial serving-board inspiration cover for Yndarena's home entertaining app. One authentic-looking high-end food photograph, not illustration, CGI or collage. Perfectly overhead vertical view. A single plain rectangular honey-toned natural wood serving board with gently rounded corners, no handle, no grooves, no branding, lying horizontally on warm cream linen. This is a generic preview board, not a depiction of a specific commercial product. Entire board visible with generous linen margin, landscape 3:2 composition and safe central framing for mobile crops. Soft warm window daylight from upper left, natural imperfect food textures, generous but achievable home serving, no hands, no people, no text, no labels, no extra dishes, no food outside the specified ingredient list. Recipe quantities are not visually calibrated. Subject: Sunday Garden in Garden Rows: an ivory hummus bowl near the top left corner anchors neat relaxed parallel garden-bed-like rows of whole red cherry tomatoes, halved red strawberries, orange carrot batons, yellow bell pepper strips and green cucumber rounds. At the lower edge a small group of cheddar cubes and two short plain round cracker fans, finished with two short rosemary sprigs. Rows stay visibly distinct with narrow wood paths. Only these ingredients, no meat, grapes, apples, olives, broccoli, radishes or unrelated foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_sunday-garden-garden-rows",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-645c1843-4e22-4e30-af54-ca32be11ed88.png"
+    },
+    {
+      "id": "the-copper-pot-long-table",
+      "type": "presentation-cover",
+      "target": "The Copper Pot",
+      "format": "Long Table",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial serving-board inspiration cover for Yndarena's home entertaining app. One authentic-looking high-end food photograph, not illustration, CGI or collage. Perfectly overhead vertical view. A single plain rectangular honey-toned natural wood serving board with gently rounded corners, no handle, no grooves, no branding, lying horizontally on warm cream linen. This is a generic preview board, not a depiction of a specific commercial product. Entire board visible with generous linen margin, landscape 3:2 composition and safe central framing for mobile crops. Soft warm window daylight from upper left, natural imperfect food textures, generous but achievable home serving, no hands, no people, no text, no labels, no extra dishes, no food outside the specified ingredient list. Recipe quantities are not visually calibrated. Subject: The Copper Pot, a generous special-occasion board with a long-table feeling. A small ivory ramekin of dark fig-rosemary jam and a smaller ivory bowl of amber honey sit on opposite ends of a diagonal. Distinct groups of brie wedges, aged cheddar triangles, two prosciutto roses and a short salami river; red grapes, fresh fig halves and dried apricots; a plain round cracker fan, thin baguette slices and honey-rosemary walnuts in gaps. Five little rosemary sprigs tie the composition together. Sophisticated warm home atmosphere with the corner of an old copper pot very subtly visible outside the board on the linen. No extra foods, no nuts other than walnuts, no wine glasses.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_the-copper-pot-long-table",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-15b9f104-1818-45bf-a755-c9d87452402e.png"
+    },
+    {
+      "id": "love-like-rosemary-the-sprig",
+      "type": "presentation-cover",
+      "target": "Love, Like Rosemary",
+      "format": "The Sprig",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial serving-board inspiration cover for Yndarena's home entertaining app. One authentic-looking high-end food photograph, not illustration, CGI or collage. Perfectly overhead vertical view. A single plain rectangular honey-toned natural wood serving board with gently rounded corners, no handle, no grooves, no branding, lying horizontally on warm cream linen. This is a generic preview board, not a depiction of a specific commercial product. Entire board visible with generous linen margin, landscape 3:2 composition and safe central framing for mobile crops. Soft warm window daylight from upper left, natural imperfect food textures, generous but achievable home serving, no hands, no people, no text, no labels, no extra dishes, no food outside the specified ingredient list. Recipe quantities are not visually calibrated. Subject: Love, Like Rosemary for two, The Sprig layout. Arrange an airy graceful diagonal composition evoking a rosemary branch, with a single small ivory ramekin of dark fig-rosemary jam anchoring one end. Along the diagonal are small separate groups of brie wedges, aged cheddar triangles, two tiny prosciutto roses, red grapes, fresh fig halves, two short fans of plain round crackers and honey-rosemary walnut halves. A couple of fresh rosemary sprigs sit along the diagonal like a botanical thread of love and memory. Plenty of visible wood between groups, intimate two-person portions. Only these nine ingredient types, no flowers, honey bowl, olives, apples or other foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_love-like-rosemary-the-sprig",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-5b6d4ed2-6f21-47bc-a0db-e2a989680cb5.png"
+    },
+    {
+      "id": "love-like-rosemary-gathered",
+      "type": "presentation-cover",
+      "target": "Love, Like Rosemary",
+      "format": "Gathered",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial serving-board inspiration cover for Yndarena's home entertaining app. One authentic-looking high-end food photograph, not illustration, CGI or collage. Perfectly overhead vertical view. A single plain rectangular honey-toned natural wood serving board with gently rounded corners, no handle, no grooves, no branding, lying horizontally on warm cream linen. This is a generic preview board, not a depiction of a specific commercial product. Entire board visible with generous linen margin, landscape 3:2 composition and safe central framing for mobile crops. Soft warm window daylight from upper left, natural imperfect food textures, generous but achievable home serving, no hands, no people, no text, no labels, no extra dishes, no food outside the specified ingredient list. Recipe quantities are not visually calibrated. Subject: Love, Like Rosemary for two, Gathered layout: a cozy compact organic central gathering around one small ivory ramekin of dark fig-rosemary jam. Small groups of brie wedges and aged cheddar triangles near the ramekin, two small prosciutto roses, red grapes and fresh fig halves, two short plain round cracker fans, honey-rosemary walnut halves in the small gaps and fresh rosemary sprigs around the cluster. Asymmetrical inviting composition with visible wood around the outer edge, clearly for two rather than a banquet. Exactly these nine ingredient types, no other foods, flowers or additional dip bowls.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_love-like-rosemary-gathered",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-48081d59-5c2f-4220-9f51-4b883b325493.png"
+    },
+    {
+      "id": "generic-honey-wood-surface",
+      "type": "surface",
+      "target": "Generic preview wood",
+      "format": "texture",
+      "prompt": "Use case: product-mockup. Asset type: generic photographic wood surface texture for a serving-board app preview, to be clipped inside an existing board silhouette. A perfectly flat uninterrupted natural honey-light brown hardwood surface, realistic fine linear grain running horizontally across the entire square canvas. Very subtle natural variation, matte food-board-like finish, warm neutral soft even daylight, no perspective, no directional cast shadows, no board edges, no handle, no grooves, no join lines, no food, no props, no text, no knots or holes, no logos. Full bleed opaque square high resolution photographic texture, not an illustration, no 3D, not a specific branded product.",
+      "status": "complete",
+      "resultKey": "yndarenaV2Result_generic-honey-wood-surface",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-e984334d-33a8-44d0-8c09-3a8e5ab62e56.png"
+    }
+  ]
+}

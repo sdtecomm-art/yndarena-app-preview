@@ -89,6 +89,7 @@ export const PRESENTATIONS = {
         id: 'the-sprig',
         name: 'The Sprig',
         desc: 'A diagonal line of crackers, like a stem, with everything growing from it.',
+        media: { cover: 'love-like-rosemary-the-sprig' },
         place: [
           { g: 'crackers', q: 6, x: 214, y: 258, r: -33, s: 'fan' },
           { g: 'crackers', q: 6, x: 386, y: 146, r: -33, s: 'fan' },
@@ -112,6 +113,7 @@ export const PRESENTATIONS = {
         id: 'gathered',
         name: 'Gathered',
         desc: 'A round wreath that leaves the edges of the board open.',
+        media: { cover: 'love-like-rosemary-gathered' },
         place: [
           { g: 'bowl-jam', q: 0.25, x: 300, y: 200 },
           { g: 'brie', q: 6, x: 300, y: 96, s: 'wedges' },
@@ -142,6 +144,8 @@ export const PRESENTATIONS = {
     board: 'cheese-bread',
     intro: 'A generous board for friends arriving as the light turns warm. Whipped feta, warm olives and a winding salami river.',
     memory: 'Put your whole heart into it. Nobody will notice if a cracker leans the wrong way.',
+    // Editorial cover: AI inspiration image of the first layout. Placement and amounts come from the layout data.
+    media: { cover: 'golden-hour-salami-river' },
     groups: [
       { type: 'bowl-feta', qty: 0.75 },
       { type: 'bowl-olives', qty: 0.5 },
@@ -160,20 +164,21 @@ export const PRESENTATIONS = {
         id: 'river',
         name: 'Salami River',
         desc: 'A river of salami crosses the board and splits it into two shores.',
+        media: { cover: 'golden-hour-salami-river' },
         place: [
-          { g: 'bowl-feta', q: 0.75, x: 148, y: 104 },
-          { g: 'bowl-olives', q: 0.5, x: 470, y: 312 },
-          { g: 'salami', q: 6, x: 306, y: 206, r: -24, s: 'river' },
-          { g: 'brie', q: 8, x: 470, y: 102, s: 'wedges' },
-          { g: 'gouda', q: 6, x: 146, y: 298, r: -10, s: 'triangles' },
-          { g: 'prosciutto', q: 4, x: 300, y: 330, s: 'roses' },
-          { g: 'grapes', q: 10, x: 538, y: 206 },
-          { g: 'apple', q: 1, x: 290, y: 82, r: -10 },
-          { g: 'crackers', q: 12, x: 206, y: 196, r: -24, s: 'fan' },
-          { g: 'crackers', q: 12, x: 400, y: 236, r: -24, s: 'fan' },
-          { g: 'walnuts', q: 0.5, x: 64, y: 200 },
-          { g: 'rosemary', q: 2, x: 372, y: 330, r: 30 },
-          { g: 'rosemary', q: 2, x: 226, y: 72, r: -60 },
+          { g: 'bowl-feta', q: 0.75, x: 92, y: 82 },
+          { g: 'bowl-olives', q: 0.5, x: 548, y: 330 },
+          { g: 'salami', q: 6, x: 300, y: 205, r: -24, s: 'river' },
+          { g: 'brie', q: 8, x: 505, y: 82, s: 'wedges' },
+          { g: 'gouda', q: 6, x: 102, y: 318, r: -10, s: 'triangles' },
+          { g: 'prosciutto', q: 4, x: 418, y: 338, s: 'roses' },
+          { g: 'grapes', q: 10, x: 548, y: 205 },
+          { g: 'apple', q: 1, x: 220, y: 52, r: -10 },
+          { g: 'crackers', q: 12, x: 262, y: 124, r: -24, s: 'fan' },
+          { g: 'crackers', q: 12, x: 338, y: 286, r: -24, s: 'fan' },
+          { g: 'walnuts', q: 0.5, x: 58, y: 200 },
+          { g: 'rosemary', q: 2, x: 222, y: 362, r: 30 },
+          { g: 'rosemary', q: 2, x: 372, y: 40, r: -60 },
         ],
         tips: {
           charcuterie: 'Start the river near one corner and let it curve toward the other.',
@@ -184,6 +189,7 @@ export const PRESENTATIONS = {
         id: 'corners',
         name: 'Four Corners',
         desc: 'Bowls in the center and a different flavor in each corner.',
+        media: { cover: 'golden-hour-four-corners' },
         place: [
           { g: 'bowl-feta', q: 0.75, x: 250, y: 196, s: 'swoosh' },
           { g: 'bowl-olives', q: 0.5, x: 352, y: 210 },
@@ -217,6 +223,8 @@ export const PRESENTATIONS = {
     board: 'fruits-veg',
     intro: 'Crisp vegetables, sweet berries and a bowl of lemony hummus. Easy for small hands to reach.',
     memory: 'Let everyone help. A crooked carrot stick has its own story.',
+    // Editorial cover: AI inspiration image of the first layout. Placement and amounts come from the layout data.
+    media: { cover: 'sunday-garden-rainbow' },
     groups: [
       { type: 'bowl-hummus', qty: 1 },
       { type: 'cheddar', qty: 6 },
@@ -233,6 +241,7 @@ export const PRESENTATIONS = {
         id: 'rainbow',
         name: 'Rainbow',
         desc: 'Colors arc around the hummus from red to green.',
+        media: { cover: 'sunday-garden-rainbow' },
         place: [
           { g: 'bowl-hummus', q: 1, x: 300, y: 262 },
           { g: 'tomatoes', q: 1, x: 112, y: 300 },
@@ -252,6 +261,7 @@ export const PRESENTATIONS = {
         id: 'rows',
         name: 'Garden Rows',
         desc: 'Neat rows like a vegetable garden. Easy to refill.',
+        media: { cover: 'sunday-garden-garden-rows' },
         place: [
           { g: 'bowl-hummus', q: 1, x: 96, y: 200 },
           { g: 'carrots', q: 8, x: 252, y: 80, s: 'batons' },
@@ -280,6 +290,8 @@ export const PRESENTATIONS = {
     board: 'cheese-bread',
     intro: 'For birthdays, anniversaries and long dinners. Homemade fig jam, honey, warm bread and plenty to share.',
     memory: 'Inspired by the copper pot where Yndarena made her jams. What is made with love endures.',
+    // Editorial cover: AI inspiration image of the first layout. Placement and amounts come from the layout data.
+    media: { cover: 'the-copper-pot-long-table' },
     groups: [
       { type: 'bowl-jam', qty: 0.5 },
       { type: 'bowl-honey', qty: 3 },
@@ -300,6 +312,7 @@ export const PRESENTATIONS = {
         id: 'long-table',
         name: 'Long Table',
         desc: 'Two bowls on one diagonal, everything else flowing around them.',
+        media: { cover: 'the-copper-pot-long-table' },
         place: [
           { g: 'bowl-jam', q: 0.5, x: 214, y: 150 },
           { g: 'bowl-honey', q: 3, x: 400, y: 262 },

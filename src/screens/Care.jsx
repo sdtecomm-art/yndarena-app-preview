@@ -32,8 +32,7 @@ function VideoCard() {
       <button className="card tap" onClick={() => setOpen(true)}>
         <div style={{ position: 'relative', aspectRatio: '16 / 9', background: 'linear-gradient(160deg,#9a6644,#6f4630)', display: 'grid', placeItems: 'center' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(60% 70% at 30% 20%, rgba(255,248,238,.35), transparent)' }} />
-          <div style={{ width: 58, height: 58, borderRadius: 29, background: 'rgba(250,245,239,.92)', display: 'grid', placeItems: 'center', position: 'relative' }}><Icon name="play" /></div>
-          <span className="photo-tag" style={{ top: 'auto', bottom: 10 }}>Video pending</span>
+          <span className="tag is-lav" style={{ position: 'relative' }}>Video coming soon</span>
         </div>
         <div className="card-pad" style={{ padding: '12px 14px' }}>
           <div className="kicker">2 minutes</div>
@@ -42,7 +41,7 @@ function VideoCard() {
       </button>
       <Sheet open={open} onClose={() => setOpen(false)} title="Care video">
         <p className="body" style={{ marginTop: 0 }}>Oil your boards once the day they arrive. After that, the water test tells you when they need it again.</p>
-        <DemoNote>Placeholder. The existing care video from yndarenahome.com/wood-care will play here.</DemoNote>
+        <DemoNote>Yndarena’s existing care video (yndarenahome.com/wood-care) will play here once it is linked. Until then, follow the steps in your care plan.</DemoNote>
       </Sheet>
     </>
   );

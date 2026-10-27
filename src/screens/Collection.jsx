@@ -159,7 +159,7 @@ export function DesignItem({ params }) {
   return (
     <>
       <TopBar title={d.kind === 'scratch' ? 'From scratch' : 'My version'} right={<IconButton name="share" label="Share" onClick={() => nav.push('share', { id: d.id })} />} />
-      <PhotoPending className="hero-board"><BoardView boardId={d.board} items={d.items} uid={'item-' + d.id} /></PhotoPending>
+      <PhotoPending className="hero-board" tag="Your layout"><BoardView boardId={d.board} items={d.items} uid={'item-' + d.id} /></PhotoPending>
       <div className="pad" style={{ marginTop: 18 }}>
         <div className="row wrap" style={{ gap: 6 }}>
           <span className={'tag ' + (d.kind === 'scratch' ? 'is-sage' : 'is-lav')}>{d.kind === 'scratch' ? 'From scratch' : 'Modified version'}</span>
@@ -229,7 +229,7 @@ export function MadeItem({ params }) {
   return (
     <>
       <TopBar title="Made" />
-      <PhotoPending className="hero-board"><BoardView boardId={isPres ? p.board : c.board} items={items} uid={'made-' + m.id} /></PhotoPending>
+      <PhotoPending className="hero-board" tag="Layout view"><BoardView boardId={isPres ? p.board : c.board} items={items} uid={'made-' + m.id} /></PhotoPending>
       <div className="pad" style={{ marginTop: 18 }}>
         <span className="tag">{fmt(m.at)}{m.version ? ' · ' + m.version : ''}</span>
         <h1 className="h1" style={{ marginTop: 10 }}>{isPres ? p.name : c.name}</h1>

@@ -1,0 +1,1382 @@
+[
+  {
+    "id": "honey-ivory-bowl",
+    "file": "ingredients/honey-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 614414,
+    "fullyOpaquePixelCount": 1203,
+    "transparentFraction": 0.39072,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      74,
+      70,
+      1176,
+      1168
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "ad6764405d00cab0f7405a275160ed005d750e807d5450da5bb83f79249a08a2",
+    "bytes": 1442833
+  },
+  {
+    "id": "whipped-feta-ivory-bowl",
+    "file": "ingredients/whipped-feta-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 664132,
+    "fullyOpaquePixelCount": 1013,
+    "transparentFraction": 0.42234,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      95,
+      80,
+      1158,
+      1163
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "d47e59252d414e3c16468e4d4e7f399884b36b044d03ac34f3d3089388bdd0b1",
+    "bytes": 1748495
+  },
+  {
+    "id": "whipped-feta-parchment-swoosh",
+    "file": "ingredients/whipped-feta-parchment-swoosh.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 710721,
+    "fullyOpaquePixelCount": 230,
+    "transparentFraction": 0.45196,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      153,
+      97,
+      1151,
+      1157
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "e14a6cb01d06a08136b2e75e3da2870ba29a88b94a99e696c3db99476242dbda",
+    "bytes": 1778102
+  },
+  {
+    "id": "lemon-herb-hummus-ivory-bowl",
+    "file": "ingredients/lemon-herb-hummus-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 804548,
+    "fullyOpaquePixelCount": 488,
+    "transparentFraction": 0.51163,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      128,
+      127,
+      1115,
+      1110
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "a3dc2fbf67910c90987b3ccf1d6738e8c6fe9b7317d1e0b552301cd98d354806",
+    "bytes": 1615798
+  },
+  {
+    "id": "lemon-herb-hummus-parchment-swoosh",
+    "file": "ingredients/lemon-herb-hummus-parchment-swoosh.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 839891,
+    "fullyOpaquePixelCount": 247,
+    "transparentFraction": 0.53411,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      123,
+      227,
+      1134,
+      1025
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "1d9b233d762631800d9f96429b9294f621c1b5c542fc5e991bafb7dc2855e0ec",
+    "bytes": 1569491
+  },
+  {
+    "id": "citrus-marinated-olives-ivory-bowl",
+    "file": "ingredients/citrus-marinated-olives-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 767996,
+    "fullyOpaquePixelCount": 713,
+    "transparentFraction": 0.48839,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      125,
+      114,
+      1125,
+      1132
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "87fe7309450ab4b218a8e28ac7eb6d28f619f46d1137a490f6a785cb19614ea2",
+    "bytes": 1815557
+  },
+  {
+    "id": "carrot-batons-group",
+    "file": "ingredients/carrot-batons-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 763146,
+    "fullyOpaquePixelCount": 446,
+    "transparentFraction": 0.4853,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      182,
+      107,
+      1090,
+      1167
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "c23bfd1fe4b41d100bc36d514ceae36fb24be54b8349eee8e1945211be4bfb50",
+    "bytes": 1540842
+  },
+  {
+    "id": "celery-batons-group",
+    "file": "ingredients/celery-batons-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 847587,
+    "fullyOpaquePixelCount": 947,
+    "transparentFraction": 0.539,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      72,
+      127,
+      1185,
+      1142
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "3e5b43c8483550b8f01754060cf3f60b9e06236903440aadffe5f19e2b9a6d6a",
+    "bytes": 1493380
+  },
+  {
+    "id": "bell-pepper-strips-group",
+    "file": "ingredients/bell-pepper-strips-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 853864,
+    "fullyOpaquePixelCount": 1056,
+    "transparentFraction": 0.54299,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      165,
+      143,
+      1126,
+      1109
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "db5f929525e85610b9f12fad4241c8ea4a088a918f7a603f7669ce64017efc24",
+    "bytes": 1352720
+  },
+  {
+    "id": "camembert-wedges-fan",
+    "file": "ingredients/camembert-wedges-fan.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 715899,
+    "fullyOpaquePixelCount": 214,
+    "transparentFraction": 0.45526,
+    "cornerAlpha": [
+      1,
+      0,
+      1,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      79,
+      149,
+      1208,
+      1133
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "b7b050babe49446b6be94af566d864ab54e21059540ac615dada5f27de4aea96",
+    "bytes": 1621070
+  },
+  {
+    "id": "camembert-wheel-cut-wedge",
+    "file": "ingredients/camembert-wheel-cut-wedge.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 769920,
+    "fullyOpaquePixelCount": 174,
+    "transparentFraction": 0.48961,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      146,
+      157,
+      1140,
+      1124
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "4006e6a669d4bb1cc8ea415bf4a7bb5f30d66b97c149e7daead5185fe8361025",
+    "bytes": 1639031
+  },
+  {
+    "id": "manchego-triangles-fan",
+    "file": "ingredients/manchego-triangles-fan.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 960533,
+    "fullyOpaquePixelCount": 579,
+    "transparentFraction": 0.61083,
+    "cornerAlpha": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      31,
+      213,
+      1199,
+      1117
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "ef055afbf078dff026081c6e288c0f90f7dc12d4c99441782c2d064d4ef65690",
+    "bytes": 1210265
+  },
+  {
+    "id": "manchego-cubes-group",
+    "file": "ingredients/manchego-cubes-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 888120,
+    "fullyOpaquePixelCount": 328,
+    "transparentFraction": 0.56478,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      176,
+      139,
+      1136,
+      1111
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "9a8c257530cec2a63a9d4e18d3bedcc549d08008e33f4b9d445c3a5c0d192974",
+    "bytes": 1240713
+  },
+  {
+    "id": "aged-gouda-triangles-fan",
+    "file": "ingredients/aged-gouda-triangles-fan.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 896781,
+    "fullyOpaquePixelCount": 488,
+    "transparentFraction": 0.57028,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      52,
+      204,
+      1203,
+      1135
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "72474d8419849adfcf5e0fda8abe802e33e80edbc6735c29705cb83cbf6fe928",
+    "bytes": 1393600
+  },
+  {
+    "id": "aged-gouda-cubes-group",
+    "file": "ingredients/aged-gouda-cubes-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 804742,
+    "fullyOpaquePixelCount": 612,
+    "transparentFraction": 0.51175,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      131,
+      108,
+      1135,
+      1129
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "e0e8f2b2766c9e38b7491069d9d967a6ffdd69b45da002be3bbef6ccbb65d4c3",
+    "bytes": 1508016
+  },
+  {
+    "id": "goat-cheese-coins-group",
+    "file": "ingredients/goat-cheese-coins-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 1027158,
+    "fullyOpaquePixelCount": 131,
+    "transparentFraction": 0.65319,
+    "cornerAlpha": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      86,
+      194,
+      1179,
+      1113
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "1073c329baec733f3dc92485082bfe30c5ef06557b01b85fd732c2e03f1f7c0d",
+    "bytes": 1035448
+  },
+  {
+    "id": "serrano-single-rose",
+    "file": "ingredients/serrano-single-rose.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 830486,
+    "fullyOpaquePixelCount": 82,
+    "transparentFraction": 0.52813,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      130,
+      130,
+      1135,
+      1129
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "b87e19984ed8c6321644b2f2f265d874583eba2b34d8e468fd3b0bc8b8db689e",
+    "bytes": 1707490
+  },
+  {
+    "id": "serrano-ribbon-group",
+    "file": "ingredients/serrano-ribbon-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 870564,
+    "fullyOpaquePixelCount": 308,
+    "transparentFraction": 0.55361,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      87,
+      179,
+      1168,
+      1086
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "5599017e474d7682813226f05fdd074567c28c61b2abecb8f79c0842ce73a1f7",
+    "bytes": 1672290
+  },
+  {
+    "id": "salami-river-group",
+    "file": "ingredients/salami-river-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 1091562,
+    "fullyOpaquePixelCount": 437,
+    "transparentFraction": 0.69415,
+    "cornerAlpha": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      122,
+      44,
+      1139,
+      1184
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "6d000c70204d401c2d242ca62ccb1f3afd390469ea9e61af37ce6d35e0bacbd1",
+    "bytes": 1355867
+  },
+  {
+    "id": "salami-folded-quarters-group",
+    "file": "ingredients/salami-folded-quarters-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 964458,
+    "fullyOpaquePixelCount": 194,
+    "transparentFraction": 0.61332,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      86,
+      242,
+      1186,
+      1027
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "deaa70d4f365089db933de00840e908c10e7fb80b21b1de82fbe5f5ce8714a5e",
+    "bytes": 1581315
+  },
+  {
+    "id": "soppressata-river-group",
+    "file": "ingredients/soppressata-river-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 1067373,
+    "fullyOpaquePixelCount": 290,
+    "transparentFraction": 0.67877,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      273,
+      77,
+      978,
+      1181
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "3924b3a6af652c0dd06d889803a52d57ccce0bb2fe263230ce7629407d11bba5",
+    "bytes": 1418608
+  },
+  {
+    "id": "soppressata-folded-quarters-group",
+    "file": "ingredients/soppressata-folded-quarters-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 827595,
+    "fullyOpaquePixelCount": 335,
+    "transparentFraction": 0.52629,
+    "cornerAlpha": [
+      0,
+      0,
+      1,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      64,
+      147,
+      1192,
+      1110
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "528968f0e8b81020d42f5edfa36cc9303eefc0ab411edc66c48dafe117448f94",
+    "bytes": 2065909
+  },
+  {
+    "id": "green-grapes-small-cluster",
+    "file": "ingredients/green-grapes-small-cluster.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 878251,
+    "fullyOpaquePixelCount": 1480,
+    "transparentFraction": 0.5585,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      124,
+      141,
+      1140,
+      1113
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "3fd1cefdbbcac2f911cf7930d54664167ad94fdbab15c0d320870d527ebff73e",
+    "bytes": 1392158
+  },
+  {
+    "id": "crisp-apple-slice-fan",
+    "file": "ingredients/crisp-apple-slice-fan.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 808832,
+    "fullyOpaquePixelCount": 460,
+    "transparentFraction": 0.51436,
+    "cornerAlpha": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      66,
+      144,
+      1189,
+      1138
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "989dba6bb323c143c7b8b8d527bd87dfc4f3f640a14215bc61317d1eecab923f",
+    "bytes": 1518995
+  },
+  {
+    "id": "ripe-pear-slice-fan",
+    "file": "ingredients/ripe-pear-slice-fan.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 709941,
+    "fullyOpaquePixelCount": 416,
+    "transparentFraction": 0.45147,
+    "cornerAlpha": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      87,
+      112,
+      1188,
+      1135
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "ed646f51b665dbba03bc37fddffcac90d07baa2d642fd7ca10c9ee58608e424e",
+    "bytes": 1614634
+  },
+  {
+    "id": "strawberries-halved-group",
+    "file": "ingredients/strawberries-halved-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 749814,
+    "fullyOpaquePixelCount": 839,
+    "transparentFraction": 0.47682,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      69,
+      88,
+      1196,
+      1129
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "e37962e1cd364c79852137056ad296b3d8d195f9c30a8830ee0190639da47d3c",
+    "bytes": 1936211
+  },
+  {
+    "id": "dried-apricots-pile",
+    "file": "ingredients/dried-apricots-pile.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 865037,
+    "fullyOpaquePixelCount": 211,
+    "transparentFraction": 0.5501,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      151,
+      152,
+      1122,
+      1103
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "ec684cc10e5ca5af0dbaf1f0a980a81e6743386c97d0273beb02b614da9fd276",
+    "bytes": 1715717
+  },
+  {
+    "id": "mini-cucumber-rounds-group",
+    "file": "ingredients/mini-cucumber-rounds-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 674539,
+    "fullyOpaquePixelCount": 190,
+    "transparentFraction": 0.42896,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      68,
+      119,
+      1192,
+      1137
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "7cfdb2a6f1bd4207bbfc80557ba8611255c32e62936b1a80161e27f3d401724c",
+    "bytes": 1977763
+  },
+  {
+    "id": "mini-cucumber-ribbons-group",
+    "file": "ingredients/mini-cucumber-ribbons-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 845790,
+    "fullyOpaquePixelCount": 387,
+    "transparentFraction": 0.53786,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      140,
+      181,
+      1138,
+      1049
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "fdf0ce06a07704824a26cb246047a87efd86a75f37c08900a9ba43f3fb90fff1",
+    "bytes": 1447009
+  },
+  {
+    "id": "cherry-tomatoes-group",
+    "file": "ingredients/cherry-tomatoes-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 875656,
+    "fullyOpaquePixelCount": 1408,
+    "transparentFraction": 0.55685,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      140,
+      123,
+      1131,
+      1086
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "864ceab95e50d670efa5ed67262d4e0c8a0bde781360b831f831045a3358fc86",
+    "bytes": 1332083
+  },
+  {
+    "id": "seed-cracker-single",
+    "file": "ingredients/seed-cracker-single.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 871640,
+    "fullyOpaquePixelCount": 399,
+    "transparentFraction": 0.5543,
+    "cornerAlpha": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      149,
+      258,
+      1109,
+      996
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "f8d219435a78702f65ddb342508b2add7f636955c7bdb695c9273c17f42ae779",
+    "bytes": 2063965
+  },
+  {
+    "id": "baguette-slices-group",
+    "file": "ingredients/baguette-slices-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 868509,
+    "fullyOpaquePixelCount": 271,
+    "transparentFraction": 0.55231,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      63,
+      149,
+      1212,
+      1116
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "66e01741e88acaacf16793d0b231f3b82688317694ce0dae408495cf09e2987e",
+    "bytes": 1766646
+  },
+  {
+    "id": "marcona-almonds-pile",
+    "file": "ingredients/marcona-almonds-pile.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "hasAlphaChannel": true,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixelCount": 824477,
+    "fullyOpaquePixelCount": 409,
+    "transparentFraction": 0.5243,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      144,
+      139,
+      1132,
+      1125
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "60f64faa512170514c6bec603638d434cf9746a5f0bf63076a589dbed5f6e007",
+    "bytes": 1609947
+  },
+  {
+    "id": "recipe-whipped-feta-with-honey",
+    "file": "recipes/recipe-whipped-feta-with-honey.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "80286e56107ab93a872a05936995908f4d9fcb98d3d75485591f1f94431a06a4",
+    "bytes": 3236186
+  },
+  {
+    "id": "recipe-fig-rosemary-jam",
+    "file": "recipes/recipe-fig-rosemary-jam.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "257042b5300283c71cf068a00bee205cd70ed0e22a4e773505fb26d952292173",
+    "bytes": 2621375
+  },
+  {
+    "id": "recipe-rosemary-honey-walnuts",
+    "file": "recipes/recipe-rosemary-honey-walnuts.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "dcade1a8f1967f61ac66d3359b35969fa8e34c3e88346244847541e3cb02f8a3",
+    "bytes": 2749743
+  },
+  {
+    "id": "recipe-lemon-herb-hummus",
+    "file": "recipes/recipe-lemon-herb-hummus.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "3a76b15c5018afbe2686045f0437162ef5bfda2dac95a60527e57bfb951a958a",
+    "bytes": 2665940
+  },
+  {
+    "id": "recipe-citrus-marinated-olives",
+    "file": "recipes/recipe-citrus-marinated-olives.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "b8e0a437dd57136577624686b3b7cfaf119bd55066122bbb6539785cd8ae7e25",
+    "bytes": 2642390
+  },
+  {
+    "id": "golden-hour-salami-river",
+    "file": "presentations/golden-hour-salami-river.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "8390ef99d213613fbf75caa3a7e0e483ab69e629d2a0314f05b71993b8a49998",
+    "bytes": 3427478
+  },
+  {
+    "id": "golden-hour-four-corners",
+    "file": "presentations/golden-hour-four-corners.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "7bfa65c76f13565feb84980d7962e0ce8c3a30add623a49119d32a0eeaee0461",
+    "bytes": 3280276
+  },
+  {
+    "id": "sunday-garden-rainbow",
+    "file": "presentations/sunday-garden-rainbow.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "f8e11eeee2359196873fd61b75c327e6cd5f8eac8a31400793d641d45eb2b67e",
+    "bytes": 3097206
+  },
+  {
+    "id": "sunday-garden-garden-rows",
+    "file": "presentations/sunday-garden-garden-rows.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "b261b37a70fb9d3eeab292762ffa722560125985df8d070a6231afca477f1cd5",
+    "bytes": 2917084
+  },
+  {
+    "id": "the-copper-pot-long-table",
+    "file": "presentations/the-copper-pot-long-table.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "5979abf4043ae3620b11a8c2fc77c8b9e7fc531eb9d5391abf0239023e8f793a",
+    "bytes": 3381443
+  },
+  {
+    "id": "love-like-rosemary-the-sprig",
+    "file": "presentations/love-like-rosemary-the-sprig.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "99f417b49cf2fbb60b0fb0a6a13830ef55177dac17d10606864034473930ba54",
+    "bytes": 3186351
+  },
+  {
+    "id": "love-like-rosemary-gathered",
+    "file": "presentations/love-like-rosemary-gathered.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572864,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "b15ab6d40c205df8844a4a4af0743284abee7aa2975dd1b94e84af2637e9250e",
+    "bytes": 3296938
+  },
+  {
+    "id": "generic-honey-wood-surface",
+    "file": "surfaces/generic-honey-wood-surface.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGB",
+    "hasAlphaChannel": false,
+    "alphaRange": [
+      255,
+      255
+    ],
+    "fullyTransparentPixelCount": 0,
+    "fullyOpaquePixelCount": 1572516,
+    "transparentFraction": 0.0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "acc966ede628ab83c5714b7e09d0a877d06b313155e38a587301d763bd53ee11",
+    "bytes": 2907641
+  }
+]

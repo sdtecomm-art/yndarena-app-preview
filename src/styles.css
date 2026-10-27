@@ -435,7 +435,10 @@ select.input { appearance: none; background: transparent; }
 .vplayer-frame video { width: 100%; height: 100%; object-fit: contain; display: block; background: #1e1a1b; }
 .vplayer-still { position: absolute; inset: 0; display: grid; place-items: center; background-size: cover; background-position: center; }
 .vplayer.is-pending .vplayer-frame { cursor: default; }
-.vplayer.is-pending .vplayer-still { opacity: .42; filter: grayscale(.35); }
+.result-frame { background: radial-gradient(80% 80% at 50% 45%, #fbf7f1, #efe6da); }
+.result-img { width: 70%; height: 82%; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(44, 29, 18, .18)); }
+.vplayer-note { padding: 12px var(--gut) 14px; background: var(--c-cream); }
+.vplayer-note p { margin: 8px 0 0; font-size: 14.5px; line-height: 1.45; color: var(--c-brown); }
 .vplayer-still .photo-tag { top: 10px; bottom: auto; }
 .vplayer-big { width: 64px; height: 64px; border-radius: 32px; background: rgba(250, 245, 239, .94); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(35, 31, 32, .18); position: absolute; }
 .vplayer-pending { position: absolute; left: 14px; right: 14px; bottom: 14px; padding: 12px 14px; border-radius: 12px; background: rgba(250, 245, 239, .95); border: 1px solid var(--c-line); }
@@ -454,7 +457,9 @@ select.input { appearance: none; background: transparent; }
 
 /* ---------- Photos ---------- */
 .photo-hero { position: relative; background: var(--table); }
-.photo-hero img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; display: block; }
+.photo-hero img { width: 100%; height: auto; object-fit: cover; display: block; }
+.board-card .photo-hero img { aspect-ratio: 3 / 2; }
+.hero-note { margin: 10px 0 0; }
 .photo-hero .photo-tag { bottom: 10px; }
 .view-toggle { position: absolute; left: 12px; bottom: 10px; z-index: 2; }
 .view-toggle .segmented { background: rgba(250, 245, 239, .92); }

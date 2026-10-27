@@ -3,7 +3,7 @@ import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
 import { useActions } from '../actions.js';
 import { TopBar, Button, Icon, DemoNote, Segmented, Sprig, Kicker } from '../ui.jsx';
-import { ReviewSheet, RecipeRow, MediaImg } from '../components.jsx';
+import { ReviewSheet, RecipeRow, MediaImg, compositionPhoto } from '../components.jsx';
 import { TechPills } from './Presentation.jsx';
 import BoardView from '../board/BoardView.jsx';
 import { ITEMS, LAYER_COPY, styleOf } from '../data/catalog.js';
@@ -181,10 +181,10 @@ export default function Table({ params }) {
               <div className="trio" style={{ justifyContent: 'center' }}><Sprig className="sprout" /><Sprig className="sprout" /><Sprig className="sprout" /></div>
               <h2 className="h1" style={{ marginTop: 14 }}>Ready to share.</h2>
               <p className="lead" style={{ margin: '8px 0 0' }}>It doesn’t need to look perfect. It only needs the people around it.</p>
-              {comp?.media?.topView && (
+              {comp && compositionPhoto(comp) && (
                 <div style={{ marginTop: 18, textAlign: 'left' }}>
-                  <div className="label" style={{ marginBottom: 8 }}>Reference photo of this layout</div>
-                  <div className="photo-hero" style={{ borderRadius: 12, overflow: 'hidden' }}><MediaImg id={comp.media.topView} /></div>
+                  <div className="label" style={{ marginBottom: 8 }}>{comp.media.topView ? 'Reference photo of this layout' : 'Inspiration for this layout'}</div>
+                  <div className="photo-hero" style={{ borderRadius: 12, overflow: 'hidden' }}><MediaImg id={compositionPhoto(comp)} /></div>
                   <p className="small muted" style={{ marginTop: 8 }}>Yours doesn’t need to match it. The guide above follows the layout you chose.</p>
                 </div>
               )}

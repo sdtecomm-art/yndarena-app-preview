@@ -21,7 +21,7 @@ export default function Community({ params }) {
     <>
       <TopBar transparent title="" right={<SaveButton kind="community" id={params.id} />} />
       <div style={{ marginTop: 'calc(-1 * (var(--safe-top) + 54px))' }}>
-        <PhotoPending className="hero-board">
+        <PhotoPending className="hero-board" tag="Layout view · no photo shared">
           <div style={{ height: 'calc(var(--safe-top) + 40px)' }} />
           <BoardView boardId={c.board} items={items} uid={'h2h-' + params.id} />
         </PhotoPending>
