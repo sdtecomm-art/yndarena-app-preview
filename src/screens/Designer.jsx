@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useActions } from '../actions.js';
+import { MEDIA, photoPiece, photoGroups } from '../data/media.js';
 import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
 import { Icon, IconButton, Sheet, Chip, Stepper, Button, DemoNote, useToast } from '../ui.jsx';
@@ -12,7 +13,7 @@ import { RECIPES } from '../data/recipes.js';
 import { uid, fmtQty, totals } from '../lib.js';
 
 const clampItem = (it) => {
-  const [w, h] = sizeFor(it.type, it.qty);
+  const [w, h] = sizeFor(it.type, it.qty, it.style);
   const mx = Math.min(w, h) / 2 - 8;
   return { ...it, x: Math.max(mx, Math.min(BOARD_W - mx, it.x)), y: Math.max(mx, Math.min(BOARD_H - mx, it.y)) };
 };
@@ -167,6 +168,7 @@ export default function Designer({ params }) {
 
   const it = selected && ITEMS[selected.type];
   const st = selected && styleOf(selected.type, selected.style);
+  const piece = selected && photoPiece(selected.type, st.id);
 
   return (
     <div className="designer">
@@ -218,6 +220,11 @@ export default function Designer({ params }) {
               <button className="link" onClick={() => nav.push('technique', { id: st.tech })}>How to: {TECHNIQUES[st.tech].name}</button>
               {it.recipe && <button className="link" onClick={() => nav.push('recipe', { id: it.recipe })}>Recipe</button>}
             </div>
+            {piece && (
+              <p className="small muted" style={{ margin: '10px 0 0' }}>
+                Photo piece, {MEDIA[piece.asset].label}. Shown as {photoGroups(piece, selected.qty)} {piece.groupName[photoGroups(piece, selected.qty) > 1 ? 1 : 0]}. We assume one fan is about {fmtQty(piece.unitQty, it.unit)}: more cheese adds fans instead of stretching the photo.
+              </p>
+            )}
             <div className="inspector-actions">
               <button onClick={() => patchSel({ r: ((selected.r || 0) + 15) % 360 })}><Icon name="rotate" size={18} />Rotate</button>
               <button onClick={() => { const c = clampItem({ ...selected, uid: uid('it'), x: selected.x + 28, y: selected.y + 22 }); commit([...items, c]); setSel(c.uid); }}><Icon name="copy" size={18} />Duplicate</button>

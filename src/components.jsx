@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import BoardView from './board/BoardView.jsx';
-import { ItemArt } from './board/art.jsx';
+import { ItemVisual } from './board/art.jsx';
 import { ITEMS, BOARDS, sizeFor } from './data/catalog.js';
 import { PRESENTATIONS, OCCASIONS } from './data/presentations.js';
 import { RECIPES } from './data/recipes.js';
 import { COMMUNITY } from './data/community.js';
 import { presentationItems, communityItems } from './lib.js';
+import { MEDIA } from './data/media.js';
 import { useStore, isSaved } from './store.jsx';
 import { useActions } from './actions.js';
 import { useNav } from './nav.jsx';
@@ -21,11 +22,11 @@ export function BoardThumb({ board, items, uid }) {
 
 export function ItemIcon({ type, style, size = 64 }) {
   const it = ITEMS[type];
-  const [w, h] = sizeFor(type, it.baseQty);
+  const [w, h] = sizeFor(type, it.baseQty, style);
   const m = Math.max(w, h) + 12;
   return (
     <svg viewBox={`${-m / 2} ${-m / 2} ${m} ${m}`} width={size} height={size} aria-hidden="true">
-      <ItemArt it={it} w={w} h={h} style={style || it.styles[0].id} qty={it.baseQty} seed={'icon-' + type} />
+      <ItemVisual type={type} it={it} w={w} h={h} style={style || it.styles[0].id} qty={it.baseQty} seed={'icon-' + type} />
     </svg>
   );
 }
@@ -46,15 +47,42 @@ export function SaveButton({ kind, id, light }) {
   );
 }
 
+// Responsive, lazy image for a registered asset, always labelled with what it is.
+export function MediaImg({ id, sizes = '(max-width: 500px) 100vw, 390px', eager, tag = true }) {
+  const m = MEDIA[id];
+  return (
+    <>
+      <img src={m.src} srcSet={m.srcSet} sizes={sizes} alt={m.alt} width={m.width} height={m.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+      {tag && <span className="photo-tag">{m.label}</span>}
+    </>
+  );
+}
+
+// The visual that represents a presentation in lists: its editorial cover when there is one,
+// otherwise the overhead photo of its first layout, otherwise the layout illustration.
+export function presentationPhoto(id) {
+  const p = PRESENTATIONS[id];
+  return p.media?.cover || p.compositions[0].media?.topView || null;
+}
+
+export function PresentationVisual({ id, label, eager }) {
+  const p = PRESENTATIONS[id];
+  const photo = presentationPhoto(id);
+  if (photo) return <div className="photo-hero"><MediaImg id={photo} eager={eager} /></div>;
+  return (
+    <PhotoPending className="board-art">
+      <BoardView boardId={p.board} items={presentationItems(id, p.compositions[0].id)} label={label || `${p.name}, illustration`} />
+    </PhotoPending>
+  );
+}
+
 export function PresentationCard({ id, wide }) {
   const nav = useNav();
   const p = PRESENTATIONS[id];
   const occ = OCCASIONS.find((o) => o.id === p.occasion);
   return (
     <button className="card board-card tap" style={wide ? undefined : { width: 260 }} onClick={() => nav.push('presentation', { id })}>
-      <PhotoPending className="board-art">
-        <BoardView boardId={p.board} items={presentationItems(id, p.compositions[0].id)} uid={'pc-' + id} label={`${p.name}, illustration`} />
-      </PhotoPending>
+      <PresentationVisual id={id} />
       <div className="card-body">
         <div className="kicker">{occ.label} · {p.context}</div>
         <div className="card-title" style={{ marginTop: 4 }}>{p.name}</div>

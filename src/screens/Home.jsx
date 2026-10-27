@@ -7,7 +7,7 @@ import { PRESENTATIONS, PRESENTATION_ORDER, OCCASIONS } from '../data/presentati
 import { COMMUNITY_ORDER } from '../data/community.js';
 import { TECHNIQUES } from '../data/techniques.js';
 import { presentationItems, careStatus, giftInfo, giftWho, fmtShort, daysBetween, whenText } from '../lib.js';
-import { ItemIcon } from '../components.jsx';
+import { ItemIcon, PresentationVisual } from '../components.jsx';
 import { WORDMARK } from '../assets.js';
 
 function greeting() {
@@ -118,9 +118,7 @@ export default function Home({ openProfile }) {
 
       <div className="pad" style={{ marginTop: 18 }}>
         <button className="card board-card tap" onClick={() => nav.push('presentation', { id: 'love-like-rosemary' })}>
-          <PhotoPending className="board-art" >
-            <BoardView boardId={hero.board} items={presentationItems('love-like-rosemary', 'two-halves')} uid="hero" />
-          </PhotoPending>
+          <PresentationVisual id="love-like-rosemary" eager />
           <div className="card-body">
             <div className="kicker">Featured · For Two</div>
             <div className="card-title" style={{ fontSize: 28, marginTop: 4 }}>{hero.name}</div>

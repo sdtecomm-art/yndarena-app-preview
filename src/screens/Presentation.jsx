@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { useActions } from '../actions.js';
-import { TopBar, Kicker, Button, Icon, PhotoPending, DemoNote, Sprig } from '../ui.jsx';
+import { TopBar, Kicker, Button, Icon, PhotoPending, DemoNote, Sprig, Segmented } from '../ui.jsx';
+import { MediaImg } from '../components.jsx';
+import { MEDIA } from '../data/media.js';
 import { SaveButton, RecipeRow } from '../components.jsx';
 import BoardView from '../board/BoardView.jsx';
 import { PRESENTATIONS, OCCASIONS } from '../data/presentations.js';
@@ -77,6 +79,8 @@ export default function Presentation({ params }) {
   const p = PRESENTATIONS[params.id];
   const [compId, setCompId] = useState(params.comp || p.compositions[0].id);
   const comp = p.compositions.find((c) => c.id === compId);
+  const photo = comp.media?.topView || null;
+  const [view, setView] = useState('photo');
   const items = presentationItems(params.id, compId);
   const techs = techniquesFor(items);
   const layers = buildLayers(items, comp.tips);
@@ -90,10 +94,24 @@ export default function Presentation({ params }) {
     <>
       <TopBar transparent title="" right={<SaveButton kind="presentation" id={params.id} />} />
       <div style={{ marginTop: 'calc(-1 * (var(--safe-top) + 54px))' }}>
-        <PhotoPending className="hero-board">
-          <div style={{ height: 'calc(var(--safe-top) + 40px)' }} />
-          <BoardView key={compId} boardId={p.board} items={items} uid={'pres-' + compId} label={`${p.name}, ${comp.name} layout`} />
-        </PhotoPending>
+        {photo && view === 'photo' ? (
+          <div className="photo-hero">
+            <MediaImg id={photo} eager />
+            <div className="view-toggle"><Segmented value={view} onChange={setView} options={[{ id: 'photo', label: 'Photo' }, { id: 'layout', label: 'Layout' }]} /></div>
+          </div>
+        ) : photo ? (
+          <div className="hero-board" style={{ position: 'relative' }}>
+            <div style={{ height: 'calc(var(--safe-top) + 40px)' }} />
+            <BoardView key={compId} boardId={p.board} items={items} uid={'pres-' + compId} label={`${p.name}, ${comp.name} layout`} />
+            <span className="photo-tag">Editable layout</span>
+            <div className="view-toggle"><Segmented value={view} onChange={setView} options={[{ id: 'photo', label: 'Photo' }, { id: 'layout', label: 'Layout' }]} /></div>
+          </div>
+        ) : (
+          <PhotoPending className="hero-board">
+            <div style={{ height: 'calc(var(--safe-top) + 40px)' }} />
+            <BoardView key={compId} boardId={p.board} items={items} uid={'pres-' + compId} label={`${p.name}, ${comp.name} layout`} />
+          </PhotoPending>
+        )}
       </div>
 
       {p.compositions.length > 1 && (
@@ -108,11 +126,28 @@ export default function Presentation({ params }) {
                 <div style={{ background: 'var(--table)', borderRadius: 6 }}>
                   <BoardView boardId={p.board} items={presentationItems(params.id, c.id)} uid={'cs-' + c.id} />
                 </div>
-                <div className="comp-name">{c.name}</div>
+                <div className="comp-name">{c.name}{c.media?.topView ? ' · Photo' : ''}</div>
               </button>
             ))}
           </div>
           <p className="small pad" style={{ margin: '10px 0 0' }}><em>{comp.name}.</em> {comp.desc}</p>
+          {!photo && <p className="small pad muted" style={{ margin: '6px 0 0' }}>No photo of this layout yet. The illustration follows the editable positions.</p>}
+        </div>
+      )}
+
+      {photo && (
+        <div className="pad" style={{ marginTop: 16 }}>
+          <div className="card card-pad">
+            <div className="row-between">
+              <div className="label">Photo and layout check</div>
+              <span className="tag is-lav">{MEDIA[photo].label}</span>
+            </div>
+            <p className="small" style={{ margin: '8px 0 0' }}>{MEDIA[photo].note} The editable layout is the reference for Designer and the build guide.</p>
+            <div className="label" style={{ marginTop: 12 }}>Same in both</div>
+            <ul className="check-list">{comp.media.matches.map((m) => <li key={m}><span className="mk">=</span>{m}</li>)}</ul>
+            <div className="label" style={{ marginTop: 10 }}>Different in the photo</div>
+            <ul className="check-list">{comp.media.differs.map((m) => <li key={m}><span className="mk">≠</span>{m}</li>)}</ul>
+          </div>
         </div>
       )}
 
@@ -184,7 +219,7 @@ export default function Presentation({ params }) {
       </div>
 
       <div className="pad" style={{ marginTop: 20 }}>
-        <DemoNote>Preview content. Quantities and steps are representative and have not been kitchen-tested yet. Illustrations stand in for photos.</DemoNote>
+        <DemoNote>Preview content. Quantities and steps are representative and have not been kitchen-tested yet. Illustrations and AI reference images stand in for real photos.</DemoNote>
       </div>
       <div className="sticky-cta">
         <Button variant="ghost" small className="grow" icon="edit" onClick={() => { const id = a.fromPresentation(params.id, compId); nav.push('designer', { id }); }}>Make it yours</Button>

@@ -1,6 +1,7 @@
 import { useId, useMemo } from 'react';
 import { BOARDS, BOARD_W, BOARD_H, ITEMS, sizeFor } from '../data/catalog.js';
-import { ItemArt, rng } from './art.jsx';
+import { ItemVisual, rng } from './art.jsx';
+import { photoPiece } from '../data/media.js';
 import { ROSEMARY_PATH } from './rosemaryPath.js';
 
 const PAD = 18;
@@ -30,6 +31,9 @@ function WoodGrain({ board, uid }) {
         </clipPath>
         <filter id={`sh-${uid}`} x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="1.5" dy="3" stdDeviation="2.4" floodColor="#2c1d12" floodOpacity=".28" />
+        </filter>
+        <filter id={`psh-${uid}`} x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="1" dy="2" stdDeviation="1.6" floodColor="#2c1d12" floodOpacity=".22" />
         </filter>
         <filter id={`bsh-${uid}`} x="-10%" y="-10%" width="120%" height="130%">
           <feDropShadow dx="0" dy="8" stdDeviation="9" floodColor="#3b2a1e" floodOpacity=".22" />
@@ -78,7 +82,9 @@ export default function BoardView({
       {items.map((p) => {
         const it = ITEMS[p.type];
         if (!it) return null;
-        const [w, h] = sizeFor(p.type, p.qty);
+        const style = p.style || it.styles[0].id;
+        const [w, h] = sizeFor(p.type, p.qty, style);
+        const isPhoto = !!photoPiece(p.type, style);
         const st = layerState ? layerState[p.uid] : 'done';
         if (st === 'future')
           return (
@@ -95,8 +101,8 @@ export default function BoardView({
             style={onItemDown ? { cursor: 'grab' } : undefined}
           >
             <rect x={-w / 2 - 6} y={-h / 2 - 6} width={w + 12} height={h + 12} fill="transparent" />
-            <g filter={`url(#sh-${uid})`}>
-              <ItemArt it={it} w={w} h={h} style={p.style || it.styles[0].id} qty={p.qty} seed={p.uid} />
+            <g filter={`url(#${isPhoto ? 'psh' : 'sh'}-${uid})`}>
+              <ItemVisual type={p.type} it={it} w={w} h={h} style={style} qty={p.qty} seed={p.uid} />
             </g>
             {st === 'current' && (
               <rect className="pulse" x={-w / 2 - 7} y={-h / 2 - 7} width={w + 14} height={h + 14} rx="14" fill="none" stroke="#faf5ef" strokeWidth="2.5" strokeDasharray="6 5" />

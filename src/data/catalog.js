@@ -1,3 +1,5 @@
+import { photoPiece, photoFootprint } from './media.js';
+
 // Board models and the visual library used by Designer, presentations and lists.
 // Coordinates live in a 600 x 400 board space. Footprints are approximate on purpose:
 // final board dimensions are not confirmed yet, so nothing here claims physical precision.
@@ -346,8 +348,11 @@ export const ITEMS = {
   },
 };
 
-export function sizeFor(type, qty) {
+// Approximate footprint in board units. Photographic pieces repeat groups instead of stretching.
+export function sizeFor(type, qty, style) {
   const it = ITEMS[type];
+  const piece = photoPiece(type, style || it.styles[0].id);
+  if (piece) return photoFootprint(piece, qty);
   const k = Math.max(0.62, Math.min(1.55, Math.sqrt(qty / it.baseQty)));
   if (it.art === 'rosemary') return [it.fp[0], it.fp[1]];
   return [it.fp[0] * k, it.fp[1] * k];

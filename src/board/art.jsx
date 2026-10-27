@@ -1,6 +1,7 @@
 // Top-down illustrations for each ready-to-place group. Drawn in local
 // coordinates centered on 0,0 within a w x h footprint.
 import { ROSEMARY_PATH } from './rosemaryPath.js';
+import { MEDIA, photoPiece, photoGroups } from '../data/media.js';
 
 export function rng(seedStr) {
   let h = 1779033703 ^ seedStr.length;
@@ -473,4 +474,41 @@ export function ItemArt({ it, w, h, style, qty, seed }) {
   const Art = ARTS[it.art];
   const rand = rng(seed + ':' + style + ':' + Math.round(w));
   return <Art it={it} w={w} h={h} style={style} qty={qty} rand={rand} />;
+}
+
+// Photographic group: the same cutout repeated, never stretched to fake a quantity.
+function PhotoPiece({ piece, qty, seed }) {
+  const m = MEDIA[piece.asset];
+  const n = photoGroups(piece, qty);
+  const [w0, h0] = piece.footprint;
+  const step = w0 * 0.62;
+  const total = w0 + (n - 1) * step;
+  const rand = rng('photo:' + seed);
+  return (
+    <g>
+      {Array.from({ length: n }, (_, i) => {
+        const cx = -total / 2 + w0 / 2 + i * step;
+        const rot = n > 1 ? (i % 2 ? 5 : -5) + (rand() - 0.5) * 4 : 0;
+        return (
+          <image
+            key={i}
+            href={m.src}
+            x={-w0 * piece.anchor[0]}
+            y={-h0 * piece.anchor[1]}
+            width={w0}
+            height={h0}
+            preserveAspectRatio="xMidYMid meet"
+            transform={`translate(${cx} ${(i % 2) * 4 - 2}) rotate(${rot})`}
+          />
+        );
+      })}
+    </g>
+  );
+}
+
+// Chooses the photographic piece when one exists for this item and style, otherwise the illustration.
+export function ItemVisual({ type, it, w, h, style, qty, seed }) {
+  const piece = photoPiece(type, style);
+  if (piece) return <PhotoPiece piece={piece} qty={qty} seed={seed} />;
+  return <ItemArt it={it} w={w} h={h} style={style} qty={qty} seed={seed} />;
 }

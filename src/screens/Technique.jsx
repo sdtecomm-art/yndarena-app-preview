@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { useActions } from '../actions.js';
 import { useStore } from '../store.jsx';
-import { TopBar, Kicker, Button, Icon, DemoNote } from '../ui.jsx';
-import { ItemIcon } from '../components.jsx';
+import { TopBar, Kicker, Button, DemoNote } from '../ui.jsx';
+import { TechniqueVideo, techniqueVideo, stepOf } from './TechniqueVideo.jsx';
 import { TECHNIQUES, TECH_GROUPS } from '../data/techniques.js';
 import { ITEMS, styleOf } from '../data/catalog.js';
 import { PRESENTATIONS, PRESENTATION_ORDER } from '../data/presentations.js';
 import { COMMUNITY, COMMUNITY_ORDER } from '../data/community.js';
 import { uid } from '../lib.js';
-
-const STEP_MS = 3200;
 
 function findUse(tid) {
   for (const pid of PRESENTATION_ORDER) {
@@ -24,35 +22,14 @@ function findUse(tid) {
   return null;
 }
 
-// Demo player: illustrated steps standing in for Yndarena's own short videos.
-function DemoPlayer({ t }) {
-  const [i, setI] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  useEffect(() => {
-    if (!playing) return;
-    const id = setTimeout(() => setI((x) => (x + 1) % t.steps.length), STEP_MS);
-    return () => clearTimeout(id);
-  }, [i, playing, t.steps.length]);
-  const k = (i + 1) / t.steps.length;
-  return (
-    <div className="demo-stage" onClick={() => setPlaying(!playing)} role="button" aria-label={playing ? 'Pause demo' : 'Play demo'}>
-      <div className="demo-progress">
-        {t.steps.map((_, j) => <span key={j} className={j < i ? 'done' : j === i && playing ? 'cur' : j === i ? 'done' : ''}><i key={i + '-' + j} /></span>)}
-      </div>
-      <div key={i} className="demo-art" style={{ transform: `scale(${0.7 + 0.3 * k})`, opacity: 0.55 + 0.45 * k }}>
-        <ItemIcon type={t.demoType} style={t.demoStyle} size={210} />
-      </div>
-      <div key={'t' + i} className="demo-step-txt"><span className="label" style={{ marginRight: 8 }}>Step {i + 1}</span>{t.steps[i]}</div>
-      {!playing && <div style={{ position: 'absolute', width: 56, height: 56, borderRadius: 28, background: 'rgba(250,245,239,.9)', display: 'grid', placeItems: 'center' }}><Icon name="play" /></div>}
-    </div>
-  );
-}
-
 export default function Technique({ params }) {
   const nav = useNav();
   const a = useActions();
   const { updateUser } = useStore();
   const t = TECHNIQUES[params.id];
+  const video = techniqueVideo(t);
+  const [seg, setSeg] = useState(null);
+  const hasSegments = video.status === 'ready' && video.segments.length > 0;
   const use = findUse(params.id);
   const [type, style] = (() => {
     const tp = t.demoType;
@@ -73,10 +50,7 @@ export default function Technique({ params }) {
   return (
     <>
       <TopBar title="Technique" />
-      <DemoPlayer t={t} />
-      <div className="pad" style={{ marginTop: 10 }}>
-        <DemoNote>Demo animation. Yndarena’s own short video will replace it.</DemoNote>
-      </div>
+      <TechniqueVideo t={t} video={video} seg={seg} onSeg={setSeg} />
       <div className="pad" style={{ marginTop: 18 }}>
         <Kicker>{TECH_GROUPS.find((g) => g.id === t.group).label} · {t.minutes} min</Kicker>
         <h1 className="h1" style={{ marginTop: 6 }}>{t.name}</h1>
@@ -93,15 +67,37 @@ export default function Technique({ params }) {
 
       <div className="pad section">
         <h2 className="h2">Steps</h2>
+        {t.stepsStatus === 'provisional' && (
+          <div style={{ marginTop: 8 }}><DemoNote>Provisional script. The steps will be confirmed by the person who demonstrates the technique on camera.</DemoNote></div>
+        )}
         <ol style={{ listStyle: 'none', padding: 0, margin: '8px 0 0' }}>
-          {t.steps.map((s, i) => (
+          {t.steps.map(stepOf).map((s, i) => (
             <li key={i} className="ing-row" style={{ justifyContent: 'flex-start', gap: 14 }}>
               <span className="label" style={{ paddingTop: 4, width: 22 }}>{String(i + 1).padStart(2, '0')}</span>
-              <span>{s}</span>
+              <span className="grow">
+                {s.title && <strong style={{ fontWeight: 500, display: 'block' }}>{s.title}</strong>}
+                {s.text}
+              </span>
+              {hasSegments && video.segments.some((g) => g.step === i) && (
+                <button className="link" onClick={() => setSeg(i)}>Watch</button>
+              )}
             </li>
           ))}
         </ol>
       </div>
+
+      {video.status !== 'ready' && video.shotPlan?.length > 0 && (
+        <div className="pad section">
+          <h2 className="h2">What the video will show</h2>
+          <p className="small" style={{ margin: '4px 0 6px' }}>Hands only, on the real board, at normal speed. Each step will be playable on its own.</p>
+          {video.shotPlan.map((x, i) => (
+            <div key={i} className="ing-row" style={{ justifyContent: 'flex-start', gap: 14 }}>
+              <span className="label" style={{ paddingTop: 4, width: 22 }}>{String(i + 1).padStart(2, '0')}</span>
+              <span>{x}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       {t.tools.length > 0 && (
         <div className="pad section">

@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { uid, pad4, presentationItems, todayDate, iso, DAY } from './lib.js';
 
-const KEY = 'ynd-preview-v1';
+const KEY = 'ynd-preview-v2';
 export const DEMO_CODE = '246810';
 export const EXPIRED_CODE = '000000';
 export const RETURNING_EMAIL = 'home@example.com';
