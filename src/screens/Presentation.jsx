@@ -97,31 +97,16 @@ export default function Presentation({ params }) {
   return (
     <>
       <TopBar transparent title="" right={<SaveButton kind="presentation" id={params.id} />} />
-      <div style={{ marginTop: 'calc(-1 * (var(--safe-top) + 54px))' }}>
-        {photo && view === 'photo' ? (
-          <div className="photo-hero">
-            <MediaImg key={photo} id={photo} eager />
-            <div className="view-toggle"><Segmented value={view} onChange={setView} options={[{ id: 'photo', label: 'Photo' }, { id: 'layout', label: 'Layout' }]} /></div>
-          </div>
-        ) : photo ? (
-          <div className="hero-board" style={{ position: 'relative' }}>
-            <div style={{ height: 'calc(var(--safe-top) + 40px)' }} />
-            <BoardView key={compId} boardId={p.board} items={items} uid={'pres-' + compId} label={`${p.name}, ${comp.name} layout`} />
-            <span className="photo-tag">{usesPhotoPieces(items) ? 'AI preview' : 'Illustration'}</span>
-            <div className="view-toggle"><Segmented value={view} onChange={setView} options={[{ id: 'photo', label: 'Photo' }, { id: 'layout', label: 'Layout' }]} /></div>
-          </div>
-        ) : (
-          <div className="hero-board" style={{ position: 'relative' }}>
-            <div style={{ height: 'calc(var(--safe-top) + 40px)' }} />
-            <BoardView key={compId} boardId={p.board} items={items} uid={'pres-' + compId} label={`${p.name}, ${comp.name} layout`} />
-            <span className="photo-tag">{usesPhotoPieces(items) ? 'AI preview' : 'Photo pending'}</span>
-          </div>
-        )}
+      <div className="meal-stage">
+        <div className="scene-frame">
+          <BoardView key={compId} boardId={p.board} items={items} uid={'pres-' + compId} scene={view} label={`${p.name}, ${comp.name}, ${view === 'photo' ? 'photo view' : 'layout view with numbers'}`} />
+        </div>
+        <div className="scene-bar">
+          <Segmented value={view} onChange={setView} options={[{ id: 'photo', label: 'Photo' }, { id: 'layout', label: 'Layout' }]} />
+          <span className="scene-cap">{view === 'photo' ? 'Rendered from this layout' : 'Numbers follow the ingredient order'}</span>
+        </div>
       </div>
-
-      {isInspiration && view === 'photo' && (
-        <p className="small pad hero-note">An inspiration image for this layout. Switch to Layout for the exact pieces and where they go.</p>
-      )}
+      <p className="small pad hero-note">Same board, food and sizes in both views. {usesPhotoPieces(items) ? 'Food images are AI cutouts, not photos of a tested board.' : ''}</p>
 
       {p.compositions.length > 1 && (
         <div style={{ marginTop: 14 }}>
@@ -154,6 +139,10 @@ export default function Presentation({ params }) {
         <div><div className="v">{p.time}<span style={{ fontSize: 15 }}> min</span></div><div className="k">{p.active} min hands-on</div></div>
         <div><div className="v">{p.serves}</div><div className="k">Serves</div></div>
         <div><div className="v" style={{ fontSize: 19, paddingTop: 4 }}>{BOARDS[p.board].name}</div><div className="k">Board</div></div>
+      </div>
+      <div className="action-bar">
+        <Button variant="ghost" small className="grow" icon="edit" onClick={() => { const id = a.fromPresentation(params.id, compId); nav.push('designer', { id }); }}>Make it yours</Button>
+        <Button small className="grow" onClick={() => nav.push('table', { source: { kind: 'presentation', id: params.id, compositionId: compId } })}>Bring it to the table</Button>
       </div>
 
       
@@ -212,8 +201,18 @@ export default function Presentation({ params }) {
         <Sprig />
       </div>
 
+      {isInspiration && (
+        <div className="pad section">
+          <details className="inspo card">
+            <summary><span><span className="label">Mood image</span><span className="h3" style={{ display: 'block', fontSize: 18, marginTop: 4 }}>The feeling we were after</span></span><Icon name="chevron" size={18} className="chev" /></summary>
+            <MediaImg id={photo} />
+            <p className="small" style={{ margin: '10px 14px 14px' }}>An AI mood image on a different board, with different amounts. Follow the Photo and Layout views above, not this picture.</p>
+          </details>
+        </div>
+      )}
+
       <div className="pad" style={{ marginTop: 20 }}>
-        <DemoNote>Preview content. Quantities and steps are representative and have not been kitchen-tested yet. Images are AI previews or illustrations, not photos of a tested board.</DemoNote>
+        <DemoNote>Preview content. Quantities and steps are representative and have not been kitchen-tested yet.</DemoNote>
       </div>
       <div className="sticky-cta">
         <Button variant="ghost" small className="grow" icon="edit" onClick={() => { const id = a.fromPresentation(params.id, compId); nav.push('designer', { id }); }}>Make it yours</Button>

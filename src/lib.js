@@ -24,7 +24,7 @@ export function frac(q) {
   return w ? `${w} ${best[1]}` : best[1];
 }
 
-const PLURAL = { sprigs: ['sprig', 'sprigs'], pieces: ['piece', 'pieces'], clove: ['clove', 'cloves'], can: ['can', 'cans'], stalks: ['stalk', 'stalks'], loaf: ['loaf', 'loaves'], cup: ['cup', 'cups'], pinch: ['pinch', 'pinches'], servings: ['serving', 'servings'], wedges: ['wedge', 'wedges'], leaves: ['leaf', 'leaves'] };
+const PLURAL = { slices: ['slice', 'slices'], sprigs: ['sprig', 'sprigs'], pieces: ['piece', 'pieces'], clove: ['clove', 'cloves'], can: ['can', 'cans'], stalks: ['stalk', 'stalks'], loaf: ['loaf', 'loaves'], cup: ['cup', 'cups'], pinch: ['pinch', 'pinches'], servings: ['serving', 'servings'], wedges: ['wedge', 'wedges'], leaves: ['leaf', 'leaves'] };
 export function fmtQty(q, unit) {
   const n = frac(q);
   if (unit === 'each') return n;
@@ -69,8 +69,13 @@ export function presentationItems(presId, compId) {
   return withLayout(comp.place, `${presId}/${comp.id}`).map((it, i) => ({ ...it, uid: `${presId}-${comp.id}-${i}` }));
 }
 
-export function mealItems(mid) {
-  return itemsFromPlacements(MEALS[mid].place, 'mm').map((it, i) => ({ ...it, uid: `${mid}-${i}` }));
+export function mealLayout(mid, layoutId) {
+  const m = MEALS[mid];
+  return m.layouts.find((l) => l.id === layoutId) || m.layouts[0];
+}
+export function mealItems(mid, layoutId) {
+  const l = mealLayout(mid, layoutId);
+  return itemsFromPlacements(l.place, 'mm').map((it, i) => ({ ...it, uid: `${mid}-${l.id}-${i}` }));
 }
 
 export function communityItems(cid) {
@@ -215,7 +220,7 @@ export function resolveSource(src, user) {
   if (src.kind === 'meal') {
     const m = MEALS[src.id];
     if (!m) return null;
-    return { title: m.name, subtitle: 'Everyday meal', board: m.board, items: mealItems(src.id) };
+    return { title: m.name, subtitle: m.kind === 'share' ? 'Board to share' : 'Everyday meal', board: m.board, items: mealItems(src.id, src.compositionId) };
   }
   if (src.kind === 'recipe') {
     const r = RECIPES[src.id];

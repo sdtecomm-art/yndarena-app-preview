@@ -61,7 +61,7 @@ export function useActions() {
       return id;
     },
     // A Home's own copy of an everyday meal. Later updates to the built-in meal never touch it.
-    fromMeal(mid) {
+    fromMeal(mid, layoutId) {
       const m = MEALS[mid];
       const id = uid('d');
       updateUser((u) => {
@@ -69,8 +69,8 @@ export function useActions() {
           name: `${m.name} · My version`,
           board: m.board,
           kind: 'modified',
-          origin: { kind: 'meal', id: mid, name: m.name },
-          items: fresh(mealItems(mid)),
+          origin: { kind: 'meal', id: mid, name: m.name, ...(layoutId ? { compositionId: layoutId } : {}) },
+          items: fresh(mealItems(mid, layoutId)),
         }, id);
       });
       return id;

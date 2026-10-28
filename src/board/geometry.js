@@ -21,11 +21,12 @@ export function groupLayout(item) {
   const style = item.style || it.styles[0].id;
   const piece = photoPiece(item.type, style);
   const prof = profileOf(item.type, style);
-  if (!piece || !prof) {
+  if (!prof) {
     const [w, h] = baseSize(item.type, item.qty).map((v, i) => v * (i ? BOARD.h / LEGACY.h : BOARD.w / LEGACY.w));
     return { w, h, parts: [], illustrated: true };
   }
-  const a = MEDIA[piece.asset].aspect;
+  // Without a cutout yet, the profile's expected top view sets the proportions (bowls are round).
+  const a = piece ? MEDIA[piece.asset].aspect : prof.aspect || 1;
   // What is drawn is what sits on the board at once (placed); the prepared amount (qty) is what the shopping list uses.
   const qty = item.placed ?? item.qty;
 

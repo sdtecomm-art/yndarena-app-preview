@@ -8,6 +8,7 @@ import { TECHNIQUES, TECH_GROUPS } from '../data/techniques.js';
 import { ITEMS, styleOf } from '../data/catalog.js';
 import { PRESENTATIONS, PRESENTATION_ORDER } from '../data/presentations.js';
 import { COMMUNITY, COMMUNITY_ORDER } from '../data/community.js';
+import { MEALS } from '../data/meals.js';
 import { uid } from '../lib.js';
 
 function findUse(tid) {
@@ -15,6 +16,9 @@ function findUse(tid) {
     for (const c of PRESENTATIONS[pid].compositions) {
       if (c.place.some((p) => styleOf(p.g, p.s).tech === tid)) return { kind: 'presentation', id: pid, comp: c.id, name: `${PRESENTATIONS[pid].name}, ${c.name}` };
     }
+  }
+  for (const [mid, m] of Object.entries(MEALS)) {
+    if (m.place.some((p) => ITEMS[p.g] && styleOf(p.g, p.s).tech === tid)) return { kind: 'meal', id: mid, name: m.name };
   }
   for (const cid of COMMUNITY_ORDER) {
     if (COMMUNITY[cid].items.some((p) => styleOf(p.type, p.style).tech === tid)) return { kind: 'community', id: cid, name: COMMUNITY[cid].name };
@@ -42,7 +46,7 @@ export default function Technique({ params }) {
     updateUser((u) => {
       const d = u.designs[id];
       d.name = `Practice: ${t.name}`;
-      d.items.push({ uid: uid('it'), type, qty: ITEMS[type].baseQty, x: 300, y: 200, r: 0, style });
+      d.items.push({ uid: uid('it'), type, qty: ITEMS[type].baseQty, x: 165, y: 120, r: 0, style });
     });
     nav.push('designer', { id });
   };
@@ -60,7 +64,7 @@ export default function Technique({ params }) {
       <div className="pad row" style={{ marginTop: 18, gap: 10 }}>
         <Button variant="ghost" small className="grow" onClick={tryOnBoard}>Try it on a board</Button>
         {use && (
-          <Button small className="grow" onClick={() => (use.kind === 'presentation' ? nav.push('presentation', { id: use.id, comp: use.comp }) : nav.push('community', { id: use.id }))}>See it in a presentation</Button>
+          <Button small className="grow" onClick={() => (use.kind === 'presentation' ? nav.push('presentation', { id: use.id, comp: use.comp }) : use.kind === 'meal' ? nav.push('meal', { id: use.id }) : nav.push('community', { id: use.id }))}>{use.kind === 'meal' ? 'See it on a board' : 'See it in a presentation'}</Button>
         )}
       </div>
       {use && <p className="small pad" style={{ marginTop: 8 }}>Used in {use.name}.</p>}

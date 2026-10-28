@@ -2,18 +2,20 @@ import { useStore } from '../store.jsx';
 import { useNav } from '../nav.jsx';
 import { Icon, Kicker, Sprig, Button } from '../ui.jsx';
 import { BoardThumb, MealCard } from '../components.jsx';
+import { NextStep, ProductStrip, useCareActions } from './Care.jsx';
 import { PRESENTATIONS } from '../data/presentations.js';
 import { MEAL_ORDER } from '../data/meals.js';
-import { presentationItems, careStatus, oilPending, giftInfo, giftWho, fmtDate, fmtShort, fromIso, iso, daysBetween, whenText } from '../lib.js';
+import { presentationItems, giftInfo, giftWho, fmtShort, whenText } from '../lib.js';
 import { WORDMARK } from '../assets.js';
 
 const MAX_GIFTS = 3;
 
+// A quiet nod to the time of day, under the ideas: the care plan leads the Home.
 function greeting() {
   const h = new Date().getHours();
-  if (h < 12) return 'Good morning.';
-  if (h < 18) return 'Good afternoon.';
-  return 'Good evening.';
+  if (h < 11) return 'Something easy for breakfast or later.';
+  if (h < 16) return 'Something easy for lunch or tonight.';
+  return 'Something easy for tonight.';
 }
 
 export function AppHead({ onProfile }) {
@@ -29,64 +31,39 @@ export function AppHead({ onProfile }) {
   );
 }
 
-// What the care plan block says comes only from the existing care state; nothing here invents a date or a result.
-function careView(care, today) {
-  if (care.status !== 'active') {
-    return {
-      kicker: 'Your care plan',
-      title: 'Let’s set up your board care.',
-      text: care.status === 'notyet' ? 'Everything will be ready when your boards arrive.' : 'A two-minute video, a quick water test and gentle reminders.',
-      cta: 'Set up care', go: 'care',
-    };
-  }
-  const cs = careStatus(care, today);
-  if (cs.dueNow) {
-    return {
-      kicker: `Check ${cs.dueNow.n} of 6`, hot: true,
-      title: 'It’s time for a quick water test.',
-      text: 'A few drops of water, one minute. The wood will tell you what it needs.',
-      cta: 'Start water test', go: 'water-test', second: ['View care plan', 'care'],
-    };
-  }
-  const oil = oilPending(care);
-  if (oil) {
-    return {
-      kicker: 'Oil pending', hot: true,
-      title: 'Your board needs oil.',
-      text: `The water soaked in on ${fmtShort(fromIso(oil.at))}. Oil when you can, then mark it done.`,
-      cta: 'Continue care', go: 'care',
-    };
-  }
-  if (cs.next) {
-    const last = [...care.checks].sort((a, b) => (a.at < b.at ? -1 : 1)).pop();
-    const doneToday = last && (last.at === iso(today) || last.oiledAt === iso(today));
-    return {
-      kicker: doneToday ? 'Care done' : 'Your next water test',
-      title: doneToday ? 'Your boards are cared for.' : fmtDate(cs.next.date),
-      text: doneToday ? `Next water test: ${fmtDate(cs.next.date)}.` : `In ${daysBetween(today, cs.next.date)} days. We’ll remind you.`,
-      cta: 'View care plan', go: 'care', second: doneToday ? null : ['Check now', 'water-test'],
-    };
-  }
-  return { kicker: 'Your care plan', title: 'Your care plan is complete.', text: 'Do the water test whenever the wood looks dry.', cta: 'View care plan', go: 'care', second: ['Water test', 'water-test'] };
-}
-
-function CareBlock({ care, today }) {
-  const nav = useNav();
-  const v = careView(care, today);
-  const open = (to) => (to === 'water-test' ? nav.push('water-test') : nav.push('care', { seg: 'care' }));
+// The care plan opens the Home: what it is for, the product, and the next step from the plan's own data.
+function CareHero({ care, today }) {
+  const act = useCareActions();
   return (
-    <section className={'card care-block' + (v.hot ? ' is-hot' : '')} aria-label="Your care plan">
-      <div className="row-between" style={{ alignItems: 'flex-start' }}>
-        <Kicker>{v.kicker}</Kicker>
-        <div className="round-ico"><Icon name="drop" size={18} /></div>
+    <section className="care-hero" aria-label="Your Yndarena Care Plan">
+      <div className="pad">
+        <div className="eyebrow">Your Yndarena Care Plan</div>
+        <h1 className="display-xl">Made with love.<br /><em>Cared for with ease.</em></h1>
+        <p className="hero-lede">Know when to oil, see how, and let us remind you.</p>
       </div>
-      <h2 className="h2" style={{ marginTop: 2 }}>{v.title}</h2>
-      <p className="body" style={{ margin: '6px 0 14px' }}>{v.text}</p>
-      <Button block arrow onClick={() => open(v.go)}>{v.cta}</Button>
-      {v.second && <Button block variant="text" onClick={() => open(v.second[1])}>{v.second[0]}</Button>}
+      <ProductStrip className="hero-product" />
+      <div className="pad">
+        <NextStep care={care} today={today} compact />
+      </div>
+      <div className="guide-rail" role="list" aria-label="Care guides">
+        {GUIDES.map((g) => (
+          <button key={g.id} role="listitem" className="guide-tile" onClick={() => act(g.go)}>
+            <span className="ico"><Icon name={g.icon} size={20} /></span>
+            <span className="t">{g.title}</span>
+            <span className="s">{g.sub}</span>
+          </button>
+        ))}
+      </div>
     </section>
   );
 }
+
+const GUIDES = [
+  { id: 'check', icon: 'drop', title: 'Water test', sub: 'One minute at your board', go: 'focus:check' },
+  { id: 'oil', icon: 'hand', title: 'How to oil', sub: 'Step by step', go: 'oil-guide' },
+  { id: 'everyday', icon: 'wash', title: 'Everyday care', sub: 'Wash, dry, store', go: 'focus:everyday' },
+  { id: 'help', icon: 'help', title: 'Need a hand?', sub: 'Answers and support', go: 'focus:help' },
+];
 
 function ContinueRow({ user }) {
   const nav = useNav();
@@ -173,22 +150,16 @@ export default function Home({ openProfile }) {
   const nav = useNav();
 
   return (
-    <>
+    <div className="home">
       <AppHead onProfile={openProfile} />
-      <div className="pad" style={{ marginTop: 8 }}>
-        <h1 className="h1" style={{ fontSize: 32 }}>{greeting()}</h1>
-      </div>
-
-      <div className="pad" style={{ marginTop: 14 }}>
-        <CareBlock care={user.care} today={today} />
-      </div>
+      <CareHero care={user.care} today={today} />
 
       <section className="section" aria-label="Ideas for your table">
         <div className="section-head">
           <h2 className="h2">Ideas for your table</h2>
-          <button className="link" onClick={() => nav.switchTab('discover', { name: 'discover', params: { seg: 'meals' } })}>Discover</button>
+          <button className="link" onClick={() => nav.switchTab('discover', { name: 'discover', params: { seg: 'meals' } })}>See all</button>
         </div>
-        <p className="small pad" style={{ margin: '-4px 0 12px' }}>Serve what you already love.</p>
+        <p className="small pad" style={{ margin: '-4px 0 12px' }}>Serve what you already love. {greeting()}</p>
         <div className="pad stack-8">
           {mealsForToday(today).map((id) => <MealCard key={id} id={id} compact />)}
           <ContinueRow user={user} />
@@ -197,10 +168,10 @@ export default function Home({ openProfile }) {
 
       <GiftBlock gifts={user.gifts} today={today} />
 
-      <div style={{ textAlign: 'center', margin: '30px 0 0' }}>
-        <button className="link" onClick={() => nav.push('story')}>Our story</button>
-        <div className="label" style={{ marginTop: 14 }}>turning houses into homes</div>
-      </div>
-    </>
+      <footer className="home-sign">
+        <Sprig style={{ height: 40 }} />
+        <div className="label">turning houses into homes</div>
+      </footer>
+    </div>
   );
 }

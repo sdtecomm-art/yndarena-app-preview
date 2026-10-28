@@ -64,37 +64,98 @@ function Surface({ board, uid }) {
   );
 }
 
-// Places alongside-the-board items in a row under the board, at the same scale.
+// Loose food served next to the board sits on a plate; food already in its own bowl or dish needs none.
+const plateOf = (l) => (l.container ? 0 : Math.max(l.w, l.h) + 16);
+
+// Places alongside-the-board items in a row under the board, at the same scale, centred like a table setting.
 function alongsideSlots(items) {
   const out = {};
-  let x = 0, rowH = 0, y = BOARD.h + BAND_GAP + 12;
+  const rows = [[]];
+  let x = 0;
   for (const it of items) {
-    const l = groupLayout(it);
-    if (x > 0 && x + l.w > BOARD.w) { x = 0; y += rowH + 8; rowH = 0; }
-    out[it.uid] = { x: x + l.w / 2, y: y + l.h / 2 };
-    x += l.w + 10; rowH = Math.max(rowH, l.h);
+    const l = groupLayout(it), d = plateOf(l), w = d || l.w, h = d || l.h;
+    if (x > 0 && x + w > BOARD.w) { rows.push([]); x = 0; }
+    rows[rows.length - 1].push({ it, w, h, d });
+    x += w + 10;
   }
-  return { slots: out, bottom: items.length ? y + rowH : BOARD.h };
+  let y = BOARD.h + BAND_GAP + 12;
+  for (const row of rows) {
+    if (!row.length) continue;
+    const total = row.reduce((a, r) => a + r.w, 0) + (row.length - 1) * 10, rowH = Math.max(...row.map((r) => r.h));
+    let cx = (BOARD.w - total) / 2;
+    for (const r of row) { out[r.it.uid] = { x: cx + r.w / 2, y: y + rowH / 2, plate: r.d }; cx += r.w + 10; }
+    y += rowH + 8;
+  }
+  return { slots: out, bottom: items.length ? y - 8 : BOARD.h };
 }
 
-export default function BoardView({ boardId, items, uid, selected, layerState, onItemDown, onBgDown, svgRef, className = '', label, flag }) {
+function Plate({ d, uid }) {
+  return (
+    <g filter={`url(#bsh-${uid})`}>
+      <circle r={d / 2} fill={`url(#plate-${uid})`} />
+      <circle r={d / 2 - d * 0.12} fill="none" stroke="#e7dfd4" strokeWidth=".8" />
+    </g>
+  );
+}
+
+// Layout aids: what Photo leaves out. Numbers match the list under the board.
+function Aids({ items, slots }) {
+  return (
+    <g className="layout-aids" style={{ pointerEvents: 'none' }}>
+      <path d={groovePath(-1.5)} fill="none" stroke="#fff6ea" strokeOpacity=".55" strokeWidth=".7" strokeDasharray="2.5 2.5" />
+      <g fontSize="7" fill="#786350" letterSpacing=".06em">
+        <line x1="0" x2={BOARD.w} y1={-5} y2={-5} stroke="#786350" strokeOpacity=".45" strokeWidth=".5" />
+        <text x={BOARD.w / 2} y={-7.5} textAnchor="middle">33 cm</text>
+        <text x={BOARD.w + 6} y={BOARD.h / 2} textAnchor="middle" transform={`rotate(90 ${BOARD.w + 6} ${BOARD.h / 2})`}>24 cm</text>
+      </g>
+      {items.map((p, i) => {
+        const c = p.alongside ? slots[p.uid] : { x: p.x, y: p.y };
+        if (!c) return null;
+        // The number sits on the upper left of the group, clear of its centre (and of any pending label).
+        const l = groupLayout(p), r = ((p.alongside ? 0 : p.r || 0) * Math.PI) / 180;
+        const bw = Math.abs(l.w * Math.cos(r)) + Math.abs(l.h * Math.sin(r)), bh = Math.abs(l.w * Math.sin(r)) + Math.abs(l.h * Math.cos(r));
+        const k = l.container ? 0.36 : 0.5;
+        const pos = { x: c.x - bw * k + 9, y: c.y - bh * k + 9 };
+        return (
+          <g key={p.uid} transform={`translate(${pos.x} ${pos.y})`}>
+            <circle r="7.5" fill="#231f20" fillOpacity=".86" stroke="#faf5ef" strokeWidth="1" />
+            <text y="2.6" textAnchor="middle" fontSize="7.6" fill="#faf5ef" fontFamily="var(--sans)">{i + 1}</text>
+          </g>
+        );
+      })}
+    </g>
+  );
+}
+
+// scene: 'photo' draws the clean table scene; 'layout' draws the same scene with aids to reproduce it.
+// Both use the same viewBox, so switching never changes the height. Without scene: the working view (Designer etc.).
+export default function BoardView({ boardId, items, uid, selected, layerState, onItemDown, onBgDown, svgRef, className = '', label, flag, scene }) {
   const board = BOARDS[boardId] || BOARDS['cheese-bread'];
   // SVG defs ids must be unique per instance: hidden screens keep their own copies mounted.
   uid = 'b' + useId().replace(/[^a-zA-Z0-9]/g, '');
   const along = items.filter((i) => i.alongside && ITEMS[i.type]);
   const { slots, bottom } = alongsideSlots(along);
   const H = bottom + PAD;
+  const top = scene ? PAD + 6 : PAD;
   return (
     <svg
       ref={svgRef}
-      className={'board-svg ' + className}
-      viewBox={`${-PAD} ${-PAD} ${BOARD.w + PAD * 2} ${H + PAD}`}
+      className={'board-svg ' + className + (scene ? ' is-scene is-' + scene : '')}
+      viewBox={`${-PAD} ${-top} ${BOARD.w + PAD * 2} ${H + top}`}
       role="img"
       aria-label={label || `${board.name} board, 33 × 24 cm`}
       onPointerDown={onBgDown}
     >
+      <defs>
+        <radialGradient id={`plate-${uid}`} cx=".4" cy=".35" r=".75">
+          <stop offset="0" stopColor="#fffdf9" />
+          <stop offset=".8" stopColor="#f3eee6" />
+          <stop offset="1" stopColor="#e6ded2" />
+        </radialGradient>
+      </defs>
       <Surface board={board} uid={uid} />
-      {along.length > 0 && (
+      {along.map((p) => slots[p.uid]?.plate ? <g key={'pl' + p.uid} transform={`translate(${slots[p.uid].x} ${slots[p.uid].y})`}><Plate d={slots[p.uid].plate} uid={uid} /></g> : null)}
+      {along.length > 0 && scene !== 'photo' && (
         <g className="alongside-band">
           <line x1="0" x2={BOARD.w} y1={BOARD.h + BAND_GAP / 2 + 2} y2={BOARD.h + BAND_GAP / 2 + 2} stroke="#8a7c6c" strokeOpacity=".35" strokeWidth=".6" strokeDasharray="2 2" />
           <text x="0" y={BOARD.h + BAND_GAP + 6} className="band-label">ALONGSIDE</text>
@@ -134,6 +195,7 @@ export default function BoardView({ boardId, items, uid, selected, layerState, o
           </g>
         );
       })}
+      {scene === 'layout' && <Aids items={items.filter((i) => ITEMS[i.type])} slots={slots} />}
     </svg>
   );
 }

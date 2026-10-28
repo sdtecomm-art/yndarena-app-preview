@@ -48,6 +48,10 @@ export const CONTAINERS = {
   'bowl-4.5in': { label: 'Small bowl (4.5 in)', d: 4.5 * inch, ...estimate('Chosen for sides; to confirm with the bowls Yndarena recommends') },
   'bowl-5in': { label: 'Medium bowl (5 in)', d: 5 * inch, ...estimate('Size from the serveware named in the app') },
   'bowl-7in': { label: 'Serving bowl (7 in)', d: 7 * inch, ...estimate('Chosen for a pasta dinner for two; to confirm') },
+  'bowl-6in': { label: 'Serving bowl (6 in)', d: 6 * inch, ...estimate('Chosen for a risotto for two; to confirm') },
+  'pasta-plate-7in': { label: 'Shallow pasta bowl (7 in)', d: 7 * inch, ...estimate('Chosen for ravioli for two; to confirm') },
+  'soup-bowl-5in': { label: 'Soup bowl (5 in)', d: 5 * inch, ...estimate('One serving of soup; served next to the board, never a hot pot on the wood') },
+  'baking-dish-7in': { label: 'Small baking dish (7 in)', d: 7 * inch, ...estimate('An oven dish for a warm dip; it stays next to the board') },
 };
 
 // ---------- Components ----------
@@ -133,6 +137,29 @@ export const PROFILES = {
   'side-cabbage-carrot:bowl': P('container', { container: 'bowl-4.5in', capacity: 2 }, 'A 4.5 in bowl for two servings'),
   'side-tomato-basil:bowl': P('container', { container: 'bowl-4in', capacity: 1 }, 'A 4 in bowl for 1 cup'),
   'rustic-bread:slices': P('pile', { w: 120 }, 'Three or four slices from a round loaf'),
+  // Catalog expansion (2026-10-28). No cutouts yet: `aspect` is the expected top view (width / height) of the
+  // pending photo, so placeholders already take the physical footprint the photo will fill.
+  'spaghetti-bowl:bowl': P('container', { container: 'bowl-7in', capacity: 2 }, 'A 7 in bowl for 8 oz of spaghetti with sauce, two servings'),
+  'garlic-bread:slices': P('pile', { w: 120, aspect: 1.3 }, 'Four slices of garlic bread'),
+  'parmesan:bowl': P('container', { container: 'ramekin-2in', capacity: 0.5 }, 'A mini bowl of grated parmesan, about 1/2 cup'),
+  'ravioli-plate:plate': P('container', { container: 'pasta-plate-7in', capacity: 2 }, 'A 7 in shallow pasta bowl for two servings of ravioli'),
+  'risotto-bowl:bowl': P('container', { container: 'bowl-6in', capacity: 2 }, 'A 6 in bowl for about 3 cups of risotto, two servings'),
+  'bbq-sliders:sliders': P('units', { unit: 68, layout: 'grid', aspect: 1 }, 'A slider bun is about 6.5 to 7 cm across'),
+  'pickles:bowl': P('container', { container: 'ramekin-3in', capacity: 0.5 }, 'A ramekin of pickle chips, about 1/2 cup'),
+  'creamy-coleslaw:bowl': P('container', { container: 'bowl-4.5in', capacity: 2 }, 'A 4.5 in bowl for two servings'),
+  'grilled-cheese:triangles': P('units', { unit: 118, layout: 'shingle', aspect: 1.15 }, 'One sandwich cut corner to corner, about 11 to 12 cm a side'),
+  'tomato-soup:bowl': P('container', { container: 'soup-bowl-5in', capacity: 1 }, 'One bowl per serving'),
+  'quesadilla:wedges': P('units', { unit: 150, layout: 'shingle', aspect: 1.5 }, 'One 8 in quesadilla cut in triangles, laid in an overlapping line about 15 cm long'),
+  'salsa:bowl': P('container', { container: 'ramekin-3in', capacity: 0.5 }, 'A ramekin, about 1/2 cup'),
+  'sour-cream:bowl': P('container', { container: 'ramekin-3in', capacity: 0.5 }, 'A ramekin, about 1/2 cup'),
+  'mac-cheese:bowl': P('container', { container: 'bowl-7in', capacity: 2 }, 'A 7 in bowl for two servings'),
+  'broccoli:florets': P('pile', { w: 95, aspect: 1.25 }, '1 1/2 cups of cooked florets, one layer deep'),
+  'pretzel-bites:pile': P('pile', { w: 125, aspect: 1.25 }, '2 cups of bites, one layer deep'),
+  'mustard:bowl': P('container', { container: 'ramekin-3in', capacity: 0.5 }, 'A ramekin, about 1/2 cup'),
+  'cheese-dip:bowl': P('container', { container: 'ramekin-3in', capacity: 0.5 }, 'A ramekin, about 1/2 cup'),
+  'buffalo-dip:bowl': P('container', { container: 'bowl-5in', capacity: 1.5 }, 'A 5 in serving bowl, about 1 1/2 cups'),
+  'buffalo-dip:dish': P('container', { container: 'baking-dish-7in', capacity: 2 }, 'Served warm in its baking dish, next to the board'),
+  'tortilla-chips:pile': P('pile', { w: 120, aspect: 1.3 }, '3 cups of chips, loosely piled'),
 };
 
 export const profileOf = (type, style) => PROFILES[`${type}:${style}`] || null;

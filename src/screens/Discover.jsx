@@ -2,13 +2,16 @@ import { useMemo, useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { Icon, Chip, Kicker, DemoNote } from '../ui.jsx';
 import { PresentationCard, CommunityCard, RecipeRow, ItemIcon, MealCard } from '../components.jsx';
-import { MEALS, MEAL_ORDER } from '../data/meals.js';
+import { MEALS, MEAL_ORDER, SHARE_ORDER } from '../data/meals.js';
 import { PRESENTATIONS, PRESENTATION_ORDER, OCCASIONS } from '../data/presentations.js';
 import { RECIPES, RECIPE_TYPES } from '../data/recipes.js';
 import { TECHNIQUES, TECH_GROUPS } from '../data/techniques.js';
 import { COMMUNITY_ORDER } from '../data/community.js';
 import { ITEMS } from '../data/catalog.js';
 import { presentationsUsingRecipe } from '../lib.js';
+
+// Recipes now reach the main dishes too: their quick prep lives on the meal itself, so nothing is duplicated.
+const RECIPE_FILTERS = [{ id: 'all', label: 'All' }, { id: 'mains', label: 'Main dishes' }, { id: 'snacks', label: 'Snacks to share' }, ...RECIPE_TYPES];
 
 const SEGS = [
   { id: 'meals', label: 'Everyday meals' },
@@ -28,7 +31,7 @@ function search(q) {
   });
   const recipes = Object.keys(RECIPES).filter((id) => has(RECIPES[id].name) || RECIPES[id].ingredients.some((i) => has(i.name)));
   const techs = Object.keys(TECHNIQUES).filter((id) => has(TECHNIQUES[id].name) || TECHNIQUES[id].compatible.some((c) => has(ITEMS[c].name)));
-  const meals = MEAL_ORDER.filter((id) => has(MEALS[id].name) || MEALS[id].ingredients.some(has));
+  const meals = [...MEAL_ORDER, ...SHARE_ORDER].filter((id) => has(MEALS[id].name) || MEALS[id].ingredients.some(has));
   return { pres, recipes, techs, meals };
 }
 
@@ -72,7 +75,7 @@ export default function Discover({ params = {} }) {
           )}
           {results.meals.length > 0 && (
             <div className="stack-12" style={{ marginBottom: 22 }}>
-              <Kicker>Everyday meals</Kicker>
+              <Kicker>Meals and snacks</Kicker>
               {results.meals.map((id) => <MealCard key={id} id={id} compact />)}
             </div>
           )}
@@ -124,6 +127,13 @@ export default function Discover({ params = {} }) {
                 </div>
                 {occasion !== 'all' && <p className="small italic" style={{ margin: '12px 0 0' }}>{OCCASIONS.find((o) => o.id === occasion).line}</p>}
               </div>
+              {occasion === 'all' && (
+                <div className="pad" style={{ marginTop: 18 }}>
+                  <div className="section-label"><span>Easy snacks to share</span></div>
+                  <div className="stack-8" style={{ marginTop: 10 }}>{SHARE_ORDER.map((id) => <MealCard key={id} id={id} compact />)}</div>
+                  <div className="section-label" style={{ marginTop: 24 }}><span>Presentations</span></div>
+                </div>
+              )}
               <div className="pad stack-16" style={{ marginTop: 16 }}>
                 {PRESENTATION_ORDER.filter((id) => occasion === 'all' || PRESENTATIONS[id].occasion === occasion).map((id) => <PresentationCard key={id} id={id} wide />)}
               </div>
@@ -134,19 +144,36 @@ export default function Discover({ params = {} }) {
             <div style={{ marginTop: 18 }}>
               <div className="pad">
                 <div className="row wrap" style={{ gap: 6 }}>
-                  <button className={'tag' + (rtype === 'all' ? ' is-dark' : '')} onClick={() => setRtype('all')}>All</button>
-                  {RECIPE_TYPES.map((t) => <button key={t.id} className={'tag' + (rtype === t.id ? ' is-dark' : '')} onClick={() => setRtype(t.id)}>{t.label}</button>)}
+                  {RECIPE_FILTERS.map((t) => <button key={t.id} className={'tag' + (rtype === t.id ? ' is-dark' : '')} aria-pressed={rtype === t.id} onClick={() => setRtype(t.id)}>{t.label}</button>)}
                 </div>
-                <div className="row wrap" style={{ gap: 6, marginTop: 8 }}>
-                  {OCCASIONS.map((o) => <button key={o.id} className={'tag' + (occasion === o.id ? ' is-lav' : '')} onClick={() => setOccasion(occasion === o.id ? 'all' : o.id)}>{o.label}</button>)}
+                {!['mains', 'snacks'].includes(rtype) && (
+                  <div className="row wrap" style={{ gap: 6, marginTop: 8 }}>
+                    {OCCASIONS.map((o) => <button key={o.id} className={'tag' + (occasion === o.id ? ' is-lav' : '')} onClick={() => setOccasion(occasion === o.id ? 'all' : o.id)}>{o.label}</button>)}
+                  </div>
+                )}
+              </div>
+              {(rtype === 'all' || rtype === 'mains') && occasion === 'all' && (
+                <div className="pad" style={{ marginTop: 14 }}>
+                  {rtype === 'all' && <div className="section-label"><span>Main dishes</span></div>}
+                  <p className="small" style={{ margin: '8px 0 10px' }}>Each one has an optional quick prep. Cook it your usual way or use store-bought.</p>
+                  <div className="stack-8">{MEAL_ORDER.map((id) => <MealCard key={id} id={id} compact />)}</div>
                 </div>
-              </div>
-              <div className="pad" style={{ marginTop: 8 }}>
-                {Object.keys(RECIPES)
-                  .filter((id) => rtype === 'all' || RECIPES[id].type === rtype)
-                  .filter((id) => occasion === 'all' || presentationsUsingRecipe(id).some((x) => x.p.occasion === occasion))
-                  .map((id) => <RecipeRow key={id} id={id} />)}
-              </div>
+              )}
+              {(rtype === 'all' || rtype === 'snacks') && occasion === 'all' && (
+                <div className="pad" style={{ marginTop: 18 }}>
+                  {rtype === 'all' && <div className="section-label"><span>Snacks to share</span></div>}
+                  <div className="stack-8" style={{ marginTop: 10 }}>{SHARE_ORDER.map((id) => <MealCard key={id} id={id} compact />)}</div>
+                </div>
+              )}
+              {!['mains', 'snacks'].includes(rtype) && (
+                <div className="pad" style={{ marginTop: 18 }}>
+                  {rtype === 'all' && occasion === 'all' && <div className="section-label"><span>Dips, spreads and bites</span></div>}
+                  {Object.keys(RECIPES)
+                    .filter((id) => rtype === 'all' || RECIPES[id].type === rtype)
+                    .filter((id) => occasion === 'all' || presentationsUsingRecipe(id).some((x) => x.p.occasion === occasion))
+                    .map((id) => <RecipeRow key={id} id={id} />)}
+                </div>
+              )}
             </div>
           )}
 

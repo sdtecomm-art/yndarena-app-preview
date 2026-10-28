@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { StoreProvider, useStore, DEMO_CODE, RETURNING_EMAIL } from './store.jsx';
-import { NavProvider, useNav, TABS } from './nav.jsx';
+import { NavProvider, useNav, TABS, FULL } from './nav.jsx';
 import { ToastProvider, ToastHost, useToast, Icon, Kicker, Sprig, ConfirmTap } from './ui.jsx';
 import { useActions } from './actions.js';
 import { pad4 } from './lib.js';
@@ -19,14 +19,15 @@ import Table from './screens/Table.jsx';
 import Shopping from './screens/Shopping.jsx';
 import Collection, { DesignItem, MadeItem } from './screens/Collection.jsx';
 import Community, { ShareDesign, SharedView, decodeShare, encodeShare } from './screens/Community.jsx';
-import Care, { WaterTest } from './screens/Care.jsx';
-import Profile, { Story } from './screens/Profile.jsx';
+import Care, { WaterTest, OilGuide } from './screens/Care.jsx';
+import Profile from './screens/Profile.jsx';
 import Review from './screens/Review.jsx';
 import { WORDMARK } from './assets.js';
 
 const TAB_META = {
   home: { label: 'Home', icon: 'home' },
   discover: { label: 'Discover', icon: 'discover' },
+  care: { label: 'Care', icon: 'care' },
   collection: { label: 'Collection', icon: 'collection' },
 };
 
@@ -35,13 +36,13 @@ function parseHash() {
   return m ? decodeShare(m[1]) : null;
 }
 
-function ScreenFor({ route, onSignOut, openProfile }) {
+function ScreenFor({ route, onSignOut, openProfile, root }) {
   const p = route.params || {};
   switch (route.name) {
     case 'home': return <Home openProfile={openProfile} />;
     case 'discover': return <Discover params={p} />;
     case 'collection': return <Collection />;
-    case 'care': return <Care params={p} />;
+    case 'care': return <Care params={p} root={root} />;
     case 'presentation': return <Presentation params={p} />;
     case 'meal': return <Meal params={p} />;
     case 'recipe': return <Recipe params={p} />;
@@ -52,9 +53,9 @@ function ScreenFor({ route, onSignOut, openProfile }) {
     case 'item': return <DesignItem params={p} />;
     case 'made': return <MadeItem params={p} />;
     case 'share': return <ShareDesign params={p} />;
-    case 'water-test': return <WaterTest />;
+    case 'water-test': return <WaterTest params={p} />;
+    case 'oil-guide': return <OilGuide />;
     case 'profile': return <Profile onSignOut={onSignOut} />;
-    case 'story': return <Story />;
     case 'review': return <Review />;
     default: return null;
   }
@@ -83,7 +84,7 @@ function Main({ onSignOut }) {
         {TABS.map((tab) =>
           nav.stacks[tab].map((route, i) => {
             const isTop = tab === nav.tab && i === nav.stacks[tab].length - 1;
-            const full = ['designer', 'table', 'water-test', 'share'].includes(route.name);
+            const full = FULL.has(route.name);
             const anim = isTop && i > 0 ? (nav.dir === 'push' ? ' anim-push' : nav.dir === 'pop' ? ' anim-pop' : '') : '';
             if (route.name === 'designer') {
               return <div key={route.key} className={'screen is-full' + anim} hidden={!isTop}><Designer params={route.params} /></div>;
@@ -91,7 +92,7 @@ function Main({ onSignOut }) {
             return (
               <div key={route.key} className={'screen' + (full ? ' is-full' : ' has-tabbar') + anim} hidden={!isTop}>
                 <div className="screen-scroll">
-                  <ScreenFor route={route} onSignOut={onSignOut} openProfile={openProfile} />
+                  <ScreenFor route={route} onSignOut={onSignOut} openProfile={openProfile} root={i === 0 && tab === 'care'} />
                 </div>
               </div>
             );
@@ -149,8 +150,10 @@ const JOURNEYS = [
   ['new', 'Sign up as a new Home'],
   ['returning', 'Sign in as a returning Home'],
   ['care', 'Care plan and water test'],
+  ['oil', 'How to oil, step by step'],
   ['meal', 'An everyday meal on the board'],
   ['meal-designer', 'Swap a side in Designer'],
+  ['catalog', 'Main dishes and snacks'],
   ['presentation', 'Explore a presentation'],
   ['layouts', 'Switch layouts, same ingredients'],
   ['designer', 'Make it yours in Designer'],
@@ -191,6 +194,7 @@ function SidePanels({ children, setShared }) {
     const L = 'love-like-rosemary';
     setTimeout(() => {
       if (k === 'meal') nav.switchTab('discover', { name: 'meal', params: { id: 'steak-potatoes' } });
+
       if (k === 'meal-designer') { const id = a.fromMeal('salmon-rice-greens'); nav.switchTab('discover', { name: 'designer', params: { id } }); }
       if (k === 'presentation') nav.switchTab('discover', { name: 'presentation', params: { id: L } });
       if (k === 'layouts') nav.switchTab('discover', { name: 'presentation', params: { id: L, comp: 'the-sprig' } });
@@ -202,7 +206,9 @@ function SidePanels({ children, setShared }) {
       if (k === 'h2h') nav.switchTab('discover', { name: 'community', params: { id: 'h2h-midnight' } });
       if (k === 'care') nav.switchTab('care');
       if (k === 'review') nav.switchTab('home', { name: 'review', params: {} });
-      if (k === 'gifts') nav.switchTab('care', { name: 'care', params: { seg: 'gifts' } });
+      if (k === 'gifts') nav.switchTab('home', { name: 'care', params: { seg: 'gifts' } });
+      if (k === 'oil') nav.switchTab('care', { name: 'oil-guide', params: {} });
+      if (k === 'catalog') nav.switchTab('discover', { name: 'discover', params: { seg: 'recipes' } });
     }, 30);
   };
 

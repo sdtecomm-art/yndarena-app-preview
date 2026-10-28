@@ -48,7 +48,7 @@ export const RECIPES = {
     name: 'Fig & Rosemary Jam',
     type: 'spread',
     item: 'bowl-jam',
-    intro: 'A small batch of jam, cooked slowly. Made in the spirit of the copper pot in our story.',
+    intro: 'A small batch of jam, cooked slowly. Made in the spirit of Yndarena’s copper pot.',
     time: 40,
     active: 10,
     difficulty: 'Easy',

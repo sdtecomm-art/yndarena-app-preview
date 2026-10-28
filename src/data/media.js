@@ -6,6 +6,8 @@
 // Source files and their manifests live in media-source/; the app only bundles optimized copies.
 import llrTop1080 from '../media/presentations/llr-two-halves-top-1080.webp';
 import llrTop640 from '../media/presentations/llr-two-halves-top-640.webp';
+import spines1400 from '../media/product/yndarena-boards-spines-1400.webp';
+import spines800 from '../media/product/yndarena-boards-spines-800.webp';
 
 const files = (all) => Object.fromEntries(Object.entries(all).map(([p, url]) => [p.split('/').pop().replace('.webp', ''), url]));
 const INGREDIENT_FILES = files(import.meta.glob('../media/ingredients/*.webp', { eager: true, query: '?url', import: 'default' }));
@@ -41,6 +43,14 @@ const cover = (id, kind, alt) => ({
 });
 
 export const MEDIA = {
+  // The three boards seen from their spines, as on the stand. Rendered from Yndarena's own product reference
+  // (brand kit, TABLAS.pdf, "Tables image reference"), turned to lie horizontally. Not AI-generated, not a photo.
+  'product-boards-spines': {
+    role: 'product', src: spines1400, small: spines800, srcSet: `${spines800} 800w, ${spines1400} 1400w`, width: 1400, height: 296,
+    alt: 'The three Yndarena boards stacked: Meat & Fish, Fruits & Vegetables and Cheese & Bread, each with its engraved rosemary',
+    provenance: 'brand-reference', sourceFile: 'brand-kit/sources/TABLAS.pdf, page 1', status: 'reference', label: 'Product reference',
+  },
+
   'llr-two-halves-top': {
     role: 'layout-top',
     src: llrTop1080,

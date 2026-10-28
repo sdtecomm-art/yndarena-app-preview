@@ -1,13 +1,18 @@
 // Notes for the people reviewing the preview. Shown only in the review panel, never in the customer journey.
 
 export const REVIEW = {
-  updated: '2026-10-27',
+  updated: '2026-10-28',
   packages: [
     'yndarena-ingredients-v1: 12 transparent PNG (Love, Like Rosemary). SHA-256 checked against its manifest.',
     'yndarena-media-v2: 33 transparent cutouts, 5 recipe covers, 7 presentation covers, 1 generic wood texture. All AI-generated.',
     'yndarena-everyday-v4: 16 prepared components and 6 meal covers. Replaces everyday-v3, which was never integrated in this preview. SHA-256 and visible bounds match its manifest (22 of 22).',
   ],
   rules: [
+    'Care Plan (2026-10-28): Care is a tab. Home opens with the plan, the product (the three boards from TABLAS.pdf, page 1, a brand reference, not AI) and the next step. Every state (new, boards not home yet, upcoming, due, oil pending, logged today, complete) comes from the stored start date and checks; nothing estimates the condition of the wood. No streaks or points.',
+    'Water test: the screen separates what happens at the board from the on-screen illustration. A result is saved only when the customer chooses one; “I’m not sure” and the walkthrough save nothing. “It soaks in” saves the check with oil pending, as before; “I oiled my boards” confirms it.',
+    'Hero title: the brief proposed “Made to last. Cared for with ease.” The brand rules forbid durability promises (“built to last”), so the preview uses “Made with love. Cared for with ease.” One word to change back in Home.jsx if Yndarena prefers the original.',
+    'Photo and Layout are one scene drawn from the layout data: same board (33 × 24 cm, estimated groove), same food, bowls, amounts and positions, and the same height. Layout adds numbers, the serving zone and the dimensions. Loose food served alongside sits on a plate. The AI covers no longer act as Photo: they appear only inside presentations as a closed “Mood image”, labelled as a different board.',
+    'Catalog: 10 additions (7 everyday meals, 3 snacks under Boards to share), each with two arrangements of the same amounts. All 26 meal arrangements pass the fit check (tools/check-meals.html). Recipes can now filter main dishes and snacks; their quick prep stays on the meal, no duplicate recipe cards.',
     'One registry (src/data/media.js) maps every item and serving style to its cutout. Designer, layout thumbnails, the build-by-layers guide, saved versions, Collection, From home to home and shared links all draw through the same renderer, so no screen can fall back to an old illustration.',
     'Quantities, recipes and shopping lists come from the presentation data. Replacing an illustration with a photo changes none of them. No weight or piece count is read from an image.',
     'Scale: every board is drawn in millimetres at 330 × 240 (the confirmed 33 × 24 cm), in every view. Each group has a physical profile in src/data/physical.js (container, pile, counted pieces, roses or river) with its source and status; the visible food of each cutout, not its transparent margin, is fitted to that footprint.',
@@ -49,6 +54,10 @@ export const REVIEW = {
     'everyday-wraps-cabbage-carrot-cover': ['Halves side by side; the layout overlaps them in a short line'],
   },
   pending: [
+    'Approve the oiling steps and the everyday care tips. Approved facts used as they are: mineral oil and cloth come with the set, oil the day they arrive, the water test wording, the schedule. Not in the materials received: amount of oil, how long to let it soak, when to wipe it off, washing and drying rules. The guide gives no times or quantities until Yndarena confirms them.',
+    'Link for Yndarena board oil and the care kit (OIL_URL). The “I need board oil” sheet shows no store link or price until it exists.',
+    '21 photo cutouts for the new catalog: media-source/pending/PENDING-ASSETS.md lists file, shot, size in mm and the meals that use each one. Until then each shows its outline and “Photo pending”.',
+    'Real photos of meals on a Yndarena board. The Photo view stays rendered from the layout until then.',
     'Everyday meals: amounts and steps are editorial drafts; nothing is kitchen-tested. Covers use generic wood, not Yndarena boards.',
     'Measure the juice groove (inset, width, corner curve) on a real board and set GROOVE in physical.js.',
     'Confirm whether Cheese & Bread, Fruits & Vegetables and Meat & Fish share the 33 × 24 cm size.',
@@ -57,7 +66,7 @@ export const REVIEW = {
     'Photos on the real Yndarena boards, with weighed portions.',
     'A product reference for each board surface (wood, grain and finish) to replace the generic texture.',
     'Technique videos: 20 clips planned (video-plan.json), none generated. Start with Batons and Strips, Spoon Swoosh, Prosciutto Rose, Salami River and Cucumber Ribbons.',
-    'Link to Yndarena’s existing board care video (yndarenahome.com/wood-care).',
+    'Care video: the app links to yndarenahome.com/wood-care/#video (the address in the care emails); it is not embedded.',
     'Step photos for the build guide.',
     'Original PNG files of media-v2, to record matching SHA-256 values.',
   ],

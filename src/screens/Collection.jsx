@@ -9,13 +9,12 @@ import { PRESENTATIONS } from '../data/presentations.js';
 import { RECIPES } from '../data/recipes.js';
 import { COMMUNITY } from '../data/community.js';
 import { MEALS } from '../data/meals.js';
-import { mediaFor } from '../data/media.js';
 import { BOARDS } from '../data/catalog.js';
-import { presentationItems, communityItems, listContent } from '../lib.js';
+import { presentationItems, communityItems, listContent, mealItems } from '../lib.js';
 
 const FILTERS = [
   { id: 'all', label: 'All' },
-  { id: 'meal', label: 'Everyday meals' },
+  { id: 'meal', label: 'Meals & snacks' },
   { id: 'presentation', label: 'Yndarena boards' },
   { id: 'modified', label: 'My versions' },
   { id: 'scratch', label: 'From scratch' },
@@ -33,7 +32,7 @@ function entryView(e, user) {
   if (e.kind === 'meal') {
     const m = MEALS[e.id];
     if (!m) return null;
-    return { title: m.name, sub: 'Everyday meal', thumb: <div className="thumb"><img src={mediaFor(m.cover).small} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div> };
+    return { title: m.name, sub: m.kind === 'share' ? 'Board to share' : 'Everyday meal', thumb: <BoardThumb board={m.board} items={mealItems(e.id)} uid={'col-m-' + e.id} /> };
   }
   if (e.kind === 'recipe') {
     const r = RECIPES[e.id];

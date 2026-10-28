@@ -7,7 +7,7 @@ import { PRESENTATIONS, OCCASIONS } from './data/presentations.js';
 import { RECIPES } from './data/recipes.js';
 import { COMMUNITY } from './data/community.js';
 import { MEALS } from './data/meals.js';
-import { presentationItems, communityItems } from './lib.js';
+import { presentationItems, communityItems, mealItems } from './lib.js';
 import { MEDIA, mediaFor } from './data/media.js';
 import { useStore, isSaved } from './store.jsx';
 import { useActions } from './actions.js';
@@ -75,12 +75,12 @@ export function compositionPhoto(comp) {
 
 export function PresentationVisual({ id, label, eager }) {
   const p = PRESENTATIONS[id];
-  const photo = presentationPhoto(id);
-  if (photo) return <div className="photo-hero"><MediaImg id={photo} eager={eager} /></div>;
+  // Cards show the board as it is laid out (the same scene as the Photo view), never a mood image of another board.
+  const comp = p.compositions[0];
   return (
-    <PhotoPending className="board-art">
-      <BoardView boardId={p.board} items={presentationItems(id, p.compositions[0].id)} label={label || `${p.name}, illustration`} />
-    </PhotoPending>
+    <div className="board-art scene-card">
+      <BoardView boardId={p.board} items={presentationItems(id, comp.id)} uid={'pv-' + id} scene="photo" label={label || `${p.name}, ${comp.name}`} />
+    </div>
   );
 }
 
@@ -105,18 +105,30 @@ export function PresentationCard({ id, wide }) {
 }
 
 // An everyday meal: its cover, name and the time to bring it to the table once the food is ready.
+// The meal's own scene, the same one its Photo view shows: board, groove, food and what goes alongside.
+export function MealScene({ id, layoutId, scene = 'photo', uid }) {
+  const m = MEALS[id];
+  return (
+    <div className={'scene scene-' + scene}>
+      <BoardView boardId={m.board} items={mealItems(id, layoutId)} uid={uid} scene={scene} label={`${m.name}, ${scene === 'photo' ? 'scene' : 'layout'}`} />
+    </div>
+  );
+}
+
+const hasPending = (id) => mealItems(id).some((i) => ITEMS[i.type].pending);
+
 export function MealCard({ id, compact }) {
   const nav = useNav();
   const m = MEALS[id];
-  const cover = mediaFor(m.cover);
+  const kind = m.kind === 'share' ? 'Board to share' : 'Everyday meal';
   if (compact) {
     return (
       <button className="card tap meal-row" onClick={() => nav.push('meal', { id })}>
-        <img src={cover.small} alt="" loading="lazy" decoding="async" />
+        <div className="meal-row-art"><BoardView boardId={m.board} items={mealItems(id)} uid={'mr-' + id} scene="photo" /></div>
         <div className="grow">
-          <div className="kicker">{m.category}</div>
+          <div className="kicker">{m.kind === 'share' ? 'To share' : m.category}</div>
           <div className="h3" style={{ fontSize: 18, marginTop: 2 }}>{m.name}</div>
-          <div className="small" style={{ fontSize: 13 }}>Serves {m.serves} · {m.minutes} min to serve</div>
+          <div className="small" style={{ fontSize: 13 }}>Serves {m.serves} · {m.minutes} min to assemble</div>
         </div>
         <Icon name="chevron" size={18} />
       </button>
@@ -124,13 +136,16 @@ export function MealCard({ id, compact }) {
   }
   return (
     <button className="card board-card tap" onClick={() => nav.push('meal', { id })}>
-      <div className="photo-hero"><MediaImg id={m.cover} /></div>
+      <div className="board-art scene-card">
+        <BoardView boardId={m.board} items={mealItems(id)} uid={'mc-' + id} scene="photo" />
+        {hasPending(id) && <span className="photo-tag">Photos pending</span>}
+      </div>
       <div className="card-body">
-        <div className="kicker">Everyday meal · {m.category}</div>
+        <div className="kicker">{kind} · {m.kind === 'share' ? `Serves ${m.serves}` : m.category}</div>
         <div className="card-title" style={{ marginTop: 4 }}>{m.name}</div>
         <p className="small" style={{ margin: '6px 0 8px' }}>{m.description}</p>
         <div className="metas">
-          <Meta icon="clock">{m.minutes} min to serve</Meta>
+          <Meta icon="clock">{m.minutes} min to assemble</Meta>
           <Meta icon="people">Serves {m.serves}</Meta>
         </div>
       </div>

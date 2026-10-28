@@ -204,9 +204,280 @@ export const MEALS = {
     ],
     layoutNote: 'Only fresh tomato and basil in the side bowl. Mozzarella stays on the flatbread.',
   },
+  // ---------- Catalog expansion, 2026-10-28 (NUEVO-CONTENIDO.md) ----------
+  // Same rules as above. `layouts` holds two arrangements of the same components and amounts; `place` is the first.
+  // `cook` says what the assembly minutes leave out. Photos of these components are pending (review panel).
+  'spaghetti-marinara': {
+    name: 'Spaghetti Marinara',
+    category: 'Dinner',
+    description: 'Spaghetti in a warm marinara, with parmesan and basil to finish and garlic bread on the side.',
+    serves: 2,
+    minutes: 3,
+    cook: 'Cooking the pasta and warming the sauce are not included. Follow the package or your usual way.',
+    board: 'cheese-bread',
+    ingredients: ['8 oz spaghetti', '1 1/2 cups marinara sauce, jarred or your own', 'A little grated parmesan, optional', 'A few basil leaves, optional', '4 pieces of garlic bread'],
+    quickPrep: ['Cook the spaghetti following the package directions.', 'Warm the marinara and toss it with the drained pasta.', 'Warm the garlic bread in the oven while you plate.'],
+    serving: ['Fill the warmed bowl with the spaghetti, a finger below the rim.', 'Set the parmesan and the basil beside it.', 'Bring the garlic bread to the table on a plate next to the board. It does not fit on the board with the bowl.'],
+    layouts: [
+      { id: 'bowl-left', name: 'Bowl to the left', place: [
+        { g: 'spaghetti-bowl', q: 2, x: 112, y: 120 },
+        { g: 'parmesan', q: 0.25, x: 246, y: 76 },
+        { g: 'basil', q: 3, x: 248, y: 166 },
+        { g: 'garlic-bread', q: 4, alongside: true },
+      ] },
+      { id: 'bowl-right', name: 'Bowl to the right', place: [
+        { g: 'spaghetti-bowl', q: 2, x: 218, y: 120 },
+        { g: 'parmesan', q: 0.25, x: 84, y: 76 },
+        { g: 'basil', q: 3, x: 82, y: 166 },
+        { g: 'garlic-bread', q: 4, alongside: true },
+      ] },
+    ],
+    layoutNote: 'A 7 in bowl leaves no room for the bread at 33 × 24 cm, so the garlic bread goes alongside.',
+  },
+  'cheese-ravioli': {
+    name: 'Cheese Ravioli, Tomato & Basil',
+    category: 'Dinner',
+    description: 'Cheese ravioli in tomato sauce with a little basil. Bread if you like, no salad needed.',
+    serves: 2,
+    minutes: 3,
+    cook: 'Cooking the ravioli is not included. Fresh or frozen, follow the package.',
+    board: 'cheese-bread',
+    ingredients: ['18 oz cheese ravioli, fresh or frozen', '1 cup tomato sauce', 'A few basil leaves', 'A slice or two of rustic bread, optional'],
+    quickPrep: ['Cook the ravioli following the package directions.', 'Warm the sauce and spoon it over the drained ravioli.', 'Tear a few basil leaves over the top.'],
+    serving: ['Spoon the ravioli into the shallow pasta bowl and wipe the rim.', 'Set the bread beside it, if you are serving bread.', 'Finish with the basil leaves.'],
+    layouts: [
+      { id: 'bowl-left', name: 'Bowl to the left', place: [
+        { g: 'ravioli-plate', q: 2, x: 112, y: 120 },
+        { g: 'rustic-bread', q: 1, x: 256, y: 92 },
+        { g: 'basil', q: 3, x: 256, y: 178 },
+      ] },
+      { id: 'bowl-right', name: 'Bowl to the right', place: [
+        { g: 'ravioli-plate', q: 2, x: 218, y: 120 },
+        { g: 'rustic-bread', q: 1, x: 74, y: 92 },
+        { g: 'basil', q: 3, x: 74, y: 178 },
+      ] },
+    ],
+    layoutNote: 'Bread is optional. No standard salad.',
+  },
+  'mushroom-risotto': {
+    name: 'Creamy Mushroom Risotto',
+    category: 'Dinner',
+    description: 'A bowl of mushroom risotto with parmesan, and a little bread only if you want it.',
+    serves: 2,
+    minutes: 3,
+    cook: 'Cooking the risotto is not included. Ready-made works too.',
+    board: 'cheese-bread',
+    ingredients: ['About 3 cups of mushroom risotto, homemade or ready-made', 'A little grated parmesan, optional', 'A slice or two of rustic bread, optional'],
+    quickPrep: ['Make the risotto your usual way, or warm a ready-made one.', 'Loosen it with a splash of warm broth just before serving.'],
+    serving: ['Spoon the risotto into the warmed bowl and smooth the top.', 'Set the parmesan beside it.', 'Add the bread, if you are serving bread.'],
+    layouts: [
+      { id: 'bowl-left', name: 'Bowl to the left', place: [
+        { g: 'risotto-bowl', q: 2, x: 102, y: 120 },
+        { g: 'parmesan', q: 0.25, x: 218, y: 70 },
+        { g: 'rustic-bread', q: 1, x: 252, y: 164 },
+      ] },
+      { id: 'bowl-right', name: 'Bowl to the right', place: [
+        { g: 'risotto-bowl', q: 2, x: 228, y: 120 },
+        { g: 'parmesan', q: 0.25, x: 112, y: 70 },
+        { g: 'rustic-bread', q: 1, x: 78, y: 164 },
+      ] },
+    ],
+    layoutNote: 'A smaller bowl than the pasta dinners, so bread can sit on the board.',
+  },
+  'bbq-chicken-sliders': {
+    name: 'BBQ Chicken Sliders',
+    category: 'Lunch or dinner',
+    description: 'Small buns with BBQ chicken and pickles, with a bowl of creamy coleslaw.',
+    serves: 2,
+    minutes: 4,
+    cook: 'Cooking the chicken is not included. Rotisserie or leftover chicken works well.',
+    board: 'meat-fish',
+    ingredients: ['4 slider buns', '1 1/2 cups cooked chicken, shredded', '1/3 cup BBQ sauce', '1/2 cup pickle chips', '1 1/2 cups coleslaw, deli or homemade'],
+    quickPrep: ['Warm the shredded chicken with the BBQ sauce.', 'Split the buns and toast them lightly, if you like.'],
+    serving: ['Fill the buns just before serving and set them in a block of two by two.', 'Place the coleslaw bowl beside them.', 'Add the pickles in a small bowl.'],
+    scale: 'Two sliders per person. For more people, add sliders in pairs; the board holds four.',
+    layouts: [
+      { id: 'sliders-left', name: 'Sliders to the left', place: [
+        { g: 'bbq-sliders', q: 4, x: 94, y: 120 },
+        { g: 'creamy-coleslaw', q: 2, x: 232, y: 80 },
+        { g: 'pickles', q: 0.5, x: 266, y: 180 },
+      ] },
+      { id: 'sliders-right', name: 'Sliders to the right', place: [
+        { g: 'bbq-sliders', q: 4, x: 236, y: 120 },
+        { g: 'creamy-coleslaw', q: 2, x: 84, y: 80 },
+        { g: 'pickles', q: 0.5, x: 112, y: 180 },
+      ] },
+    ],
+    layoutNote: 'Creamy coleslaw, not the cabbage-and-carrot slaw of Chicken Wraps.',
+  },
+  'grilled-cheese-soup': {
+    name: 'Grilled Cheese & Tomato Soup',
+    category: 'Lunch or dinner',
+    description: 'Grilled cheese cut in triangles on the board, with tomato soup in bowls alongside.',
+    serves: 2,
+    minutes: 2,
+    cook: 'Making the sandwiches and warming the soup are not included.',
+    board: 'cheese-bread',
+    ingredients: ['4 slices of sandwich bread', '4 slices of cheddar or American cheese', 'Butter', '2 cups tomato soup, carton or homemade'],
+    quickPrep: ['Butter the bread, fill with cheese and cook in a pan until golden on both sides.', 'Warm the soup in a pot.'],
+    serving: ['Cut each sandwich corner to corner and lay the triangles in a short overlapping line.', 'Ladle the soup into bowls and set them next to the board.', 'Keep the pot on the stove or a trivet, never on the wood.'],
+    layouts: [
+      { id: 'line', name: 'In one line', place: [
+        { g: 'grilled-cheese', q: 2, x: 165, y: 120 },
+        { g: 'tomato-soup', q: 2, alongside: true },
+      ] },
+      { id: 'column', name: 'Stacked', place: [
+        { g: 'grilled-cheese', q: 2, x: 165, y: 120, arrange: 'column' },
+        { g: 'tomato-soup', q: 2, alongside: true },
+      ] },
+    ],
+    layoutNote: 'Soup goes alongside in bowls. No hot pots on the wood.',
+  },
+  'cheese-quesadillas': {
+    name: 'Cheese Quesadillas',
+    category: 'Lunch or dinner',
+    description: 'Golden cheese quesadillas in triangles, with salsa and sour cream for dipping.',
+    serves: 2,
+    minutes: 2,
+    cook: 'Cooking the quesadillas is not included.',
+    board: 'cheese-bread',
+    ingredients: ['2 flour tortillas (8 in)', '1 1/2 cups shredded cheese', '1/2 cup salsa, optional', '1/2 cup sour cream, optional'],
+    quickPrep: ['Fill half of each tortilla with cheese, fold and cook in a dry pan until golden on both sides.', 'Rest for a minute, then cut into triangles.'],
+    serving: ['Lay the triangles of each quesadilla in a short overlapping line.', 'Set the salsa and sour cream in small bowls beside them.', 'Leave space to pick up each piece.'],
+    layouts: [
+      { id: 'dips-right', name: 'Dips to the right', place: [
+        { g: 'quesadilla', q: 2, x: 104, y: 120, arrange: 'column' },
+        { g: 'salsa', q: 0.5, x: 246, y: 76 },
+        { g: 'sour-cream', q: 0.5, x: 246, y: 168 },
+      ] },
+      { id: 'dips-left', name: 'Dips to the left', place: [
+        { g: 'quesadilla', q: 2, x: 226, y: 120, arrange: 'column' },
+        { g: 'salsa', q: 0.5, x: 84, y: 76 },
+        { g: 'sour-cream', q: 0.5, x: 84, y: 168 },
+      ] },
+    ],
+    layoutNote: 'Its own dish: not the chicken wraps under another name.',
+  },
+  'mac-and-cheese': {
+    name: 'Classic Mac & Cheese',
+    category: 'Dinner',
+    description: 'A warm bowl of mac & cheese, with a little broccoli if you like.',
+    serves: 2,
+    minutes: 2,
+    cook: 'Cooking is not included. Boxed, deli or your own recipe all work.',
+    board: 'cheese-bread',
+    ingredients: ['Mac & cheese for 2, boxed, deli or homemade', '1 1/2 cups broccoli florets, optional'],
+    quickPrep: ['Make the mac & cheese your usual way.', 'Steam or roast the broccoli until just tender.'],
+    serving: ['Spoon the mac & cheese into the warmed bowl.', 'Set the broccoli beside it, or serve it on a plate next to the board.'],
+    layouts: [
+      { id: 'side-on-board', name: 'Broccoli on the board', place: [
+        { g: 'mac-cheese', q: 2, x: 112, y: 120 },
+        { g: 'broccoli', q: 1.5, x: 258, y: 120 },
+      ] },
+      { id: 'side-alongside', name: 'Broccoli alongside', place: [
+        { g: 'mac-cheese', q: 2, x: 165, y: 120 },
+        { g: 'broccoli', q: 1.5, alongside: true },
+      ] },
+    ],
+    layoutNote: 'No bread or salad by default.',
+  },
+  'cheddar-apples-crackers': {
+    kind: 'share',
+    name: 'Cheddar, Apples & Crackers',
+    category: 'Board to share',
+    description: 'Sharp cheddar, crisp apple slices and crackers. An easy board for an afternoon or a movie night.',
+    serves: 4,
+    minutes: 6,
+    cook: 'No cooking. Slicing the apple and the cheese is included in the minutes.',
+    board: 'cheese-bread',
+    ingredients: ['6 oz aged cheddar', '1 crisp apple', '16 round crackers', '1/2 cup pickle chips, optional'],
+    quickPrep: ['Cut the cheddar into thin triangles.', 'Slice the apple just before serving; a squeeze of lemon keeps it from browning.'],
+    serving: ['Fan the cheddar triangles in one corner.', 'Lay the apple slices in a fan beside them.', 'Run the crackers in a line along the bottom, with room to take one.', 'Serve the pickles next to the board in a small bowl, if you like.'],
+    layouts: [
+      { id: 'corners', name: 'Corners and a line', place: [
+        { g: 'cheddar', s: 'triangles', q: 6, x: 98, y: 82 },
+        { g: 'apple', q: 1, x: 236, y: 84 },
+        { g: 'crackers', s: 'fan', q: 16, x: 165, y: 184 },
+        { g: 'pickles', q: 0.5, alongside: true },
+      ] },
+      { id: 'stacks', name: 'Crackers in short stacks', place: [
+        { g: 'cheddar', s: 'triangles', q: 6, x: 98, y: 74 },
+        { g: 'apple', q: 1, x: 98, y: 168 },
+        { g: 'crackers', s: 'stack', q: 16, x: 232, y: 120 },
+        { g: 'pickles', q: 0.5, alongside: true },
+      ] },
+    ],
+    layoutNote: 'Pickles are optional and go alongside: on the board they would crowd the crackers.',
+  },
+  'pretzel-bites-mustard': {
+    kind: 'share',
+    name: 'Soft Pretzel Bites & Mustard',
+    category: 'Board to share',
+    description: 'Warm soft pretzel bites with mustard, and a cheese dip if you like. Refill from the oven as they go.',
+    serves: 4,
+    minutes: 3,
+    cook: 'Baking or warming the bites is not included. Follow the package.',
+    board: 'cheese-bread',
+    ingredients: ['4 cups soft pretzel bites, frozen or bakery', '1/2 cup yellow or honey mustard', '1/2 cup cheese dip, optional'],
+    quickPrep: ['Bake or warm the pretzel bites following the package.', 'Warm the cheese dip, if you are serving it.'],
+    serving: ['Set the mustard and cheese dip in small bowls.', 'Pile half of the warm bites beside them.', 'Keep the rest warm in the oven and refill the board as it empties.'],
+    layouts: [
+      { id: 'dips-right', name: 'Dips to the right', place: [
+        { g: 'pretzel-bites', q: 4, p: 2, x: 116, y: 120, overflow: 'refill' },
+        { g: 'mustard', q: 0.5, x: 248, y: 78 },
+        { g: 'cheese-dip', q: 0.5, x: 248, y: 166 },
+      ] },
+      { id: 'dips-top', name: 'Dips on top', place: [
+        { g: 'pretzel-bites', q: 4, p: 2, x: 165, y: 158, overflow: 'refill' },
+        { g: 'mustard', q: 0.5, x: 118, y: 66 },
+        { g: 'cheese-dip', q: 0.5, x: 212, y: 66 },
+      ] },
+    ],
+    layoutNote: 'Half the bites on the board at once; the rest stay warm to refill.',
+  },
+  'buffalo-chicken-dip': {
+    kind: 'share',
+    name: 'Buffalo Chicken Dip & Dippers',
+    category: 'Board to share',
+    description: 'A warm buffalo chicken dip with tortilla chips and crisp carrot and celery batons.',
+    serves: 4,
+    minutes: 5,
+    cook: 'Mixing and baking the dip are not included.',
+    board: 'meat-fish',
+    ingredients: ['1 cup cooked chicken, shredded', '4 oz cream cheese', '1/4 cup buffalo hot sauce', '1/4 cup ranch or blue cheese dressing', '3 cups tortilla chips, or crackers', '8 oz carrots', '3 celery stalks'],
+    quickPrep: ['Mix the chicken, cream cheese, hot sauce and dressing, and bake until bubbling.', 'Cut the carrots and celery into batons.'],
+    serving: ['Spoon the dip into a serving bowl, or keep it in its baking dish on a trivet next to the board.', 'Group the chips and the vegetables around it.', 'Leave room to reach the dip from every side.'],
+    layouts: [
+      { id: 'dip-on-board', name: 'Dip on the board', place: [
+        { g: 'buffalo-dip', s: 'bowl', q: 1.5, x: 85, y: 90 },
+        { g: 'tortilla-chips', q: 3, x: 235, y: 76 },
+        { g: 'carrots', q: 8, x: 232, y: 160, r: 90 },
+        { g: 'celery', q: 3, alongside: true },
+      ] },
+      { id: 'dip-alongside', name: 'Dip in its dish, alongside', place: [
+        { g: 'buffalo-dip', s: 'dish', q: 1.5, alongside: true },
+        { g: 'tortilla-chips', q: 3, x: 90, y: 80 },
+        { g: 'celery', q: 3, x: 96, y: 166 },
+        { g: 'carrots', q: 8, x: 232, y: 120, r: 90 },
+      ] },
+    ],
+    layoutNote: 'With the dip on the board, the celery waits alongside. A hot baking dish never goes on the wood.',
+  },
 };
 
-export const MEAL_ORDER = ['gnocchi-tomato-basil', 'lemon-chicken-potatoes', 'steak-potatoes', 'salmon-rice-greens', 'chicken-wraps', 'tomato-mozzarella-flatbread'];
+export const MEAL_ORDER = [
+  'gnocchi-tomato-basil', 'lemon-chicken-potatoes', 'steak-potatoes', 'salmon-rice-greens', 'chicken-wraps', 'tomato-mozzarella-flatbread',
+  'spaghetti-marinara', 'cheese-ravioli', 'mushroom-risotto', 'bbq-chicken-sliders', 'grilled-cheese-soup', 'cheese-quesadillas', 'mac-and-cheese',
+].filter((id) => !MEALS[id].kind);
+
+// Snacks to share live under Boards to share, next to the presentations, with the same meal screen.
+export const SHARE_ORDER = ['cheddar-apples-crackers', 'pretzel-bites-mustard', 'buffalo-chicken-dip'];
+
+// First layout is the default; meals without `layouts` have one.
+for (const m of Object.values(MEALS)) {
+  if (m.layouts) m.place = m.layouts[0].place;
+  else m.layouts = [{ id: 'main', name: 'Layout', place: m.place }];
+}
 
 // The four simple salads. Available in Designer as prepared sides; never added to every meal.
 export const SIDE_IDEAS = {

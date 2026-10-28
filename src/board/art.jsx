@@ -494,9 +494,44 @@ function PhotoPiece({ piece, item }) {
   );
 }
 
-// Chooses the photographic piece when one exists for this item and style, otherwise the illustration.
-export function ItemVisual({ type, it, w, h, style, qty, seed, item }) {
+// A component whose photo has not been produced yet: its physical footprint and its name, never a drawing of the food.
+// Bowls show as empty rims at their real diameter; counted pieces show one outline per piece.
+function PendingPiece({ item, it, w, h, labels = true }) {
+  const l = groupLayout(item);
+  const parts = l.parts.length ? l.parts : [{ x: 0, y: 0, w, h, r: 0 }];
+  const words = it.short || it.name;
+  // The name fits inside the outline: smaller bowls get smaller type, never an overflow.
+  const fs = Math.max(4.6, Math.min(9, Math.min(l.w, l.h) / 6.5, (l.w * (l.container ? 0.74 : 0.84)) / (Math.min(words.length, 22) * 0.52)));
+  return (
+    <g className="pending-piece">
+      {parts.map((p, i) => (
+        <g key={i} transform={`translate(${p.x} ${p.y}) rotate(${p.r})`}>
+          {l.container ? (
+            <>
+              <circle r={p.w / 2} fill="#fbf8f3" stroke="#d9cfc4" strokeWidth="1.4" />
+              <circle r={p.w / 2 - 6} fill="#f1ebe3" stroke="#8a7c6c" strokeOpacity=".55" strokeWidth=".7" strokeDasharray="2.4 2" />
+            </>
+          ) : (
+            <rect x={-p.w / 2} y={-(p.origin === 'bottom' ? p.h : p.h / 2)} width={p.w} height={p.h} rx={Math.min(p.w, p.h) * 0.22}
+              fill="#f6f1ea" fillOpacity=".86" stroke="#8a7c6c" strokeOpacity=".6" strokeWidth=".7" strokeDasharray="2.4 2" />
+          )}
+        </g>
+      ))}
+      {labels && (
+        <g className="pending-label" style={{ pointerEvents: 'none' }}>
+          <text textAnchor="middle" y={-fs * 0.2} fontSize={fs} fill="#584234">{words.length > 22 ? words.slice(0, 21) + '…' : words}</text>
+          <text textAnchor="middle" y={fs * 1.05} fontSize={fs * 0.72} letterSpacing=".08em" fill="#786350">PHOTO PENDING</text>
+        </g>
+      )}
+    </g>
+  );
+}
+
+// Chooses the photographic piece when one exists for this item and style; otherwise the pending footprint.
+// The old illustrations (ItemArt) are no longer shown for food.
+export function ItemVisual({ type, it, w, h, style, qty, seed, item, labels }) {
   const piece = photoPiece(type, style);
-  if (piece) return <PhotoPiece piece={piece} item={{ ...(item || {}), type, qty, style }} />;
-  return <ItemArt it={it} w={w} h={h} style={style} qty={qty} seed={seed} />;
+  const full = { ...(item || {}), type, qty: item?.qty ?? qty, style };
+  if (piece) return <PhotoPiece piece={piece} item={full} />;
+  return <PendingPiece item={full} it={it} w={w} h={h} labels={labels} />;
 }

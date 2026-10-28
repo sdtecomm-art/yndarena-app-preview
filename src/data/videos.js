@@ -26,6 +26,9 @@ export const VIDEOS = {
   'spoon-swoosh': pending('lemon-herb-hummus-parchment-swoosh', 1),
   'filling-gaps': pending('marcona-almonds-pile', 1),
   'herb-garnish': pending('rosemary-single-sprig', 1),
+  'portion-bowl': pending(null, 1),
+  'sandwich-triangles': pending(null, 2),
+  'slider-assembly': pending(null, 1),
   // Board care reuses Yndarena's existing care video once it is linked (yndarenahome.com/wood-care).
   // The generic wood texture is not a poster of the product, so care has no poster.
   'board-care': { ...pending(null, 1), reuse: 'Existing care video on yndarenahome.com/wood-care, not linked in this preview yet' },
