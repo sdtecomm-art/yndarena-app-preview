@@ -1,0 +1,338 @@
+{
+ "spaghetti-bowl:bowl": {
+  "name": "spaghetti-marinara-ivory-bowl",
+  "size": [
+   519,
+   520
+  ],
+  "vis": [
+   0.0193,
+   0.0192,
+   0.9615,
+   0.9615
+  ],
+  "aspect": 0.998,
+  "alpha_min": 0,
+  "repr": "one filled bowl"
+ },
+ "garlic-bread:slices": {
+  "name": "garlic-bread-four-slices",
+  "size": [
+   520,
+   517
+  ],
+  "vis": [
+   0.0192,
+   0.0193,
+   0.9615,
+   0.9613
+  ],
+  "aspect": 1.006,
+  "alpha_min": 0,
+  "repr": "four slices"
+ },
+ "parmesan:bowl": {
+  "name": "grated-parmesan-mini-bowl",
+  "size": [
+   520,
+   519
+  ],
+  "vis": [
+   0.0192,
+   0.0193,
+   0.9615,
+   0.9615
+  ],
+  "aspect": 1.002,
+  "alpha_min": 0,
+  "repr": "one mini bowl"
+ },
+ "ravioli-plate:plate": {
+  "name": "cheese-ravioli-tomato-basil-ivory-bowl",
+  "size": [
+   520,
+   517
+  ],
+  "vis": [
+   0.0192,
+   0.0193,
+   0.9635,
+   0.9632
+  ],
+  "aspect": 1.006,
+  "alpha_min": 0,
+  "repr": "one shallow pasta bowl"
+ },
+ "risotto-bowl:bowl": {
+  "name": "mushroom-risotto-ivory-bowl",
+  "size": [
+   520,
+   520
+  ],
+  "vis": [
+   0.0192,
+   0.0192,
+   0.9615,
+   0.9615
+  ],
+  "aspect": 1.0,
+  "alpha_min": 0,
+  "repr": "one filled bowl"
+ },
+ "bbq-sliders:sliders": {
+  "name": "bbq-chicken-slider-single",
+  "size": [
+   520,
+   508
+  ],
+  "vis": [
+   0.0192,
+   0.0197,
+   0.9635,
+   0.9606
+  ],
+  "aspect": 1.0266,
+  "alpha_min": 0,
+  "repr": "ONE slider; repeat for count"
+ },
+ "pickles:bowl": {
+  "name": "pickle-chips-ivory-ramekin",
+  "size": [
+   520,
+   518
+  ],
+  "vis": [
+   0.0192,
+   0.0193,
+   0.9615,
+   0.9614
+  ],
+  "aspect": 1.004,
+  "alpha_min": 0,
+  "repr": "one ramekin"
+ },
+ "creamy-coleslaw:bowl": {
+  "name": "creamy-coleslaw-ivory-bowl",
+  "size": [
+   520,
+   520
+  ],
+  "vis": [
+   0.0192,
+   0.0192,
+   0.9615,
+   0.9615
+  ],
+  "aspect": 1.0,
+  "alpha_min": 0,
+  "repr": "one bowl"
+ },
+ "grilled-cheese:triangles": {
+  "name": "grilled-cheese-two-triangles",
+  "size": [
+   520,
+   494
+  ],
+  "vis": [
+   0.0173,
+   0.0202,
+   0.9635,
+   0.9595
+  ],
+  "aspect": 1.057,
+  "alpha_min": 0,
+  "repr": "ONE sandwich cut into two triangles; repeat per sandwich"
+ },
+ "tomato-soup:bowl": {
+  "name": "tomato-soup-ivory-bowl-single",
+  "size": [
+   520,
+   517
+  ],
+  "vis": [
+   0.0192,
+   0.0193,
+   0.9615,
+   0.9613
+  ],
+  "aspect": 1.006,
+  "alpha_min": 0,
+  "repr": "ONE soup bowl; repeat per serving"
+ },
+ "quesadilla:wedges": {
+  "name": "cheese-quesadilla-four-triangles",
+  "size": [
+   520,
+   399
+  ],
+  "vis": [
+   0.0058,
+   0.0251,
+   0.9846,
+   0.9499
+  ],
+  "aspect": 1.3509,
+  "alpha_min": 0,
+  "repr": "ONE quesadilla cut into FOUR wedges; repeat per quesadilla"
+ },
+ "salsa:bowl": {
+  "name": "salsa-ivory-ramekin",
+  "size": [
+   518,
+   520
+  ],
+  "vis": [
+   0.0193,
+   0.0192,
+   0.9614,
+   0.9615
+  ],
+  "aspect": 0.996,
+  "alpha_min": 0,
+  "repr": "one ramekin"
+ },
+ "sour-cream:bowl": {
+  "name": "sour-cream-ivory-ramekin",
+  "size": [
+   520,
+   517
+  ],
+  "vis": [
+   0.0192,
+   0.0193,
+   0.9635,
+   0.9613
+  ],
+  "aspect": 1.008,
+  "alpha_min": 0,
+  "repr": "one ramekin"
+ },
+ "mac-cheese:bowl": {
+  "name": "mac-and-cheese-ivory-bowl",
+  "size": [
+   520,
+   520
+  ],
+  "vis": [
+   0.0192,
+   0.0192,
+   0.9615,
+   0.9615
+  ],
+  "aspect": 1.0,
+  "alpha_min": 0,
+  "repr": "one filled bowl"
+ },
+ "broccoli:florets": {
+  "name": "cooked-broccoli-florets-group",
+  "size": [
+   520,
+   481
+  ],
+  "vis": [
+   0.0192,
+   0.0208,
+   0.9615,
+   0.9584
+  ],
+  "aspect": 1.0846,
+  "alpha_min": 0,
+  "repr": "one group; count is illustrative"
+ },
+ "pretzel-bites:pile": {
+  "name": "soft-pretzel-bites-group",
+  "size": [
+   520,
+   418
+  ],
+  "vis": [
+   0.0192,
+   0.0239,
+   0.9615,
+   0.9522
+  ],
+  "aspect": 1.2563,
+  "alpha_min": 0,
+  "repr": "one group; count is illustrative"
+ },
+ "mustard:bowl": {
+  "name": "mustard-dip-ivory-ramekin",
+  "size": [
+   518,
+   520
+  ],
+  "vis": [
+   0.0193,
+   0.0192,
+   0.9614,
+   0.9615
+  ],
+  "aspect": 0.996,
+  "alpha_min": 0,
+  "repr": "one ramekin"
+ },
+ "cheese-dip:bowl": {
+  "name": "cheese-dip-ivory-ramekin",
+  "size": [
+   515,
+   520
+  ],
+  "vis": [
+   0.0194,
+   0.0192,
+   0.9612,
+   0.9615
+  ],
+  "aspect": 0.99,
+  "alpha_min": 0,
+  "repr": "one ramekin"
+ },
+ "buffalo-dip:bowl": {
+  "name": "buffalo-chicken-dip-ivory-bowl",
+  "size": [
+   520,
+   515
+  ],
+  "vis": [
+   0.0192,
+   0.0194,
+   0.9615,
+   0.9612
+  ],
+  "aspect": 1.0101,
+  "alpha_min": 0,
+  "repr": "one serving bowl"
+ },
+ "buffalo-dip:dish": {
+  "name": "buffalo-chicken-dip-round-baking-dish",
+  "size": [
+   520,
+   517
+  ],
+  "vis": [
+   0.0192,
+   0.0193,
+   0.9615,
+   0.9613
+  ],
+  "aspect": 1.006,
+  "alpha_min": 0,
+  "repr": "one ROUND baking dish without handles"
+ },
+ "tortilla-chips:pile": {
+  "name": "tortilla-chips-group",
+  "size": [
+   511,
+   520
+  ],
+  "vis": [
+   0.0196,
+   0.0192,
+   0.9609,
+   0.9615
+  ],
+  "aspect": 0.982,
+  "alpha_min": 0,
+  "repr": "one group; count is illustrative"
+ }
+}

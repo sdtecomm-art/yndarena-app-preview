@@ -7,7 +7,7 @@ const RESEND_SECONDS = 30;
 const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e) && e.length <= 190;
 
 // Unified access: one email field, a one-time code, and the account is found or created.
-export default function Auth({ onSignedIn, initialEmail = '' }) {
+export default function Auth({ onSignedIn, initialEmail = '', onAllProducts }) {
   const { state, update } = useStore();
   const [step, setStep] = useState('email');
   const [email, setEmail] = useState(initialEmail);
@@ -70,6 +70,7 @@ export default function Auth({ onSignedIn, initialEmail = '' }) {
 
         {step === 'email' && (
           <>
+            {onAllProducts && <button className="all-products" onClick={onAllProducts}><Icon name="back" size={14} />All products</button>}
             <Wordmark height={64} />
             <h1>Your Home starts here.</h1>
             <p className="lead">Sign in or create your Yndarena account.</p>

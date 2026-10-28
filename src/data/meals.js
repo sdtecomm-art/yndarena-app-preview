@@ -244,20 +244,18 @@ export const MEALS = {
     board: 'cheese-bread',
     ingredients: ['18 oz cheese ravioli, fresh or frozen', '1 cup tomato sauce', 'A few basil leaves', 'A slice or two of rustic bread, optional'],
     quickPrep: ['Cook the ravioli following the package directions.', 'Warm the sauce and spoon it over the drained ravioli.', 'Tear a few basil leaves over the top.'],
-    serving: ['Spoon the ravioli into the shallow pasta bowl and wipe the rim.', 'Set the bread beside it, if you are serving bread.', 'Finish with the basil leaves.'],
+    serving: ['Spoon the ravioli into the shallow pasta bowl and wipe the rim.', 'Tear a few basil leaves over the top.', 'Set the bread beside it, if you are serving bread.'],
     layouts: [
       { id: 'bowl-left', name: 'Bowl to the left', place: [
         { g: 'ravioli-plate', q: 2, x: 112, y: 120 },
-        { g: 'rustic-bread', q: 1, x: 256, y: 92 },
-        { g: 'basil', q: 3, x: 256, y: 178 },
+        { g: 'rustic-bread', q: 1, x: 256, y: 120 },
       ] },
       { id: 'bowl-right', name: 'Bowl to the right', place: [
         { g: 'ravioli-plate', q: 2, x: 218, y: 120 },
-        { g: 'rustic-bread', q: 1, x: 74, y: 92 },
-        { g: 'basil', q: 3, x: 74, y: 178 },
+        { g: 'rustic-bread', q: 1, x: 74, y: 120 },
       ] },
     ],
-    layoutNote: 'Bread is optional. No standard salad.',
+    layoutNote: 'Bread is optional. No standard salad. The basil goes on the ravioli, not on the board.',
   },
   'mushroom-risotto': {
     name: 'Creamy Mushroom Risotto',
@@ -346,12 +344,12 @@ export const MEALS = {
     serving: ['Lay the triangles of each quesadilla in a short overlapping line.', 'Set the salsa and sour cream in small bowls beside them.', 'Leave space to pick up each piece.'],
     layouts: [
       { id: 'dips-right', name: 'Dips to the right', place: [
-        { g: 'quesadilla', q: 2, x: 104, y: 120, arrange: 'column' },
+        { g: 'quesadilla', q: 2, x: 110, y: 120, arrange: 'column' },
         { g: 'salsa', q: 0.5, x: 246, y: 76 },
         { g: 'sour-cream', q: 0.5, x: 246, y: 168 },
       ] },
       { id: 'dips-left', name: 'Dips to the left', place: [
-        { g: 'quesadilla', q: 2, x: 226, y: 120, arrange: 'column' },
+        { g: 'quesadilla', q: 2, x: 220, y: 120, arrange: 'column' },
         { g: 'salsa', q: 0.5, x: 84, y: 76 },
         { g: 'sour-cream', q: 0.5, x: 84, y: 168 },
       ] },
@@ -446,17 +444,17 @@ export const MEALS = {
     board: 'meat-fish',
     ingredients: ['1 cup cooked chicken, shredded', '4 oz cream cheese', '1/4 cup buffalo hot sauce', '1/4 cup ranch or blue cheese dressing', '3 cups tortilla chips, or crackers', '8 oz carrots', '3 celery stalks'],
     quickPrep: ['Mix the chicken, cream cheese, hot sauce and dressing, and bake until bubbling.', 'Cut the carrots and celery into batons.'],
-    serving: ['Spoon the dip into a serving bowl, or keep it in its baking dish on a trivet next to the board.', 'Group the chips and the vegetables around it.', 'Leave room to reach the dip from every side.'],
+    serving: ['Spoon the dip into a serving bowl, or keep it in its baking dish on a trivet next to the board.', 'Pile about two thirds of the chips and group the vegetables around the dip.', 'Keep the rest of the chips in the bag to refill.'],
     layouts: [
       { id: 'dip-on-board', name: 'Dip on the board', place: [
         { g: 'buffalo-dip', s: 'bowl', q: 1.5, x: 85, y: 90 },
-        { g: 'tortilla-chips', q: 3, x: 235, y: 76 },
-        { g: 'carrots', q: 8, x: 232, y: 160, r: 90 },
+        { g: 'tortilla-chips', q: 3, p: 2, x: 240, y: 77, overflow: 'refill' },
+        { g: 'carrots', q: 8, x: 232, y: 167, r: 90 },
         { g: 'celery', q: 3, alongside: true },
       ] },
       { id: 'dip-alongside', name: 'Dip in its dish, alongside', place: [
         { g: 'buffalo-dip', s: 'dish', q: 1.5, alongside: true },
-        { g: 'tortilla-chips', q: 3, x: 90, y: 80 },
+        { g: 'tortilla-chips', q: 3, p: 2, x: 90, y: 76, overflow: 'refill' },
         { g: 'celery', q: 3, x: 96, y: 166 },
         { g: 'carrots', q: 8, x: 232, y: 120, r: 90 },
       ] },

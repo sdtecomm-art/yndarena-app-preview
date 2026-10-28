@@ -14,6 +14,8 @@ const INGREDIENT_FILES = files(import.meta.glob('../media/ingredients/*.webp', {
 const COVER_FILES = files(import.meta.glob(['../media/recipes/*.webp', '../media/presentations/*.webp'], { eager: true, query: '?url', import: 'default' }));
 const SURFACE_FILES = files(import.meta.glob('../media/surfaces/*.webp', { eager: true, query: '?url', import: 'default' }));
 const EVERYDAY_FILES = files(import.meta.glob('../media/everyday/*.webp', { eager: true, query: '?url', import: 'default' }));
+const V5_FILES = files(import.meta.glob('../media/v5/*.webp', { eager: true, query: '?url', import: 'default' }));
+const KITCHEN_FILES = files(import.meta.glob(['../media/kitchen/*.webp', '../media/product/*.webp'], { eager: true, query: '?url', import: 'default' }));
 
 // Packages the assets came from. v2 files arrived re-encoded as WebP, so their bytes differ from the
 // package manifest; their dimensions and visible bounds were checked against it instead.
@@ -21,11 +23,12 @@ export const PACKAGES = {
   v1: { name: 'yndarena-ingredients-v1', source: 'media-source/love-like-rosemary/ingredients', hashCheck: 'sha256 matches manifest' },
   v2: { name: 'yndarena-media-v2', source: 'media-source/media-v2', hashCheck: 'received re-encoded; size and visible bounds match manifest' },
   v4: { name: 'yndarena-everyday-v4', source: 'media-source/everyday-v4', hashCheck: 'sha256 and visible bounds match manifest' },
+  v5: { name: 'yndarena-media-v5-20261028', source: 'media-source/media-v5', hashCheck: '14 of 21 food files match the manifest sha256; 7 arrived re-encoded through the chat and match its size and visible bounds exactly' },
 };
 
 // aspect: width / height of the visible food, measured on the alpha channel after cropping.
 const cutout = (id, aspect, alt, pkg, extra = {}) => ({
-  role: 'cutout', src: (pkg === 'v4' ? EVERYDAY_FILES : INGREDIENT_FILES)[id], aspect, alt, pkg, sourceFile: `${id}.png`,
+  role: 'cutout', src: (pkg === 'v5' ? V5_FILES : pkg === 'v4' ? EVERYDAY_FILES : INGREDIENT_FILES)[id], aspect, alt, pkg, sourceFile: `${id}.png`,
   provenance: 'ai-generated', status: 'provisional', label: 'AI cutout', ...extra,
 });
 
@@ -150,6 +153,29 @@ export const MEDIA = {
   'everyday-wraps-cabbage-carrot-cover': mealCover('everyday-wraps-cabbage-carrot-cover', 'Chicken wrap halves with a cabbage and carrot slaw on a wooden board', 'a26ad655f74ab03921f4c3ef400c15d4105281589cf7f20fa6c3d9febd7c85df'),
   'everyday-flatbread-tomato-basil-cover': mealCover('everyday-flatbread-tomato-basil-cover', 'A tomato and mozzarella flatbread cut in pieces with a bowl of tomatoes and basil', 'cdc1ccd6ba9e422baede5d347e4e7edf418916e65bfce6cb62bebfabf7386aeb'),
 
+  // Cutouts, package v5 (catalog expansion). One image = what `representation` says; counts come from the data.
+  'spaghetti-marinara-ivory-bowl': cutout('spaghetti-marinara-ivory-bowl', 0.998, 'Spaghetti in marinara sauce in an ivory bowl', 'v5', { representation: 'one filled bowl' }),
+  'garlic-bread-four-slices': cutout('garlic-bread-four-slices', 1.006, 'Four slices of garlic bread', 'v5', { representation: 'four slices', reencoded: true }),
+  'grated-parmesan-mini-bowl': cutout('grated-parmesan-mini-bowl', 1.002, 'Grated parmesan in a mini ivory bowl', 'v5', { representation: 'one mini bowl' }),
+  'cheese-ravioli-tomato-basil-ivory-bowl': cutout('cheese-ravioli-tomato-basil-ivory-bowl', 1.006, 'Cheese ravioli in tomato sauce with basil, in a shallow ivory bowl', 'v5', { representation: 'one shallow pasta bowl' }),
+  'mushroom-risotto-ivory-bowl': cutout('mushroom-risotto-ivory-bowl', 1.0, 'Creamy mushroom risotto in an ivory bowl', 'v5', { representation: 'one filled bowl' }),
+  'bbq-chicken-slider-single': cutout('bbq-chicken-slider-single', 1.0266, 'One BBQ chicken slider', 'v5', { representation: 'ONE slider; repeat for count' }),
+  'pickle-chips-ivory-ramekin': cutout('pickle-chips-ivory-ramekin', 1.004, 'Pickle chips in an ivory ramekin', 'v5', { representation: 'one ramekin' }),
+  'creamy-coleslaw-ivory-bowl': cutout('creamy-coleslaw-ivory-bowl', 1.0, 'Creamy coleslaw in an ivory bowl', 'v5', { representation: 'one bowl' }),
+  'grilled-cheese-two-triangles': cutout('grilled-cheese-two-triangles', 1.057, 'One grilled cheese cut into two triangles', 'v5', { representation: 'ONE sandwich cut into two triangles; repeat per sandwich', reencoded: true }),
+  'tomato-soup-ivory-bowl-single': cutout('tomato-soup-ivory-bowl-single', 1.006, 'Tomato soup in an ivory soup bowl', 'v5', { representation: 'ONE soup bowl; repeat per serving' }),
+  'cheese-quesadilla-four-triangles': cutout('cheese-quesadilla-four-triangles', 1.3509, 'One cheese quesadilla cut into four wedges', 'v5', { representation: 'ONE quesadilla cut into FOUR wedges; repeat per quesadilla' }),
+  'salsa-ivory-ramekin': cutout('salsa-ivory-ramekin', 0.996, 'Tomato salsa in an ivory ramekin', 'v5', { representation: 'one ramekin' }),
+  'sour-cream-ivory-ramekin': cutout('sour-cream-ivory-ramekin', 1.008, 'Sour cream in an ivory ramekin', 'v5', { representation: 'one ramekin' }),
+  'mac-and-cheese-ivory-bowl': cutout('mac-and-cheese-ivory-bowl', 1.0, 'Mac and cheese in an ivory bowl', 'v5', { representation: 'one filled bowl' }),
+  'cooked-broccoli-florets-group': cutout('cooked-broccoli-florets-group', 1.0846, 'Cooked broccoli florets', 'v5', { representation: 'one group; count is illustrative', reencoded: true }),
+  'soft-pretzel-bites-group': cutout('soft-pretzel-bites-group', 1.2563, 'Soft pretzel bites', 'v5', { representation: 'one group; count is illustrative', reencoded: true }),
+  'mustard-dip-ivory-ramekin': cutout('mustard-dip-ivory-ramekin', 0.996, 'Mustard dip in an ivory ramekin', 'v5', { representation: 'one ramekin' }),
+  'cheese-dip-ivory-ramekin': cutout('cheese-dip-ivory-ramekin', 0.99, 'Cheese dip in an ivory ramekin', 'v5', { representation: 'one ramekin' }),
+  'buffalo-chicken-dip-ivory-bowl': cutout('buffalo-chicken-dip-ivory-bowl', 1.0101, 'Buffalo chicken dip in an ivory serving bowl', 'v5', { representation: 'one serving bowl', reencoded: true }),
+  'buffalo-chicken-dip-round-baking-dish': cutout('buffalo-chicken-dip-round-baking-dish', 1.006, 'Buffalo chicken dip in a round baking dish', 'v5', { representation: 'one ROUND baking dish without handles', reencoded: true }),
+  'tortilla-chips-group': cutout('tortilla-chips-group', 0.982, 'Tortilla chips', 'v5', { representation: 'one group; count is illustrative', reencoded: true }),
+
   // Board surface. Generic and provisional: not the wood, grain or finish of Yndarena's boards.
   'generic-honey-wood-surface': {
     role: 'surface', src: SURFACE_FILES['generic-honey-wood-surface'], width: 720, height: 720, pkg: 'v2',
@@ -252,6 +278,28 @@ export const PHOTO_PIECES = {
   'rustic-bread:slices': { asset: 'rustic-bread-slices-group', mode: 'group' },
   'lemon:wedges': { asset: 'lemon-two-wedges', mode: 'group' },
   'basil:leaves': { asset: 'fresh-basil-three-leaves', mode: 'group' },
+  // Catalog expansion, package v5
+  'spaghetti-bowl:bowl': { asset: 'spaghetti-marinara-ivory-bowl', mode: 'group' },
+  'garlic-bread:slices': { asset: 'garlic-bread-four-slices', mode: 'units' },
+  'parmesan:bowl': { asset: 'grated-parmesan-mini-bowl', mode: 'group' },
+  'ravioli-plate:plate': { asset: 'cheese-ravioli-tomato-basil-ivory-bowl', mode: 'group' },
+  'risotto-bowl:bowl': { asset: 'mushroom-risotto-ivory-bowl', mode: 'group' },
+  'bbq-sliders:sliders': { asset: 'bbq-chicken-slider-single', mode: 'units' },
+  'pickles:bowl': { asset: 'pickle-chips-ivory-ramekin', mode: 'group' },
+  'creamy-coleslaw:bowl': { asset: 'creamy-coleslaw-ivory-bowl', mode: 'group' },
+  'grilled-cheese:triangles': { asset: 'grilled-cheese-two-triangles', mode: 'units' },
+  'tomato-soup:bowl': { asset: 'tomato-soup-ivory-bowl-single', mode: 'group' },
+  'quesadilla:wedges': { asset: 'cheese-quesadilla-four-triangles', mode: 'units' },
+  'salsa:bowl': { asset: 'salsa-ivory-ramekin', mode: 'group' },
+  'sour-cream:bowl': { asset: 'sour-cream-ivory-ramekin', mode: 'group' },
+  'mac-cheese:bowl': { asset: 'mac-and-cheese-ivory-bowl', mode: 'group' },
+  'broccoli:florets': { asset: 'cooked-broccoli-florets-group', mode: 'group' },
+  'pretzel-bites:pile': { asset: 'soft-pretzel-bites-group', mode: 'group' },
+  'mustard:bowl': { asset: 'mustard-dip-ivory-ramekin', mode: 'group' },
+  'cheese-dip:bowl': { asset: 'cheese-dip-ivory-ramekin', mode: 'group' },
+  'buffalo-dip:bowl': { asset: 'buffalo-chicken-dip-ivory-bowl', mode: 'group' },
+  'buffalo-dip:dish': { asset: 'buffalo-chicken-dip-round-baking-dish', mode: 'group' },
+  'tortilla-chips:pile': { asset: 'tortilla-chips-group', mode: 'group' },
   // Garnish
   'rosemary:sprig': { asset: 'rosemary-single-sprig', mode: 'units', layout: 'sprigs', unitHeight: 100, unit: 'sprig' },
 };

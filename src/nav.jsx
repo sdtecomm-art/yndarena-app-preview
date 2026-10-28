@@ -12,6 +12,10 @@ const Ctx = createContext(null);
 
 export function NavProvider({ children }) {
   const [nav, setNav] = useState({ tab: 'home', stacks: roots(), dir: 'none' });
+  // Yndarena's entrance comes first on every launch; the set's experience keeps its stacks while away.
+  const [atEntry, setAtEntry] = useState(true);
+  const openSet = useCallback(() => setAtEntry(false), []);
+  const allProducts = useCallback(() => setAtEntry(true), []);
 
   const push = useCallback((name, params = {}) => {
     setNav((s) => ({ ...s, dir: 'push', stacks: { ...s.stacks, [s.tab]: [...s.stacks[s.tab], { name, params, key: name + ++n }] } }));
@@ -53,8 +57,8 @@ export function NavProvider({ children }) {
   const value = useMemo(() => {
     const stack = nav.stacks[nav.tab];
     const top = stack[stack.length - 1];
-    return { ...nav, stack, top, full: FULL.has(top.name), push, pop, popTo, replace, switchTab, resetAll };
-  }, [nav, push, pop, popTo, replace, switchTab, resetAll]);
+    return { ...nav, stack, top, full: FULL.has(top.name), push, pop, popTo, replace, switchTab, resetAll, atEntry, openSet, allProducts };
+  }, [nav, push, pop, popTo, replace, switchTab, resetAll, atEntry, openSet, allProducts]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 

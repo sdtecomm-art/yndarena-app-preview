@@ -25,6 +25,11 @@ export default function Profile({ onSignOut }) {
           <div className="grow"><div>News and ideas by email</div><div className="sub">Optional. Separate from care and gift reminders.</div></div>
           <span className={'switch' + (account.marketing ? ' is-on' : '')} />
         </button>
+        <button className="list-row" onClick={nav.allProducts}>
+          <div className="round-ico"><Icon name="grid" size={18} /></div>
+          <div className="grow"><div>All products</div><div className="sub">Back to Yndarena. Same account and Home number</div></div>
+          <Icon name="chevron" size={18} />
+        </button>
         <button className="list-row" onClick={onSignOut}>
           <div className="round-ico"><Icon name="back" size={18} /></div>
           <div className="grow"><div>Sign out</div><div className="sub">Your Home and everything in it stay saved</div></div>

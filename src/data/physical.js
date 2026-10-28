@@ -137,10 +137,10 @@ export const PROFILES = {
   'side-cabbage-carrot:bowl': P('container', { container: 'bowl-4.5in', capacity: 2 }, 'A 4.5 in bowl for two servings'),
   'side-tomato-basil:bowl': P('container', { container: 'bowl-4in', capacity: 1 }, 'A 4 in bowl for 1 cup'),
   'rustic-bread:slices': P('pile', { w: 120 }, 'Three or four slices from a round loaf'),
-  // Catalog expansion (2026-10-28). No cutouts yet: `aspect` is the expected top view (width / height) of the
-  // pending photo, so placeholders already take the physical footprint the photo will fill.
+  // Catalog expansion (2026-10-28). Cutouts from package v5: the image keeps its own proportions and the width
+  // below sets the size. `aspect` is only used if a cutout goes missing. `per` = pieces shown in one image.
   'spaghetti-bowl:bowl': P('container', { container: 'bowl-7in', capacity: 2 }, 'A 7 in bowl for 8 oz of spaghetti with sauce, two servings'),
-  'garlic-bread:slices': P('pile', { w: 120, aspect: 1.3 }, 'Four slices of garlic bread'),
+  'garlic-bread:slices': P('units', { unit: 120, per: 4, layout: 'row', aspect: 1 }, 'One image is four slices of garlic bread, about 12 cm across as a group'),
   'parmesan:bowl': P('container', { container: 'ramekin-2in', capacity: 0.5 }, 'A mini bowl of grated parmesan, about 1/2 cup'),
   'ravioli-plate:plate': P('container', { container: 'pasta-plate-7in', capacity: 2 }, 'A 7 in shallow pasta bowl for two servings of ravioli'),
   'risotto-bowl:bowl': P('container', { container: 'bowl-6in', capacity: 2 }, 'A 6 in bowl for about 3 cups of risotto, two servings'),

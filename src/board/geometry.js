@@ -59,8 +59,8 @@ export function groupLayout(item) {
     const k = Math.max(1, Math.round((len - along) / step) + 1), w = along + (k - 1) * step;
     return { w, h: across, parts: Array.from({ length: k }, (_, i) => ({ x: -w / 2 + along / 2 + i * step, y: i % 2 ? across * 0.05 : -across * 0.05, w: across, h: along, r: 90 })) };
   }
-  // Units: one image per counted piece.
-  const n = Math.max(1, Math.round(qty)), u = prof.unit, uh = u / a;
+  // Units: one image per counted piece (or per group of `per` pieces, when one image shows several).
+  const n = Math.max(1, Math.round(qty / (prof.per || 1))), u = prof.unit, uh = u / a;
   if (prof.layout === 'fan') {
     const along = Math.min(n, 16), rows = Math.ceil(n / 16);
     const step = along > 1 ? Math.min(u * 0.36, (u * 4.2 - u) / (along - 1)) : 0;

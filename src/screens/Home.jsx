@@ -151,6 +151,7 @@ export default function Home({ openProfile }) {
 
   return (
     <div className="home">
+      <button className="all-products" onClick={nav.allProducts}><Icon name="back" size={14} />All products</button>
       <AppHead onProfile={openProfile} />
       <CareHero care={user.care} today={today} />
 

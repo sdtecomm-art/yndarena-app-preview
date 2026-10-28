@@ -1,0 +1,1168 @@
+{
+  "version": "yndarena-media-v5-20261028",
+  "generated_new_count": 24,
+  "reused_reference_count": 1,
+  "food_style_count": 21,
+  "generation_mode": "built-in image_gen",
+  "physical_note": "No generated image validates portions, container capacity, wood grain, product groove measurements or physical fit.",
+  "assets": [
+    {
+      "kind": "food",
+      "renderer_key": "spaghetti-bowl:bowl",
+      "representation": "one filled bowl",
+      "existing_review_group_profile_mm_estimate": [
+        178,
+        178
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/spaghetti-marinara-ivory-bowl.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2132201,
+        "sha256": "bac7538cfb1e1c0b73ef561c0453861edbcdc9515b4e723b85c0f7e2c2f2cbb5",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          54,
+          53,
+          1193,
+          1195
+        ],
+        "fully_transparent_fraction": 0.34083
+      },
+      "web": {
+        "file": "web/food/spaghetti-marinara-ivory-bowl.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 439494,
+        "sha256": "5ad4ce7a7f3369458fede3d3b342657e78862d1529728587d433f9d71cfdc4d1",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          54,
+          53,
+          1193,
+          1195
+        ],
+        "fully_transparent_fraction": 0.34083
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "garlic-bread:slices",
+      "representation": "four slices",
+      "existing_review_group_profile_mm_estimate": [
+        120,
+        92
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/garlic-bread-four-slices.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2624307,
+        "sha256": "f71ff1fa14d39f29b468debb8931d93dd50a3c75d67461d0ebeb9eeca03fb38a",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          60,
+          59,
+          1203,
+          1194
+        ],
+        "fully_transparent_fraction": 0.42607
+      },
+      "web": {
+        "file": "web/food/garlic-bread-four-slices.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 665408,
+        "sha256": "77de486b64836634496ed1061b8b71a5bb51950bcf34ed8b21b2857ddb6d469d",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          60,
+          59,
+          1203,
+          1194
+        ],
+        "fully_transparent_fraction": 0.42607
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "parmesan:bowl",
+      "representation": "one mini bowl",
+      "existing_review_group_profile_mm_estimate": [
+        51,
+        51
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/grated-parmesan-mini-bowl.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1623514,
+        "sha256": "cc1c693e9ae9fd9950aafe46678d729eadc8e5cdf27be178b0eeece63a758dfa",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          123,
+          118,
+          1129,
+          1122
+        ],
+        "fully_transparent_fraction": 0.4911
+      },
+      "web": {
+        "file": "web/food/grated-parmesan-mini-bowl.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 326000,
+        "sha256": "aae20f48f08f88fbd343cc847934f79063d1a63069f30d93797999cbf42b9f14",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          123,
+          118,
+          1129,
+          1122
+        ],
+        "fully_transparent_fraction": 0.4911
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "ravioli-plate:plate",
+      "representation": "one shallow pasta bowl",
+      "existing_review_group_profile_mm_estimate": [
+        178,
+        178
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/cheese-ravioli-tomato-basil-ivory-bowl.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2261721,
+        "sha256": "21088e5e0f61c1a2e8589f7e4270bf6eea8a12cd21808fbc744d4626fd8da36d",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          39,
+          48,
+          1212,
+          1215
+        ],
+        "fully_transparent_fraction": 0.31368
+      },
+      "web": {
+        "file": "web/food/cheese-ravioli-tomato-basil-ivory-bowl.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 496004,
+        "sha256": "d2b7bae4b33eb77cecb85718c1432d3d4f0999c833530752f4d4acbd975a1b25",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          39,
+          48,
+          1212,
+          1215
+        ],
+        "fully_transparent_fraction": 0.31368
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "risotto-bowl:bowl",
+      "representation": "one filled bowl",
+      "existing_review_group_profile_mm_estimate": [
+        152,
+        152
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/mushroom-risotto-ivory-bowl.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2133246,
+        "sha256": "53b0d67d4bb680287e865fd0efc57bf3a00534d662aff899d3dd4c87ff7d60a2",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          74,
+          84,
+          1169,
+          1180
+        ],
+        "fully_transparent_fraction": 0.38924
+      },
+      "web": {
+        "file": "web/food/mushroom-risotto-ivory-bowl.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 444322,
+        "sha256": "0cea58b19c8e2754159d1597107ac2c4dd87dfe823758a525b5ee512c7d02f3e",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          74,
+          84,
+          1169,
+          1180
+        ],
+        "fully_transparent_fraction": 0.38924
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "bbq-sliders:sliders",
+      "representation": "ONE slider; repeat for count",
+      "existing_review_group_profile_mm_estimate": [
+        131,
+        131
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/bbq-chicken-slider-single.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1988843,
+        "sha256": "6e397c6cdcb1cfd1798943147de69642babcb51ae34a2e76b21e34b642c1e0cf",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          101,
+          117,
+          1172,
+          1163
+        ],
+        "fully_transparent_fraction": 0.4606
+      },
+      "web": {
+        "file": "web/food/bbq-chicken-slider-single.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 504792,
+        "sha256": "73420852808ce06fdc08eeb4a7d2f61b7491c2391aef25f2a803afaa8531846e",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          101,
+          117,
+          1172,
+          1163
+        ],
+        "fully_transparent_fraction": 0.4606
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "pickles:bowl",
+      "representation": "one ramekin",
+      "existing_review_group_profile_mm_estimate": [
+        76,
+        76
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/pickle-chips-ivory-ramekin.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1777708,
+        "sha256": "12105ece9a45253f0cdaa9dc40feff5c2f512d3fed913c5bf1903da6bbb38ebc",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          92,
+          92,
+          1154,
+          1149
+        ],
+        "fully_transparent_fraction": 0.43107
+      },
+      "web": {
+        "file": "web/food/pickle-chips-ivory-ramekin.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 350768,
+        "sha256": "9c0bf33f516e164d6c6e64ec60549f693c1fd7c8bcc5ec956a83fdde6531906c",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          92,
+          92,
+          1154,
+          1149
+        ],
+        "fully_transparent_fraction": 0.43107
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "creamy-coleslaw:bowl",
+      "representation": "one bowl",
+      "existing_review_group_profile_mm_estimate": [
+        114,
+        114
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/creamy-coleslaw-ivory-bowl.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1868855,
+        "sha256": "a4b5a6b40f841eb26dd0b61f6c554e54399d95067133be23af10619f7d981d1b",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          71,
+          68,
+          1184,
+          1180
+        ],
+        "fully_transparent_fraction": 0.3731
+      },
+      "web": {
+        "file": "web/food/creamy-coleslaw-ivory-bowl.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 334544,
+        "sha256": "837c71b01f529ae05f4055878cb6ecb6331133e82192fc08885678920d9aba93",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          71,
+          68,
+          1184,
+          1180
+        ],
+        "fully_transparent_fraction": 0.3731
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "grilled-cheese:triangles",
+      "representation": "ONE sandwich cut into two triangles; repeat per sandwich",
+      "existing_review_group_profile_mm_estimate": [
+        189,
+        121
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/grilled-cheese-two-triangles.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2715740,
+        "sha256": "b579cb27b4288ccdc601878be30c4b8fcccd4da62c12110bf1446093d6d1a73a",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          80,
+          95,
+          1202,
+          1159
+        ],
+        "fully_transparent_fraction": 0.34488
+      },
+      "web": {
+        "file": "web/food/grilled-cheese-two-triangles.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 699310,
+        "sha256": "9afea6cae85852134cbb80c1e837b228ea569d5dce27640c4b7bced89f907a11",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          80,
+          95,
+          1202,
+          1159
+        ],
+        "fully_transparent_fraction": 0.34488
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "tomato-soup:bowl",
+      "representation": "ONE soup bowl; repeat per serving",
+      "existing_review_group_profile_mm_estimate": [
+        260,
+        127
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/tomato-soup-ivory-bowl-single.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1820012,
+        "sha256": "0edbc3c69c74a2928b9420ef7c423e397f133034fdb609bd524287b439b2dfc5",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          65,
+          65,
+          1185,
+          1178
+        ],
+        "fully_transparent_fraction": 0.37299
+      },
+      "web": {
+        "file": "web/food/tomato-soup-ivory-bowl-single.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 365204,
+        "sha256": "a881168fd8ed60acff3de9a2f674b9890f44dbab9ba3440685c8d6b7a14a0f01",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          65,
+          65,
+          1185,
+          1178
+        ],
+        "fully_transparent_fraction": 0.37299
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "quesadilla:wedges",
+      "representation": "ONE quesadilla cut into FOUR wedges; repeat per quesadilla",
+      "existing_review_group_profile_mm_estimate": [
+        240,
+        118
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/cheese-quesadilla-four-triangles.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1922771,
+        "sha256": "fb67066db67ccf805c635fc9e774614001fc368528478f6c64adc1fa0a8f5647",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          9,
+          172,
+          1242,
+          1083
+        ],
+        "fully_transparent_fraction": 0.54505
+      },
+      "web": {
+        "file": "web/food/cheese-quesadilla-four-triangles.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 481722,
+        "sha256": "49b98b63cc7ba30e91f2fec96e58602346f3706c66a843f55f7b61246fee3c6b",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          9,
+          172,
+          1242,
+          1083
+        ],
+        "fully_transparent_fraction": 0.54505
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "salsa:bowl",
+      "representation": "one ramekin",
+      "existing_review_group_profile_mm_estimate": [
+        76,
+        76
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/salsa-ivory-ramekin.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1748975,
+        "sha256": "22ebc7da8f9e6074ec77f017239b0af4be0da90a8da735621fbc46e821b84ee4",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          117,
+          119,
+          1137,
+          1144
+        ],
+        "fully_transparent_fraction": 0.47531
+      },
+      "web": {
+        "file": "web/food/salsa-ivory-ramekin.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 381654,
+        "sha256": "43d5753dc85604cf62da44ad336135e2d7c895887b2b957190ad9383d0cbc2f7",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          117,
+          119,
+          1137,
+          1144
+        ],
+        "fully_transparent_fraction": 0.47531
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "sour-cream:bowl",
+      "representation": "one ramekin",
+      "existing_review_group_profile_mm_estimate": [
+        76,
+        76
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/sour-cream-ivory-ramekin.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1354496,
+        "sha256": "dd4d76af9ad258f062c51a14178af423343e6f916a6b4e11f561a95c306d0d10",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          90,
+          93,
+          1159,
+          1156
+        ],
+        "fully_transparent_fraction": 0.42043
+      },
+      "web": {
+        "file": "web/food/sour-cream-ivory-ramekin.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 162984,
+        "sha256": "c7c12435d6424120c65972065c81d0fd9f148d2d3d2ebf18e8914897fc7e9a68",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          90,
+          93,
+          1159,
+          1156
+        ],
+        "fully_transparent_fraction": 0.42043
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "mac-cheese:bowl",
+      "representation": "one filled bowl",
+      "existing_review_group_profile_mm_estimate": [
+        178,
+        178
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/mac-and-cheese-ivory-bowl.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1857875,
+        "sha256": "72e2ceb285eb2c0f0efb2603f50438481975b94f4186b817fc1ae547e9e4a16f",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          53,
+          53,
+          1201,
+          1202
+        ],
+        "fully_transparent_fraction": 0.32879
+      },
+      "web": {
+        "file": "web/food/mac-and-cheese-ivory-bowl.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 342018,
+        "sha256": "d008242c8902767d0cdbb65369a352c699006914b9606b011608e211ab8029a3",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          53,
+          53,
+          1201,
+          1202
+        ],
+        "fully_transparent_fraction": 0.32879
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "broccoli:florets",
+      "representation": "one group; count is illustrative",
+      "existing_review_group_profile_mm_estimate": [
+        95,
+        76
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/cooked-broccoli-florets-group.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2032496,
+        "sha256": "f17d88cc3d4fe4de10cb21119a8af76880b1f056441030d5f0b5402588c8b0f4",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          88,
+          134,
+          1191,
+          1150
+        ],
+        "fully_transparent_fraction": 0.49456
+      },
+      "web": {
+        "file": "web/food/cooked-broccoli-florets-group.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 513204,
+        "sha256": "11157607521e063d9d1620caea468cc6be12c729ca645eed48508caa409fb15c",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          88,
+          134,
+          1191,
+          1150
+        ],
+        "fully_transparent_fraction": 0.49456
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "pretzel-bites:pile",
+      "representation": "one group; count is illustrative",
+      "existing_review_group_profile_mm_estimate": [
+        125,
+        100
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/soft-pretzel-bites-group.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2162262,
+        "sha256": "b61f6e5e6ef5218c9133416f02b36a2ef78dfcc6e33644623e522fb3e8de8bcb",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          45,
+          161,
+          1225,
+          1100
+        ],
+        "fully_transparent_fraction": 0.4788
+      },
+      "web": {
+        "file": "web/food/soft-pretzel-bites-group.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 579760,
+        "sha256": "a477c15dc3fb4941d6470ee205a38367a4194c6e57b95a301cbebd428a7f5b09",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          45,
+          161,
+          1225,
+          1100
+        ],
+        "fully_transparent_fraction": 0.4788
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "mustard:bowl",
+      "representation": "one ramekin",
+      "existing_review_group_profile_mm_estimate": [
+        76,
+        76
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/mustard-dip-ivory-ramekin.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1322963,
+        "sha256": "12dd3f2e0a7c8f1afb111ab86a6832c5cb331b177d4cc3d6f909f2fdfd76bb0d",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          134,
+          127,
+          1119,
+          1116
+        ],
+        "fully_transparent_fraction": 0.50881
+      },
+      "web": {
+        "file": "web/food/mustard-dip-ivory-ramekin.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 191392,
+        "sha256": "7632455c8bd88346115b3607ae9d16f8ba453cfa417358a1f97d17c4ffda50a1",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          134,
+          127,
+          1119,
+          1116
+        ],
+        "fully_transparent_fraction": 0.50881
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "cheese-dip:bowl",
+      "representation": "one ramekin",
+      "existing_review_group_profile_mm_estimate": [
+        76,
+        76
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/cheese-dip-ivory-ramekin.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 1592233,
+        "sha256": "b9328961653885e79d48cdab29041b397a6ad3dd75da56b93861198d06f0155d",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          77,
+          69,
+          1175,
+          1177
+        ],
+        "fully_transparent_fraction": 0.38402
+      },
+      "web": {
+        "file": "web/food/cheese-dip-ivory-ramekin.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 216678,
+        "sha256": "da740204d093f12f63c5e4eb527a204eeb710177226c353b526aa6c8885e5bb8",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          77,
+          69,
+          1175,
+          1177
+        ],
+        "fully_transparent_fraction": 0.38402
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "buffalo-dip:bowl",
+      "representation": "one serving bowl",
+      "existing_review_group_profile_mm_estimate": [
+        127,
+        127
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/buffalo-chicken-dip-ivory-bowl.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2363281,
+        "sha256": "19889160009f57f9c43974e25ae35e404264048723e35c6067c9bbe3e57367e2",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          36,
+          34,
+          1219,
+          1206
+        ],
+        "fully_transparent_fraction": 0.30056
+      },
+      "web": {
+        "file": "web/food/buffalo-chicken-dip-ivory-bowl.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 560966,
+        "sha256": "fc56db372272cf9e0b04cf69d2160b689e86e284e4df3228ae4fd129d622a434",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          36,
+          34,
+          1219,
+          1206
+        ],
+        "fully_transparent_fraction": 0.30056
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "buffalo-dip:dish",
+      "representation": "one ROUND baking dish without handles",
+      "existing_review_group_profile_mm_estimate": [
+        178,
+        178
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/buffalo-chicken-dip-round-baking-dish.png",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 2633695,
+        "sha256": "c85c7f030742956afe804e563cee86372fb22e842772b501ea317db395ce1380",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          34,
+          32,
+          1220,
+          1211
+        ],
+        "fully_transparent_fraction": 0.29399
+      },
+      "web": {
+        "file": "web/food/buffalo-chicken-dip-round-baking-dish.webp",
+        "width_px": 1254,
+        "height_px": 1254,
+        "bytes": 664334,
+        "sha256": "59716df0c3f89fe6a5115e472ecea2006148a6032cd8d6a94e627250c8b62fe7",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          34,
+          32,
+          1220,
+          1211
+        ],
+        "fully_transparent_fraction": 0.29399
+      }
+    },
+    {
+      "kind": "food",
+      "renderer_key": "tortilla-chips:pile",
+      "representation": "one group; count is illustrative",
+      "existing_review_group_profile_mm_estimate": [
+        120,
+        92
+      ],
+      "physical_status": "Unverified estimates; preserve the app physical system and check per-unit rendering. Image does not establish weight, volume or fit.",
+      "source_type": "ai_generated",
+      "original": {
+        "file": "food/tortilla-chips-group.png",
+        "width_px": 1234,
+        "height_px": 1274,
+        "bytes": 2196830,
+        "sha256": "c344d8cff3e8ca3e9ab5cac376b345173db8bd2779628d068d3db3260703904a",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          49,
+          51,
+          1197,
+          1220
+        ],
+        "fully_transparent_fraction": 0.44596
+      },
+      "web": {
+        "file": "web/food/tortilla-chips-group.webp",
+        "width_px": 1234,
+        "height_px": 1274,
+        "bytes": 573632,
+        "sha256": "408178b9f46a94839653feaf78decfc14139e46da8ca3fdcd12b91e2357f9786",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          49,
+          51,
+          1197,
+          1220
+        ],
+        "fully_transparent_fraction": 0.44596
+      }
+    },
+    {
+      "kind": "kitchen",
+      "source_type": "ai_generated",
+      "use": "Background layer; UI and product layers added in code",
+      "original": {
+        "file": "kitchen/yndarena-kitchen-mobile.png",
+        "width_px": 1024,
+        "height_px": 1536,
+        "bytes": 1974248,
+        "sha256": "756fe8cdc252597947c42eb5a72aab2d9611dbf693ba0403cc6cbf6d945e619c",
+        "mode": "RGB"
+      },
+      "web": {
+        "file": "web/kitchen/yndarena-kitchen-mobile.webp",
+        "width_px": 1024,
+        "height_px": 1536,
+        "bytes": 217316,
+        "sha256": "2599ee1891138507278e85fec9c140e5b7653eb85f77e4fa356252ab6ff29bdd",
+        "mode": "RGB"
+      }
+    },
+    {
+      "kind": "kitchen",
+      "source_type": "ai_generated",
+      "use": "Background layer; UI and product layers added in code",
+      "original": {
+        "file": "kitchen/yndarena-kitchen-desktop.png",
+        "width_px": 1536,
+        "height_px": 1024,
+        "bytes": 2168086,
+        "sha256": "a181458fda8d8309c5c578a52578fcf8d29efb6b0dd4b3f26a2dad43c6fe6299",
+        "mode": "RGB"
+      },
+      "web": {
+        "file": "web/kitchen/yndarena-kitchen-desktop.webp",
+        "width_px": 1536,
+        "height_px": 1024,
+        "bytes": 301048,
+        "sha256": "b2e8ef65b00eb6a8d86e2e96bfd148eb29dd3f63973d366da83d62d5d1783198",
+        "mode": "RGB"
+      }
+    },
+    {
+      "kind": "product",
+      "source_type": "ai_generated",
+      "use": "Product-entry illustration, not a physical measurement reference",
+      "original": {
+        "file": "product/yndarena-set-perspective.png",
+        "width_px": 1536,
+        "height_px": 1024,
+        "bytes": 2077259,
+        "sha256": "5ad1d330176c59e717f21b56a566361694a9eefe47c3bb8813fe92f278c47745",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "visible_bounds_alpha_32_px": [
+          48,
+          168,
+          1484,
+          888
+        ],
+        "fully_transparent_fraction": 0.51482
+      },
+      "web": {
+        "file": "web/product/yndarena-set-perspective.webp",
+        "width_px": 1536,
+        "height_px": 1024,
+        "bytes": 336964,
+        "sha256": "b8cad97c6568e29a5aa0d669b000b3b93513c5bf1927bc0dd264f4c1fba76f94",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "visible_bounds_alpha_32_px": [
+          48,
+          168,
+          1484,
+          888
+        ],
+        "fully_transparent_fraction": 0.51482
+      }
+    },
+    {
+      "kind": "product_reference",
+      "source_type": "provided_product_reference",
+      "source_url": "https://yndarena-app-preview.vercel.app/assets/yndarena-boards-spines-800-Bsqvz_Ez.webp",
+      "note": "Existing product image converted to PNG; no redesign of the original engravings.",
+      "original": {
+        "file": "product/yndarena-original-set-spines.png",
+        "width_px": 800,
+        "height_px": 169,
+        "bytes": 248863,
+        "sha256": "c670267a26ebb40624c284be3897671aa6066f1a9fa6a6f7e7e7cda1f0b71b1e",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          0,
+          0,
+          800,
+          169
+        ],
+        "fully_transparent_fraction": 0.00152
+      },
+      "web": {
+        "file": "web/product/yndarena-original-set-spines.webp",
+        "width_px": 800,
+        "height_px": 169,
+        "bytes": 41612,
+        "sha256": "d7238e6b280f9f5fd68aa76e0d0fca3e834d684003f5d10e7a1331b52ba2ffb8",
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "visible_bounds_alpha_32_px": [
+          0,
+          0,
+          800,
+          169
+        ],
+        "fully_transparent_fraction": 0.00152
+      }
+    }
+  ]
+}

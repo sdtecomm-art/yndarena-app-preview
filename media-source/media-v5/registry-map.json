@@ -1,0 +1,86 @@
+{
+  "spaghetti-bowl:bowl": {
+    "file": "web/food/spaghetti-marinara-ivory-bowl.webp",
+    "representation": "one filled bowl"
+  },
+  "garlic-bread:slices": {
+    "file": "web/food/garlic-bread-four-slices.webp",
+    "representation": "four slices"
+  },
+  "parmesan:bowl": {
+    "file": "web/food/grated-parmesan-mini-bowl.webp",
+    "representation": "one mini bowl"
+  },
+  "ravioli-plate:plate": {
+    "file": "web/food/cheese-ravioli-tomato-basil-ivory-bowl.webp",
+    "representation": "one shallow pasta bowl"
+  },
+  "risotto-bowl:bowl": {
+    "file": "web/food/mushroom-risotto-ivory-bowl.webp",
+    "representation": "one filled bowl"
+  },
+  "bbq-sliders:sliders": {
+    "file": "web/food/bbq-chicken-slider-single.webp",
+    "representation": "ONE slider; repeat for count"
+  },
+  "pickles:bowl": {
+    "file": "web/food/pickle-chips-ivory-ramekin.webp",
+    "representation": "one ramekin"
+  },
+  "creamy-coleslaw:bowl": {
+    "file": "web/food/creamy-coleslaw-ivory-bowl.webp",
+    "representation": "one bowl"
+  },
+  "grilled-cheese:triangles": {
+    "file": "web/food/grilled-cheese-two-triangles.webp",
+    "representation": "ONE sandwich cut into two triangles; repeat per sandwich"
+  },
+  "tomato-soup:bowl": {
+    "file": "web/food/tomato-soup-ivory-bowl-single.webp",
+    "representation": "ONE soup bowl; repeat per serving"
+  },
+  "quesadilla:wedges": {
+    "file": "web/food/cheese-quesadilla-four-triangles.webp",
+    "representation": "ONE quesadilla cut into FOUR wedges; repeat per quesadilla"
+  },
+  "salsa:bowl": {
+    "file": "web/food/salsa-ivory-ramekin.webp",
+    "representation": "one ramekin"
+  },
+  "sour-cream:bowl": {
+    "file": "web/food/sour-cream-ivory-ramekin.webp",
+    "representation": "one ramekin"
+  },
+  "mac-cheese:bowl": {
+    "file": "web/food/mac-and-cheese-ivory-bowl.webp",
+    "representation": "one filled bowl"
+  },
+  "broccoli:florets": {
+    "file": "web/food/cooked-broccoli-florets-group.webp",
+    "representation": "one group; count is illustrative"
+  },
+  "pretzel-bites:pile": {
+    "file": "web/food/soft-pretzel-bites-group.webp",
+    "representation": "one group; count is illustrative"
+  },
+  "mustard:bowl": {
+    "file": "web/food/mustard-dip-ivory-ramekin.webp",
+    "representation": "one ramekin"
+  },
+  "cheese-dip:bowl": {
+    "file": "web/food/cheese-dip-ivory-ramekin.webp",
+    "representation": "one ramekin"
+  },
+  "buffalo-dip:bowl": {
+    "file": "web/food/buffalo-chicken-dip-ivory-bowl.webp",
+    "representation": "one serving bowl"
+  },
+  "buffalo-dip:dish": {
+    "file": "web/food/buffalo-chicken-dip-round-baking-dish.webp",
+    "representation": "one ROUND baking dish without handles"
+  },
+  "tortilla-chips:pile": {
+    "file": "web/food/tortilla-chips-group.webp",
+    "representation": "one group; count is illustrative"
+  }
+}

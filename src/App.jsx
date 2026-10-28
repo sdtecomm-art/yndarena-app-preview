@@ -22,7 +22,9 @@ import Community, { ShareDesign, SharedView, decodeShare, encodeShare } from './
 import Care, { WaterTest, OilGuide } from './screens/Care.jsx';
 import Profile from './screens/Profile.jsx';
 import Review from './screens/Review.jsx';
+import Entry from './screens/Entry.jsx';
 import { WORDMARK } from './assets.js';
+import kitchenDesktop from './media/kitchen/yndarena-kitchen-desktop.webp';
 
 const TAB_META = {
   home: { label: 'Home', icon: 'home' },
@@ -118,6 +120,8 @@ function AppScreen({ shared, setShared }) {
   const { state, user, update } = useStore();
   const nav = useNav();
   const toast = useToast();
+  // On desktop, the wide kitchen photo becomes the page backdrop while the entrance is open.
+  useEffect(() => { document.body.classList.toggle('is-entry', nav.atEntry && !shared); }, [nav.atEntry, shared]);
 
   const signOut = () => { update((d) => { d.session = null; }); nav.resetAll(); };
   const closeShared = () => { history.replaceState(null, '', location.pathname); setShared(null); };
@@ -131,10 +135,12 @@ function AppScreen({ shared, setShared }) {
       />
     );
   }
+  if (nav.atEntry) return <Entry onOpenSet={nav.openSet} />;
   if (!state.session) {
     return (
       <Auth
         key="auth"
+        onAllProducts={nav.allProducts}
         onSignedIn={(kind, number) => {
           nav.resetAll();
           if (kind === 'returning') toast(`Welcome back to Home No. ${pad4(number)}.`);
@@ -147,6 +153,7 @@ function AppScreen({ shared, setShared }) {
 }
 
 const JOURNEYS = [
+  ['entry', 'Yndarena entrance and products'],
   ['new', 'Sign up as a new Home'],
   ['returning', 'Sign in as a returning Home'],
   ['care', 'Care plan and water test'],
@@ -180,6 +187,8 @@ function SidePanels({ children, setShared }) {
   };
   const run = (k) => {
     setShared(null);
+    if (k === 'entry') { nav.allProducts(); return; }
+    nav.openSet();
     if (k === 'new') { update((d) => { d.session = null; }); nav.resetAll(); return; }
     if (k === 'returning') { update((d) => { d.session = { email: RETURNING_EMAIL }; }); nav.resetAll(); toast('Welcome back to Home No. 0045.'); return; }
     if (k === 'shared') {
@@ -214,6 +223,7 @@ function SidePanels({ children, setShared }) {
 
   return (
     <div className="stage">
+      <div className="entry-backdrop" style={{ backgroundImage: `url(${kitchenDesktop})` }} aria-hidden="true" />
       <aside className="side">
         <img className="wordmark" src={WORDMARK} alt="Yndarena, turning houses into homes" />
         <Kicker className="mt"><span style={{ display: 'block', marginTop: 26 }}>App preview · v0.1</span></Kicker>
