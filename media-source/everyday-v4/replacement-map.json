@@ -1,0 +1,15 @@
+{
+  "replacesPackage": "yndarena-everyday-v3",
+  "completeEverydayReplacement": true,
+  "upsertTemplatesByStableId": true,
+  "preserveUserSavedVersions": true,
+  "retiredDefaultSide": "simple-green-salad-ivory-bowl",
+  "oldSidePolicy": "Do not use as the universal side in default templates. Preserve any existing user-created versions referencing it.",
+  "coverReplacements": {
+    "everyday-gnocchi-cover": "everyday-gnocchi-bread-cover",
+    "everyday-steak-cover": "everyday-steak-tomato-avocado-cover",
+    "everyday-salmon-cover": "everyday-salmon-beet-carrot-cover",
+    "everyday-chicken-wraps-cover": "everyday-wraps-cabbage-carrot-cover",
+    "everyday-flatbread-cover": "everyday-flatbread-tomato-basil-cover"
+  }
+}

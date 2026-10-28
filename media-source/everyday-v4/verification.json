@@ -1,0 +1,14 @@
+{
+  "imageCount": 22,
+  "componentCount": 16,
+  "coverCount": 6,
+  "mealTemplateCount": 6,
+  "genuineAlphaPassed": true,
+  "visibleObjectsInsideCanvas": true,
+  "uniqueImages": true,
+  "allTemplateAssetReferencesResolved": true,
+  "sourcePNGsModified": false,
+  "appChanged": false,
+  "hardMaxArchiveBytes": 30000000,
+  "targetArchiveBytes": 24000000
+}

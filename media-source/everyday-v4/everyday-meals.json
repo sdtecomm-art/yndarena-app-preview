@@ -1,0 +1,366 @@
+{
+  "version": "yndarena-everyday-v4",
+  "locale": "en-US",
+  "purpose": "Serve familiar everyday meals on a board. Care remains the primary app utility.",
+  "status": "editorial serving-guide drafts, not kitchen-tested recipes",
+  "defaultCollection": "Everyday meals",
+  "servingLead": "Serve what you already love.",
+  "preparationPolicy": "Cooking guidance is optional. Accept the customer's usual recipe, store-bought shortcuts and already prepared food.",
+  "assemblyTimePolicy": "Assembly minutes start after the food is cooked and ready. They are estimates, never total cooking times.",
+  "imagePolicy": "Images are AI-generated inspiration; component photos are not calibrated to weight or portion counts.",
+  "templates": [
+    {
+      "id": "gnocchi-tomato-basil",
+      "title": "Gnocchi, Tomato & Basil",
+      "category": "Dinner",
+      "description": "Gnocchi with tomato and basil, with a few slices of bread alongside.",
+      "suggestedServings": 2,
+      "assemblyMinutes": 3,
+      "coverAssetId": "everyday-gnocchi-bread-cover",
+      "components": [
+        "gnocchi-tomato-basil-bowl",
+        "rustic-bread-slices-group"
+      ],
+      "optionalComponents": [],
+      "simpleIngredients": [
+        "1 lb store-bought potato gnocchi",
+        "1 cup prepared tomato sauce, or your usual sauce",
+        "A few fresh basil leaves",
+        "A few slices of rustic bread"
+      ],
+      "quickPrep": [
+        "Cook the gnocchi following the package directions.",
+        "Warm your usual tomato sauce and toss with the gnocchi.",
+        "Add a few basil leaves. No homemade sauce is required."
+      ],
+      "servingSteps": [
+        "Set the bowl of gnocchi on one side of the clean, dry board.",
+        "Lay a few slices of bread beside it, leaving room to reach the bowl.",
+        "Finish with basil and bring it to the table."
+      ],
+      "layoutNote": "Gnocchi stays in its bowl. Bread is the default accompaniment. Do not add a salad by default.",
+      "componentInstances": [
+        {
+          "assetId": "gnocchi-tomato-basil-bowl",
+          "count": 1
+        },
+        {
+          "assetId": "rustic-bread-slices-group",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "lemon-chicken-potatoes",
+      "title": "Lemon Chicken & Potatoes",
+      "category": "Dinner",
+      "description": "Chicken, golden potatoes and a little green. An easy dinner to gather around.",
+      "suggestedServings": 2,
+      "assemblyMinutes": 4,
+      "coverAssetId": "everyday-lemon-chicken-cover",
+      "components": [
+        "cooked-lemon-chicken-slices",
+        "roasted-potato-wedges-group",
+        "cooked-green-beans-group",
+        "lemon-two-wedges"
+      ],
+      "optionalComponents": [],
+      "simpleIngredients": [
+        "2 cooked chicken breasts, prepared your usual way",
+        "2 cups roasted potatoes",
+        "1 cup cooked green beans",
+        "Lemon, to taste"
+      ],
+      "quickPrep": [
+        "Use your usual cooked chicken and roasted potatoes; there is no special cooking method to learn.",
+        "Add a little lemon to the chicken if you like.",
+        "Use simply cooked green beans or another familiar vegetable."
+      ],
+      "servingSteps": [
+        "Place the cooked chicken in a relaxed overlapping line.",
+        "Keep the potatoes together beside it, leaving a small gap.",
+        "Add the green beans and an optional lemon wedge."
+      ],
+      "layoutNote": "A cooked main, one familiar starch and one vegetable. Do not require garnish or additional homemade sauces.",
+      "componentInstances": [
+        {
+          "assetId": "cooked-lemon-chicken-slices",
+          "count": 2
+        },
+        {
+          "assetId": "roasted-potato-wedges-group",
+          "count": 1
+        },
+        {
+          "assetId": "cooked-green-beans-group",
+          "count": 1
+        },
+        {
+          "assetId": "lemon-two-wedges",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "steak-potatoes",
+      "title": "Steak & Roasted Potatoes",
+      "category": "Dinner",
+      "description": "Steak and golden potatoes with a fresh tomato-and-avocado side.",
+      "suggestedServings": 2,
+      "assemblyMinutes": 4,
+      "coverAssetId": "everyday-steak-tomato-avocado-cover",
+      "components": [
+        "cooked-steak-slices",
+        "roasted-potato-wedges-group",
+        "tomato-avocado-salad-ivory-bowl"
+      ],
+      "optionalComponents": [],
+      "simpleIngredients": [
+        "2 cooked steaks, prepared your usual way",
+        "2 cups roasted potatoes",
+        "2 tomatoes",
+        "1 ripe avocado",
+        "A little olive oil; lemon if you like"
+      ],
+      "quickPrep": [
+        "Use the steak and potatoes you already know how to cook.",
+        "Cut the tomatoes and avocado into chunks.",
+        "Dress lightly with olive oil and a little lemon if you like."
+      ],
+      "servingSteps": [
+        "Set the tomato-and-avocado bowl near one corner.",
+        "Place the sliced cooked steak across the open center.",
+        "Group the potatoes beside it and leave each element easy to reach."
+      ],
+      "layoutNote": "Use the tomato-and-avocado bowl, never the old lettuce-and-cucumber bowl. Keep raw-meat preparation separate from the clean serving surface.",
+      "componentInstances": [
+        {
+          "assetId": "cooked-steak-slices",
+          "count": 2
+        },
+        {
+          "assetId": "roasted-potato-wedges-group",
+          "count": 1
+        },
+        {
+          "assetId": "tomato-avocado-salad-ivory-bowl",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "salmon-rice-greens",
+      "title": "Salmon, Rice & Beet Salad",
+      "category": "Dinner",
+      "description": "A simple salmon dinner with rice and a colorful beet-and-carrot side.",
+      "suggestedServings": 2,
+      "assemblyMinutes": 4,
+      "coverAssetId": "everyday-salmon-beet-carrot-cover",
+      "components": [
+        "cooked-salmon-fillet",
+        "cooked-rice-ivory-bowl",
+        "beet-carrot-salad-ivory-bowl",
+        "lemon-two-wedges"
+      ],
+      "optionalComponents": [],
+      "simpleIngredients": [
+        "2 cooked salmon portions",
+        "1 1/2 cups cooked rice",
+        "2 small cooked beets; prepared beets are fine",
+        "1 carrot",
+        "Lemon and a little olive oil"
+      ],
+      "quickPrep": [
+        "Use your usual cooked salmon and plain rice.",
+        "Cut the cooked beets into wedges and shave the carrot into ribbons.",
+        "Toss the vegetables lightly with lemon and olive oil."
+      ],
+      "servingSteps": [
+        "Set the rice and beet-and-carrot bowls near one side.",
+        "Place the cooked salmon beside them, with room to lift each portion.",
+        "Add the lemon wedges and bring it to the table."
+      ],
+      "layoutNote": "The stable template ID is retained for migration; the visible title changes. Replace the previous green-bean side with the beet-and-carrot bowl.",
+      "componentInstances": [
+        {
+          "assetId": "cooked-salmon-fillet",
+          "count": 2
+        },
+        {
+          "assetId": "cooked-rice-ivory-bowl",
+          "count": 1
+        },
+        {
+          "assetId": "beet-carrot-salad-ivory-bowl",
+          "count": 1
+        },
+        {
+          "assetId": "lemon-two-wedges",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "chicken-wraps",
+      "title": "Chicken Wraps",
+      "category": "Lunch or dinner",
+      "description": "Chicken wraps with a crisp cabbage-and-carrot side.",
+      "suggestedServings": 2,
+      "assemblyMinutes": 3,
+      "coverAssetId": "everyday-wraps-cabbage-carrot-cover",
+      "components": [
+        "chicken-wrap-two-halves",
+        "cabbage-carrot-slaw-ivory-bowl"
+      ],
+      "optionalComponents": [],
+      "simpleIngredients": [
+        "2 flour tortillas",
+        "Cooked chicken for 2 wraps",
+        "Lettuce and tomato for the wrap filling",
+        "A little plain yogurt or your usual dressing, optional",
+        "1 cup finely sliced cabbage",
+        "1 carrot",
+        "A little lemon and olive oil"
+      ],
+      "quickPrep": [
+        "Fill and roll the tortillas with cooked chicken, lettuce, tomato and optional dressing.",
+        "Cut each wrap into two halves.",
+        "Toss finely sliced cabbage and carrot with a little lemon and olive oil."
+      ],
+      "servingSteps": [
+        "Set the four wrap halves with their cut sides visible.",
+        "Place the cabbage-and-carrot bowl beside them.",
+        "Leave a little space so the halves are easy to pick up."
+      ],
+      "layoutNote": "The wrap filling still contains lettuce and tomato. The side is cabbage and carrot, not lettuce and cucumber. Use two instances of the two-halves component.",
+      "componentInstances": [
+        {
+          "assetId": "chicken-wrap-two-halves",
+          "count": 2
+        },
+        {
+          "assetId": "cabbage-carrot-slaw-ivory-bowl",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "tomato-mozzarella-flatbread",
+      "title": "Tomato & Mozzarella Flatbread",
+      "category": "Lunch or dinner",
+      "description": "A simple pizza night with fresh tomatoes and basil alongside.",
+      "suggestedServings": 2,
+      "assemblyMinutes": 3,
+      "coverAssetId": "everyday-flatbread-tomato-basil-cover",
+      "components": [
+        "tomato-mozzarella-flatbread-four-pieces",
+        "tomato-basil-salad-ivory-bowl"
+      ],
+      "optionalComponents": [],
+      "simpleIngredients": [
+        "2 small flatbreads or 1 large ready-made base",
+        "1/2 cup tomato sauce",
+        "4 oz mozzarella",
+        "1 cup cherry tomatoes",
+        "A few basil leaves",
+        "A little olive oil"
+      ],
+      "quickPrep": [
+        "Top a ready-made base with tomato sauce and mozzarella; bake following the base manufacturer instructions.",
+        "Halve the cherry tomatoes and toss lightly with basil and olive oil.",
+        "Cut the flatbread into easy-to-share pieces."
+      ],
+      "servingSteps": [
+        "Arrange the flatbread pieces in a relaxed fan or close to their original shape.",
+        "Set a small tomato-and-basil bowl to one side.",
+        "Leave room to lift each piece."
+      ],
+      "layoutNote": "Use only fresh tomato and basil in the side bowl. No default green salad; mozzarella stays on the flatbread.",
+      "componentInstances": [
+        {
+          "assetId": "tomato-mozzarella-flatbread-four-pieces",
+          "count": 1
+        },
+        {
+          "assetId": "tomato-basil-salad-ivory-bowl",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "implementationNotes": [
+    "These are proposed new content IDs, not confirmed IDs in the existing app.",
+    "Keep serving guidance primary and quickPrep optional; do not require videos.",
+    "Do not generate new images for existing app ingredients already covered by earlier packages.",
+    "Do not add nutritional scores, calorie claims, ingredient gatekeeping or mandatory personalization questions.",
+    "Keep all previous presentations and recipes available in Discover; change their prominence rather than deleting them.",
+    "This package replaces v3 for these six default templates; it is not a patch requiring v3 uploads.",
+    "Do not insert a universal default green salad. Use the side chosen for each template.",
+    "Update covers, Designer defaults, steps and ingredient lists together.",
+    "Preserve user-created saved versions. Update built-in templates by stable ID without duplicating them.",
+    "componentInstances describes approximate visual module placement, not calibrated weights; adapt physical shopping quantities separately."
+  ],
+  "replacesPackage": "yndarena-everyday-v3",
+  "revisionNote": "Full replacement of the six everyday serving ideas, with varied sides and matching covers. Preserve stable existing template IDs and upsert; do not add duplicates.",
+  "sideIdeas": [
+    {
+      "id": "tomato-avocado",
+      "title": "Tomato & Avocado Salad",
+      "assetId": "tomato-avocado-salad-ivory-bowl",
+      "ingredients": [
+        "Tomato",
+        "Avocado",
+        "Olive oil",
+        "Lemon, optional"
+      ],
+      "steps": [
+        "Cut the tomato and avocado into chunks.",
+        "Dress lightly just before serving."
+      ]
+    },
+    {
+      "id": "beet-carrot",
+      "title": "Beet & Carrot Salad",
+      "assetId": "beet-carrot-salad-ivory-bowl",
+      "ingredients": [
+        "Cooked beets",
+        "Carrot",
+        "Olive oil",
+        "Lemon"
+      ],
+      "steps": [
+        "Cut the cooked beets and shave the carrot into ribbons.",
+        "Toss lightly with olive oil and lemon."
+      ]
+    },
+    {
+      "id": "cabbage-carrot",
+      "title": "Cabbage & Carrot Slaw",
+      "assetId": "cabbage-carrot-slaw-ivory-bowl",
+      "ingredients": [
+        "Cabbage",
+        "Carrot",
+        "Olive oil",
+        "Lemon"
+      ],
+      "steps": [
+        "Finely slice the cabbage and carrot.",
+        "Toss with a little olive oil and lemon."
+      ]
+    },
+    {
+      "id": "tomato-basil",
+      "title": "Tomato & Basil",
+      "assetId": "tomato-basil-salad-ivory-bowl",
+      "ingredients": [
+        "Cherry tomatoes",
+        "Basil",
+        "Olive oil"
+      ],
+      "steps": [
+        "Halve the tomatoes and add a few basil leaves.",
+        "Dress lightly with olive oil."
+      ]
+    }
+  ]
+}

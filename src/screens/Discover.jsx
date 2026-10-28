@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { Icon, Chip, Kicker, DemoNote } from '../ui.jsx';
-import { PresentationCard, CommunityCard, RecipeRow, ItemIcon } from '../components.jsx';
+import { PresentationCard, CommunityCard, RecipeRow, ItemIcon, MealCard } from '../components.jsx';
+import { MEALS, MEAL_ORDER } from '../data/meals.js';
 import { PRESENTATIONS, PRESENTATION_ORDER, OCCASIONS } from '../data/presentations.js';
 import { RECIPES, RECIPE_TYPES } from '../data/recipes.js';
 import { TECHNIQUES, TECH_GROUPS } from '../data/techniques.js';
@@ -10,7 +11,8 @@ import { ITEMS } from '../data/catalog.js';
 import { presentationsUsingRecipe } from '../lib.js';
 
 const SEGS = [
-  { id: 'presentations', label: 'Boards' },
+  { id: 'meals', label: 'Everyday meals' },
+  { id: 'presentations', label: 'Boards to share' },
   { id: 'recipes', label: 'Recipes' },
   { id: 'techniques', label: 'Techniques' },
   { id: 'h2h', label: 'From home to home' },
@@ -26,7 +28,8 @@ function search(q) {
   });
   const recipes = Object.keys(RECIPES).filter((id) => has(RECIPES[id].name) || RECIPES[id].ingredients.some((i) => has(i.name)));
   const techs = Object.keys(TECHNIQUES).filter((id) => has(TECHNIQUES[id].name) || TECHNIQUES[id].compatible.some((c) => has(ITEMS[c].name)));
-  return { pres, recipes, techs };
+  const meals = MEAL_ORDER.filter((id) => has(MEALS[id].name) || MEALS[id].ingredients.some(has));
+  return { pres, recipes, techs, meals };
 }
 
 export function TechniqueTile({ id }) {
@@ -44,7 +47,7 @@ export function TechniqueTile({ id }) {
 }
 
 export default function Discover({ params = {} }) {
-  const [seg, setSeg] = useState(params.seg || 'presentations');
+  const [seg, setSeg] = useState(params.seg || 'meals');
   const [occasion, setOccasion] = useState(params.occasion || 'all');
   const [rtype, setRtype] = useState('all');
   const [tgroup, setTgroup] = useState('all');
@@ -64,8 +67,14 @@ export default function Discover({ params = {} }) {
 
       {results ? (
         <div className="pad" style={{ marginTop: 18 }}>
-          {!results.pres.length && !results.recipes.length && !results.techs.length && (
-            <p className="body">Nothing yet for “{q}”. Try an ingredient like brie, figs or honey.</p>
+          {!results.pres.length && !results.recipes.length && !results.techs.length && !results.meals.length && (
+            <p className="body">Nothing yet for “{q}”. Try an ingredient like chicken, brie or honey.</p>
+          )}
+          {results.meals.length > 0 && (
+            <div className="stack-12" style={{ marginBottom: 22 }}>
+              <Kicker>Everyday meals</Kicker>
+              {results.meals.map((id) => <MealCard key={id} id={id} compact />)}
+            </div>
           )}
           {results.pres.length > 0 && (
             <div className="stack-12">
@@ -93,6 +102,17 @@ export default function Discover({ params = {} }) {
           <div className="chips" style={{ marginTop: 16 }}>
             {SEGS.map((s) => <Chip key={s.id} active={seg === s.id} onClick={() => setSeg(s.id)}>{s.label}</Chip>)}
           </div>
+
+          {seg === 'meals' && (
+            <div style={{ marginTop: 18 }}>
+              <div className="pad">
+                <p className="body" style={{ marginTop: 0 }}>Serve what you already love. Cook it your usual way or use store-bought, then bring it to the table in a few minutes.</p>
+              </div>
+              <div className="pad stack-16" style={{ marginTop: 12 }}>
+                {MEAL_ORDER.map((id) => <MealCard key={id} id={id} />)}
+              </div>
+            </div>
+          )}
 
           {seg === 'presentations' && (
             <div style={{ marginTop: 18 }}>

@@ -9,6 +9,7 @@ import { ITEMS } from './data/catalog.js';
 import Auth from './screens/Auth.jsx';
 import Welcome from './screens/Welcome.jsx';
 import Home from './screens/Home.jsx';
+import Meal from './screens/Meal.jsx';
 import Discover from './screens/Discover.jsx';
 import Presentation from './screens/Presentation.jsx';
 import Recipe from './screens/Recipe.jsx';
@@ -27,7 +28,6 @@ const TAB_META = {
   home: { label: 'Home', icon: 'home' },
   discover: { label: 'Discover', icon: 'discover' },
   collection: { label: 'Collection', icon: 'collection' },
-  care: { label: 'Care & Gifts', icon: 'care' },
 };
 
 function parseHash() {
@@ -43,6 +43,7 @@ function ScreenFor({ route, onSignOut, openProfile }) {
     case 'collection': return <Collection />;
     case 'care': return <Care params={p} />;
     case 'presentation': return <Presentation params={p} />;
+    case 'meal': return <Meal params={p} />;
     case 'recipe': return <Recipe params={p} />;
     case 'technique': return <Technique params={p} />;
     case 'community': return <Community params={p} />;
@@ -147,6 +148,9 @@ function AppScreen({ shared, setShared }) {
 const JOURNEYS = [
   ['new', 'Sign up as a new Home'],
   ['returning', 'Sign in as a returning Home'],
+  ['care', 'Care plan and water test'],
+  ['meal', 'An everyday meal on the board'],
+  ['meal-designer', 'Swap a side in Designer'],
   ['presentation', 'Explore a presentation'],
   ['layouts', 'Switch layouts, same ingredients'],
   ['designer', 'Make it yours in Designer'],
@@ -156,7 +160,6 @@ const JOURNEYS = [
   ['collection', 'Your collection'],
   ['h2h', 'Adapt a board from another Home'],
   ['shared', 'Open a shared link'],
-  ['care', 'Care plan and water test'],
   ['gifts', 'Gift dates'],
 ];
 
@@ -187,6 +190,8 @@ function SidePanels({ children, setShared }) {
     nav.resetAll();
     const L = 'love-like-rosemary';
     setTimeout(() => {
+      if (k === 'meal') nav.switchTab('discover', { name: 'meal', params: { id: 'steak-potatoes' } });
+      if (k === 'meal-designer') { const id = a.fromMeal('salmon-rice-greens'); nav.switchTab('discover', { name: 'designer', params: { id } }); }
       if (k === 'presentation') nav.switchTab('discover', { name: 'presentation', params: { id: L } });
       if (k === 'layouts') nav.switchTab('discover', { name: 'presentation', params: { id: L, comp: 'the-sprig' } });
       if (k === 'designer') { const id = a.fromPresentation(L, 'two-halves'); nav.switchTab('discover', { name: 'designer', params: { id } }); }

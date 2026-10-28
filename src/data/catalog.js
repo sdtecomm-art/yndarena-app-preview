@@ -38,6 +38,8 @@ export const BOARD_W = 600;
 export const BOARD_H = 400;
 
 export const CATEGORIES = [
+  { id: 'mains', label: 'Mains' },
+  { id: 'sides', label: 'Sides & salads' },
   { id: 'bowls', label: 'Bowls & dips' },
   { id: 'cheese', label: 'Cheese' },
   { id: 'charcuterie', label: 'Charcuterie' },
@@ -48,19 +50,24 @@ export const CATEGORIES = [
 ];
 
 // Layer order used to build boards. Same order the original presentations follow.
-export const LAYER_ORDER = ['bowls', 'cheese', 'charcuterie', 'produce', 'crunch', 'fill', 'garnish'];
+export const LAYER_ORDER = ['bowls', 'sides', 'mains', 'cheese', 'charcuterie', 'produce', 'crunch', 'fill', 'garnish'];
 
 export const LAYER_COPY = {
+  sides: { title: 'Set the sides', text: 'Bowls and sides go down first, so the main has room around them.' },
+  mains: { title: 'Bring in the main', text: 'Place it where everyone can reach it, with a little space to lift each piece.' },
   bowls: { title: 'Anchor the bowls', text: 'Bowls and dips go down first. They hold space and give the eye somewhere to rest.' },
   cheese: { title: 'Place the cheeses', text: 'Spread the cheeses apart so each one has its own corner of the board.' },
   charcuterie: { title: 'Fold the charcuterie', text: 'Tuck the folded meats next to the cheeses they pair with.' },
   produce: { title: 'Add fruit and vegetables', text: 'Color goes in now. Let it follow the open spaces.' },
   crunch: { title: 'Bring in the crunch', text: 'Crackers and bread lean against bigger pieces so they stay upright.' },
   fill: { title: 'Fill the gaps', text: 'Small bites close the gaps so the board feels generous.' },
-  garnish: { title: 'Finish with rosemary', text: 'A few sprigs, last of all. For love and memory.' },
+  garnish: { title: 'Finish the board', text: 'A last touch of green or a wedge of lemon, if you like.' },
 };
 
 // Each item type is a ready-to-place group, never a single grape or cracker.
+// Everyday meal components (cat 'mains' and 'sides') are prepared food: cooked your usual way or store-bought.
+// Their tech is null (no technique to learn) and shop lists what to buy for baseQty, from everyday-meals.json;
+// a null qty means the source gives no amount ("a few", "to taste").
 // fp = footprint [w, h] at baseQty in board units. Size scales gently with quantity.
 export const ITEMS = {
   // Cheese
@@ -341,7 +348,134 @@ export const ITEMS = {
     tools: ['Small bowl for pits'],
   },
 
+  // Mains, ready to serve
+  'gnocchi-bowl': {
+    name: 'Gnocchi, tomato & basil', cat: 'mains', unit: 'lb', baseQty: 1, step: 0.5, min: 0.5, max: 3, fp: [150, 150],
+    art: 'bowl', color: '#c4472f', serveware: 'Serving bowl',
+    styles: [{ id: 'bowl', label: 'In a bowl', tech: null }],
+    subs: [], tools: ['Serving spoon'],
+    shop: [{ key: 'gnocchi', name: 'Potato gnocchi, store-bought', qty: 1, unit: 'lb' }, { key: 'tomato-sauce', name: 'Tomato sauce', qty: 1, unit: 'cup' }, { key: 'basil', name: 'Fresh basil', qty: null }],
+  },
+  'lemon-chicken': {
+    name: 'Cooked chicken breasts', cat: 'mains', unit: 'each', baseQty: 2, step: 1, min: 1, max: 6, fp: [110, 80],
+    art: 'pile', color: '#d9a35f', shape: 'round',
+    styles: [{ id: 'sliced', label: 'Sliced', tech: null }],
+    subs: [], tools: [],
+    shop: [{ key: 'chicken-breast', name: 'Chicken breasts, cooked your usual way', qty: 2, unit: 'each' }],
+  },
+  steak: {
+    name: 'Cooked steak', cat: 'mains', unit: 'each', baseQty: 2, step: 1, min: 1, max: 6, fp: [110, 80],
+    art: 'pile', color: '#8a4a36', shape: 'round',
+    styles: [{ id: 'sliced', label: 'Sliced', tech: null }],
+    subs: [], tools: ['Steak knives'],
+    shop: [{ key: 'steak', name: 'Steaks, cooked your usual way', qty: 2, unit: 'each' }],
+  },
+  salmon: {
+    name: 'Cooked salmon', cat: 'mains', unit: 'each', baseQty: 2, step: 1, min: 1, max: 6, fp: [100, 70],
+    art: 'pile', color: '#e08a63', shape: 'round',
+    styles: [{ id: 'fillet', label: 'Fillets', tech: null }],
+    subs: [], tools: ['Fish server or spatula'],
+    shop: [{ key: 'salmon', name: 'Salmon portions, cooked', qty: 2, unit: 'each' }],
+  },
+  'chicken-wraps': {
+    name: 'Chicken wraps', cat: 'mains', unit: 'each', baseQty: 2, step: 1, min: 1, max: 6, fp: [120, 80],
+    art: 'baguette', color: '#e6d3ad', crumb: '#f4e2bd',
+    styles: [{ id: 'halves', label: 'Cut in halves', tech: null }],
+    subs: [], tools: [],
+    shop: [
+      { key: 'tortillas', name: 'Flour tortillas', qty: 2, unit: 'each' },
+      { key: 'cooked-chicken', name: 'Cooked chicken, for the wraps', qty: null },
+      { key: 'lettuce', name: 'Lettuce, for the filling', qty: null },
+      { key: 'tomato', name: 'Tomato, for the filling', qty: null },
+      { key: 'yogurt-dressing', name: 'Plain yogurt or your usual dressing, optional', qty: null },
+    ],
+  },
+  flatbread: {
+    name: 'Tomato & mozzarella flatbread', cat: 'mains', unit: 'each', baseQty: 1, step: 1, min: 1, max: 3, fp: [170, 170],
+    art: 'baguette', color: '#d9a35f', crumb: '#f1d5a8',
+    styles: [{ id: 'pieces', label: 'Cut in four', tech: null }],
+    subs: [], tools: ['Pizza cutter or knife'],
+    shop: [
+      { key: 'flatbread-base', name: 'Ready-made flatbread base (1 large or 2 small)', qty: 1, unit: 'each' },
+      { key: 'tomato-sauce', name: 'Tomato sauce', qty: 0.5, unit: 'cup' },
+      { key: 'mozzarella', name: 'Mozzarella', qty: 4, unit: 'oz' },
+      { key: 'olive-oil', name: 'Olive oil', qty: null },
+    ],
+  },
+
+  // Sides, ready to serve. The four salads are simple and optional: choose, swap or remove them.
+  potatoes: {
+    name: 'Roasted potatoes', cat: 'sides', unit: 'cup', baseQty: 2, step: 0.5, min: 0.5, max: 6, fp: [130, 112],
+    art: 'pile', color: '#d9a35f', shape: 'round',
+    styles: [{ id: 'wedges', label: 'Wedges', tech: null }],
+    subs: ['rice'], tools: [],
+    shop: [{ key: 'potatoes', name: 'Potatoes, roasted your usual way', qty: 2, unit: 'cup' }],
+  },
+  'green-beans': {
+    name: 'Green beans', cat: 'sides', unit: 'cup', baseQty: 1, step: 0.5, min: 0.5, max: 4, fp: [124, 96],
+    art: 'batons', color: '#5f7d45',
+    styles: [{ id: 'cooked', label: 'Cooked', tech: null }],
+    subs: ['side-tomato-basil', 'side-beet-carrot'], tools: [],
+    shop: [{ key: 'green-beans', name: 'Green beans, simply cooked', qty: 1, unit: 'cup' }],
+  },
+  rice: {
+    name: 'Cooked rice', cat: 'sides', unit: 'cup', baseQty: 1.5, step: 0.5, min: 0.5, max: 4, fp: [112, 112],
+    art: 'bowl', color: '#f4efe4', serveware: 'Small bowl for the rice',
+    styles: [{ id: 'bowl', label: 'In a bowl', tech: null }],
+    subs: ['potatoes'], tools: ['Serving spoon'],
+    shop: [{ key: 'rice', name: 'Rice, cooked', qty: 1.5, unit: 'cup' }],
+  },
+  'side-tomato-avocado': {
+    name: 'Tomato & Avocado Salad', cat: 'sides', unit: 'servings', baseQty: 2, step: 1, min: 1, max: 6, fp: [112, 112],
+    art: 'bowl', color: '#c4472f', serveware: 'Small salad bowl', side: 'tomato-avocado',
+    styles: [{ id: 'bowl', label: 'In a bowl', tech: null }],
+    subs: ['side-beet-carrot', 'side-cabbage-carrot', 'side-tomato-basil'], tools: ['Salad spoon'],
+    shop: [{ key: 'tomato', name: 'Tomatoes', qty: 2, unit: 'each' }, { key: 'avocado', name: 'Ripe avocado', qty: 1, unit: 'each' }, { key: 'olive-oil', name: 'Olive oil', qty: null }, { key: 'lemon', name: 'Lemon, optional', qty: null }],
+  },
+  'side-beet-carrot': {
+    name: 'Beet & Carrot Salad', cat: 'sides', unit: 'servings', baseQty: 2, step: 1, min: 1, max: 6, fp: [112, 112],
+    art: 'bowl', color: '#8a2a4a', serveware: 'Small salad bowl', side: 'beet-carrot',
+    styles: [{ id: 'bowl', label: 'In a bowl', tech: null }],
+    subs: ['side-tomato-avocado', 'side-cabbage-carrot', 'side-tomato-basil'], tools: ['Salad spoon'],
+    shop: [{ key: 'beets', name: 'Small cooked beets (prepared is fine)', qty: 2, unit: 'each' }, { key: 'carrot', name: 'Carrot', qty: 1, unit: 'each' }, { key: 'olive-oil', name: 'Olive oil', qty: null }, { key: 'lemon', name: 'Lemon', qty: null }],
+  },
+  'side-cabbage-carrot': {
+    name: 'Cabbage & Carrot Slaw', cat: 'sides', unit: 'servings', baseQty: 2, step: 1, min: 1, max: 6, fp: [112, 112],
+    art: 'bowl', color: '#d8d6a8', serveware: 'Small salad bowl', side: 'cabbage-carrot',
+    styles: [{ id: 'bowl', label: 'In a bowl', tech: null }],
+    subs: ['side-tomato-avocado', 'side-beet-carrot', 'side-tomato-basil'], tools: ['Salad spoon'],
+    shop: [{ key: 'cabbage', name: 'Cabbage, finely sliced', qty: 1, unit: 'cup' }, { key: 'carrot', name: 'Carrot', qty: 1, unit: 'each' }, { key: 'olive-oil', name: 'Olive oil', qty: null }, { key: 'lemon', name: 'Lemon', qty: null }],
+  },
+  'side-tomato-basil': {
+    name: 'Tomato & Basil', cat: 'sides', unit: 'cup', baseQty: 1, step: 0.5, min: 0.5, max: 3, fp: [104, 104],
+    art: 'bowl', color: '#d9452f', serveware: 'Small bowl', side: 'tomato-basil',
+    styles: [{ id: 'bowl', label: 'In a bowl', tech: null }],
+    subs: ['side-tomato-avocado', 'side-beet-carrot', 'side-cabbage-carrot'], tools: [],
+    shop: [{ key: 'cherry-tomatoes', name: 'Cherry tomatoes', qty: 1, unit: 'cup' }, { key: 'basil', name: 'Fresh basil', qty: null }, { key: 'olive-oil', name: 'Olive oil', qty: null }],
+  },
+  'rustic-bread': {
+    name: 'Rustic bread', cat: 'crunch', unit: 'servings', baseQty: 2, step: 1, min: 1, max: 6, fp: [140, 100],
+    art: 'baguette', color: '#c9955a', crumb: '#f1dfbd',
+    styles: [{ id: 'slices', label: 'Slices', tech: null }],
+    subs: ['baguette'], tools: ['Bread knife'],
+    shop: [{ key: 'rustic-bread', name: 'Rustic bread, a few slices', qty: null }],
+  },
+
   // Garnish
+  lemon: {
+    name: 'Lemon wedges', cat: 'garnish', unit: 'wedges', baseQty: 2, step: 1, min: 1, max: 8, fp: [64, 52],
+    art: 'pile', color: '#f0d24a', shape: 'round',
+    styles: [{ id: 'wedges', label: 'Wedges', tech: null }],
+    subs: [], tools: [],
+    shop: [{ key: 'lemon', name: 'Lemon', qty: null }],
+  },
+  basil: {
+    name: 'Fresh basil', cat: 'garnish', unit: 'leaves', baseQty: 3, step: 1, min: 1, max: 10, fp: [54, 44],
+    art: 'rosemary', color: '#4f7a3a',
+    styles: [{ id: 'leaves', label: 'Leaves', tech: null }],
+    subs: [], tools: [],
+    shop: [{ key: 'basil', name: 'Fresh basil', qty: null }],
+  },
   rosemary: {
     name: 'Fresh rosemary', cat: 'garnish', unit: 'sprigs', baseQty: 3, step: 1, min: 1, max: 8, fp: [34, 86],
     art: 'rosemary', color: '#6f7a5a',

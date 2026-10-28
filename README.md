@@ -52,6 +52,13 @@ src/
 
 Ported from the existing care plan spec (`lib.js`): first check at week 3 from the day the boards came home, then every 12 weeks, 6 checks max, no catch-up bursts. Gift reminders at 21 and 10 days, yearly unless a year is set, Feb 29 falls back to Mar 1 in non-leap years, a date added inside a window only gets that window's reminder. Up to 3 dates, as in the current system.
 
+## Home and everyday meals (package everyday-v4)
+
+- Three tabs: Home · Discover · Collection. Home shows, in order: **Your care plan** (state-driven next action, from the existing care logic), **Ideas for your table** (three everyday meals) and **Gift dates**. Care and gift details open from those blocks; old links to the care tab land there.
+- Six everyday meals in `src/data/meals.js`, keyed by the package's stable ids, each with its own side (no universal salad). Detail shows the whole board first, up to three serving steps, then optional quick prep. Designer copies are the Home's own and are never rewritten by updates.
+- Prepared components (gnocchi bowl, chicken, steak, salmon, wraps, flatbread, potatoes, green beans, rice, four simple salads, rustic bread, lemon, basil) live in the catalog under Mains and Sides & salads. Their shopping lines come from `everyday-meals.json`; items with no amount in the source are listed without one.
+- Covers retired by `replacement-map.json` resolve through `MEDIA_REPLACED`.
+
 ## Visual resources
 
 Registry: `src/data/media.js`. Every asset declares its role, provenance (all AI-generated so far) and status. Sources, manifests and generation records are kept in `media-source/` (not bundled); the app uses optimized WebP copies in `src/media/`, cropped to their visible area with alpha preserved.

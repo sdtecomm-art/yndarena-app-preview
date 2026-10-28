@@ -166,7 +166,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 300; }
 /* ---------- Tab bar ---------- */
 .tabbar {
   position: absolute; z-index: 40; left: 0; right: 0; bottom: 0; height: calc(var(--tabbar-h) + var(--safe-bottom)); padding-bottom: var(--safe-bottom);
-  display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(250, 245, 239, .94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(250, 245, 239, .94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--c-line);
 }
 .tabbar button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--c-taupe); font-family: var(--sans); font-weight: 500; font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase; transition: color .3s var(--ease); }
@@ -469,3 +469,15 @@ select.input { appearance: none; background: transparent; }
 .check-list .mk { font-family: var(--sans); font-weight: 500; color: var(--c-taupe); }
 
 .topbar.is-transparent .icon-btn { background: rgba(250, 245, 239, .88); }
+
+/* Home: care first */
+.care-block { padding: 18px 18px 10px; }
+.care-block.is-hot { background: rgba(172, 162, 189, .18); border-color: rgba(172, 162, 189, .55); }
+.meal-row { display: grid; grid-template-columns: 76px 1fr auto; gap: 12px; align-items: center; padding: 8px 12px 8px 8px; text-align: left; width: 100%; }
+.meal-row img { width: 76px; height: 64px; object-fit: cover; border-radius: 10px; display: block; }
+.serve-steps { list-style: none; padding: 0; margin: 8px 0 0; counter-reset: s; }
+.serve-steps li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--c-line); font-size: 16.5px; line-height: 1.4; }
+.serve-steps li::before { counter-increment: s; content: counter(s); width: 26px; height: 26px; border-radius: 13px; display: grid; place-items: center; background: var(--c-bone); border: 1px solid var(--c-line-strong); font-family: var(--sans); font-size: 12px; }
+details.quick-prep summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+details.quick-prep summary::-webkit-details-marker { display: none; }
+details.quick-prep[open] .chev { transform: rotate(90deg); }

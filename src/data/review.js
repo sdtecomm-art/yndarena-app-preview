@@ -5,6 +5,7 @@ export const REVIEW = {
   packages: [
     'yndarena-ingredients-v1: 12 transparent PNG (Love, Like Rosemary). SHA-256 checked against its manifest.',
     'yndarena-media-v2: 33 transparent cutouts, 5 recipe covers, 7 presentation covers, 1 generic wood texture. All AI-generated.',
+    'yndarena-everyday-v4: 16 prepared components and 6 meal covers. Replaces everyday-v3, which was never integrated in this preview. SHA-256 and visible bounds match its manifest (22 of 22).',
   ],
   rules: [
     'One registry (src/data/media.js) maps every item and serving style to its cutout. Designer, layout thumbnails, the build-by-layers guide, saved versions, Collection, From home to home and shared links all draw through the same renderer, so no screen can fall back to an old illustration.',
@@ -40,6 +41,7 @@ export const REVIEW = {
     'llr-two-halves-top': ['See the Two Halves comparison below'],
   },
   pending: [
+    'Everyday meals: amounts and steps are editorial drafts; nothing is kitchen-tested. Covers use generic wood, not Yndarena boards.',
     'Photos on the real Yndarena boards, with weighed portions.',
     'A product reference for each board surface (wood, grain and finish) to replace the generic texture.',
     'Technique videos: 20 clips planned (video-plan.json), none generated. Start with Batons and Strips, Spoon Swoosh, Prosciutto Rose, Salami River and Cucumber Ribbons.',

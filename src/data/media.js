@@ -11,18 +11,27 @@ const files = (all) => Object.fromEntries(Object.entries(all).map(([p, url]) => 
 const INGREDIENT_FILES = files(import.meta.glob('../media/ingredients/*.webp', { eager: true, query: '?url', import: 'default' }));
 const COVER_FILES = files(import.meta.glob(['../media/recipes/*.webp', '../media/presentations/*.webp'], { eager: true, query: '?url', import: 'default' }));
 const SURFACE_FILES = files(import.meta.glob('../media/surfaces/*.webp', { eager: true, query: '?url', import: 'default' }));
+const EVERYDAY_FILES = files(import.meta.glob('../media/everyday/*.webp', { eager: true, query: '?url', import: 'default' }));
 
 // Packages the assets came from. v2 files arrived re-encoded as WebP, so their bytes differ from the
 // package manifest; their dimensions and visible bounds were checked against it instead.
 export const PACKAGES = {
   v1: { name: 'yndarena-ingredients-v1', source: 'media-source/love-like-rosemary/ingredients', hashCheck: 'sha256 matches manifest' },
   v2: { name: 'yndarena-media-v2', source: 'media-source/media-v2', hashCheck: 'received re-encoded; size and visible bounds match manifest' },
+  v4: { name: 'yndarena-everyday-v4', source: 'media-source/everyday-v4', hashCheck: 'sha256 and visible bounds match manifest' },
 };
 
 // aspect: width / height of the visible food, measured on the alpha channel after cropping.
 const cutout = (id, aspect, alt, pkg, extra = {}) => ({
-  role: 'cutout', src: INGREDIENT_FILES[id], aspect, alt, pkg, sourceFile: `${id}.png`,
+  role: 'cutout', src: (pkg === 'v4' ? EVERYDAY_FILES : INGREDIENT_FILES)[id], aspect, alt, pkg, sourceFile: `${id}.png`,
   provenance: 'ai-generated', status: 'provisional', label: 'AI cutout', ...extra,
+});
+
+const mealCover = (id, alt, sha256) => ({
+  role: 'cover', kind: 'meal', src: EVERYDAY_FILES[`${id}-1080`], small: EVERYDAY_FILES[`${id}-640`],
+  srcSet: `${EVERYDAY_FILES[`${id}-640`]} 640w, ${EVERYDAY_FILES[`${id}-1080`]} 1080w`,
+  width: 1080, height: 720, alt, pkg: 'v4', sourceFile: `${id}.png`, sha256,
+  provenance: 'ai-generated', status: 'provisional', label: 'AI inspiration',
 });
 
 const cover = (id, kind, alt) => ({
@@ -107,12 +116,46 @@ export const MEDIA = {
   'love-like-rosemary-the-sprig': cover('love-like-rosemary-the-sprig', 'presentation', 'A diagonal board with jam, brie, figs, grapes, prosciutto roses and crackers'),
   'love-like-rosemary-gathered': cover('love-like-rosemary-gathered', 'presentation', 'A round wreath of cheese, prosciutto, figs and grapes around a bowl of fig jam'),
 
+  // Everyday meals, package v4: prepared components and covers. sha256 matches the package manifest.
+  'gnocchi-tomato-basil-bowl': cutout('gnocchi-tomato-basil-bowl', 0.997, 'Gnocchi with tomato sauce and basil in a bowl', 'v4', { sha256: '23b75335697f535775dcb377ea93d0b931a37b9abd69414d45934f7a7cb76057' }),
+  'cooked-lemon-chicken-slices': cutout('cooked-lemon-chicken-slices', 1.2095, 'Sliced cooked lemon chicken', 'v4', { sha256: '06d747306fed6ec6a8140dc7792dabe71daf489e70f846c40172a1ce7ec1ed97' }),
+  'cooked-steak-slices': cutout('cooked-steak-slices', 1.3938, 'Sliced cooked steak', 'v4', { sha256: 'bfdd394f03b7336e288000435d60e013a5fecbe00cb34693f867050928172a66' }),
+  'cooked-salmon-fillet': cutout('cooked-salmon-fillet', 1.493, 'A cooked salmon fillet', 'v4', { sha256: '92ffa7aa6bf3420e4a5794499c39b7a65d28151b75972824f6d333a63e68e6e8' }),
+  'cooked-rice-ivory-bowl': cutout('cooked-rice-ivory-bowl', 0.9791, 'Cooked rice in an ivory bowl', 'v4', { sha256: 'a9da993b2fb66aff2ced59457d4c6e4e0bee50e68f236ee1de82b30fe9467515' }),
+  'roasted-potato-wedges-group': cutout('roasted-potato-wedges-group', 1.0588, 'Roasted potato wedges', 'v4', { sha256: '47fec2a27093f8098aa54e356e5bb7806a8fb589cfa0f2dd240ddc72e70251ba' }),
+  'cooked-green-beans-group': cutout('cooked-green-beans-group', 0.7176, 'Cooked green beans', 'v4', { sha256: '1c4e938cbc2ceb705541f2d976ae183dd71f37c0b30aa8a0d0995fbe8cb81da1' }),
+  'chicken-wrap-two-halves': cutout('chicken-wrap-two-halves', 1.447, 'A chicken wrap cut in two halves', 'v4', { sha256: '6202357a198ceda3ecddd45b0f8cd391055cc3fa7250a0a4a9c34ab17f002202' }),
+  'tomato-mozzarella-flatbread-four-pieces': cutout('tomato-mozzarella-flatbread-four-pieces', 0.7924, 'Tomato and mozzarella flatbread cut in four', 'v4', { sha256: '4fd80fd4b4edfbd057d20e785a6a222f5164784c00d89aa51a902691459ecabe' }),
+  'fresh-basil-three-leaves': cutout('fresh-basil-three-leaves', 1.2419, 'Three fresh basil leaves', 'v4', { sha256: 'a39ccb6137d554fdb6022b8edac189550f44fc38fa43a269f2565dbd824a205b' }),
+  'lemon-two-wedges': cutout('lemon-two-wedges', 1.283, 'Two lemon wedges', 'v4', { sha256: '97633cfbcde52b23cb1deff46a66a586a5b06772568539eb4f680ae48036a7e6' }),
+  'rustic-bread-slices-group': cutout('rustic-bread-slices-group', 1.2338, 'Slices of rustic bread', 'v4', { sha256: '89e65537d34c52b386a5d55f750bce32e39f173f7c31efb3735d94a8fa501f55' }),
+  'tomato-avocado-salad-ivory-bowl': cutout('tomato-avocado-salad-ivory-bowl', 1.0062, 'Tomato and avocado salad in an ivory bowl', 'v4', { sha256: '322450ca2e4a220680f83592840cb19e5ba6e17e1be35a7c4ef4cc16a4c5b123' }),
+  'beet-carrot-salad-ivory-bowl': cutout('beet-carrot-salad-ivory-bowl', 0.9952, 'Beet and carrot salad in an ivory bowl', 'v4', { sha256: 'bf9b45a6e943ef4c2e18b2adebd7354d1aa92fdf4218e2597c5f88f619f0b024' }),
+  'cabbage-carrot-slaw-ivory-bowl': cutout('cabbage-carrot-slaw-ivory-bowl', 0.999, 'Cabbage and carrot slaw in an ivory bowl', 'v4', { sha256: '24b0c3f61313d02c7ca5e9317e274fabfe4dd82c0dc01baf32d04531325c9420' }),
+  'tomato-basil-salad-ivory-bowl': cutout('tomato-basil-salad-ivory-bowl', 0.9852, 'Cherry tomatoes and basil in an ivory bowl', 'v4', { sha256: 'f224e10e77bad3743971a33abc3f5e33f67cd9fa5bd14caf8f133f6009faf3ae' }),
+  'everyday-gnocchi-bread-cover': mealCover('everyday-gnocchi-bread-cover', 'A bowl of gnocchi with tomato and basil on a wooden board, with slices of rustic bread', '49b681215df581f99d80c88dfe1db62eaa53d9a9b3b84c357f9c026302e867af'),
+  'everyday-lemon-chicken-cover': mealCover('everyday-lemon-chicken-cover', 'Sliced lemon chicken with roasted potatoes, green beans and lemon on a wooden board', 'ad55665d185f18d80986b24e4788292c67f4462f2d6679b58b31358512058335'),
+  'everyday-steak-tomato-avocado-cover': mealCover('everyday-steak-tomato-avocado-cover', 'Sliced steak with roasted potatoes and a tomato and avocado salad on a wooden board', 'bf579e30fbb4f5f6b725a30d1136b1f67a1997dfa5160b1dc9579d7054c6b077'),
+  'everyday-salmon-beet-carrot-cover': mealCover('everyday-salmon-beet-carrot-cover', 'Salmon with a bowl of rice and a beet and carrot salad on a wooden board', '957f9bf1de2fc7fb8dbb9f325f2d9f4dd2240aae2b470dcbdc806e55537068b5'),
+  'everyday-wraps-cabbage-carrot-cover': mealCover('everyday-wraps-cabbage-carrot-cover', 'Chicken wrap halves with a cabbage and carrot slaw on a wooden board', 'a26ad655f74ab03921f4c3ef400c15d4105281589cf7f20fa6c3d9febd7c85df'),
+  'everyday-flatbread-tomato-basil-cover': mealCover('everyday-flatbread-tomato-basil-cover', 'A tomato and mozzarella flatbread cut in pieces with a bowl of tomatoes and basil', 'cdc1ccd6ba9e422baede5d347e4e7edf418916e65bfce6cb62bebfabf7386aeb'),
+
   // Board surface. Generic and provisional: not the wood, grain or finish of Yndarena's boards.
   'generic-honey-wood-surface': {
     role: 'surface', src: SURFACE_FILES['generic-honey-wood-surface'], width: 720, height: 720, pkg: 'v2',
     sourceFile: 'generic-honey-wood-surface.png', alt: '', provenance: 'ai-generated', status: 'provisional', label: 'Generic wood',
   },
 };
+
+// Covers retired by everyday-v4 (replacement-map.json). Any stored reference to an old id resolves to its successor.
+export const MEDIA_REPLACED = {
+  'everyday-gnocchi-cover': 'everyday-gnocchi-bread-cover',
+  'everyday-steak-cover': 'everyday-steak-tomato-avocado-cover',
+  'everyday-salmon-cover': 'everyday-salmon-beet-carrot-cover',
+  'everyday-chicken-wraps-cover': 'everyday-wraps-cabbage-carrot-cover',
+  'everyday-flatbread-cover': 'everyday-flatbread-tomato-basil-cover',
+};
+export const mediaFor = (id) => MEDIA[MEDIA_REPLACED[id] || id] || null;
 
 // Board surface per board model. Replace an entry with the real product reference when it exists;
 // the renderer clips it to the existing board outline, so geometry and Designer coordinates never change.
@@ -182,6 +225,23 @@ export const PHOTO_PIECES = {
   // Nuts & small bites
   'walnuts:pile': { asset: 'rosemary-honey-walnuts-pile', mode: 'group' },
   'almonds:pile': { asset: 'marcona-almonds-pile', mode: 'group' },
+  // Everyday meals: prepared components. Mains served by the piece repeat one image per piece.
+  'gnocchi-bowl:bowl': { asset: 'gnocchi-tomato-basil-bowl', mode: 'group' },
+  'lemon-chicken:sliced': { asset: 'cooked-lemon-chicken-slices', mode: 'units', layout: 'row', unitWidth: 150, unit: 'breast' },
+  'steak:sliced': { asset: 'cooked-steak-slices', mode: 'units', layout: 'row', unitWidth: 160, unit: 'steak' },
+  'salmon:fillet': { asset: 'cooked-salmon-fillet', mode: 'units', layout: 'row', unitWidth: 150, unit: 'portion' },
+  'chicken-wraps:halves': { asset: 'chicken-wrap-two-halves', mode: 'units', layout: 'row', unitWidth: 160, unit: 'wrap' },
+  'flatbread:pieces': { asset: 'tomato-mozzarella-flatbread-four-pieces', mode: 'units', layout: 'row', unitWidth: 200, unit: 'flatbread' },
+  'potatoes:wedges': { asset: 'roasted-potato-wedges-group', mode: 'group' },
+  'green-beans:cooked': { asset: 'cooked-green-beans-group', mode: 'group', turn: true },
+  'rice:bowl': { asset: 'cooked-rice-ivory-bowl', mode: 'group' },
+  'side-tomato-avocado:bowl': { asset: 'tomato-avocado-salad-ivory-bowl', mode: 'group' },
+  'side-beet-carrot:bowl': { asset: 'beet-carrot-salad-ivory-bowl', mode: 'group' },
+  'side-cabbage-carrot:bowl': { asset: 'cabbage-carrot-slaw-ivory-bowl', mode: 'group' },
+  'side-tomato-basil:bowl': { asset: 'tomato-basil-salad-ivory-bowl', mode: 'group' },
+  'rustic-bread:slices': { asset: 'rustic-bread-slices-group', mode: 'group' },
+  'lemon:wedges': { asset: 'lemon-two-wedges', mode: 'group' },
+  'basil:leaves': { asset: 'fresh-basil-three-leaves', mode: 'group' },
   // Garnish
   'rosemary:sprig': { asset: 'rosemary-single-sprig', mode: 'units', layout: 'sprigs', unitHeight: 100, unit: 'sprig' },
 };
@@ -260,6 +320,15 @@ export function photoLayout(piece, qty, base) {
     const spread = Math.abs(angles[0]) * Math.PI / 180;
     const w = uw + 2 * Math.sin(spread) * uh, h = uh;
     return { w, h, parts: angles.map((a) => ({ x: 0, y: h / 2, w: uw, h: uh, r: a, origin: 'bottom' })) };
+  }
+  if (piece.layout === 'row') {
+    // Prepared pieces side by side, slightly overlapping: two breasts, two wraps, two salmon portions.
+    const uw = piece.unitWidth, uh = uw / m.aspect, step = uw * 0.82, cols = Math.min(n, 3), rows = Math.ceil(n / cols);
+    const w = uw + (cols - 1) * step, h = uh + (rows - 1) * uh * 0.8;
+    return {
+      w, h,
+      parts: Array.from({ length: n }, (_, i) => ({ x: -w / 2 + uw / 2 + (i % cols) * step, y: -h / 2 + uh / 2 + Math.floor(i / cols) * uh * 0.8 + (i % 2 ? uh * 0.06 : -uh * 0.06), w: uw, h: uh, r: i % 2 ? 6 : -4 })),
+    };
   }
   // grid: one image per unit, two columns.
   const uw = piece.unitWidth, uh = uw / m.aspect, cols = Math.min(n, 2), rows = Math.ceil(n / cols);

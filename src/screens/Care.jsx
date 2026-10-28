@@ -3,23 +3,19 @@ import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
 import { TopBar, Button, Kicker, Icon, Sheet, DemoNote, Sprig, Segmented, Chip, Empty, useToast } from '../ui.jsx';
 import {
-  careStatus, fmtDate, fmtShort, daysBetween, iso, fromIso, uid, DAY,
+  careStatus, oilPending, fmtDate, fmtShort, daysBetween, iso, fromIso, uid, DAY,
   OCCASION_TYPES, giftInfo, giftWho, whenText, MONTHS, MONTHS_SHORT, CARE_FIRST_WEEK, CARE_EVERY,
 } from '../lib.js';
 
 const MAX_GIFTS = 3;
 
+// Opens from the Home: the care plan block (seg 'care') or the gift dates block (seg 'gifts').
 export default function Care({ params = {} }) {
-  const [seg, setSeg] = useState(params.seg || 'care');
+  const seg = params.seg || 'care';
   return (
     <>
-      <div className="pad" style={{ paddingTop: 'calc(var(--safe-top) + 16px)' }}>
-        <h1 className="h1">Care & gifts</h1>
-        <div style={{ marginTop: 14 }}>
-          <Segmented value={seg} onChange={setSeg} options={[{ id: 'care', label: 'Board care' }, { id: 'gifts', label: 'Gift dates' }]} />
-        </div>
-      </div>
-      {seg === 'care' ? <CarePlan /> : <GiftDates />}
+      <TopBar title={seg === 'care' ? 'Your care plan' : 'Gift dates'} />
+      {seg === 'care' ? <CarePlan /> : <GiftDates startAdd={params.add} />}
     </>
   );
 }
@@ -96,8 +92,18 @@ function CarePlan() {
 
   const cs = careStatus(care, today);
   const results = Object.fromEntries(care.checks.filter((c) => c.n).map((c) => [c.n, c]));
+  const pendingOil = oilPending(care);
   return (
     <div className="pad" style={{ marginTop: 20 }}>
+      {pendingOil && (
+        <div className="card" style={{ padding: '20px 18px', marginBottom: 14, background: 'rgba(172,162,189,.18)', borderColor: 'rgba(172,162,189,.55)' }}>
+          <Kicker>Oil pending</Kicker>
+          <h2 className="h2" style={{ marginTop: 6 }}>Your boards need oil.</h2>
+          <p className="body" style={{ margin: '6px 0 14px' }}>The water soaked in on {fmtDate(fromIso(pendingOil.at))}. Oil them when you can, then let us know.</p>
+          <Button block arrow onClick={() => updateUser((u) => { const c = u.care.checks.find((x) => x.at === pendingOil.at && x.n === pendingOil.n); if (c) { c.oiled = true; c.oiledAt = iso(today); } })}>I oiled my boards</Button>
+          <Button block variant="text" onClick={() => setOil(true)}>Need oil?</Button>
+        </div>
+      )}
       <div className="card" style={{ padding: '20px 18px', background: cs.dueNow ? 'rgba(172,162,189,.18)' : undefined, borderColor: cs.dueNow ? 'rgba(172,162,189,.55)' : undefined }}>
         <Kicker>{cs.dueNow ? `Check ${cs.dueNow.n} of 6` : 'Your care plan'}</Kicker>
         {cs.dueNow ? (
@@ -331,10 +337,11 @@ function OilAsk({ onAnswer }) {
 }
 
 // ---------- Gift dates ----------
-function GiftDates() {
+function GiftDates({ startAdd }) {
   const { user, updateUser, today } = useStore();
   const nav = useNav();
-  const [edit, setEdit] = useState(null);
+  const blank = () => ({ id: null, name: '', occasion: 'Birthday', m: today.getUTCMonth() + 1, d: today.getUTCDate(), once: false, y: today.getUTCFullYear() });
+  const [edit, setEdit] = useState(() => (startAdd && user.gifts.length < MAX_GIFTS ? blank() : null));
   const [plan, setPlan] = useState(null);
   const gifts = user.gifts.map((g) => ({ g, ...giftInfo(g, today) })).sort((a, b) => (a.days ?? 9999) - (b.days ?? 9999));
 

@@ -43,6 +43,7 @@ export default function Shopping({ params }) {
     else if (s.kind === 'design') nav.push('designer', { id: s.id });
     else if (s.kind === 'recipe') nav.push('recipe', { id: s.id });
     else if (s.kind === 'community') nav.push('community', { id: s.id });
+    else if (s.kind === 'meal') nav.push('meal', { id: s.id });
   };
 
   const Line = ({ l }) => (

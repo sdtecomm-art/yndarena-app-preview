@@ -1,14 +1,13 @@
 import { useStore } from '../store.jsx';
 import { useNav } from '../nav.jsx';
-import { Icon, Kicker, Sprig, Button, PhotoPending } from '../ui.jsx';
-import { PresentationCard, CommunityCard, BoardThumb } from '../components.jsx';
-import BoardView from '../board/BoardView.jsx';
-import { PRESENTATIONS, PRESENTATION_ORDER, OCCASIONS } from '../data/presentations.js';
-import { COMMUNITY_ORDER } from '../data/community.js';
-import { TECHNIQUES } from '../data/techniques.js';
-import { presentationItems, careStatus, giftInfo, giftWho, fmtShort, daysBetween, whenText } from '../lib.js';
-import { ItemIcon, PresentationVisual } from '../components.jsx';
+import { Icon, Kicker, Sprig, Button } from '../ui.jsx';
+import { BoardThumb, MealCard } from '../components.jsx';
+import { PRESENTATIONS } from '../data/presentations.js';
+import { MEAL_ORDER } from '../data/meals.js';
+import { presentationItems, careStatus, oilPending, giftInfo, giftWho, fmtDate, fmtShort, fromIso, iso, daysBetween, whenText } from '../lib.js';
 import { WORDMARK } from '../assets.js';
+
+const MAX_GIFTS = 3;
 
 function greeting() {
   const h = new Date().getHours();
@@ -30,34 +29,92 @@ export function AppHead({ onProfile }) {
   );
 }
 
-function ContinueCard({ user }) {
+// What the care plan block says comes only from the existing care state; nothing here invents a date or a result.
+function careView(care, today) {
+  if (care.status !== 'active') {
+    return {
+      kicker: 'Your care plan',
+      title: 'Let’s set up your board care.',
+      text: care.status === 'notyet' ? 'Everything will be ready when your boards arrive.' : 'A two-minute video, a quick water test and gentle reminders.',
+      cta: 'Set up care', go: 'care',
+    };
+  }
+  const cs = careStatus(care, today);
+  if (cs.dueNow) {
+    return {
+      kicker: `Check ${cs.dueNow.n} of 6`, hot: true,
+      title: 'It’s time for a quick water test.',
+      text: 'A few drops of water, one minute. The wood will tell you what it needs.',
+      cta: 'Start water test', go: 'water-test', second: ['View care plan', 'care'],
+    };
+  }
+  const oil = oilPending(care);
+  if (oil) {
+    return {
+      kicker: 'Oil pending', hot: true,
+      title: 'Your board needs oil.',
+      text: `The water soaked in on ${fmtShort(fromIso(oil.at))}. Oil when you can, then mark it done.`,
+      cta: 'Continue care', go: 'care',
+    };
+  }
+  if (cs.next) {
+    const last = [...care.checks].sort((a, b) => (a.at < b.at ? -1 : 1)).pop();
+    const doneToday = last && (last.at === iso(today) || last.oiledAt === iso(today));
+    return {
+      kicker: doneToday ? 'Care done' : 'Your next water test',
+      title: doneToday ? 'Your boards are cared for.' : fmtDate(cs.next.date),
+      text: doneToday ? `Next water test: ${fmtDate(cs.next.date)}.` : `In ${daysBetween(today, cs.next.date)} days. We’ll remind you.`,
+      cta: 'View care plan', go: 'care', second: doneToday ? null : ['Check now', 'water-test'],
+    };
+  }
+  return { kicker: 'Your care plan', title: 'Your care plan is complete.', text: 'Do the water test whenever the wood looks dry.', cta: 'View care plan', go: 'care', second: ['Water test', 'water-test'] };
+}
+
+function CareBlock({ care, today }) {
+  const nav = useNav();
+  const v = careView(care, today);
+  const open = (to) => (to === 'water-test' ? nav.push('water-test') : nav.push('care', { seg: 'care' }));
+  return (
+    <section className={'card care-block' + (v.hot ? ' is-hot' : '')} aria-label="Your care plan">
+      <div className="row-between" style={{ alignItems: 'flex-start' }}>
+        <Kicker>{v.kicker}</Kicker>
+        <div className="round-ico"><Icon name="drop" size={18} /></div>
+      </div>
+      <h2 className="h2" style={{ marginTop: 2 }}>{v.title}</h2>
+      <p className="body" style={{ margin: '6px 0 14px' }}>{v.text}</p>
+      <Button block arrow onClick={() => open(v.go)}>{v.cta}</Button>
+      {v.second && <Button block variant="text" onClick={() => open(v.second[1])}>{v.second[0]}</Button>}
+    </section>
+  );
+}
+
+function ContinueRow({ user }) {
   const nav = useNav();
   const r = user.recent;
-  if (!r) return null;
-  if (r.kind === 'design' && user.designs[r.id]) {
+  if (r?.kind === 'design' && user.designs[r.id]) {
     const d = user.designs[r.id];
     return (
       <button className="card tap" onClick={() => nav.push('designer', { id: d.id })}>
-        <div className="row" style={{ padding: 12 }}>
+        <div className="row" style={{ padding: 10 }}>
           <BoardThumb board={d.board} items={d.items} uid={'cont-' + d.id} />
           <div className="grow">
             <div className="kicker">Pick up where you left off</div>
-            <div className="h3" style={{ fontSize: 17, marginTop: 2 }}>{d.name}</div>
+            <div className="h3" style={{ fontSize: 16, marginTop: 2 }}>{d.name}</div>
           </div>
           <Icon name="chevron" size={18} />
         </div>
       </button>
     );
   }
-  if (r.kind === 'presentation' && PRESENTATIONS[r.id]) {
+  if (r?.kind === 'presentation' && PRESENTATIONS[r.id]) {
     const p = PRESENTATIONS[r.id];
     return (
       <button className="card tap" onClick={() => nav.push('presentation', { id: r.id, comp: r.comp })}>
-        <div className="row" style={{ padding: 12 }}>
+        <div className="row" style={{ padding: 10 }}>
           <BoardThumb board={p.board} items={presentationItems(r.id, r.comp)} uid={'cont-p-' + r.id} />
           <div className="grow">
             <div className="kicker">You were looking at</div>
-            <div className="h3" style={{ fontSize: 17, marginTop: 2 }}>{p.name}</div>
+            <div className="h3" style={{ fontSize: 16, marginTop: 2 }}>{p.name}</div>
           </div>
           <Icon name="chevron" size={18} />
         </div>
@@ -67,154 +124,83 @@ function ContinueCard({ user }) {
   return null;
 }
 
-function Reminders({ user, today }) {
+function GiftBlock({ gifts, today }) {
   const nav = useNav();
-  const cards = [];
-  if (user.care.status === 'active') {
-    const cs = careStatus(user.care, today);
-    if (cs.dueNow) cards.push({ k: 'care', icon: 'drop', title: 'Time for the water test', sub: 'A quick check for your boards', action: () => nav.switchTab('care', { name: 'water-test', params: {} }), hot: true });
-    else if (cs.next) cards.push({ k: 'care', icon: 'drop', title: 'Next board check', sub: `${fmtShort(cs.next.date)} · in ${daysBetween(today, cs.next.date)} days`, action: () => nav.switchTab('care') });
-  }
-  const upcoming = user.gifts.map((g) => ({ g, ...giftInfo(g, today) })).filter((x) => x.date).sort((a, b) => a.days - b.days);
-  if (upcoming[0]) {
-    const x = upcoming[0];
-    cards.push({ k: 'gift', icon: 'gift', title: `${giftWho(x.g)} is ${whenText(x.days)}`, sub: fmtShort(x.date), action: () => nav.switchTab('care', { name: 'care', params: { seg: 'gifts' } }), hot: x.stage != null });
-  }
-  if (!cards.length) return null;
+  const list = gifts.map((g) => ({ g, ...giftInfo(g, today) })).filter((x) => x.date).sort((a, b) => a.days - b.days);
+  const next = list[0];
   return (
-    <div className="section pad stack-8">
-      <Kicker>Your reminders</Kicker>
-      {cards.map((c) => (
-        <button key={c.k} className="reminder-card tap" onClick={c.action}>
-          <div className="round-ico" style={c.hot ? { background: 'rgba(172,162,189,.25)', borderColor: 'rgba(172,162,189,.6)' } : undefined}><Icon name={c.icon} size={18} /></div>
-          <div>
-            <div style={{ fontSize: 16, lineHeight: 1.3 }}>{c.title}</div>
-            <div className="small">{c.sub}</div>
-          </div>
-          <Icon name="chevron" size={18} />
+    <section className="section pad" aria-label="Gift dates">
+      <div className="section-head" style={{ padding: 0 }}>
+        <h2 className="h2">Gift dates</h2>
+        {gifts.length > 0 && <button className="link" onClick={() => nav.push('care', { seg: 'gifts' })}>Manage</button>}
+      </div>
+      {gifts.length === 0 ? (
+        <button className="reminder-card tap" style={{ marginTop: 12 }} onClick={() => nav.push('care', { seg: 'gifts', add: true })}>
+          <div className="round-ico"><Icon name="gift" size={18} /></div>
+          <div><div style={{ fontSize: 16, lineHeight: 1.3 }}>Keep a special date close</div><div className="small">We’ll remind you 21 and 10 days ahead</div></div>
+          <Icon name="plus" size={18} />
         </button>
-      ))}
-    </div>
+      ) : (
+        <>
+          {next?.stage && <p className="small" style={{ margin: '6px 0 0' }}>Reminder sent: {giftWho(next.g)} is {whenText(next.days)}.</p>}
+          <div className="stack-8" style={{ marginTop: 12 }}>
+            {list.map((x) => (
+              <button key={x.g.id} className="reminder-card tap" onClick={() => nav.push('care', { seg: 'gifts' })}>
+                <div className="round-ico" style={x.stage ? { background: 'rgba(172,162,189,.25)', borderColor: 'rgba(172,162,189,.6)' } : undefined}><Icon name="gift" size={18} /></div>
+                <div>
+                  <div style={{ fontSize: 16, lineHeight: 1.3 }}>{giftWho(x.g)}</div>
+                  <div className="small">{fmtShort(x.date)} · {whenText(x.days)}</div>
+                </div>
+                <Icon name="chevron" size={18} />
+              </button>
+            ))}
+          </div>
+          {gifts.length < MAX_GIFTS && <Button block variant="text" icon="plus" style={{ marginTop: 6 }} onClick={() => nav.push('care', { seg: 'gifts', add: true })}>Add a date</Button>}
+        </>
+      )}
+    </section>
   );
+}
+
+// Three everyday meals, a different trio each day so the Home stays fresh without showing the whole catalog.
+function mealsForToday(today) {
+  const start = Math.floor(today.getTime() / 86400000) % MEAL_ORDER.length;
+  return [0, 1, 2].map((i) => MEAL_ORDER[(start + i * 2) % MEAL_ORDER.length]);
 }
 
 export default function Home({ openProfile }) {
   const { user, today } = useStore();
   const nav = useNav();
-  const hero = PRESENTATIONS['love-like-rosemary'];
-  const hasActivity = !!user.recent || user.made.length > 0;
-  const careNone = user.care.status === 'none';
-  const giftsNone = user.gifts.length === 0;
 
   return (
     <>
       <AppHead onProfile={openProfile} />
-      <div className="pad" style={{ marginTop: 16 }}>
-        <h1 className="display">{greeting()}</h1>
-        <p className="lead" style={{ margin: '8px 0 0' }}>{hasActivity ? 'Something to share tonight?' : 'Here’s a board to start with. Everything you need is inside.'}</p>
+      <div className="pad" style={{ marginTop: 8 }}>
+        <h1 className="h1" style={{ fontSize: 32 }}>{greeting()}</h1>
       </div>
 
-      {hasActivity && <div className="pad" style={{ marginTop: 18 }}><ContinueCard user={user} /></div>}
-
-      <div className="pad" style={{ marginTop: 18 }}>
-        <button className="card board-card tap" onClick={() => nav.push('presentation', { id: 'love-like-rosemary' })}>
-          <PresentationVisual id="love-like-rosemary" eager />
-          <div className="card-body">
-            <div className="kicker">Featured · For Two</div>
-            <div className="card-title" style={{ fontSize: 28, marginTop: 4 }}>{hero.name}</div>
-            <p className="small" style={{ margin: '6px 0 10px' }}>{hero.intro}</p>
-            <span className="row" style={{ gap: 14 }}>
-              <span className="meta"><Icon name="clock" size={15} />{hero.time} min</span>
-              <span className="meta"><Icon name="people" size={15} />Serves {hero.serves}</span>
-              <span className="meta"><Icon name="grid" size={15} />3 layouts</span>
-            </span>
-          </div>
-        </button>
+      <div className="pad" style={{ marginTop: 14 }}>
+        <CareBlock care={user.care} today={today} />
       </div>
 
-      <div className="section">
-        <div className="section-head"><h2 className="h2">Find your occasion</h2></div>
-        <div className="hscroll">
-          {OCCASIONS.map((o) => (
-            <button key={o.id} className="card tap" style={{ width: 150, padding: 14 }} onClick={() => nav.switchTab('discover', { name: 'discover', params: { seg: 'presentations', occasion: o.id } })}>
-              <Sprig style={{ height: 34, background: o.id === 'special' ? 'var(--c-lavender)' : 'var(--c-sage)' }} />
-              <div className="h3" style={{ fontSize: 18, marginTop: 8 }}>{o.label}</div>
-              <div className="small" style={{ fontSize: 13 }}>{o.line}</div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <Reminders user={user} today={today} />
-
-      {(careNone || giftsNone) && (
-        <div className="section pad stack-8">
-          <Kicker>Included in your Home</Kicker>
-          {careNone && (
-            <button className="reminder-card tap" onClick={() => nav.switchTab('care')}>
-              <div className="round-ico"><Icon name="drop" size={18} /></div>
-              <div><div style={{ fontSize: 16, lineHeight: 1.3 }}>Care for your boards</div><div className="small">A two-minute video, the water test and reminders</div></div>
-              <Icon name="chevron" size={18} />
-            </button>
-          )}
-          {giftsNone && (
-            <button className="reminder-card tap" onClick={() => nav.switchTab('care', { name: 'care', params: { seg: 'gifts' } })}>
-              <div className="round-ico"><Icon name="gift" size={18} /></div>
-              <div><div style={{ fontSize: 16, lineHeight: 1.3 }}>Keep a special date close</div><div className="small">We’ll remind you 21 and 10 days ahead</div></div>
-              <Icon name="chevron" size={18} />
-            </button>
-          )}
-        </div>
-      )}
-
-      <div className="section">
+      <section className="section" aria-label="Ideas for your table">
         <div className="section-head">
-          <h2 className="h2">More to share</h2>
-          <button className="link" onClick={() => nav.switchTab('discover', { name: 'discover', params: { seg: 'presentations' } })}>See all</button>
+          <h2 className="h2">Ideas for your table</h2>
+          <button className="link" onClick={() => nav.switchTab('discover', { name: 'discover', params: { seg: 'meals' } })}>Discover</button>
         </div>
-        <div className="hscroll">
-          {PRESENTATION_ORDER.filter((id) => id !== 'love-like-rosemary').map((id) => <PresentationCard key={id} id={id} />)}
+        <p className="small pad" style={{ margin: '-4px 0 12px' }}>Serve what you already love.</p>
+        <div className="pad stack-8">
+          {mealsForToday(today).map((id) => <MealCard key={id} id={id} compact />)}
+          <ContinueRow user={user} />
         </div>
-      </div>
+      </section>
 
-      <div className="section">
-        <div className="section-head">
-          <h2 className="h2">Little techniques</h2>
-          <button className="link" onClick={() => nav.switchTab('discover', { name: 'discover', params: { seg: 'techniques' } })}>All</button>
-        </div>
-        <div className="hscroll">
-          {['prosciutto-rose', 'salami-river', 'grape-clusters', 'cracker-fan', 'apple-fan'].map((id) => {
-            const t = TECHNIQUES[id];
-            return (
-              <button key={id} className="card tap" style={{ width: 132, padding: 10 }} onClick={() => nav.push('technique', { id })}>
-                <div style={{ background: 'var(--table)', borderRadius: 10, display: 'grid', placeItems: 'center', height: 92 }}>
-                  <ItemIcon type={t.demoType} style={t.demoStyle} size={84} />
-                </div>
-                <div className="h3" style={{ fontSize: 16, marginTop: 8 }}>{t.name}</div>
-                <div className="small" style={{ fontSize: 12.5 }}>{t.minutes} min</div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      <GiftBlock gifts={user.gifts} today={today} />
 
-      <div className="section">
-        <div className="section-head">
-          <h2 className="h2">From home to home</h2>
-          <button className="link" onClick={() => nav.switchTab('discover', { name: 'discover', params: { seg: 'h2h' } })}>More</button>
-        </div>
-        <div className="hscroll">{COMMUNITY_ORDER.map((id) => <CommunityCard key={id} id={id} />)}</div>
+      <div style={{ textAlign: 'center', margin: '30px 0 0' }}>
+        <button className="link" onClick={() => nav.push('story')}>Our story</button>
+        <div className="label" style={{ marginTop: 14 }}>turning houses into homes</div>
       </div>
-
-      <div className="memory" style={{ marginTop: 34 }}>
-        <div>
-          <p>“If this wooden spoon could talk, it could tell the whole story of my life.”</p>
-          <button className="link" style={{ marginTop: 14 }} onClick={() => nav.push('story')}>Our story</button>
-        </div>
-        <Sprig />
-      </div>
-      <div style={{ textAlign: 'center', margin: '28px 0 0' }} className="label">turning houses into homes</div>
     </>
   );
 }
-

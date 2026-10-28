@@ -1,0 +1,250 @@
+{
+  "version": "yndarena-everyday-v4",
+  "tool": "built-in image_gen",
+  "newlyGeneratedOrEdited": 10,
+  "retainedUnchanged": 12,
+  "assets": [
+    {
+      "id": "gnocchi-tomato-basil-bowl",
+      "label": "Gnocchi, Tomato & Basil",
+      "role": "main",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: One medium round shallow ivory ceramic bowl containing pillowy potato gnocchi gently coated in simple smooth red tomato sauce and three fresh basil leaves on top. A modest natural home dinner portion. No cheese, meat, spoon, fork or other garnish. The entire circular bowl visible.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_gnocchi-tomato-basil-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-3f4ef8ec-6bb7-4477-a837-91fe9d42bee8.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "cooked-lemon-chicken-slices",
+      "label": "Lemon Chicken",
+      "role": "main",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: One fully cooked boneless chicken breast sliced crosswise into six relaxed overlapping pieces, arranged as a compact fan. Warm golden pan-seared exterior, opaque moist white cooked interior, a very light lemon-olive-oil sheen with no puddle. No pink raw center, plate, lemon wedges, leaves or herb sprigs.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_cooked-lemon-chicken-slices",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-0b874f1d-6214-4079-98a3-3ad1aba4ce9b.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "cooked-steak-slices",
+      "label": "Sliced Steak",
+      "role": "main",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: One cooked boneless steak sliced into six realistic overlapping strips in a compact row. Brown seared exterior and warm medium-well cooked center with a very faint warm blush, natural beef fibers. Not raw meat, no blood, no sauce puddle, no plate, knife, butter or herbs.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_cooked-steak-slices",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-373a6e5b-28d8-4306-9c8d-90dbb0084ad7.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "cooked-salmon-fillet",
+      "label": "Cooked Salmon",
+      "role": "main",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: One fully cooked roasted salmon fillet portion, warm coral pink surface with natural slightly golden edges and opaque gently separated flesh flakes, no raw sashimi appearance. No skin hanging out, no sauce, plate, lemon, vegetables or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_cooked-salmon-fillet",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-12d848bf-1d95-43aa-9006-3999cb13d349.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "cooked-rice-ivory-bowl",
+      "label": "Cooked Rice",
+      "role": "side",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: One small round ivory ceramic bowl filled with fluffy cooked white long grain rice, separate naturally irregular grains with a softly domed top. No herbs, sesame, vegetables, chopsticks, spoon or steam. Whole bowl visible.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_cooked-rice-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-3cac508b-b3a5-4ce9-bfde-178a942285ed.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "roasted-potato-wedges-group",
+      "label": "Roasted Potatoes",
+      "role": "side",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: A compact loose group of seven cooked golden roasted skin-on potato wedges, crisp browned edges and soft golden cut surfaces, very light olive oil sheen. No dried herbs, cheese, sauce, bowl or plate, no raw potatoes.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_roasted-potato-wedges-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-77820ffe-486e-426c-b257-a0e91922cec9.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "cooked-green-beans-group",
+      "label": "Green Beans",
+      "role": "side",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: A small compact loose parallel bundle of about twelve cooked trimmed green beans, vivid natural green and lightly glossy, relaxed slight bends. No stems, garlic pieces, bowl, butter puddle or plate.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_cooked-green-beans-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-624496e7-7552-4f87-8143-95b6951e2e0f.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "chicken-wrap-two-halves",
+      "label": "Chicken Wrap",
+      "role": "main",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: One simple flour-tortilla chicken wrap cut diagonally into exactly TWO halves, placed side by side with cut ends visible. Filling is fully cooked white chicken pieces, green lettuce and red tomato with a very small amount of plain creamy dressing. Soft lightly toasted tortilla, natural compact filled wrap. No fries, avocado, cheese, sauce bowl, plate or garnish.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_chicken-wrap-two-halves",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-24f00cbe-4c9a-4439-9c63-b8eb4c31e525.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "tomato-mozzarella-flatbread-four-pieces",
+      "label": "Tomato & Mozzarella Flatbread",
+      "role": "main",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: One small thin rustic oval flatbread pizza cut into FOUR pieces, arranged close together with small clear gaps. Lightly golden baked crust, a thin red tomato sauce layer, naturally melted white mozzarella in modest patches, four small basil leaves. No pepperoni, other meats, olives, chili, utensils, board or plate.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_tomato-mozzarella-flatbread-four-pieces",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-84347bd9-3c0f-4832-953e-2d55ce6f8aa3.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "fresh-basil-three-leaves",
+      "label": "Fresh Basil",
+      "role": "garnish",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: Exactly three small fresh green basil leaves overlapping slightly as a compact garnish group, natural veins, soft moist surface, realistic irregular leaf shapes. No stems, flower, bowl, plate or other herbs.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_fresh-basil-three-leaves",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-c78a388e-476c-429c-83b8-34b00fad6ebc.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "lemon-two-wedges",
+      "label": "Lemon Wedges",
+      "role": "garnish",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photorealistic prepared-food component PNG for the Yndarena serving-board app. Perfectly vertical overhead camera, warm neutral soft window daylight from upper left, authentic appetizing home-cooked texture, restrained natural highlights, not illustration or CGI. Entire subject visible with at least 12 percent clear margin on all sides of a square image. Genuine transparent alpha background outside the subject and in gaps, no table, no board, no text, no watermark, no extra props or ingredients. Only a tight subtle contact shadow. These are COOKED ready-to-serve components, never raw ingredients. Subject: Exactly two small freshly cut lemon wedges, juicy translucent pale yellow flesh, yellow rind and thin white pith, compact side by side arrangement. No whole lemon, seeds prominently visible, leaves, plate or other foods.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_lemon-two-wedges",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-a7218513-711c-42a4-b519-65b95fbbabce.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "everyday-lemon-chicken-cover",
+      "label": "Lemon Chicken & Potatoes",
+      "type": "cover",
+      "role": "everyday-meal",
+      "prompt": "Use case: photorealistic-natural. One editorial serving-inspiration cover for Yndarena, a warm American home-and-kitchen brand. A simple everyday DINNER, never a charcuterie or appetizer spread. Perfectly vertical overhead food photograph, soft warm natural window daylight from upper left, authentic natural home-cooked textures and realistic utensils. One clean generic rectangular honey-toned wood board with softly rounded corners, no handle or grooves, on cream linen; the entire board visible with margin. This is a generic preview board, not an exact product photograph. A relaxed achievable arrangement of just a few elements, no lavish decorations, no extra food beyond the specified meal, no compulsory rosemary garnish. Landscape 3:2 frame suitable for mobile crops. No text, logo, hands, people, collage, illustration, CGI, pans, stovetop or hot cookware. Cooked ready-to-serve food only. Subject: Two small fully cooked golden chicken breasts sliced into relaxed overlapping pieces, opaque white interiors, set on the left half of the clean serving board. One compact group of golden roasted potato wedges on upper right, a small group of cooked green beans on lower right and two small lemon wedges. Only these four food elements, no sauce bowl, raw meat, fruit, cheese, crackers, nuts, butter or extra garnish. Natural clean surface, no puddles.",
+      "status": "complete",
+      "resultKey": "yndarenaV3Result_everyday-lemon-chicken-cover",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-d3b9d291-a528-418e-b34f-8d319a80e252.png",
+      "reusedFromPackage": "yndarena-everyday-v3"
+    },
+    {
+      "id": "rustic-bread-slices-group",
+      "label": "Rustic Bread",
+      "role": "side",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photoreal ready-to-serve food component PNG for Yndarena's serving-board app. Perfectly vertically overhead food camera, warm neutral soft daylight from upper left, realistic fresh food texture and restrained highlights, no illustration or CGI. Whole object entirely visible centered on a square canvas with a generous clear margin on every side. Genuine alpha transparency outside the food or bowl; transparent gaps where applicable. No table, board, utensils, text, watermark or extra foods. Subtle tight contact shadow only. Subject: A compact gently overlapping fan of three slices of rustic white sourdough country bread, creamy irregular open crumb and natural golden brown crust, unbuttered and not toasted. No garlic, herbs, seeds, plate, crumbs or whole loaf.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_rustic-bread-slices-group",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-904830b5-c52a-4411-abde-36299629c584.png"
+    },
+    {
+      "id": "tomato-avocado-salad-ivory-bowl",
+      "label": "Tomato & Avocado Salad",
+      "role": "side",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photoreal ready-to-serve food component PNG for Yndarena's serving-board app. Perfectly vertically overhead food camera, warm neutral soft daylight from upper left, realistic fresh food texture and restrained highlights, no illustration or CGI. Whole object entirely visible centered on a square canvas with a generous clear margin on every side. Genuine alpha transparency outside the food or bowl; transparent gaps where applicable. No table, board, utensils, text, watermark or extra foods. Subtle tight contact shadow only. Subject: One small round shallow warm ivory ceramic bowl containing a simple freshly made salad of red tomato chunks and ripe pale green avocado chunks, lightly dressed with olive oil. Only tomato and avocado, no lettuce, cucumber, onion, cheese, nuts, seeds, herbs or other ingredients. Natural irregular hand cut shapes. All bowl edges visible.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_tomato-avocado-salad-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-455c5cb2-fbca-4c3f-8450-911cfd1e03db.png"
+    },
+    {
+      "id": "beet-carrot-salad-ivory-bowl",
+      "label": "Beet & Carrot Salad",
+      "role": "side",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photoreal ready-to-serve food component PNG for Yndarena's serving-board app. Perfectly vertically overhead food camera, warm neutral soft daylight from upper left, realistic fresh food texture and restrained highlights, no illustration or CGI. Whole object entirely visible centered on a square canvas with a generous clear margin on every side. Genuine alpha transparency outside the food or bowl; transparent gaps where applicable. No table, board, utensils, text, watermark or extra foods. Subtle tight contact shadow only. Subject: One small round shallow warm ivory ceramic bowl containing a simple salad of cooked beetroot wedges and thin fresh carrot ribbons, deep natural burgundy beet and warm orange carrot, lightly dressed with olive oil and lemon. Only beetroot and carrot visible, no lettuce, cucumber, cheese, nuts, seeds, orange fruit, onion or herbs. All bowl edges visible.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_beet-carrot-salad-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-2e1bf88b-fa4e-4ab6-89cd-a4c43036f700.png"
+    },
+    {
+      "id": "cabbage-carrot-slaw-ivory-bowl",
+      "label": "Cabbage & Carrot Slaw",
+      "role": "side",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photoreal ready-to-serve food component PNG for Yndarena's serving-board app. Perfectly vertically overhead food camera, warm neutral soft daylight from upper left, realistic fresh food texture and restrained highlights, no illustration or CGI. Whole object entirely visible centered on a square canvas with a generous clear margin on every side. Genuine alpha transparency outside the food or bowl; transparent gaps where applicable. No table, board, utensils, text, watermark or extra foods. Subtle tight contact shadow only. Subject: One small round shallow warm ivory ceramic bowl with a simple fresh slaw of thinly sliced pale white-green cabbage and fine orange carrot strips, lightly dressed with lemon and olive oil, no thick mayonnaise. Only cabbage and carrot visible, no lettuce, cucumber, purple cabbage, cheese, nuts or herbs. Natural crisp texture. All bowl edges visible.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_cabbage-carrot-slaw-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-706b1eae-b0bf-4102-9cba-5ceea3998cd0.png"
+    },
+    {
+      "id": "tomato-basil-salad-ivory-bowl",
+      "label": "Tomato & Basil",
+      "role": "side",
+      "type": "component",
+      "prompt": "Use case: product-mockup. One independent isolated photoreal ready-to-serve food component PNG for Yndarena's serving-board app. Perfectly vertically overhead food camera, warm neutral soft daylight from upper left, realistic fresh food texture and restrained highlights, no illustration or CGI. Whole object entirely visible centered on a square canvas with a generous clear margin on every side. Genuine alpha transparency outside the food or bowl; transparent gaps where applicable. No table, board, utensils, text, watermark or extra foods. Subtle tight contact shadow only. Subject: One small round shallow warm ivory ceramic bowl of fresh ripe red cherry tomato halves and a few small fresh green basil leaves with a light olive oil sheen. Only tomato and basil, no mozzarella, avocado, lettuce, cucumber, onion, seeds, nuts or balsamic drizzle. All bowl edges visible.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_tomato-basil-salad-ivory-bowl",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-ef4e3d26-e2a8-48d8-86e4-5e14348ee7ad.png"
+    },
+    {
+      "id": "everyday-gnocchi-bread-cover",
+      "label": "Gnocchi, Tomato & Basil",
+      "type": "cover",
+      "role": "everyday-meal",
+      "replacesAssetId": "everyday-gnocchi-cover",
+      "referencePath": "C:/Users/dalla/.codex/.chatgpt-projects/g-p-685437096f0c81919b87992825412c63/output/yndarena-everyday-v3/covers/everyday-gnocchi-cover.png",
+      "prompt": "Use case: precise-object-edit. Edit the attached Yndarena editorial food photograph. Image 1 is the edit target, not just a style reference. Preserve the original overhead camera, wood board shape, cream linen background, warm natural lighting, realistic food photography, image aspect ratio and all main-dish food exactly. No text, logos, people or extra props. Change only the side dish described below; keep the resulting meal simple and believable. Remove the upper-right ivory bowl of lettuce and cucumber completely. In its place, directly on the wood, put three gently overlapping slices of plain rustic sourdough bread with golden crust and creamy open crumb. No salad or salad bowl remains. Preserve the gnocchi bowl with tomato sauce and basil, fork and folded napkin exactly.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_everyday-gnocchi-bread-cover",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-ed4c5b46-5c35-4e0c-bb27-8a9381c1be57.png"
+    },
+    {
+      "id": "everyday-steak-tomato-avocado-cover",
+      "label": "Steak & Roasted Potatoes",
+      "type": "cover",
+      "role": "everyday-meal",
+      "replacesAssetId": "everyday-steak-cover",
+      "referencePath": "C:/Users/dalla/.codex/.chatgpt-projects/g-p-685437096f0c81919b87992825412c63/output/yndarena-everyday-v3/covers/everyday-steak-cover.png",
+      "prompt": "Use case: precise-object-edit. Edit the attached Yndarena editorial food photograph. Image 1 is the edit target, not just a style reference. Preserve the original overhead camera, wood board shape, cream linen background, warm natural lighting, realistic food photography, image aspect ratio and all main-dish food exactly. No text, logos, people or extra props. Change only the side dish described below; keep the resulting meal simple and believable. Replace ONLY the contents of the upper-right ivory salad bowl: remove all lettuce and cucumber, and fill the same bowl with an uncomplicated fresh salad of irregular red tomato chunks and pale green ripe avocado chunks, lightly dressed with olive oil. Only tomato and avocado in the bowl, no leaves, onion, cheese or herbs. Preserve the steaks and potato wedges exactly.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_everyday-steak-tomato-avocado-cover",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-55745da8-21a6-4282-b6d7-e02c6c67c048.png"
+    },
+    {
+      "id": "everyday-salmon-beet-carrot-cover",
+      "label": "Salmon, Rice & Beet Salad",
+      "type": "cover",
+      "role": "everyday-meal",
+      "replacesAssetId": "everyday-salmon-cover",
+      "referencePath": "C:/Users/dalla/.codex/.chatgpt-projects/g-p-685437096f0c81919b87992825412c63/output/yndarena-everyday-v3/covers/everyday-salmon-cover.png",
+      "prompt": "Use case: precise-object-edit. Edit the attached Yndarena editorial food photograph. Image 1 is the edit target, not just a style reference. Preserve the original overhead camera, wood board shape, cream linen background, warm natural lighting, realistic food photography, image aspect ratio and all main-dish food exactly. No text, logos, people or extra props. Change only the side dish described below; keep the resulting meal simple and believable. Replace the lower-right loose group of green beans with a small round ivory bowl of cooked burgundy beetroot wedges and thin orange carrot ribbons, lightly dressed with olive oil and lemon. Only beetroot and carrot in this bowl; no lettuce, cucumber, cheese, seeds or nuts. Keep both cooked salmon portions and the upper-right white rice bowl unchanged. Keep the two lemon wedges, moving them a little only if needed to fit the new bowl. No green beans remain.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_everyday-salmon-beet-carrot-cover",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-67948e4f-6aac-4c83-b675-80d561ff45d5.png"
+    },
+    {
+      "id": "everyday-wraps-cabbage-carrot-cover",
+      "label": "Chicken Wraps",
+      "type": "cover",
+      "role": "everyday-meal",
+      "replacesAssetId": "everyday-chicken-wraps-cover",
+      "referencePath": "C:/Users/dalla/.codex/.chatgpt-projects/g-p-685437096f0c81919b87992825412c63/output/yndarena-everyday-v3/covers/everyday-chicken-wraps-cover.png",
+      "prompt": "Use case: precise-object-edit. Edit the attached Yndarena editorial food photograph. Image 1 is the edit target, not just a style reference. Preserve the original overhead camera, wood board shape, cream linen background, warm natural lighting, realistic food photography, image aspect ratio and all main-dish food exactly. No text, logos, people or extra props. Change only the side dish described below; keep the resulting meal simple and believable. Replace ONLY the contents of the upper-right ivory salad bowl: remove all lettuce and cucumber and add a simple fine-shredded pale white-green cabbage and orange carrot slaw with a light lemon and olive oil dressing, no thick mayonnaise. No purple cabbage, cucumber, lettuce, seeds or other vegetables in the side bowl. Preserve the four chicken wrap halves, including their lettuce and tomato filling, exactly.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_everyday-wraps-cabbage-carrot-cover",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-acfa9f1e-586b-46a4-999d-1920b225d702.png"
+    },
+    {
+      "id": "everyday-flatbread-tomato-basil-cover",
+      "label": "Tomato & Mozzarella Flatbread",
+      "type": "cover",
+      "role": "everyday-meal",
+      "replacesAssetId": "everyday-flatbread-cover",
+      "referencePath": "C:/Users/dalla/.codex/.chatgpt-projects/g-p-685437096f0c81919b87992825412c63/output/yndarena-everyday-v3/covers/everyday-flatbread-cover.png",
+      "prompt": "Use case: precise-object-edit. Edit the attached Yndarena editorial food photograph. Image 1 is the edit target, not just a style reference. Preserve the original overhead camera, wood board shape, cream linen background, warm natural lighting, realistic food photography, image aspect ratio and all main-dish food exactly. No text, logos, people or extra props. Change only the side dish described below; keep the resulting meal simple and believable. Replace ONLY the contents of the upper-right ivory side bowl: remove all lettuce and cucumber and put fresh ripe red cherry tomato halves with a few small basil leaves and a light olive oil sheen. No mozzarella, avocado, onion, lettuce, cucumber or nuts in the side bowl. Preserve the four flatbread pizza pieces with mozzarella, tomato sauce and basil exactly. This is pizza with a simple tomato side, not pizza with a green salad.",
+      "status": "complete",
+      "resultKey": "yndarenaV4Result_everyday-flatbread-tomato-basil-cover",
+      "sourcePath": "C:\\Users\\dalla\\.codex\\generated_images\\01a15ee0-5655-7513-b6af-74c31976096d\\exec-75fcb6ad-56a0-495f-b9f9-0e020e777957.png"
+    }
+  ]
+}

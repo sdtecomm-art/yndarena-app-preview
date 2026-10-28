@@ -7,6 +7,7 @@ import { TECHNIQUES } from '../data/techniques.js';
 import { PRESENTATIONS, PRESENTATION_ORDER } from '../data/presentations.js';
 import { RECIPES } from '../data/recipes.js';
 import { COMMUNITY, COMMUNITY_ORDER } from '../data/community.js';
+import { MEALS, MEAL_ORDER } from '../data/meals.js';
 import { REVIEW } from '../data/review.js';
 
 const MODE = { group: 'Group', cluster: 'Group (visual count)', units: 'One per unit' };
@@ -46,6 +47,7 @@ function coverUses(id) {
     for (const c of p.compositions) if (c.media?.cover === id || c.media?.topView === id) uses.push(`${p.name} · ${c.name}`);
   }
   for (const [rid, r] of Object.entries(RECIPES)) if (r.media?.cover === id) uses.push(`${r.name} recipe`);
+  for (const mid of MEAL_ORDER) if (MEALS[mid].cover === id) uses.push(`${MEALS[mid].name} meal`);
   return uses;
 }
 
@@ -103,7 +105,7 @@ export default function Review() {
                   <div className="grow">
                     <div>{ITEMS[type].name} · {st.label}</div>
                     <div className="sub">{m.sourceFile}{m.reused ? ' (reused)' : ''} · {PACKAGES[m.pkg].name}</div>
-                    <div className="sub">{MODE[piece.mode]}{piece.turn ? ', may turn 90°' : ''} · {TECHNIQUES[st.tech].name} · {m.label}, {m.status}</div>
+                    <div className="sub">{MODE[piece.mode]}{piece.turn ? ', may turn 90°' : ''} · {st.tech ? TECHNIQUES[st.tech].name : 'No technique'} · {m.label}, {m.status}</div>
                     {m.note && <div className="sub">{m.note}</div>}
                     <div className="sub" style={{ fontFamily: 'var(--sans)', fontSize: 11 }}>manifest sha256 {m.sha256.slice(0, 12)}…{m.pkg === 'v2' ? ' (received re-encoded)' : ''}</div>
                   </div>
@@ -119,6 +121,9 @@ export default function Review() {
         {PRESENTATION_ORDER.flatMap((pid) => PRESENTATIONS[pid].compositions.map((c) => (
           <CoverageRow key={pid + c.id} name={`${PRESENTATIONS[pid].name} · ${c.name}`} placements={c.place.map((pl) => [pl.g, pl.s])} />
         )))}
+        {MEAL_ORDER.map((mid) => (
+          <CoverageRow key={mid} name={`Everyday meal · ${MEALS[mid].name}`} placements={MEALS[mid].place.map((pl) => [pl.g, pl.s])} />
+        ))}
         {COMMUNITY_ORDER.map((cid) => (
           <CoverageRow key={cid} name={`From home to home · ${COMMUNITY[cid].name}`} placements={COMMUNITY[cid].items.map((i) => [i.type, i.style])} />
         ))}
@@ -142,6 +147,18 @@ export default function Review() {
             </div>
           );
         })}
+      </div>
+
+      <div className="pad section">
+        <h2 className="h2">Everyday meals (v4)</h2>
+        <p className="small" style={{ margin: '4px 0 0' }}>Built-in meals keyed by stable id; a Home’s saved versions are separate copies and never rewritten. Retired cover ids resolve to their v4 replacements. The retired green-salad side was never in this preview, so no saved version references it.</p>
+        {MEAL_ORDER.map((mid) => (
+          <div key={mid} className="ing-row" style={{ display: 'block' }}>
+            <div>{MEALS[mid].name} <span className="small">· id {mid}</span></div>
+            <div className="note">{MEALS[mid].place.map((pl) => ITEMS[pl.g].name).join(' + ')}</div>
+            <div className="note">{MEALS[mid].layoutNote}</div>
+          </div>
+        ))}
       </div>
 
       <div className="pad section">

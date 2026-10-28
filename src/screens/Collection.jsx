@@ -8,11 +8,14 @@ import BoardView from '../board/BoardView.jsx';
 import { PRESENTATIONS } from '../data/presentations.js';
 import { RECIPES } from '../data/recipes.js';
 import { COMMUNITY } from '../data/community.js';
+import { MEALS } from '../data/meals.js';
+import { mediaFor } from '../data/media.js';
 import { BOARDS } from '../data/catalog.js';
 import { presentationItems, communityItems, listContent } from '../lib.js';
 
 const FILTERS = [
   { id: 'all', label: 'All' },
+  { id: 'meal', label: 'Everyday meals' },
   { id: 'presentation', label: 'Yndarena boards' },
   { id: 'modified', label: 'My versions' },
   { id: 'scratch', label: 'From scratch' },
@@ -26,6 +29,11 @@ function entryView(e, user) {
   if (e.kind === 'presentation') {
     const p = PRESENTATIONS[e.id];
     return { title: p.name, sub: 'Yndarena board', thumb: <BoardThumb board={p.board} items={presentationItems(e.id, e.compositionId)} uid={'col-' + e.id + (e.compositionId || '')} /> };
+  }
+  if (e.kind === 'meal') {
+    const m = MEALS[e.id];
+    if (!m) return null;
+    return { title: m.name, sub: 'Everyday meal', thumb: <div className="thumb"><img src={mediaFor(m.cover).small} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div> };
   }
   if (e.kind === 'recipe') {
     const r = RECIPES[e.id];
@@ -58,6 +66,7 @@ export default function Collection() {
     if (e.kind === 'design') nav.push('item', { id: e.id });
     else if (e.kind === 'presentation') nav.push('presentation', { id: e.id });
     else if (e.kind === 'recipe') nav.push('recipe', { id: e.id });
+    else if (e.kind === 'meal') nav.push('meal', { id: e.id });
     else nav.push('community', { id: e.id });
   };
 
@@ -170,7 +179,7 @@ export function DesignItem({ params }) {
         {d.origin && (
           <p className="small" style={{ marginTop: 8 }}>
             Based on{' '}
-            <button className="link" style={{ padding: 0 }} onClick={() => (d.origin.kind === 'presentation' ? nav.push('presentation', { id: d.origin.id, comp: d.origin.compositionId }) : d.origin.kind === 'community' ? nav.push('community', { id: d.origin.id }) : null)}>
+            <button className="link" style={{ padding: 0 }} onClick={() => (d.origin.kind === 'presentation' ? nav.push('presentation', { id: d.origin.id, comp: d.origin.compositionId }) : d.origin.kind === 'community' ? nav.push('community', { id: d.origin.id }) : d.origin.kind === 'meal' ? nav.push('meal', { id: d.origin.id }) : null)}>
               {d.origin.name}{d.origin.home ? ` · Home #${d.origin.home}` : ''}
             </button>
           </p>

@@ -1,0 +1,596 @@
+[
+  {
+    "id": "gnocchi-tomato-basil-bowl",
+    "file": "components/gnocchi-tomato-basil-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 773501,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      126,
+      124,
+      1129,
+      1130
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "23b75335697f535775dcb377ea93d0b931a37b9abd69414d45934f7a7cb76057",
+    "bytes": 1724789
+  },
+  {
+    "id": "cooked-lemon-chicken-slices",
+    "file": "components/cooked-lemon-chicken-slices.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 845903,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      80,
+      164,
+      1206,
+      1095
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "06d747306fed6ec6a8140dc7792dabe71daf489e70f846c40172a1ce7ec1ed97",
+    "bytes": 1730108
+  },
+  {
+    "id": "cooked-steak-slices",
+    "file": "components/cooked-steak-slices.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 865739,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      76,
+      254,
+      1205,
+      1064
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "bfdd394f03b7336e288000435d60e013a5fecbe00cb34693f867050928172a66",
+    "bytes": 1960640
+  },
+  {
+    "id": "cooked-salmon-fillet",
+    "file": "components/cooked-salmon-fillet.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 1028782,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      42,
+      267,
+      1220,
+      1056
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "92ffa7aa6bf3420e4a5794499c39b7a65d28151b75972824f6d333a63e68e6e8",
+    "bytes": 1386053
+  },
+  {
+    "id": "cooked-rice-ivory-bowl",
+    "file": "components/cooked-rice-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 781391,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      157,
+      147,
+      1096,
+      1106
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "a9da993b2fb66aff2ced59457d4c6e4e0bee50e68f236ee1de82b30fe9467515",
+    "bytes": 1378634
+  },
+  {
+    "id": "roasted-potato-wedges-group",
+    "file": "components/roasted-potato-wedges-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 741404,
+    "cornerAlpha": [
+      1,
+      0,
+      1,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      89,
+      125,
+      1169,
+      1145
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "47fec2a27093f8098aa54e356e5bb7806a8fb589cfa0f2dd240ddc72e70251ba",
+    "bytes": 2114536
+  },
+  {
+    "id": "cooked-green-beans-group",
+    "file": "components/cooked-green-beans-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 957316,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      270,
+      113,
+      1002,
+      1133
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "1c4e938cbc2ceb705541f2d976ae183dd71f37c0b30aa8a0d0995fbe8cb81da1",
+    "bytes": 1417247
+  },
+  {
+    "id": "chicken-wrap-two-halves",
+    "file": "components/chicken-wrap-two-halves.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 871954,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      24,
+      211,
+      1238,
+      1050
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "6202357a198ceda3ecddd45b0f8cd391055cc3fa7250a0a4a9c34ab17f002202",
+    "bytes": 1616180
+  },
+  {
+    "id": "tomato-mozzarella-flatbread-four-pieces",
+    "file": "components/tomato-mozzarella-flatbread-four-pieces.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 901171,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      234,
+      117,
+      1047,
+      1143
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "4fd80fd4b4edfbd057d20e785a6a222f5164784c00d89aa51a902691459ecabe",
+    "bytes": 1798318
+  },
+  {
+    "id": "fresh-basil-three-leaves",
+    "file": "components/fresh-basil-three-leaves.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 954446,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      105,
+      219,
+      1173,
+      1079
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "a39ccb6137d554fdb6022b8edac189550f44fc38fa43a269f2565dbd824a205b",
+    "bytes": 1353190
+  },
+  {
+    "id": "lemon-two-wedges",
+    "file": "components/lemon-two-wedges.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 1047272,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      138,
+      249,
+      1140,
+      1030
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "97633cfbcde52b23cb1deff46a66a586a5b06772568539eb4f680ae48036a7e6",
+    "bytes": 1121361
+  },
+  {
+    "id": "everyday-lemon-chicken-cover",
+    "file": "covers/everyday-lemon-chicken-cover.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "alphaRange": [
+      255,
+      255
+    ],
+    "transparentPixelCount": 0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "ad55665d185f18d80986b24e4788292c67f4462f2d6679b58b31358512058335",
+    "bytes": 3309797
+  },
+  {
+    "id": "rustic-bread-slices-group",
+    "file": "components/rustic-bread-slices-group.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 857506,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      73,
+      179,
+      1197,
+      1090
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "89e65537d34c52b386a5d55f750bce32e39f173f7c31efb3735d94a8fa501f55",
+    "bytes": 1994742
+  },
+  {
+    "id": "tomato-avocado-salad-ivory-bowl",
+    "file": "components/tomato-avocado-salad-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 573263,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      63,
+      66,
+      1192,
+      1188
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "322450ca2e4a220680f83592840cb19e5ba6e17e1be35a7c4ef4cc16a4c5b123",
+    "bytes": 1987377
+  },
+  {
+    "id": "beet-carrot-salad-ivory-bowl",
+    "file": "components/beet-carrot-salad-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 711189,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      107,
+      96,
+      1147,
+      1141
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "bf9b45a6e943ef4c2e18b2adebd7354d1aa92fdf4218e2597c5f88f619f0b024",
+    "bytes": 1891356
+  },
+  {
+    "id": "cabbage-carrot-slaw-ivory-bowl",
+    "file": "components/cabbage-carrot-slaw-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 770778,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      123,
+      120,
+      1127,
+      1125
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "24b0c3f61313d02c7ca5e9317e274fabfe4dd82c0dc01baf32d04531325c9420",
+    "bytes": 1631771
+  },
+  {
+    "id": "tomato-basil-salad-ivory-bowl",
+    "file": "components/tomato-basil-salad-ivory-bowl.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "transparentPixelCount": 769199,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      127,
+      111,
+      1127,
+      1126
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "f224e10e77bad3743971a33abc3f5e33f67cd9fa5bd14caf8f133f6009faf3ae",
+    "bytes": 1693813
+  },
+  {
+    "id": "everyday-gnocchi-bread-cover",
+    "file": "covers/everyday-gnocchi-bread-cover.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "alphaRange": [
+      255,
+      255
+    ],
+    "transparentPixelCount": 0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "49b681215df581f99d80c88dfe1db62eaa53d9a9b3b84c357f9c026302e867af",
+    "bytes": 2760230
+  },
+  {
+    "id": "everyday-steak-tomato-avocado-cover",
+    "file": "covers/everyday-steak-tomato-avocado-cover.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "alphaRange": [
+      255,
+      255
+    ],
+    "transparentPixelCount": 0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "bf579e30fbb4f5f6b725a30d1136b1f67a1997dfa5160b1dc9579d7054c6b077",
+    "bytes": 3012079
+  },
+  {
+    "id": "everyday-salmon-beet-carrot-cover",
+    "file": "covers/everyday-salmon-beet-carrot-cover.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "alphaRange": [
+      255,
+      255
+    ],
+    "transparentPixelCount": 0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "957f9bf1de2fc7fb8dbb9f325f2d9f4dd2240aae2b470dcbdc806e55537068b5",
+    "bytes": 2798377
+  },
+  {
+    "id": "everyday-wraps-cabbage-carrot-cover",
+    "file": "covers/everyday-wraps-cabbage-carrot-cover.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "alphaRange": [
+      255,
+      255
+    ],
+    "transparentPixelCount": 0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "a26ad655f74ab03921f4c3ef400c15d4105281589cf7f20fa6c3d9febd7c85df",
+    "bytes": 2518790
+  },
+  {
+    "id": "everyday-flatbread-tomato-basil-cover",
+    "file": "covers/everyday-flatbread-tomato-basil-cover.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "alphaRange": [
+      255,
+      255
+    ],
+    "transparentPixelCount": 0,
+    "cornerAlpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "visibleBoundsAlphaThreshold32": [
+      0,
+      0,
+      1536,
+      1024
+    ],
+    "boundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "sha256": "cdc1ccd6ba9e422baede5d347e4e7edf418916e65bfce6cb62bebfabf7386aeb",
+    "bytes": 2925951
+  }
+]

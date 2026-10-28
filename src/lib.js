@@ -4,6 +4,7 @@ import { RECIPES, PANTRY } from './data/recipes.js';
 import { PRESENTATIONS } from './data/presentations.js';
 import { COMMUNITY } from './data/community.js';
 import { TECHNIQUES } from './data/techniques.js';
+import { MEALS } from './data/meals.js';
 
 export const uid = (p = 'id') => p + '-' + Math.random().toString(36).slice(2, 9);
 export const pad4 = (n) => String(n).padStart(4, '0');
@@ -20,7 +21,7 @@ export function frac(q) {
   return w ? `${w} ${best[1]}` : best[1];
 }
 
-const PLURAL = { sprigs: ['sprig', 'sprigs'], pieces: ['piece', 'pieces'], clove: ['clove', 'cloves'], can: ['can', 'cans'], stalks: ['stalk', 'stalks'], loaf: ['loaf', 'loaves'], cup: ['cup', 'cups'], pinch: ['pinch', 'pinches'] };
+const PLURAL = { sprigs: ['sprig', 'sprigs'], pieces: ['piece', 'pieces'], clove: ['clove', 'cloves'], can: ['can', 'cans'], stalks: ['stalk', 'stalks'], loaf: ['loaf', 'loaves'], cup: ['cup', 'cups'], pinch: ['pinch', 'pinches'], servings: ['serving', 'servings'], wedges: ['wedge', 'wedges'], leaves: ['leaf', 'leaves'] };
 export function fmtQty(q, unit) {
   const n = frac(q);
   if (unit === 'each') return n;
@@ -47,6 +48,10 @@ export function presentationItems(presId, compId) {
   return itemsFromPlacements(comp.place).map((it, i) => ({ ...it, uid: `${presId}-${comp.id}-${i}` }));
 }
 
+export function mealItems(mid) {
+  return itemsFromPlacements(MEALS[mid].place).map((it, i) => ({ ...it, uid: `${mid}-${i}` }));
+}
+
 export function communityItems(cid) {
   return COMMUNITY[cid].items.map((p, i) => ({ uid: `${cid}-${i}`, type: p.type, qty: p.qty, x: p.x, y: p.y, r: p.r || 0, style: p.style || ITEMS[p.type].styles[0].id }));
 }
@@ -59,7 +64,7 @@ export function totals(items) {
 
 export function techniquesFor(items) {
   const seen = new Set();
-  for (const it of items) seen.add(styleOf(it.type, it.style).tech);
+  for (const it of items) { const t = styleOf(it.type, it.style).tech; if (t) seen.add(t); }
   return [...seen].filter((t) => TECHNIQUES[t]);
 }
 
@@ -81,6 +86,13 @@ export function presentationsUsingRecipe(rid) {
 export function shoppingFromItems(items, boardId, extraRecipes = []) {
   const map = new Map();
   const add = (key, name, qty, unit, from) => {
+    if (qty == null) {
+      // No amount in the source ("a few", "to taste"): listed once, without a quantity.
+      const prev = map.get(key + '|free');
+      if (prev) { if (from && !prev.from.includes(from)) prev.from.push(from); }
+      else map.set(key + '|free', { key, name, amount: null, unit: null, vol: false, from: from ? [from] : [], pantry: PANTRY.has(key) });
+      return;
+    }
     const vol = VOL[unit];
     const k = vol ? key + '|vol' : key + '|' + unit;
     const prev = map.get(k);
@@ -95,6 +107,9 @@ export function shoppingFromItems(items, boardId, extraRecipes = []) {
       const r = RECIPES[it.recipe];
       const batches = Math.max(1, Math.ceil((qty / r.yield.qty) * 2) / 2);
       recipeBatches[it.recipe] = Math.max(recipeBatches[it.recipe] || 0, batches);
+    } else if (Array.isArray(it.shop)) {
+      const from = it.shop.length > 1 ? it.name : null;
+      for (const l of it.shop) add(l.key, l.name, l.qty == null ? null : (l.qty * qty) / it.baseQty, l.unit, from);
     } else if (it.shop) add(it.shop, 'Honey', qty, it.unit, null);
     else add(type, it.name, qty, it.unit, null);
   }
@@ -102,9 +117,10 @@ export function shoppingFromItems(items, boardId, extraRecipes = []) {
   for (const [rid, batches] of Object.entries(recipeBatches)) {
     for (const ing of RECIPES[rid].ingredients) add(ing.key, ing.name.split(',')[0], ing.qty * batches, ing.unit, RECIPES[rid].name);
   }
-  const lines = [...map.values()].map((l) => ({
+  const counted = new Set([...map.values()].filter((l) => l.amount != null).map((l) => l.key));
+  const lines = [...map.values()].filter((l) => l.amount != null || !counted.has(l.key)).map((l) => ({
     ...l,
-    label: l.vol ? fmtVolume(l.amount) : fmtQty(l.amount, l.unit),
+    label: l.amount == null ? '' : l.vol ? fmtVolume(l.amount) : fmtQty(l.amount, l.unit),
   }));
   const serveware = [];
   if (boardId) serveware.push(`${BOARDS[boardId].name} board`);
@@ -152,6 +168,11 @@ export function resolveSource(src, user) {
   if (src.kind === 'community') {
     const c = COMMUNITY[src.id];
     return { title: c.name, subtitle: `Shared by Home #${c.home}`, board: c.board, items: communityItems(src.id) };
+  }
+  if (src.kind === 'meal') {
+    const m = MEALS[src.id];
+    if (!m) return null;
+    return { title: m.name, subtitle: 'Everyday meal', board: m.board, items: mealItems(src.id) };
   }
   if (src.kind === 'recipe') {
     const r = RECIPES[src.id];
@@ -206,6 +227,13 @@ export function careStatus(care, today) {
   const dueNow = currentN > 0 && !doneNs.has(currentN) ? sched[currentN - 1] : null;
   const next = sched.find((s) => s.n > currentN) || null;
   return { sched, doneNs, currentN, dueNow, next };
+}
+
+// The most recent water test said "oil" and the Home hasn't confirmed oiling yet. Never assumed done.
+export function oilPending(care) {
+  if (care.status !== 'active' || !care.checks.length) return null;
+  const last = [...care.checks].sort((a, b) => (a.at < b.at ? -1 : 1)).pop();
+  return last.result === 'soaks' && !last.oiled ? last : null;
 }
 
 // Gift dates, same rules as the existing system: reminders 21 and 10 days ahead.

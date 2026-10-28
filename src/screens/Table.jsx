@@ -167,7 +167,7 @@ export default function Table({ params }) {
                     <div key={k} className="ing-row">
                       <div>
                         <div>{ITEMS[v.it.type].name} <span className="small">· {st.label.toLowerCase()}{v.n > 1 ? `, in ${v.n} spots` : ''}</span></div>
-                        <button className="note" style={{ borderBottom: '1px solid var(--c-line-strong)' }} onClick={() => nav.push('technique', { id: st.tech })}>How to: {TECHNIQUES[st.tech].name}</button>
+                        {st.tech && <button className="note" style={{ borderBottom: '1px solid var(--c-line-strong)' }} onClick={() => nav.push('technique', { id: st.tech })}>How to: {TECHNIQUES[st.tech].name}</button>}
                       </div>
                       <span className="q">{fmtQty(v.qty, ITEMS[v.it.type].unit)}</span>
                     </div>

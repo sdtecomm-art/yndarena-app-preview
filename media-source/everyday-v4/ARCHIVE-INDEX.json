@@ -1,0 +1,49 @@
+{
+  "package": "yndarena-everyday-v4",
+  "instructions": "Extract every ordinary ZIP into the same parent folder and merge the shared root directory. No binary recombination is needed.",
+  "hardMaxBytesPerArchive": 30000000,
+  "parts": [
+    {
+      "file": "yndarena-everyday-v4-part-01.zip",
+      "contents": [
+        "asset-metadata.json",
+        "everyday-meals.json",
+        "galeria.html",
+        "generation-records.json",
+        "LEER-PRIMERO.md",
+        "manifest.json",
+        "PRODUCT-DIRECTION.md",
+        "PROMPT-PARA-CLAUDE-CODE.md",
+        "replacement-map.json",
+        "verification.json",
+        "covers/everyday-flatbread-tomato-basil-cover.png",
+        "covers/everyday-gnocchi-bread-cover.png",
+        "covers/everyday-lemon-chicken-cover.png",
+        "covers/everyday-salmon-beet-carrot-cover.png",
+        "covers/everyday-steak-tomato-avocado-cover.png",
+        "covers/everyday-wraps-cabbage-carrot-cover.png",
+        "components/beet-carrot-salad-ivory-bowl.png",
+        "components/cabbage-carrot-slaw-ivory-bowl.png",
+        "components/chicken-wrap-two-halves.png",
+        "components/cooked-green-beans-group.png"
+      ]
+    },
+    {
+      "file": "yndarena-everyday-v4-part-02.zip",
+      "contents": [
+        "components/cooked-lemon-chicken-slices.png",
+        "components/cooked-rice-ivory-bowl.png",
+        "components/cooked-salmon-fillet.png",
+        "components/cooked-steak-slices.png",
+        "components/fresh-basil-three-leaves.png",
+        "components/gnocchi-tomato-basil-bowl.png",
+        "components/lemon-two-wedges.png",
+        "components/roasted-potato-wedges-group.png",
+        "components/rustic-bread-slices-group.png",
+        "components/tomato-avocado-salad-ivory-bowl.png",
+        "components/tomato-basil-salad-ivory-bowl.png",
+        "components/tomato-mozzarella-flatbread-four-pieces.png"
+      ]
+    }
+  ]
+}

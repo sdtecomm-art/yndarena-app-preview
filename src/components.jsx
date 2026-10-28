@@ -5,8 +5,9 @@ import { ITEMS, BOARDS, sizeFor } from './data/catalog.js';
 import { PRESENTATIONS, OCCASIONS } from './data/presentations.js';
 import { RECIPES } from './data/recipes.js';
 import { COMMUNITY } from './data/community.js';
+import { MEALS } from './data/meals.js';
 import { presentationItems, communityItems } from './lib.js';
-import { MEDIA } from './data/media.js';
+import { MEDIA, mediaFor } from './data/media.js';
 import { useStore, isSaved } from './store.jsx';
 import { useActions } from './actions.js';
 import { useNav } from './nav.jsx';
@@ -49,7 +50,7 @@ export function SaveButton({ kind, id, light }) {
 
 // Responsive, lazy image for a registered asset, always labelled with what it is.
 export function MediaImg({ id, sizes = '(max-width: 500px) 100vw, 390px', eager, tag = true }) {
-  const m = MEDIA[id];
+  const m = mediaFor(id);
   return (
     <>
       <img src={m.src} srcSet={m.srcSet} sizes={sizes} alt={m.alt} width={m.width} height={m.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
@@ -96,6 +97,40 @@ export function PresentationCard({ id, wide }) {
           <Meta icon="clock">{p.time} min</Meta>
           <Meta icon="people">Serves {p.serves}</Meta>
           {p.compositions.length > 1 && <Meta icon="grid">{p.compositions.length} layouts</Meta>}
+        </div>
+      </div>
+    </button>
+  );
+}
+
+// An everyday meal: its cover, name and the time to bring it to the table once the food is ready.
+export function MealCard({ id, compact }) {
+  const nav = useNav();
+  const m = MEALS[id];
+  const cover = mediaFor(m.cover);
+  if (compact) {
+    return (
+      <button className="card tap meal-row" onClick={() => nav.push('meal', { id })}>
+        <img src={cover.small} alt="" loading="lazy" decoding="async" />
+        <div className="grow">
+          <div className="kicker">{m.category}</div>
+          <div className="h3" style={{ fontSize: 18, marginTop: 2 }}>{m.name}</div>
+          <div className="small" style={{ fontSize: 13 }}>Serves {m.serves} · {m.minutes} min to serve</div>
+        </div>
+        <Icon name="chevron" size={18} />
+      </button>
+    );
+  }
+  return (
+    <button className="card board-card tap" onClick={() => nav.push('meal', { id })}>
+      <div className="photo-hero"><MediaImg id={m.cover} /></div>
+      <div className="card-body">
+        <div className="kicker">Everyday meal · {m.category}</div>
+        <div className="card-title" style={{ marginTop: 4 }}>{m.name}</div>
+        <p className="small" style={{ margin: '6px 0 8px' }}>{m.description}</p>
+        <div className="metas">
+          <Meta icon="clock">{m.minutes} min to serve</Meta>
+          <Meta icon="people">Serves {m.serves}</Meta>
         </div>
       </div>
     </button>

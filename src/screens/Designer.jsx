@@ -80,7 +80,7 @@ export default function Designer({ params }) {
   const [past, setPast] = useState([]);
   const [future, setFuture] = useState([]);
   const [sheet, setSheet] = useState(null);
-  const [cat, setCat] = useState('cheese');
+  const [cat, setCat] = useState(design?.origin?.kind === 'meal' ? 'sides' : 'cheese');
   const [suggestIdx, setSuggestIdx] = useState(0);
   const svgRef = useRef();
   const drag = useRef(null);
@@ -160,7 +160,9 @@ export default function Designer({ params }) {
   };
 
   const originText = design.origin
-    ? design.origin.kind === 'presentation'
+    ? design.origin.kind === 'meal'
+      ? `Based on ${design.origin.name}. Swap or remove any side; the original stays as it is.`
+      : design.origin.kind === 'presentation'
       ? `Based on ${design.origin.name}${design.origin.compositionName ? ', ' + design.origin.compositionName : ''}. The original stays as it is.`
       : design.origin.home ? `Based on ${design.origin.name}, shared by Home #${design.origin.home}.` : `Based on ${design.origin.name}.`
     : 'Started from scratch.';
@@ -215,7 +217,7 @@ export default function Designer({ params }) {
               </div>
             )}
             <div className="row wrap" style={{ gap: 14, marginTop: 10 }}>
-              <button className="link" onClick={() => nav.push('technique', { id: st.tech })}>How to: {TECHNIQUES[st.tech].name}</button>
+              {st.tech && <button className="link" onClick={() => nav.push('technique', { id: st.tech })}>How to: {TECHNIQUES[st.tech].name}</button>}
               {it.recipe && <button className="link" onClick={() => nav.push('recipe', { id: it.recipe })}>Recipe</button>}
             </div>
             <div className="inspector-actions">
@@ -292,7 +294,7 @@ export default function Designer({ params }) {
       </Sheet>
 
       <Sheet open={sheet === 'techs'} onClose={() => setSheet(null)} title="Techniques on this board">
-        {[...new Set(items.map((i) => styleOf(i.type, i.style).tech))].map((tid) => (
+        {[...new Set(items.map((i) => styleOf(i.type, i.style).tech).filter(Boolean))].map((tid) => (
           <button key={tid} className="list-row" onClick={() => { setSheet(null); nav.push('technique', { id: tid }); }}>
             <div className="thumb" style={{ width: 52, height: 52, borderRadius: 26 }}><ItemIcon type={TECHNIQUES[tid].demoType} style={TECHNIQUES[tid].demoStyle} size={52} /></div>
             <div className="grow"><div>{TECHNIQUES[tid].name}</div><div className="sub">{TECHNIQUES[tid].summary}</div></div>

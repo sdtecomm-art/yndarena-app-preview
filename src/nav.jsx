@@ -1,10 +1,11 @@
 // Minimal stack navigation: one stack per tab, full-screen routes hide the tab bar.
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-export const TABS = ['home', 'discover', 'collection', 'care'];
+// Care & gifts is no longer a tab: its screens open from the Home blocks. Old links to the 'care' tab land there.
+export const TABS = ['home', 'discover', 'collection'];
 const FULL = new Set(['designer', 'table', 'water-test', 'share']);
 
-const roots = () => ({ home: [{ name: 'home', key: 'home' }], discover: [{ name: 'discover', key: 'discover' }], collection: [{ name: 'collection', key: 'collection' }], care: [{ name: 'care', key: 'care' }] });
+const roots = () => ({ home: [{ name: 'home', key: 'home' }], discover: [{ name: 'discover', key: 'discover' }], collection: [{ name: 'collection', key: 'collection' }] });
 let n = 0;
 
 const Ctx = createContext(null);
@@ -37,6 +38,7 @@ export function NavProvider({ children }) {
     });
   }, []);
   const switchTab = useCallback((tab, route) => {
+    if (tab === 'care') { tab = 'home'; route = route || { name: 'care' }; }
     setNav((s) => {
       const stacks = { ...s.stacks };
       if (s.tab === tab && !route) stacks[tab] = stacks[tab].slice(0, 1);
@@ -47,7 +49,7 @@ export function NavProvider({ children }) {
       return { ...s, tab, dir: 'none', stacks };
     });
   }, []);
-  const resetAll = useCallback((tab = 'home') => setNav({ tab, stacks: roots(), dir: 'none' }), []);
+  const resetAll = useCallback((tab = 'home') => setNav({ tab: tab === 'care' ? 'home' : tab, stacks: roots(), dir: 'none' }), []);
 
   const value = useMemo(() => {
     const stack = nav.stacks[nav.tab];

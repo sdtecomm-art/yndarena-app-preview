@@ -1,5 +1,6 @@
 import { useStore } from './store.jsx';
-import { uid, presentationItems, communityItems } from './lib.js';
+import { uid, presentationItems, communityItems, mealItems } from './lib.js';
+import { MEALS } from './data/meals.js';
 import { PRESENTATIONS } from './data/presentations.js';
 import { COMMUNITY } from './data/community.js';
 import { RECIPES } from './data/recipes.js';
@@ -42,6 +43,21 @@ export function useActions() {
           kind: 'modified',
           origin: { kind: 'presentation', id: presId, compositionId: comp.id, name: p.name, compositionName: comp.name },
           items: fresh(presentationItems(presId, comp.id)),
+        }, id);
+      });
+      return id;
+    },
+    // A Home's own copy of an everyday meal. Later updates to the built-in meal never touch it.
+    fromMeal(mid) {
+      const m = MEALS[mid];
+      const id = uid('d');
+      updateUser((u) => {
+        newDesign(u, {
+          name: `${m.name} · My version`,
+          board: m.board,
+          kind: 'modified',
+          origin: { kind: 'meal', id: mid, name: m.name },
+          items: fresh(mealItems(mid)),
         }, id);
       });
       return id;
