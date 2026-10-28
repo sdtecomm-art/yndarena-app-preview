@@ -1,5 +1,8 @@
 import { TopBar, Kicker, DemoNote } from '../ui.jsx';
 import BoardView from '../board/BoardView.jsx';
+import { BOARD, GROOVE, LIFT_GAP, CONTAINERS, PROFILES, serviceZone } from '../data/physical.js';
+import { boardFit, groupLayout, fitMode } from '../board/geometry.js';
+import { presentationItems, mealItems, communityItems } from '../lib.js';
 import { MEDIA, PACKAGES, PHOTO_PIECES, BOARD_SURFACES, photoPiece } from '../data/media.js';
 import { VIDEOS, videoReady } from '../data/videos.js';
 import { ITEMS, BOARDS, CATEGORIES, styleOf } from '../data/catalog.js';
@@ -34,7 +37,7 @@ function categorySheet(cat) {
   const rows = Math.ceil(pieces.length / cols);
   return pieces.map(([type, style], i) => ({
     uid: `${type}:${style}`, type, style, qty: ITEMS[type].baseQty, r: 0,
-    x: (600 / cols) * ((i % cols) + 0.5), y: (400 / rows) * (Math.floor(i / cols) + 0.5),
+    x: (BOARD.w / cols) * ((i % cols) + 0.5), y: (BOARD.h / rows) * (Math.floor(i / cols) + 0.5),
   }));
 }
 
@@ -52,7 +55,22 @@ function coverUses(id) {
 }
 
 // Review panel: provenance, coverage, covers, videos and checks. Reached from preview tools only.
+function fitRowsAll() {
+  const tight = { x: 25, y: 25, w: BOARD.w - 50, h: BOARD.h - 50, corner: 20 };
+  const row = (name, items) => {
+    const byUid = Object.fromEntries(items.map((i) => [i.uid, ITEMS[i.type].name]));
+    const mode = fitMode(items);
+    return { name, mode, fit: boardFit(items, undefined, mode), tight: boardFit(items, tight, mode), along: items.filter((i) => i.alongside).length, label: (u) => byUid[u] || u };
+  };
+  return [
+    ...MEAL_ORDER.map((id) => row(`Meal · ${MEALS[id].name}`, mealItems(id))),
+    ...PRESENTATION_ORDER.flatMap((pid) => PRESENTATIONS[pid].compositions.map((c) => row(`${PRESENTATIONS[pid].name} · ${c.name}`, presentationItems(pid, c.id)))),
+    ...COMMUNITY_ORDER.map((cid) => row(`From home to home · ${COMMUNITY[cid].name}`, communityItems(cid))),
+  ];
+}
+
 export default function Review() {
+  const fitRows = fitRowsAll();
   const llr = PRESENTATIONS['love-like-rosemary'];
   const twoHalves = llr.compositions.find((c) => c.id === 'two-halves');
   const styles = Object.entries(ITEMS).flatMap(([type, it]) => it.styles.map((s) => [type, s.id]));
@@ -68,6 +86,52 @@ export default function Review() {
         <h1 className="h1" style={{ marginTop: 6 }}>Photographic library</h1>
         <p className="small" style={{ marginTop: 8 }}>Updated {REVIEW.updated}.</p>
         <ul className="check-list">{REVIEW.packages.map((m) => <li key={m}><span className="mk">·</span>{m}</li>)}</ul>
+      </div>
+
+      <div className="pad section">
+        <h2 className="h2">Board and scale</h2>
+        <ul className="check-list">
+          <li><span className="mk">✓</span>Board {BOARD.w / 10} × {BOARD.h / 10} × {BOARD.thickness / 10} cm, {BOARD.status}: {BOARD.source}. Drawn at 330:240 in every view.</li>
+          <li><span className="mk">○</span>Same size for all three models: {BOARD.appliesTo.status}. {BOARD.appliesTo.source}.</li>
+          <li><span className="mk">○</span>Juice groove: serving zone inset {GROOVE.inset} mm ({serviceZone().w} × {serviceZone().h} mm before the curves), groove {GROOVE.width} mm, corner curve {GROOVE.corner} mm. {GROOVE.status}: {GROOVE.source}. Edit GROOVE in src/data/physical.js.</li>
+          <li><span className="mk">○</span>A rough pixel reading of the cropped photo suggests an inset nearer 23–27 mm and corner curves near 20 mm. Not a measurement; see the sensitivity column below.</li>
+          <li><span className="mk">○</span>Space to lift a piece: {LIFT_GAP.mm} mm between dishes ({LIFT_GAP.status}). Garnish and small fills may touch.</li>
+          <li><span className="mk">○</span>Corner radius {BOARD.cornerRadius.mm} mm ({BOARD.cornerRadius.status}).</li>
+        </ul>
+      </div>
+
+      <div className="pad section">
+        <h2 className="h2">Fit on the board</h2>
+        <p className="small" style={{ margin: '4px 0 0' }}>Every group's full footprint, rotations included, inside the serving zone and apart from its neighbours. Uses estimated sizes: a pass means the layout is plausible, not that it was tested on a real board.</p>
+        {fitRows.map((r) => (
+          <div key={r.name} className="ing-row" style={{ display: 'block' }}>
+            <div>{r.name} <span className="small">· {r.mode === 'dinner' ? 'plated' : 'shared board'} · {r.fit.fits ? 'fits (estimated)' : 'does not fit'}{r.along ? ` · ${r.along} alongside` : ''} · with a 25 mm inset: {r.tight.fits ? 'fits' : 'does not fit'}</span></div>
+            {!r.fit.fits && <div className="note">{r.fit.outside.length ? `Past the groove: ${r.fit.outside.map(r.label).join(', ')}. ` : ''}{r.fit.crowded.length ? `Tight to lift: ${r.fit.crowded.map(([a, b]) => `${r.label(a)} / ${r.label(b)}`).join(', ')}.` : ''}</div>}
+          </div>
+        ))}
+      </div>
+
+      <div className="pad section">
+        <h2 className="h2">Containers</h2>
+        <p className="small" style={{ margin: '4px 0 0' }}>A bowl keeps its diameter. More than it holds adds a bowl, or one bowl is refilled; it never grows.</p>
+        {Object.entries(CONTAINERS).map(([id, c]) => (
+          <div key={id} className="ing-row"><span>{c.label}</span><span className="q" style={{ textAlign: 'right' }}>Ø {Math.round(c.d)} mm · {c.status}</span></div>
+        ))}
+      </div>
+
+      <div className="pad section">
+        <h2 className="h2">Component sizes</h2>
+        <p className="small" style={{ margin: '4px 0 0' }}>Physical footprint at the base amount. All estimates pending a test with real food on a real board; images never set a size.</p>
+        {Object.entries(PROFILES).map(([key, pr]) => {
+          const [type, style] = key.split(':');
+          const l = groupLayout({ type, style, qty: ITEMS[type].baseQty });
+          return (
+            <div key={key} className="ing-row" style={{ display: 'block' }}>
+              <div>{ITEMS[type].name} · {styleOf(type, style).label} <span className="small">· {Math.round(l.w)} × {Math.round(l.h)} mm{pr.capacity ? ` · holds ${pr.capacity} ${ITEMS[type].unit}` : ''}</span></div>
+              <div className="note">{pr.kind} · {pr.status}: {pr.source}</div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="pad section">

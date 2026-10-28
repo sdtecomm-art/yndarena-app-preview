@@ -2,6 +2,7 @@
 // no real accounts, no Home counter, no emails, no purchases.
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { uid, pad4, presentationItems, todayDate, iso, DAY } from './lib.js';
+import { fromLegacy } from './data/physical.js';
 
 const KEY = 'ynd-preview-v2';
 export const DEMO_CODE = '246810';
@@ -42,6 +43,7 @@ function returningUser() {
   const did = 'd-anniversary';
   u.designs[did] = {
     id: did,
+    units: 'mm',
     name: 'Love, Like Rosemary · Our version',
     board: 'cheese-bread',
     kind: 'modified',
@@ -95,10 +97,33 @@ function initialState() {
   };
 }
 
+// Designs saved before the move to physical units (600 × 400 canvas) are converted once to board mm.
+// The original items and versions are kept untouched under `legacy`; names, boards and contents stay the same.
+export function migrateDesigns(state) {
+  for (const user of Object.values(state.users || {})) {
+    for (const d of Object.values(user.designs || {})) {
+      if (d.units === 'mm') continue;
+      d.legacy = { items: d.items, versions: d.versions, canvas: [600, 400] };
+      const conv = (items) => items.map((i) => ({ ...i, ...fromLegacy({ x: i.x, y: i.y }) }));
+      d.items = conv(d.items || []);
+      d.versions = (d.versions || []).map((v) => ({ ...v, items: conv(v.items || []) }));
+      d.units = 'mm';
+    }
+  }
+  return state;
+}
+
 function load() {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const state = JSON.parse(raw);
+      const before = JSON.stringify(state);
+      migrateDesigns(state);
+      // Persist the conversion once, so every later read sees board mm.
+      if (JSON.stringify(state) !== before) localStorage.setItem(KEY, JSON.stringify(state));
+      return state;
+    }
   } catch (e) { /* storage unavailable */ }
   return initialState();
 }

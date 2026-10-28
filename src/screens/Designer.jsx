@@ -5,16 +5,19 @@ import { useStore } from '../store.jsx';
 import { Icon, IconButton, Sheet, Chip, Stepper, Button, DemoNote, useToast } from '../ui.jsx';
 import { ItemIcon } from '../components.jsx';
 import BoardView from '../board/BoardView.jsx';
-import { ITEMS, BOARDS, CATEGORIES, BOARD_W, BOARD_H, sizeFor, styleOf, LAYER_ORDER } from '../data/catalog.js';
+import { ITEMS, BOARDS, CATEGORIES, styleOf, LAYER_ORDER } from '../data/catalog.js';
+import { BOARD, fromLegacy, profileOf, containerPlan } from '../data/physical.js';
+import { sizeOf, boardFit, groupLayout, fitMode } from '../board/geometry.js';
 import { PRESENTATIONS } from '../data/presentations.js';
 import { TECHNIQUES } from '../data/techniques.js';
 import { RECIPES } from '../data/recipes.js';
 import { uid, fmtQty, totals } from '../lib.js';
 
+// Keeps a group's centre on the board (mm). Whether it fits inside the groove is checked separately, never forced.
 const clampItem = (it) => {
-  const [w, h] = sizeFor(it.type, it.qty, it.style);
-  const mx = Math.min(w, h) / 2 - 8;
-  return { ...it, x: Math.max(mx, Math.min(BOARD_W - mx, it.x)), y: Math.max(mx, Math.min(BOARD_H - mx, it.y)) };
+  const [w, h] = sizeOf(it);
+  const mx = Math.min(BOARD.w / 2, Math.min(w, h) / 2 - 4), my = Math.min(BOARD.h / 2, Math.min(w, h) / 2 - 4);
+  return { ...it, x: Math.max(mx, Math.min(BOARD.w - mx, it.x)), y: Math.max(my, Math.min(BOARD.h - my, it.y)) };
 };
 
 // Prepared arrangements. Deterministic layouts for the demo content, not an AI engine.
@@ -45,7 +48,8 @@ function arrange(kind, items) {
     });
     garnish.forEach((g, i) => { out[g.uid] = { x: i % 2 ? 520 : 80, y: i % 2 ? 70 : 335, r: 57 }; });
   }
-  return items.map((it) => clampItem(out[it.uid] ? { ...it, ...out[it.uid] } : it));
+  // Arrangements are authored on the legacy 600 × 400 canvas and converted to mm.
+  return items.map((it) => clampItem(out[it.uid] ? { ...it, ...fromLegacy(out[it.uid]) } : it));
 }
 
 function presentationArrangements(design) {
@@ -84,6 +88,15 @@ export default function Designer({ params }) {
   const [suggestIdx, setSuggestIdx] = useState(0);
   const svgRef = useRef();
   const drag = useRef(null);
+  // The toolbar scrolls on narrow phones: fade the edge that has more tools behind it.
+  const toolsRef = useRef();
+  const [toolsMore, setToolsMore] = useState('');
+  const onToolsScroll = () => {
+    const el = toolsRef.current; if (!el) return;
+    const l = el.scrollLeft > 2, r = el.scrollLeft + el.clientWidth < el.scrollWidth - 2;
+    setToolsMore(l && r ? 'both' : l ? 'left' : r ? 'right' : '');
+  };
+  useEffect(() => { onToolsScroll(); window.addEventListener('resize', onToolsScroll); return () => window.removeEventListener('resize', onToolsScroll); }, []); // eslint-disable-line
 
   useEffect(() => {
     if (drag.current) return;
@@ -98,7 +111,9 @@ export default function Designer({ params }) {
   const redo = () => { if (!future.length) return; const nx = future[0]; setPast((p) => [...p, { items, board }]); setFuture(future.slice(1)); setItems(nx.items); setBoard(nx.board); setSel(null); };
 
   const selected = items.find((i) => i.uid === sel);
-  const patchSel = (patch) => commit(items.map((i) => (i.uid === sel ? clampItem({ ...i, ...patch }) : i)));
+  const patchSel = (patch) => commit(items.map((i) => (i.uid === sel ? clampItem(Object.fromEntries(Object.entries({ ...i, ...patch }).filter(([, v]) => v !== undefined))) : i)));
+  // Changing the prepared amount keeps what is on the board at once within it.
+  const setQty = (qty) => { const s = items.find((i) => i.uid === sel); patchSel(s.placed != null && s.placed >= qty ? { qty, placed: undefined } : { qty }); };
 
   const toBoard = (e) => {
     const pt = svgRef.current.createSVGPoint();
@@ -109,6 +124,7 @@ export default function Designer({ params }) {
     e.stopPropagation();
     setSel(id);
     const it = items.find((i) => i.uid === id);
+    if (it.alongside) return;
     const p = toBoard(e);
     drag.current = { id, dx: p.x - it.x, dy: p.y - it.y, moved: false, before: items };
     svgRef.current.setPointerCapture?.(e.pointerId);
@@ -129,7 +145,7 @@ export default function Designer({ params }) {
   const addItem = (type) => {
     const it = ITEMS[type];
     const n = items.length;
-    const nu = clampItem({ uid: uid('it'), type, qty: it.baseQty, x: 300 + ((n * 53) % 180) - 90, y: 200 + ((n * 37) % 120) - 60, r: 0, style: it.styles[0].id });
+    const nu = clampItem({ uid: uid('it'), type, qty: it.baseQty, x: BOARD.w / 2 + ((n * 29) % 100) - 50, y: BOARD.h / 2 + ((n * 22) % 72) - 36, r: 0, style: it.styles[0].id });
     commit([...items, nu]);
     setSel(nu.uid);
     setSheet(null);
@@ -143,7 +159,7 @@ export default function Designer({ params }) {
     if (s.comp) {
       const pool = {};
       items.forEach((i) => { (pool[i.type] = pool[i.type] || []).push(i); });
-      const next = s.comp.place.map((p) => ({ uid: uid('it'), type: p.g, qty: p.q, x: p.x, y: p.y, r: p.r || 0, style: p.s || ITEMS[p.g].styles[0].id }));
+      const next = s.comp.place.map((p) => ({ uid: uid('it'), type: p.g, qty: p.q, ...fromLegacy({ x: p.x, y: p.y }), r: p.r || 0, style: p.s || ITEMS[p.g].styles[0].id }));
       commit(next);
     } else commit(arrange(s.id, items));
     setSel(null);
@@ -169,6 +185,19 @@ export default function Designer({ params }) {
 
   const it = selected && ITEMS[selected.type];
   const st = selected && styleOf(selected.type, selected.style);
+  const selProf = selected && profileOf(selected.type, st.id);
+  const bowl = selProf?.kind === 'container' ? { prof: selProf, ...groupLayout(selected) } : null;
+  const canStack = selProf?.kind === 'units' && ['row', 'shingle'].includes(selProf.layout) && selected.qty > 1;
+  const fit = boardFit(items, undefined, fitMode(items));
+  const flagged = new Set([...fit.outside, ...fit.crowded.flat().filter((x) => typeof x === 'string')]);
+  const hint = selected
+    ? selected.alongside ? 'Alongside the board · tap On the board to place it'
+      : fit.outside.includes(selected.uid) ? 'Part of this sits past the groove. Move it in, or set it alongside.'
+      : fit.crowded.some((c) => c.includes(selected.uid)) ? 'A little tight to lift. Give it some room.'
+      : 'Drag to move · sizes are estimates'
+    : !items.length ? 'An empty board, ready for you'
+    : flagged.size ? `${fit.outside.length ? 'Some food sits past the groove' : 'A few pieces are tight to lift'} · tap to adjust`
+    : 'Tap a group to edit it';
 
   return (
     <div className="designer">
@@ -181,7 +210,7 @@ export default function Designer({ params }) {
         <IconButton name="save" label="Save version" onClick={saveVersion} />
       </div>
 
-      <div className="designer-tools">
+      <div className="designer-tools" ref={toolsRef} onScroll={onToolsScroll} data-more={toolsMore}>
         <button className="tool" onClick={() => setSheet('library')}><Icon name="plus" size={20} />Add</button>
         <button className="tool" onClick={undo} disabled={!past.length}><Icon name="undo" size={20} />Undo</button>
         <button className="tool" onClick={redo} disabled={!future.length}><Icon name="redo" size={20} />Redo</button>
@@ -192,13 +221,13 @@ export default function Designer({ params }) {
       </div>
 
       <div className="designer-canvas" onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
-        <BoardView svgRef={svgRef} boardId={board} items={items} uid={'des-' + params.id} selected={sel} onItemDown={onItemDown} onBgDown={() => setSel(null)} />
+        <BoardView svgRef={svgRef} boardId={board} items={items} uid={'des-' + params.id} selected={sel} onItemDown={onItemDown} onBgDown={() => setSel(null)} flag={flagged} />
         {!items.length && (
           <div style={{ position: 'absolute', textAlign: 'center', maxWidth: 240 }}>
             <Button small onClick={() => setSheet('library')} icon="plus">Add your first group</Button>
           </div>
         )}
-        <div className="canvas-hint">{selected ? 'Drag to move · sizes are approximate' : items.length ? 'Tap a group to edit it' : 'An empty board, ready for you'}</div>
+        <div className="canvas-hint">{hint}</div>
       </div>
 
       <div className="inspector">
@@ -209,11 +238,35 @@ export default function Designer({ params }) {
                 <div className="kicker">{CATEGORIES.find((c) => c.id === it.cat).label}</div>
                 <div className="h3" style={{ fontSize: 19 }}>{it.name}</div>
               </div>
-              <Stepper label={fmtQty(selected.qty, it.unit)} onDec={() => patchSel({ qty: Math.max(it.min, +(selected.qty - it.step).toFixed(3)) })} onInc={() => patchSel({ qty: Math.min(it.max, +(selected.qty + it.step).toFixed(3)) })} />
+              <Stepper label={fmtQty(selected.qty, it.unit)} onDec={() => setQty(Math.max(it.min, +(selected.qty - it.step).toFixed(3)))} onInc={() => setQty(Math.min(it.max, +(selected.qty + it.step).toFixed(3)))} />
             </div>
+            {selected.placed != null && (
+              <div className="row-between bowl-note">
+                <span>On the board now<span className="small" style={{ display: 'block' }}>{fmtQty(selected.qty - selected.placed, it.unit)} kept aside to refill</span></span>
+                <Stepper label={fmtQty(selected.placed, it.unit)} onDec={() => patchSel({ placed: Math.max(it.step, +(selected.placed - it.step).toFixed(3)) })} onInc={() => { const v = +(selected.placed + it.step).toFixed(3); patchSel(v >= selected.qty ? { placed: undefined } : { placed: v }); }} />
+              </div>
+            )}
             {it.styles.length > 1 && (
               <div className="row wrap" style={{ gap: 6, marginTop: 10 }}>
                 {it.styles.map((s) => <Chip key={s.id} active={st.id === s.id} onClick={() => patchSel({ style: s.id })}>{s.label}</Chip>)}
+              </div>
+            )}
+            {canStack && (
+              <div className="row wrap" style={{ gap: 6, marginTop: 10 }}>
+                <Chip active={selected.arrange !== 'column'} onClick={() => patchSel({ arrange: 'row' })}>Side by side</Chip>
+                <Chip active={selected.arrange === 'column'} onClick={() => patchSel({ arrange: 'column' })}>Stacked</Chip>
+              </div>
+            )}
+            {bowl && (
+              <div className="bowl-note">
+                <span>{bowl.container.label}{bowl.plan.bowls > 1 ? ` × ${bowl.plan.bowls}` : ''} · holds about {fmtQty(bowl.prof.capacity, it.unit)} each</span>
+                {bowl.plan.need > 1 && (
+                  <div className="row wrap" style={{ gap: 6, marginTop: 6 }}>
+                    <Chip active={selected.overflow !== 'refill'} onClick={() => patchSel({ overflow: 'extra' })}>{`${bowl.plan.need} bowls`}</Chip>
+                    <Chip active={selected.overflow === 'refill'} onClick={() => patchSel({ overflow: 'refill' })}>One bowl, refill</Chip>
+                  </div>
+                )}
+                {selected.overflow === 'refill' && bowl.plan.keptBack > 0 && <span className="small" style={{ display: 'block', marginTop: 4 }}>Keep {fmtQty(bowl.plan.keptBack, it.unit)} back to refill.</span>}
               </div>
             )}
             <div className="row wrap" style={{ gap: 14, marginTop: 10 }}>
@@ -222,7 +275,8 @@ export default function Designer({ params }) {
             </div>
             <div className="inspector-actions">
               <button onClick={() => patchSel({ r: ((selected.r || 0) + 15) % 360 })}><Icon name="rotate" size={18} />Rotate</button>
-              <button onClick={() => { const c = clampItem({ ...selected, uid: uid('it'), x: selected.x + 28, y: selected.y + 22 }); commit([...items, c]); setSel(c.uid); }}><Icon name="copy" size={18} />Duplicate</button>
+              <button onClick={() => { const c = clampItem({ ...selected, uid: uid('it'), x: selected.x + 16, y: selected.y + 13 }); commit([...items, c]); setSel(c.uid); }}><Icon name="copy" size={18} />Duplicate</button>
+              <button onClick={() => patchSel(selected.alongside ? { alongside: false, x: BOARD.w / 2, y: BOARD.h / 2 } : { alongside: true })}><Icon name="grid" size={18} />{selected.alongside ? 'On the board' : 'Alongside'}</button>
               <button onClick={() => (it.subs.length ? setSheet('swap') : toast('No swaps for this one yet.'))}><Icon name="swap" size={18} />Swap</button>
               <button onClick={() => { commit(items.filter((i) => i.uid !== sel)); setSel(null); }}><Icon name="trash" size={18} />Remove</button>
             </div>
@@ -277,7 +331,7 @@ export default function Designer({ params }) {
             {board === b.id && <Icon name="check" />}
           </button>
         ))}
-        <DemoNote className="mt">Board sizes are shown the same until final dimensions are confirmed.</DemoNote>
+        <DemoNote className="mt">Each board is drawn at 33 × 24 cm (13 × 9.5 in). The juice groove position is an estimate until measured.</DemoNote>
       </Sheet>
 
       <Sheet open={sheet === 'versions'} onClose={() => setSheet(null)} title="Versions">

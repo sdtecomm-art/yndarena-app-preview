@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import BoardView from './board/BoardView.jsx';
 import { ItemVisual } from './board/art.jsx';
-import { ITEMS, BOARDS, sizeFor } from './data/catalog.js';
+import { ITEMS, BOARDS } from './data/catalog.js';
+import { sizeOf } from './board/geometry.js';
 import { PRESENTATIONS, OCCASIONS } from './data/presentations.js';
 import { RECIPES } from './data/recipes.js';
 import { COMMUNITY } from './data/community.js';
@@ -23,8 +24,8 @@ export function BoardThumb({ board, items, uid }) {
 
 export function ItemIcon({ type, style, size = 64 }) {
   const it = ITEMS[type];
-  const [w, h] = sizeFor(type, it.baseQty, style);
-  const m = Math.max(w, h) + 12;
+  const [w, h] = sizeOf({ type, qty: it.baseQty, style: style || it.styles[0].id });
+  const m = Math.max(w, h) * 1.08;
   return (
     <svg viewBox={`${-m / 2} ${-m / 2} ${m} ${m}`} width={size} height={size} aria-hidden="true">
       <ItemVisual type={type} it={it} w={w} h={h} style={style || it.styles[0].id} qty={it.baseQty} seed={'icon-' + type} />

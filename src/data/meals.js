@@ -2,7 +2,10 @@
 // Content comes from media-source/everyday-v4/everyday-meals.json. Ids are the package's stable template ids:
 // built-in meals are replaced by id on each update, never duplicated, and a Home's saved versions are left as they are.
 // Amounts and steps are editorial serving drafts, not kitchen-tested recipes. Minutes are assembly time with the
-// food already cooked, never total cooking time. Placements are a composition on the 600 × 400 board, not weights.
+// food already cooked, never total cooking time.
+// Placements are in board mm (330 × 240 board, see physical.js). `alongside` items are served next to the board:
+// "Serves 2" is the whole meal, not what fits on the board at once. Fit is checked with estimated sizes only.
+// Board follows the main dish (chicken, meat and fish → Meat & Fish); a side never changes it.
 
 export const MEALS_PACKAGE = 'yndarena-everyday-v4';
 
@@ -32,8 +35,8 @@ export const MEALS = {
       'Finish with basil and bring it to the table.',
     ],
     place: [
-      { g: 'gnocchi-bowl', q: 1, x: 205, y: 200 },
-      { g: 'rustic-bread', q: 2, x: 435, y: 205, r: -8 },
+      { g: 'gnocchi-bowl', q: 1, x: 112, y: 120 },
+      { g: 'rustic-bread', q: 2, x: 258, y: 120, r: 90 },
     ],
     layoutNote: 'Gnocchi stays in its bowl. Bread is the default accompaniment. No salad by default.',
   },
@@ -43,7 +46,7 @@ export const MEALS = {
     description: 'Chicken, golden potatoes and a little green. An easy dinner to gather around.',
     serves: 2,
     minutes: 4,
-    board: 'cheese-bread',
+    board: 'meat-fish',
     cover: 'everyday-lemon-chicken-cover',
     ingredients: [
       '2 cooked chicken breasts, prepared your usual way',
@@ -58,14 +61,14 @@ export const MEALS = {
     ],
     serving: [
       'Place the cooked chicken in a relaxed overlapping line.',
-      'Keep the potatoes together beside it, leaving a small gap.',
-      'Add the green beans and an optional lemon wedge.',
+      'Add the green beans beside it, with a lemon wedge if you like.',
+      'Serve the potatoes alongside, in a bowl or on a plate.',
     ],
     place: [
-      { g: 'lemon-chicken', q: 2, x: 180, y: 185 },
-      { g: 'potatoes', q: 2, x: 460, y: 112 },
-      { g: 'green-beans', q: 1, x: 455, y: 290 },
-      { g: 'lemon', q: 2, x: 230, y: 330 },
+      { g: 'lemon-chicken', q: 2, x: 106, y: 120, arrange: 'column' },
+      { g: 'green-beans', q: 1, x: 226, y: 100 },
+      { g: 'lemon', q: 2, x: 228, y: 188 },
+      { g: 'potatoes', q: 2, alongside: true },
     ],
     layoutNote: 'A cooked main, one familiar starch and one vegetable. No garnish or homemade sauce required.',
   },
@@ -75,7 +78,7 @@ export const MEALS = {
     description: 'Steak and golden potatoes with a fresh tomato-and-avocado side.',
     serves: 2,
     minutes: 4,
-    board: 'cheese-bread',
+    board: 'meat-fish',
     cover: 'everyday-steak-tomato-avocado-cover',
     ingredients: [
       '2 cooked steaks, prepared your usual way',
@@ -90,14 +93,14 @@ export const MEALS = {
       'Dress lightly with olive oil and a little lemon if you like.',
     ],
     serving: [
-      'Set the tomato-and-avocado bowl near one corner.',
-      'Place the sliced cooked steak across the open center.',
-      'Group the potatoes beside it and leave each element easy to reach.',
+      'Place the sliced cooked steak in a relaxed overlapping line.',
+      'Set the tomato-and-avocado bowl beside it, leaving room to reach both.',
+      'Serve the potatoes alongside, in a bowl or on a plate.',
     ],
     place: [
-      { g: 'side-tomato-avocado', q: 2, x: 100, y: 100 },
-      { g: 'steak', q: 2, x: 285, y: 215 },
-      { g: 'potatoes', q: 2, x: 505, y: 300 },
+      { g: 'steak', q: 2, x: 111, y: 120, arrange: 'column' },
+      { g: 'side-tomato-avocado', q: 2, x: 249.5, y: 120 },
+      { g: 'potatoes', q: 2, alongside: true },
     ],
     layoutNote: 'Tomato-and-avocado bowl, not the retired lettuce-and-cucumber bowl. Raw-meat preparation stays off the clean serving surface.',
   },
@@ -108,7 +111,7 @@ export const MEALS = {
     description: 'A simple salmon dinner with rice and a colorful beet-and-carrot side.',
     serves: 2,
     minutes: 4,
-    board: 'cheese-bread',
+    board: 'meat-fish',
     cover: 'everyday-salmon-beet-carrot-cover',
     ingredients: [
       '2 cooked salmon portions',
@@ -128,10 +131,10 @@ export const MEALS = {
       'Add the lemon wedges and bring it to the table.',
     ],
     place: [
-      { g: 'rice', q: 1.5, x: 105, y: 105 },
-      { g: 'side-beet-carrot', q: 2, x: 105, y: 295 },
-      { g: 'salmon', q: 2, x: 365, y: 190 },
-      { g: 'lemon', q: 2, x: 525, y: 335 },
+      { g: 'rice', q: 1.5, x: 78.8, y: 78.6 },
+      { g: 'side-beet-carrot', q: 2, x: 203, y: 79 },
+      { g: 'salmon', q: 2, x: 153, y: 181.5 },
+      { g: 'lemon', q: 2, x: 286, y: 70, r: 90 },
     ],
     layoutNote: 'Beet-and-carrot bowl replaces the earlier green-bean side.',
   },
@@ -141,7 +144,7 @@ export const MEALS = {
     description: 'Chicken wraps with a crisp cabbage-and-carrot side.',
     serves: 2,
     minutes: 3,
-    board: 'cheese-bread',
+    board: 'meat-fish',
     cover: 'everyday-wraps-cabbage-carrot-cover',
     ingredients: [
       '2 flour tortillas',
@@ -158,13 +161,13 @@ export const MEALS = {
       'Toss finely sliced cabbage and carrot with a little lemon and olive oil.',
     ],
     serving: [
-      'Set the four wrap halves with their cut sides visible.',
+      'Stack the four wrap halves in an easy overlapping line, cut sides visible.',
       'Place the cabbage-and-carrot bowl beside them.',
       'Leave a little space so the halves are easy to pick up.',
     ],
     place: [
-      { g: 'chicken-wraps', q: 2, x: 215, y: 200 },
-      { g: 'side-cabbage-carrot', q: 2, x: 480, y: 200 },
+      { g: 'chicken-wraps', q: 2, x: 111, y: 120, arrange: 'column' },
+      { g: 'side-cabbage-carrot', q: 2, x: 249.5, y: 120 },
     ],
     layoutNote: 'Lettuce and tomato stay inside the wraps. The side is cabbage and carrot. Two wraps, each shown as two halves.',
   },
@@ -190,13 +193,14 @@ export const MEALS = {
       'Cut the flatbread into easy-to-share pieces.',
     ],
     serving: [
-      'Arrange the flatbread pieces in a relaxed fan or close to their original shape.',
-      'Set a small tomato-and-basil bowl to one side.',
-      'Leave room to lift each piece.',
+      'Arrange the pieces of one flatbread close to their original shape.',
+      'Set the small tomato-and-basil bowl beside it.',
+      'Keep the second flatbread warm alongside and bring it out to refill.',
     ],
     place: [
-      { g: 'flatbread', q: 1, x: 225, y: 200 },
-      { g: 'side-tomato-basil', q: 1, x: 470, y: 205 },
+      { g: 'flatbread', q: 1, x: 115, y: 120 },
+      { g: 'side-tomato-basil', q: 1, x: 248, y: 120 },
+      { g: 'flatbread', q: 1, alongside: true },
     ],
     layoutNote: 'Only fresh tomato and basil in the side bowl. Mozzarella stays on the flatbread.',
   },

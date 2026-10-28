@@ -1,8 +1,8 @@
 // Top-down illustrations for each ready-to-place group. Drawn in local
 // coordinates centered on 0,0 within a w x h footprint.
 import { ROSEMARY_PATH } from './rosemaryPath.js';
-import { MEDIA, photoPiece, photoLayout } from '../data/media.js';
-import { baseSize } from '../data/catalog.js';
+import { MEDIA, photoPiece } from '../data/media.js';
+import { groupLayout, imageRect } from './geometry.js';
 
 export function rng(seedStr) {
   let h = 1779033703 ^ seedStr.length;
@@ -477,31 +477,26 @@ export function ItemArt({ it, w, h, style, qty, seed }) {
   return <Art it={it} w={w} h={h} style={style} qty={qty} rand={rand} />;
 }
 
-// Photographic group: one or more cutouts laid out by photoLayout, drawn as a single group.
-function PhotoPiece({ piece, qty, base }) {
+// Photographic group: the cutouts of one group, laid out in mm by groupLayout from its physical profile.
+function PhotoPiece({ piece, item }) {
   const m = MEDIA[piece.asset];
-  const { parts } = photoLayout(piece, qty, base);
+  const { parts } = groupLayout(item);
   return (
     <g>
-      {parts.map((p, i) => (
-        <image
-          key={i}
-          href={m.src}
-          x={-p.w / 2}
-          y={p.origin === 'bottom' ? -p.h : -p.h / 2}
-          width={p.w}
-          height={p.h}
-          preserveAspectRatio="xMidYMid meet"
-          transform={`translate(${p.x} ${p.y}) rotate(${p.r})`}
-        />
-      ))}
+      {parts.map((p, i) => {
+        const r = imageRect(piece.asset, p);
+        return (
+          <image key={i} href={m.src} x={r.x} y={r.y} width={r.w} height={r.h} preserveAspectRatio="xMidYMid meet"
+            transform={`translate(${p.x} ${p.y}) rotate(${p.r})`} />
+        );
+      })}
     </g>
   );
 }
 
 // Chooses the photographic piece when one exists for this item and style, otherwise the illustration.
-export function ItemVisual({ type, it, w, h, style, qty, seed }) {
+export function ItemVisual({ type, it, w, h, style, qty, seed, item }) {
   const piece = photoPiece(type, style);
-  if (piece) return <PhotoPiece piece={piece} qty={qty} base={baseSize(type, qty)} />;
+  if (piece) return <PhotoPiece piece={piece} item={{ ...(item || {}), type, qty, style }} />;
   return <ItemArt it={it} w={w} h={h} style={style} qty={qty} seed={seed} />;
 }

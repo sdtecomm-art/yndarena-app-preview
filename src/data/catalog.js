@@ -1,8 +1,6 @@
-import { photoPiece, photoLayout } from './media.js';
-
 // Board models and the visual library used by Designer, presentations and lists.
-// Coordinates live in a 600 x 400 board space. Footprints are approximate on purpose:
-// final board dimensions are not confirmed yet, so nothing here claims physical precision.
+// Board coordinates are millimetres on the 330 × 240 mm board (see physical.js). Physical sizes of each group
+// live in physical.js; `fp` below is only the footprint of the old illustrations, on the legacy 600 × 400 canvas.
 
 export const BOARDS = {
   'cheese-bread': {
@@ -12,7 +10,8 @@ export const BOARDS = {
     tone: ['#9a6644', '#7c4f33'],
     grain: '#6a4029',
     tint: .5, // how much of the tone is laid over the generic surface texture
-    note: 'Dense and richly grained, with a depth of color built for the table.',
+    note: 'For cheese, bread, pasta and flatbreads.',
+    serves: 'Cheese, bread, pasta and flatbread',
   },
   'fruits-veg': {
     id: 'fruits-veg',
@@ -21,7 +20,8 @@ export const BOARDS = {
     tone: ['#dcc199', '#cdae82'],
     grain: '#b8956a',
     tint: .55, // how much of the tone is laid over the generic surface texture
-    note: 'Light, durable, and built for volume.',
+    note: 'For fruit, vegetables and dips.',
+    serves: 'Fruit and vegetables',
   },
   'meat-fish': {
     id: 'meat-fish',
@@ -30,12 +30,12 @@ export const BOARDS = {
     tone: ['#93603f', '#774a2f'],
     grain: '#633c26',
     tint: .5, // how much of the tone is laid over the generic surface texture
-    note: 'Use it for cutting. For serving, most presentations start on Cheese & Bread.',
+    note: 'For cooked chicken, meat and fish, sliced or served. Prep raw meat on a separate board.',
+    serves: 'Chicken, meat and fish',
   },
 };
 
-export const BOARD_W = 600;
-export const BOARD_H = 400;
+export { BOARD } from './physical.js';
 
 export const CATEGORIES = [
   { id: 'mains', label: 'Mains' },
@@ -391,14 +391,14 @@ export const ITEMS = {
     ],
   },
   flatbread: {
-    name: 'Tomato & mozzarella flatbread', cat: 'mains', unit: 'each', baseQty: 1, step: 1, min: 1, max: 3, fp: [170, 170],
+    name: 'Small tomato & mozzarella flatbread', cat: 'mains', unit: 'each', baseQty: 1, step: 1, min: 1, max: 4, fp: [170, 170],
     art: 'baguette', color: '#d9a35f', crumb: '#f1d5a8',
     styles: [{ id: 'pieces', label: 'Cut in four', tech: null }],
     subs: [], tools: ['Pizza cutter or knife'],
     shop: [
-      { key: 'flatbread-base', name: 'Ready-made flatbread base (1 large or 2 small)', qty: 1, unit: 'each' },
-      { key: 'tomato-sauce', name: 'Tomato sauce', qty: 0.5, unit: 'cup' },
-      { key: 'mozzarella', name: 'Mozzarella', qty: 4, unit: 'oz' },
+      { key: 'flatbread-base', name: 'Small ready-made flatbread bases', qty: 1, unit: 'each' },
+      { key: 'tomato-sauce', name: 'Tomato sauce', qty: 0.25, unit: 'cup' },
+      { key: 'mozzarella', name: 'Mozzarella', qty: 2, unit: 'oz' },
       { key: 'olive-oil', name: 'Olive oil', qty: null },
     ],
   },
@@ -485,22 +485,12 @@ export const ITEMS = {
   },
 };
 
-// Approximate footprint in board units for an illustrated group.
+// Footprint of an illustrated group on the legacy 600 × 400 canvas (converted to mm by the renderer).
 export function baseSize(type, qty) {
   const it = ITEMS[type];
   const k = Math.max(0.62, Math.min(1.55, Math.sqrt(qty / it.baseQty)));
   if (it.art === 'rosemary') return [it.fp[0], it.fp[1]];
   return [it.fp[0] * k, it.fp[1] * k];
-}
-
-// Size of a group as drawn: photographic pieces keep their own proportions inside the same footprint.
-export function sizeFor(type, qty, style) {
-  const it = ITEMS[type];
-  const piece = photoPiece(type, style || it.styles[0].id);
-  const base = baseSize(type, qty);
-  if (!piece) return base;
-  const l = photoLayout(piece, qty, base);
-  return [l.w, l.h];
 }
 
 export function styleOf(type, styleId) {

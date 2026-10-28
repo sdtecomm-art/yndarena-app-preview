@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
-import { useActions } from '../actions.js';
+import { useActions, sharedItems } from '../actions.js';
 import { TopBar, Button, Kicker, Meta, DemoNote, PhotoPending, Icon, Sprig, useToast } from '../ui.jsx';
 import { SaveButton } from '../components.jsx';
 import { IngredientList, TechPills } from './Presentation.jsx';
 import BoardView from '../board/BoardView.jsx';
 import { COMMUNITY } from '../data/community.js';
 import { BOARDS } from '../data/catalog.js';
-import { communityItems, techniquesFor } from '../lib.js';
+import { communityItems, techniquesFor, servingSplitText } from '../lib.js';
 import { shareList } from './Shopping.jsx';
 import { WORDMARK } from '../assets.js';
 
@@ -59,6 +59,7 @@ export default function Community({ params }) {
           <button className="link" onClick={() => nav.push('shopping', { id: a.ensureList({ kind: 'community', id: params.id }) })}>Shopping list</button>
         </div>
         <IngredientList items={items} />
+        {servingSplitText(items) && <p className="small" style={{ marginTop: 10 }}>On a 33 × 24 cm board: {servingSplitText(items)}</p>}
       </div>
       <div className="pad section">
         <h2 className="h2">Techniques</h2>
@@ -77,7 +78,8 @@ export default function Community({ params }) {
 
 // ---------- Sharing your own design ----------
 export function encodeShare(d, homeNo, note) {
-  const payload = { n: d.name.replace(/ · (My version|Copy)$/, ''), b: d.board, h: homeNo, t: note || undefined, o: d.origin?.name, i: d.items.map((i) => [i.type, i.qty, Math.round(i.x), Math.round(i.y), i.r || 0, i.style]) };
+  // u: 'mm' marks board millimetres; links made before have none and use the 600 × 400 canvas. Item flags: a alongside, r refill, c stacked.
+  const payload = { u: 'mm', n: d.name.replace(/ · (My version|Copy)$/, ''), b: d.board, h: homeNo, t: note || undefined, o: d.origin?.name, i: d.items.map((i) => [i.type, i.qty, Math.round(i.x * 10) / 10, Math.round(i.y * 10) / 10, i.r || 0, i.style, (i.alongside ? 'a' : '') + (i.overflow === 'refill' ? 'r' : '') + (i.arrange === 'column' ? 'c' : '')]) };
   const json = JSON.stringify(payload);
   return btoa(unescape(encodeURIComponent(json))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
@@ -159,7 +161,7 @@ export function SharedView({ payload, onSignIn, onClose }) {
   const a = useActions();
   const nav = useNav();
   const toast = useToast();
-  const items = payload.i.map((p, i) => ({ uid: 's' + i, type: p[0], qty: p[1], x: p[2], y: p[3], r: p[4], style: p[5] }));
+  const items = sharedItems(payload).map((it, i) => ({ ...it, uid: 's' + i }));
   const act = (kind) => {
     if (!user) { onSignIn(kind); return; }
     const id = a.fromShared(payload);

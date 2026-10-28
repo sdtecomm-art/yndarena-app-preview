@@ -1,6 +1,19 @@
 import { useStore } from './store.jsx';
 import { uid, presentationItems, communityItems, mealItems } from './lib.js';
 import { MEALS } from './data/meals.js';
+import { fromLegacy } from './data/physical.js';
+
+// Items of a shared link, in board mm whatever the link's age.
+export function sharedItems(payload) {
+  return (payload.i || []).map((p) => {
+    const pos = payload.u === 'mm' ? { x: p[2], y: p[3] } : fromLegacy({ x: p[2], y: p[3] });
+    const it = { uid: uid('it'), type: p[0], qty: p[1], ...pos, r: p[4], style: p[5] };
+    if (p[6]?.includes('a')) it.alongside = true;
+    if (p[6]?.includes('r')) it.overflow = 'refill';
+    if (p[6]?.includes('c')) it.arrange = 'column';
+    return it;
+  });
+}
 import { PRESENTATIONS } from './data/presentations.js';
 import { COMMUNITY } from './data/community.js';
 import { RECIPES } from './data/recipes.js';
@@ -14,7 +27,7 @@ export function useActions() {
 
   // Ids are generated outside the state updaters: React may run updaters later, during render.
   const newDesign = (u, d, id) => {
-    u.designs[id] = { id, versions: [], createdAt: now(), updatedAt: now(), ...d };
+    u.designs[id] = { id, units: 'mm', versions: [], createdAt: now(), updatedAt: now(), ...d };
     u.recent = { kind: 'design', id, at: now() };
     return id;
   };
@@ -84,7 +97,7 @@ export function useActions() {
           board: payload.b,
           kind: 'modified',
           origin: { kind: 'shared', name: payload.n, home: payload.h },
-          items: payload.i.map((p) => ({ uid: uid('it'), type: p[0], qty: p[1], x: p[2], y: p[3], r: p[4], style: p[5] })),
+          items: sharedItems(payload),
         }, id);
       });
       return id;

@@ -105,7 +105,7 @@ function CarePlan() {
         </div>
       )}
       <div className="card" style={{ padding: '20px 18px', background: cs.dueNow ? 'rgba(172,162,189,.18)' : undefined, borderColor: cs.dueNow ? 'rgba(172,162,189,.55)' : undefined }}>
-        <Kicker>{cs.dueNow ? `Check ${cs.dueNow.n} of 6` : 'Your care plan'}</Kicker>
+        <Kicker>{cs.dueNow ? `Check ${cs.dueNow.n} of 6` : cs.next ? 'Next check' : 'All six checks done'}</Kicker>
         {cs.dueNow ? (
           <>
             <h2 className="h2" style={{ marginTop: 6 }}>Today is a good day for the water test.</h2>
@@ -241,7 +241,7 @@ export function WaterTest() {
               <Button block arrow style={{ marginTop: 18 }} disabled={!drops.length} onClick={() => { setStep('wait'); setSecs(60); }}>Done, start the minute</Button>
             ) : (
               <>
-                <div style={{ textAlign: 'center', fontFamily: 'var(--display)', fontSize: 54, lineHeight: 1, marginTop: 18 }}>0:{String(secs).padStart(2, '0')}</div>
+                <div style={{ textAlign: 'center', fontFamily: 'var(--display)', fontSize: 54, lineHeight: 1, marginTop: 18 }}>{Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</div>
                 <Button block arrow style={{ marginTop: 14 }} onClick={() => setStep('result')}>{secs > 0 ? 'Skip, I already waited' : 'See what happened'}</Button>
               </>
             )}

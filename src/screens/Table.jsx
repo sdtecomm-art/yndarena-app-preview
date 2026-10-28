@@ -161,12 +161,13 @@ export default function Table({ params }) {
               <p className="body" style={{ margin: '6px 0 0' }}>{cur.tip || LAYER_COPY[cur.cat].text}</p>
               {mode === 'modified' && <p className="small muted" style={{ margin: '6px 0 0' }}>Positions follow your version. The highlighted spots show where each group goes.</p>}
               <div style={{ marginTop: 10 }}>
-                {Object.entries(cur.uids.reduce((acc, u) => { const it = items.find((x) => x.uid === u); const k = it.type + '|' + it.style; acc[k] = acc[k] || { it, qty: 0, n: 0 }; acc[k].qty += it.qty; acc[k].n += 1; return acc; }, {})).map(([k, v]) => {
+                {Object.entries(cur.uids.reduce((acc, u) => { const it = items.find((x) => x.uid === u); const k = it.type + '|' + it.style; acc[k] = acc[k] || { it, qty: 0, n: 0, on: 0, aside: 0 }; acc[k].qty += it.qty; acc[k].n += 1; if (it.alongside) acc[k].aside += it.qty; else acc[k].on += it.placed ?? it.qty; return acc; }, {})).map(([k, v]) => {
                   const st = styleOf(v.it.type, v.it.style);
                   return (
                     <div key={k} className="ing-row">
                       <div>
                         <div>{ITEMS[v.it.type].name} <span className="small">· {st.label.toLowerCase()}{v.n > 1 ? `, in ${v.n} spots` : ''}</span></div>
+                        {v.on < v.qty - 1e-6 && <div className="note">{v.on ? `${fmtQty(v.on, ITEMS[v.it.type].unit)} on the board · ` : ''}{v.aside ? `${fmtQty(v.aside, ITEMS[v.it.type].unit)} alongside` : ''}{v.qty - v.on - v.aside > 1e-6 ? `${v.aside ? ' · ' : ''}${fmtQty(v.qty - v.on - v.aside, ITEMS[v.it.type].unit)} kept aside to refill` : ''}</div>}
                         {st.tech && <button className="note" style={{ borderBottom: '1px solid var(--c-line-strong)' }} onClick={() => nav.push('technique', { id: st.tech })}>How to: {TECHNIQUES[st.tech].name}</button>}
                       </div>
                       <span className="q">{fmtQty(v.qty, ITEMS[v.it.type].unit)}</span>

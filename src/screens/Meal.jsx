@@ -7,6 +7,20 @@ import BoardView from '../board/BoardView.jsx';
 import { MEALS, SIDE_IDEAS } from '../data/meals.js';
 import { ITEMS, BOARDS } from '../data/catalog.js';
 import { mealItems, fmtQty } from '../lib.js';
+import { groupLayout } from '../board/geometry.js';
+
+function ComponentRow({ it }) {
+  const item = ITEMS[it.type];
+  const l = groupLayout(it);
+  const what = item.cat === 'mains' ? 'Main' : item.cat === 'garnish' ? 'Optional finish' : 'Side';
+  return (
+    <div className="list-row" style={{ cursor: 'default' }}>
+      <div className="thumb" style={{ width: 52, height: 52, borderRadius: 26 }}><ItemIcon type={it.type} style={it.style} size={52} /></div>
+      <div className="grow"><div>{item.name}</div><div className="sub">{what}{l.container ? ` · ${l.container.label}` : ''}</div></div>
+      <span className="small">{fmtQty(it.qty, item.unit)}</span>
+    </div>
+  );
+}
 
 // An everyday meal: the whole board first, up to three serving steps, then optional quick prep.
 export default function Meal({ params }) {
@@ -15,6 +29,7 @@ export default function Meal({ params }) {
   const m = MEALS[params.id];
   const [view, setView] = useState('photo');
   const items = mealItems(params.id);
+  const onBoard = items.filter((i) => !i.alongside), alongside = items.filter((i) => i.alongside);
   const sides = Object.values(SIDE_IDEAS).filter((s) => !items.some((i) => i.type === s.item));
 
   useEffect(() => { a.setRecent('meal', params.id); }, []); // eslint-disable-line
@@ -58,15 +73,15 @@ export default function Meal({ params }) {
 
       <div className="pad section">
         <h2 className="h2">On the board</h2>
-        <div style={{ marginTop: 6 }}>
-          {items.map((it) => (
-            <div key={it.uid} className="list-row" style={{ cursor: 'default' }}>
-              <div className="thumb" style={{ width: 52, height: 52, borderRadius: 26 }}><ItemIcon type={it.type} style={it.style} size={52} /></div>
-              <div className="grow"><div>{ITEMS[it.type].name}</div><div className="sub">{ITEMS[it.type].cat === 'mains' ? 'Main' : ITEMS[it.type].cat === 'garnish' ? 'Optional finish' : 'Side'}</div></div>
-              <span className="small">{fmtQty(it.qty, ITEMS[it.type].unit)}</span>
-            </div>
-          ))}
-        </div>
+        <div style={{ marginTop: 6 }}>{onBoard.map((it) => <ComponentRow key={it.uid} it={it} />)}</div>
+        {alongside.length > 0 && (
+          <>
+            <h3 className="h3" style={{ fontSize: 19, marginTop: 18 }}>Alongside</h3>
+            <p className="small" style={{ margin: '2px 0 0' }}>Serves {m.serves} is the whole meal. These go next to the board, in a bowl or on a plate.</p>
+            <div style={{ marginTop: 4 }}>{alongside.map((it) => <ComponentRow key={it.uid} it={it} />)}</div>
+          </>
+        )}
+        <p className="small" style={{ marginTop: 10 }}>Laid out for a 33 × 24 cm board (13 × 9.5 in), using estimated sizes.</p>
         <p className="small" style={{ marginTop: 10 }}>Prefer another side? In Make it yours you can swap or remove it, or add {sides.map((s) => s.name).join(', ').replace(/, ([^,]*)$/, ' or $1')}.</p>
       </div>
 

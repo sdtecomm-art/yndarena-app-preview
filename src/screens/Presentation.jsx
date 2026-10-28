@@ -13,7 +13,7 @@ import { PRESENTATIONS, OCCASIONS } from '../data/presentations.js';
 import { ITEMS, BOARDS, LAYER_COPY } from '../data/catalog.js';
 import { TECHNIQUES } from '../data/techniques.js';
 import { RECIPES } from '../data/recipes.js';
-import { presentationItems, techniquesFor, fmtQty, buildLayers, shoppingFromItems } from '../lib.js';
+import { presentationItems, techniquesFor, fmtQty, buildLayers, shoppingFromItems, servingSplitText } from '../lib.js';
 
 export function TechPills({ ids }) {
   const nav = useNav();
@@ -163,6 +163,7 @@ export default function Presentation({ params }) {
           <button className="link" onClick={() => { const id = a.ensureList({ kind: 'presentation', id: params.id, compositionId: compId }); nav.push('shopping', { id }); }}>Shopping list</button>
         </div>
         <IngredientList items={items} />
+        {servingSplitText(items) && <p className="small" style={{ marginTop: 10 }}>On a 33 × 24 cm board: {servingSplitText(items)}</p>}
       </div>
 
       <div className="pad section">
