@@ -2,7 +2,7 @@ import { useStore } from '../store.jsx';
 import { useNav } from '../nav.jsx';
 import { Icon, Kicker, Sprig, Button } from '../ui.jsx';
 import { NextStep, ProductStrip, useCareActions } from './Care.jsx';
-import { giftInfo, giftWho, fmtShort, whenText } from '../lib.js';
+import { giftInfo, giftWho, fmtShort, whenText, giftChannelText } from '../lib.js';
 import { WORDMARK } from '../assets.js';
 
 const MAX_GIFTS = 3;
@@ -78,7 +78,7 @@ function GiftBlock({ gifts, today }) {
                 <div className="round-ico" style={x.stage ? { background: 'rgba(172,162,189,.25)', borderColor: 'rgba(172,162,189,.6)' } : undefined}><Icon name="gift" size={18} /></div>
                 <div>
                   <div style={{ fontSize: 16, lineHeight: 1.3 }}>{giftWho(x.g)}</div>
-                  <div className="small">{fmtShort(x.date)} · {whenText(x.days)}</div>
+                  <div className="small">{fmtShort(x.date)} · {whenText(x.days)} · {giftChannelText(x.g)}</div>
                 </div>
                 <Icon name="chevron" size={18} />
               </button>

@@ -342,6 +342,14 @@ export function giftInfo(g, today) {
   if (stage) { const due = stage === 21 ? first : second; sentOn = added && added > due ? added : due; }
   return { date, days, stage, first, second, sentOn };
 }
+// Reminder channels chosen for each date. Dates saved before this choice existed keep what the original system did:
+// email. Push and email are separate; when both are on, each reminder goes once to each channel.
+export const giftChannels = (g) => ({ push: !!g.channels?.push, email: g.channels ? !!g.channels.email : true });
+export function giftChannelText(g) {
+  const c = giftChannels(g);
+  return c.push && c.email ? 'Push + email' : c.push ? 'Push' : 'Email';
+}
+
 export function giftWho(g) {
   if (g.occasion === 'Other') return `The day you set aside for ${g.name}`;
   return `${g.name}’s ${g.occasion.toLowerCase()}`;

@@ -3,9 +3,10 @@ import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
 import { TopBar, Button, Kicker, Icon, Sheet, DemoNote, Sprig, Chip, Empty, useToast } from '../ui.jsx';
 import { MEDIA } from '../data/media.js';
+import { LINKS, validAmazonUrl, IS_PREVIEW } from '../data/links.js';
 import {
   careStatus, oilPending, fmtDate, fmtShort, daysBetween, iso, fromIso, uid, DAY,
-  OCCASION_TYPES, giftInfo, giftWho, whenText, MONTHS, MONTHS_SHORT, CARE_USAGE, usageOf, addUsageInterval,
+  OCCASION_TYPES, giftInfo, giftWho, whenText, giftChannels, giftChannelText, MONTHS, MONTHS_SHORT, CARE_USAGE, usageOf, addUsageInterval,
 } from '../lib.js';
 
 const MAX_GIFTS = 3;
@@ -709,7 +710,8 @@ export function WaterTest({ params = {} }) {
 function GiftDates({ startAdd }) {
   const { user, updateUser, today } = useStore();
   const nav = useNav();
-  const blank = () => ({ id: null, name: '', occasion: 'Birthday', m: today.getUTCMonth() + 1, d: today.getUTCDate(), once: false, y: today.getUTCFullYear() });
+  // New dates start with both channels; each Home can keep one or both.
+  const blank = () => ({ id: null, name: '', occasion: 'Birthday', m: today.getUTCMonth() + 1, d: today.getUTCDate(), once: false, y: today.getUTCFullYear(), push: true, email: true });
   const [edit, setEdit] = useState(() => (startAdd && user.gifts.length < MAX_GIFTS ? blank() : null));
   const [plan, setPlan] = useState(null);
   const gifts = user.gifts.map((g) => ({ g, ...giftInfo(g, today) })).sort((a, b) => (a.days ?? 9999) - (b.days ?? 9999));
@@ -719,7 +721,7 @@ function GiftDates({ startAdd }) {
       <p className="body" style={{ marginTop: 0 }}>Keep special dates close. We’ll remind you 21 days before and again 10 days before, with time to plan a gift.</p>
       {gifts.length === 0 && (
         <div style={{ marginTop: 14 }}>
-          <Empty title="Keep a special date close" action={<Button small onClick={() => setEdit({ id: null, name: '', occasion: 'Birthday', m: today.getUTCMonth() + 1, d: today.getUTCDate(), once: false, y: today.getUTCFullYear() })}>Add a date</Button>}>
+          <Empty title="Keep a special date close" action={<Button small onClick={() => setEdit(blank())}>Add a date</Button>}>
             A birthday, an anniversary, a housewarming. Just a first name and a day.
           </Empty>
         </div>
@@ -727,7 +729,7 @@ function GiftDates({ startAdd }) {
       <div style={{ marginTop: 8 }}>
         {gifts.map(({ g, date, days, stage, first, second, sentOn }) => (
           <div key={g.id} style={{ borderBottom: '1px solid var(--c-line)' }}>
-            <button className="gift-card" style={{ borderBottom: 0 }} onClick={() => { const [m, d] = g.md.split('-').map(Number); setEdit({ id: g.id, name: g.name, occasion: g.occasion, m, d, once: !!g.y, y: g.y || today.getUTCFullYear() }); }}>
+            <button className="gift-card" style={{ borderBottom: 0 }} onClick={() => { const [m, d] = g.md.split('-').map(Number); setEdit({ id: g.id, name: g.name, occasion: g.occasion, m, d, once: !!g.y, y: g.y || today.getUTCFullYear(), ...giftChannels(g) }); }}>
               <div className="date-badge">
                 <span className="m">{date ? MONTHS_SHORT[date.getUTCMonth()] : '—'}</span>
                 <span className="d">{date ? date.getUTCDate() : ''}</span>
@@ -735,6 +737,7 @@ function GiftDates({ startAdd }) {
               <div>
                 <div style={{ fontSize: 16.5, lineHeight: 1.3 }}>{giftWho(g)}</div>
                 <div className="small">{date ? (days === 0 ? 'Today' : `In ${days} days`) : 'Date has passed'} · {g.y ? `One time, ${g.y}` : 'Every year'}</div>
+                <div className="gift-channels"><Icon name="bell" size={13} />{giftChannelText(g)}</div>
               </div>
               <Icon name="edit" size={18} />
             </button>
@@ -750,7 +753,7 @@ function GiftDates({ startAdd }) {
       </div>
       {gifts.length > 0 && (
         <div style={{ marginTop: 16 }}>
-          <Button block variant="ghost" icon="plus" disabled={gifts.length >= MAX_GIFTS} onClick={() => setEdit({ id: null, name: '', occasion: 'Birthday', m: today.getUTCMonth() + 1, d: today.getUTCDate(), once: false, y: today.getUTCFullYear() })}>Add a date</Button>
+          <Button block variant="ghost" icon="plus" disabled={gifts.length >= MAX_GIFTS} onClick={() => setEdit(blank())}>Add a date</Button>
           {gifts.length >= MAX_GIFTS && <p className="small muted" style={{ marginTop: 8 }}>You can keep up to {MAX_GIFTS} dates, the same as your current care plan.</p>}
         </div>
       )}
@@ -767,13 +770,18 @@ function GiftDates({ startAdd }) {
           <p className="small" style={{ margin: '4px 0 0' }}>{giftWho(gifts[0].g)} is on {fmtDate(gifts[0].date)}. There is no rush.</p>
         </div>
       )}
-      <div style={{ marginTop: 16 }}><DemoNote>Simulated reminders. The schedule follows the existing care plan rules: 21 and 10 days ahead. Nothing is sent from this preview.</DemoNote></div>
+      {IS_PREVIEW && <div style={{ marginTop: 16 }}><DemoNote>Simulated reminders: 21 and 10 days ahead, by the channels chosen for each date. No push notification or email is sent from this preview.</DemoNote></div>}
 
       <GiftEditor value={edit} onClose={() => setEdit(null)} today={today} onSave={(v) => {
         updateUser((u) => {
           const md = `${String(v.m).padStart(2, '0')}-${String(v.d).padStart(2, '0')}`;
           const prev = u.gifts.find((x) => x.id === v.id);
-          const g = { id: v.id || uid('g'), name: v.name.trim().slice(0, 60), occasion: v.occasion, md, addedAt: prev?.addedAt || iso(today), ...(v.once ? { y: v.y } : {}) };
+          // Channels belong to this date only (never the care plan). Editing keeps addedAt, so reminders already
+          // sent for this date are not sent again; each stage goes once to each chosen channel.
+          const g = { ...(prev || {}), id: v.id || uid('g'), name: v.name.trim().slice(0, 60), occasion: v.occasion, md, channels: { push: !!v.push, email: !!v.email } };
+          // Only a new date records when it was added. An edit never does, so it cannot trigger a reminder again.
+          if (!prev) g.addedAt = iso(today);
+          if (v.once) g.y = v.y; else delete g.y;
           const i = u.gifts.findIndex((x) => x.id === v.id);
           if (i >= 0) u.gifts[i] = g; else u.gifts.push(g);
         });
@@ -781,23 +789,37 @@ function GiftDates({ startAdd }) {
       }} onDelete={(id) => { updateUser((u) => { u.gifts = u.gifts.filter((x) => x.id !== id); }); setEdit(null); }} />
 
       <Sheet open={!!plan} onClose={() => setPlan(null)} title="Plan a gift">
-        {plan && (
-          <>
-            <p className="body" style={{ marginTop: 0 }}>Something for {plan.name}’s kitchen, or a board made by you.</p>
-            <button className="reminder-card tap" style={{ marginTop: 6 }} onClick={() => { setPlan(null); nav.push('presentation', { id: plan.occasion === 'Housewarming' ? 'golden-hour' : plan.occasion === 'Anniversary' ? 'love-like-rosemary' : 'copper-pot' }); }}>
-              <div className="round-ico"><Icon name="grid" size={18} /></div>
-              <div><div style={{ fontSize: 16 }}>Make them a board</div><div className="small">An idea for the day itself</div></div>
-              <Icon name="chevron" size={18} />
-            </button>
-            <button className="reminder-card" style={{ marginTop: 8, opacity: 0.7 }} disabled>
-              <div className="round-ico"><Icon name="gift" size={18} /></div>
-              <div><div style={{ fontSize: 16 }}>Yndarena gifts</div><div className="small">Store link pending in this preview</div></div>
-              <Icon name="chevron" size={18} />
-            </button>
-          </>
-        )}
+        {plan && <PlanGift g={plan} onShare={() => { setPlan(null); nav.switchTab('discover', { name: 'discover', params: { filter: 'all' } }); }} />}
       </Sheet>
     </div>
+  );
+}
+
+// Plan a gift: Yndarena first, on Amazon; something to share as the alternative. Opening Amazon changes nothing here.
+function PlanGift({ g, onShare }) {
+  const url = LINKS.amazonStore;
+  const ready = validAmazonUrl(url);
+  return (
+    <>
+      <p className="body" style={{ marginTop: 0 }}>Find a gift for {g.name}’s home, or plan something to share.</p>
+      <div className="gift-option is-primary">
+        <div className="go-head">
+          <span className="round-ico"><Icon name="gift" size={18} /></span>
+          <div><div className="go-t">Give Yndarena</div><div className="go-s">A thoughtful gift for their home.</div></div>
+        </div>
+        {ready ? (
+          <a className="btn btn-primary btn-block" href={url} target="_blank" rel="noopener noreferrer" aria-label="View on Amazon, opens Amazon"><span>View on Amazon</span></a>
+        ) : (
+          <button className="btn btn-primary btn-block" disabled aria-describedby="amazon-pending"><span>View on Amazon</span></button>
+        )}
+        {!ready && IS_PREVIEW && <p className="go-note" id="amazon-pending">Amazon link pending in this preview.</p>}
+      </div>
+      <button className="gift-option is-secondary" onClick={onShare}>
+        <span className="round-ico"><Icon name="grid" size={18} /></span>
+        <span className="grow"><span className="go-t">Make something to share</span><span className="go-s">A recipe or serving idea for the day.</span></span>
+        <Icon name="chevron" size={18} />
+      </button>
+    </>
   );
 }
 
@@ -809,7 +831,8 @@ function GiftEditor({ value, onClose, onSave, onDelete, today }) {
   const thisYear = today.getUTCFullYear();
   const target = v.once ? new Date(Date.UTC(v.y, v.m - 1, v.d)) : null;
   const past = target && target < new Date(today.getTime() - DAY);
-  const valid = v.name.trim() && v.d <= daysIn && !past;
+  const anyChannel = v.push || v.email;
+  const valid = v.name.trim() && v.d <= daysIn && !past && anyChannel;
   return (
     <Sheet open={!!value} onClose={onClose} title={v.id ? 'Edit date' : 'Add a date'} tall>
       <div className="stack-16">
@@ -850,6 +873,17 @@ function GiftEditor({ value, onClose, onSave, onDelete, today }) {
             </select>
           </label>
         )}
+        <fieldset className="remind-by">
+          <legend><span className="label">Remind me by</span><span className="rb-hint">Choose one or both.</span></legend>
+          {[['push', 'Push notifications', 'On this phone, even when the app is closed. Your phone asks for permission the first time.'], ['email', 'Email', 'To the address on your account.']].map(([k, t, d]) => (
+            <button key={k} type="button" className="list-row" role="switch" aria-checked={!!v[k]} onClick={() => setV({ ...v, [k]: !v[k] })}>
+              <div className="grow"><div>{t}</div><div className="sub">{d}</div></div>
+              <span className={'switch' + (v[k] ? ' is-on' : '')} />
+            </button>
+          ))}
+          {!anyChannel && <div className="err">Choose at least one way to be reminded.</div>}
+          {IS_PREVIEW && <p className="small muted" style={{ margin: '8px 0 0' }}>In this preview, push notifications and emails are simulated. No permission is requested and nothing is sent.</p>}
+        </fieldset>
         {v.d > daysIn && <div className="err">That day doesn’t exist in {MONTHS[v.m - 1]}{v.once ? ' ' + v.y : ''}.</div>}
         {past && <div className="err">That date has already passed.</div>}
         <Button block disabled={!valid} onClick={() => onSave(v)}>{v.id ? 'Save changes' : 'Save date'}</Button>

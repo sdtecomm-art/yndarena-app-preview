@@ -841,3 +841,23 @@ button.tag { min-height: 36px; }
 .rp-next .icon { flex: none; margin-top: 2px; color: var(--c-taupe); }
 .rp-channels { margin: 6px 0 10px; }
 .rp-channels .list-row { padding: 10px 0; }
+
+/* Gift dates: channels per date, and Plan a gift. */
+.gift-channels { display: inline-flex; align-items: center; gap: 5px; margin-top: 3px; font-family: var(--sans); font-size: 12.5px; color: var(--c-taupe); }
+.remind-by { border: 0; padding: 0; margin: 0; }
+.remind-by legend { padding: 0; margin-bottom: 4px; display: flex; align-items: baseline; gap: 8px; }
+.rb-hint { font-size: 14px; color: var(--c-brown); }
+.remind-by .list-row { padding: 12px 0; }
+.gift-option { display: block; width: 100%; text-align: left; border-radius: 16px; border: 1px solid var(--c-line); background: var(--c-cream); }
+.gift-option.is-primary { padding: 16px; margin-top: 8px; border-color: var(--c-line-strong); box-shadow: 0 2px 10px -6px rgba(59, 42, 30, .35); }
+.gift-option.is-primary .btn { margin-top: 14px; text-decoration: none; }
+.go-head { display: flex; gap: 12px; align-items: flex-start; }
+.go-t { display: block; font-family: var(--display); font-size: 22px; line-height: 1.1; color: var(--c-black); }
+.go-s { display: block; font-size: 15px; color: var(--c-brown); margin-top: 3px; }
+.go-note { margin: 8px 0 0; font-family: var(--sans); font-size: 12.5px; color: var(--c-taupe); text-align: center; }
+.gift-option.is-secondary { display: flex; align-items: center; gap: 12px; padding: 14px 16px; margin-top: 10px; background: var(--c-bone); transition: opacity .15s ease; }
+.gift-option.is-secondary:active { opacity: .72; }
+.gift-option.is-secondary .go-t { font-size: 19px; }
+.remind-by { margin-top: 20px !important; padding-top: 16px; border-top: 1px solid var(--c-line); }
+.remind-by legend { float: left; width: 100%; margin-bottom: 6px; }
+.remind-by legend + * { clear: both; }
