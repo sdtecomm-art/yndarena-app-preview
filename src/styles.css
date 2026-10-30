@@ -861,3 +861,5 @@ button.tag { min-height: 36px; }
 .remind-by { margin-top: 20px !important; padding-top: 16px; border-top: 1px solid var(--c-line); }
 .remind-by legend { float: left; width: 100%; margin-bottom: 6px; }
 .remind-by legend + * { clear: both; }
+
+.rp-note strong { font-weight: 500; color: var(--c-black); }

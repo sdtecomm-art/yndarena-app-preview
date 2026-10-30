@@ -24,7 +24,7 @@ export function careView(care, today) {
   if (care.status !== 'active') {
     return care.status === 'notyet'
       ? { key: 'notyet', kicker: 'When your boards arrive', title: 'Everything is ready for them.', text: 'Tell us the day they come home. Your plan starts that day.', primary: ['My boards are home', 'start'], secondary: ['See how to oil', 'oil-guide'] }
-      : { key: 'new', kicker: 'First step', title: 'Oil your boards the day they arrive.', text: 'After that, we will remind you when it is time to check.', primary: ['My boards are home', 'start'], secondary: ['See how to oil', 'oil-guide'] };
+      : { key: 'new', kicker: 'First step', title: 'Oil your boards the day they arrive.', text: 'After that, we’ll remind you to do a quick water test. It tells you when they need oil again.', primary: ['My boards are home', 'start'], secondary: ['See how to oil', 'oil-guide'] };
   }
   const cs = careStatus(care, today);
   const oil = oilPending(care);
@@ -42,13 +42,13 @@ export function careView(care, today) {
     return {
       key: 'logged', kicker: 'Care logged today',
       title: 'Your boards are cared for.',
-      text: `Next check: ${fmtDate(cs.next)}. We’ll remind you.`,
+      text: `Next water test: ${fmtDate(cs.next)}. We’ll remind you.`,
       primary: ['Browse the care guides', 'focus:oil'], secondary: null,
     };
   }
   if (cs.due) {
     return {
-      key: 'due', hot: true, kicker: cs.overdueDays > 0 ? `Check due since ${fmtShort(cs.next)}` : 'Check due today',
+      key: 'due', hot: true, kicker: cs.overdueDays > 0 ? `Water test due since ${fmtShort(cs.next)}` : 'Water test due today',
       title: 'Time for a quick water test.',
       text: 'A few drops on a clean, dry board, and a few seconds of watching. You tell us what you saw.',
       primary: ['Start water test', 'water-test'], secondary: ['How the test works', 'focus:check'],
@@ -56,9 +56,9 @@ export function careView(care, today) {
   }
   const d = daysBetween(today, cs.next);
   return {
-    key: 'upcoming', kicker: 'Next check',
+    key: 'upcoming', kicker: 'Next water test',
     title: fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear()),
-    text: `In ${d} day${d === 1 ? '' : 's'}. Nothing to do until then. We’ll remind you.`,
+    text: `In ${d} day${d === 1 ? '' : 's'}. No oil until a water test says so. We’ll remind you.`,
     primary: ['Browse the care guides', 'focus:oil'], secondary: ['Check now anyway', 'water-test'],
   };
 }
@@ -69,9 +69,9 @@ function planFacts(care, today) {
   const cs = careStatus(care, today);
   const last = [...care.checks].sort((a, b) => ((a.oiledAt || a.at) < (b.oiledAt || b.at) ? -1 : 1)).pop();
   return [
-    ['Checks recorded', `${cs.recorded}`],
+    ['Tests recorded', `${cs.recorded}`],
     ['Last care', last ? `${last.oiledAt ? 'Oiled' : last.result === 'beads' ? 'Beaded' : 'Soaked in'}, ${fmtShort(fromIso(last.oiledAt || last.at))}` : 'None yet'],
-    ['Next check', fmtShort(cs.next)],
+    ['Next water test', fmtShort(cs.next)],
   ];
 }
 
@@ -368,10 +368,10 @@ function ReminderPlan({ care, today }) {
           </button>
         ))}
       </div>
-      <p className="rp-note">We’ll remind you to check your boards. Oil them when they need it.</p>
+      <p className="rp-note"><strong>Each reminder is for a water test, not for oil.</strong> Oil only if the water soaks in.</p>
       <div className="rp-next">
         <Icon name="bell" size={16} />
-        <span>{!active ? 'Reminders start the day your boards come home.' : !on ? `Reminders are off. Next check: ${fmtDate(cs.next)}.` : cs.due ? 'A check is due now. We won’t send the missed ones.' : `Next reminder: ${fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear())}.`}</span>
+        <span>{!active ? 'Reminders start the day your boards come home.' : !on ? `Reminders are off. Next water test: ${fmtDate(cs.next)}.` : cs.due ? 'A water test is due now. We won’t send the missed reminders.' : `Next water test reminder: ${fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear())}.`}</span>
       </div>
       <div className="rp-channels">
         {[['email', 'By email'], ['app', 'In the app']].map(([k, t]) => (
@@ -461,13 +461,13 @@ function CarePlan({ params, root }) {
       <section className="care-sec" id="care-history">
         <details className="history" open={params.focus === 'history' || undefined}>
           <summary>
-            <span><span className="label">Care history</span><span className="history-sum">{active ? `${cs.recorded} check${cs.recorded === 1 ? '' : 's'} recorded · next ${fmtShort(cs.next)}` : 'Starts when your boards are home'}</span></span>
+            <span><span className="label">Care history</span><span className="history-sum">{active ? `${cs.recorded} water test${cs.recorded === 1 ? '' : 's'} recorded · next ${fmtShort(cs.next)}` : 'Starts when your boards are home'}</span></span>
             <Icon name="chevron" size={18} className="chev" />
           </summary>
           {active && (
             <div className="timeline" style={{ marginTop: 12 }}>
               <div className="tl-item is-now">
-                <div className="row-between"><span style={{ fontSize: 16 }}>Next check</span><span className="small">{fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear())}</span></div>
+                <div className="row-between"><span style={{ fontSize: 16 }}>Next water test</span><span className="small">{fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear())}</span></div>
                 <div className="small">{cs.due ? 'Due now' : `${CARE_USAGE[cs.usage].label} use · ${CARE_USAGE[cs.usage].hint}`}</div>
               </div>
               {history.map((c, i) => (

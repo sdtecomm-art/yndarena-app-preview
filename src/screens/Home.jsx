@@ -28,7 +28,7 @@ function CareHero({ care, today }) {
       <div className="pad">
         <div className="eyebrow">Your Yndarena Care Plan</div>
         <h1 className="display-xl">Made with love.<br /><em>Cared for with ease.</em></h1>
-        <p className="hero-lede">Know when to oil, see how, and let us remind you.</p>
+        <p className="hero-lede">A quick water test tells you when to oil. We’ll remind you to do it.</p>
       </div>
       <ProductStrip className="hero-product" />
       <div className="pad">
