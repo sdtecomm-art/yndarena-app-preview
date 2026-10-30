@@ -867,3 +867,10 @@ button.tag { min-height: 36px; }
 .care-sec.is-first { margin-top: 4px; }
 .care-sec.is-first .care-sec-head { border-top: 0; padding-top: 0; }
 .care-sec.is-first + .pad { margin-top: 30px; }
+
+/* After a water test: current reminder setting and a quick change. */
+.rq { margin-top: 22px; padding: 14px 16px; border-radius: 14px; background: var(--c-bone); border: 1px solid var(--c-line); text-align: left; }
+.rq-row { display: flex; align-items: center; gap: 12px; }
+.rq-k { font-family: var(--sans); font-size: 12.5px; color: var(--c-taupe); }
+.rq-v { font-size: 16px; color: var(--c-black); margin-top: 2px; }
+.rq .link { padding: 8px 0; }

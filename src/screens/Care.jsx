@@ -349,6 +349,35 @@ function Section({ id, n, title, lead, children, first }) {
   );
 }
 
+// After a water test: the current reminder setting, and a quick way to change it. Changing it never edits a result.
+function ReminderQuick() {
+  const { user, updateUser } = useStore();
+  const [open, setOpen] = useState(false);
+  const usage = usageOf(user.care);
+  return (
+    <div className="rq">
+      <div className="rq-row">
+        <div className="grow">
+          <div className="rq-k">Water test reminders</div>
+          <div className="rq-v">{CARE_USAGE[usage].label} use · {CARE_USAGE[usage].hint}</div>
+        </div>
+        <button className="link" onClick={() => setOpen(!open)} aria-expanded={open}>{open ? 'Close' : 'Change'}</button>
+      </div>
+      {open && (
+        <div className="rp-options" role="radiogroup" aria-label="How often you use your boards" style={{ marginTop: 10 }}>
+          {Object.entries(CARE_USAGE).map(([k, u]) => (
+            <button key={k} role="radio" aria-checked={usage === k} className={'rp-option' + (usage === k ? ' is-on' : '')} onClick={() => updateUser((x) => { x.care.usage = k; })}>
+              <span className="rp-radio" aria-hidden="true" />
+              <span className="rp-l">{u.label} use</span>
+              <span className="rp-h">{u.hint.replace(/^about /, 'About ')}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // How often we remind: part of the plan itself, next to the next check and the channels. No FAQ.
 function ReminderPlan({ care, today }) {
   const { updateUser } = useStore();
@@ -653,8 +682,9 @@ export function WaterTest({ params = {} }) {
             <h1 className="display-m" style={{ marginTop: 18 }}>You’re all set.</h1>
             <p className="lead" style={{ margin: '8px 0 0' }}>{RESULTS.beads.means} No oil needed today.</p>
             <p className="small" style={{ marginTop: 10 }}>Wipe the water off the board with a dry cloth.</p>
-            {practice ? <p className="small" style={{ marginTop: 6 }}>This was a walkthrough. Nothing was saved.</p> : nextDate && <p className="small" style={{ marginTop: 6 }}>Saved. We’ll remind you for the next check on {nextDate}.</p>}
-            <Button block style={{ marginTop: 22 }} onClick={() => { nav.pop(); if (!practice && active) toast('Check saved to your care plan.'); }}>Done</Button>
+            {practice ? <p className="small" style={{ marginTop: 6 }}>This was a walkthrough. Nothing was saved.</p> : nextDate && <p className="small" style={{ marginTop: 6 }}>Saved. Next water test reminder: {nextDate}.</p>}
+            <Button block style={{ marginTop: 22 }} onClick={() => { nav.pop(); if (!practice && active) toast('Water test saved to your care plan.'); }}>Done</Button>
+            {!practice && active && <ReminderQuick />}
           </div>
         )}
 
@@ -669,6 +699,7 @@ export function WaterTest({ params = {} }) {
               <button className="choice" onClick={() => setKit(true)}><Icon name="bag" size={18} /><span>I need board oil</span></button>
             </div>
             <Button block variant="text" style={{ marginTop: 10 }} onClick={() => { nav.pop(); if (!practice && active) toast('We’ll keep “Oil pending” on your Home until you oil them.'); }}>I’ll oil them later</Button>
+            {!practice && active && <ReminderQuick />}
             <OilSheet open={kit} onClose={() => setKit(false)} />
           </>
         )}
