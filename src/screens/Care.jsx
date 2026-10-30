@@ -279,8 +279,8 @@ export const OIL_FACTS = [
 
 export const OIL_STEPS = [
   { title: 'Start clean and dry', text: 'Wash the board, wipe it and let it dry completely before any oil goes on.', art: 'dry' },
-  { title: 'A little oil on the surface', text: 'Pour a small amount of mineral oil onto one face. You can always add more.', art: 'pour' },
-  { title: 'Spread it with the cloth', text: 'Rub it in following the grain, in a thin, even layer. Then the other face and the edges.', art: 'spread' },
+  { title: 'Oil on the surface', text: 'Pour mineral oil onto one face, enough to cover it once you spread it.', art: 'pour' },
+  { title: 'Spread it with the cloth', text: 'Rub it in following the grain, in an even layer. Then the other face and the edges.', art: 'spread' },
   { title: 'Let the wood drink it in', text: 'Leave the board standing on its edge while the oil soaks in.', art: 'rest' },
   { title: 'Wipe off what is left', text: 'When the surface stops taking in oil, wipe away the excess with a dry part of the cloth.', art: 'wipe' },
 ];
@@ -301,8 +301,8 @@ function StepArt({ kind }) {
 
 export const EVERYDAY = [
   { icon: 'wash', title: 'Wash by hand', text: 'Warm water and a little mild soap. Never soak it, never the dishwasher.' },
-  { icon: 'air', title: 'Dry on its edge', text: 'Wipe it right away, then let it stand on its edge so air reaches both faces.' },
-  { icon: 'stand', title: 'Store in the stand', text: 'Keep the boards in their stand, away from the stove and direct sun.' },
+  { icon: 'air', title: 'Dry it, then stand it up', text: 'Dry it with a cloth, then lean it on its edge against the wall so air reaches both faces.' },
+  { icon: 'stand', title: 'Back in the stand', text: 'Once it is completely dry, put it back in the stand, away from the stove and direct sun.' },
   { icon: 'heat', title: 'Hot pans on a trivet', text: 'Hot pans and baking dishes rest on a trivet, never on the wood.' },
 ];
 
@@ -560,7 +560,6 @@ export function WaterTest({ params = {} }) {
   const { user, updateUser, today } = useStore();
   const practice = !!params.practice;
   const [step, setStep] = useState('drops');
-  const [drops, setDrops] = useState([]);
   // A small helper count, started only once the drops are on the board. It never decides anything.
   const [secs, setSecs] = useState(WATCH_SECONDS);
   const [kit, setKit] = useState(false);
@@ -581,12 +580,7 @@ export function WaterTest({ params = {} }) {
   // After a check, the next one counts from today.
   const nextDate = active ? fmtDate(addUsageInterval(today, usageOf(user.care))) : null;
 
-  const addDrop = (e) => {
-    if (drops.length >= 6) return;
-    const r = e.currentTarget.getBoundingClientRect();
-    const k = Date.now();
-    setDrops([...drops, { cx: ((e.clientX - r.left) / r.width) * 320, cy: ((e.clientY - r.top) / r.height) * 180, r: 7 + (k % 5), sx: 1 + (k % 4) * 0.15, rot: (k % 50) - 25, seed: 1 + (k % 9), k }]);
-  };
+
   const order = ['drops', 'watch', 'result'];
   const idx = Math.min(order.indexOf(step) < 0 ? 3 : order.indexOf(step), 3);
 
@@ -602,22 +596,9 @@ export function WaterTest({ params = {} }) {
         {step === 'drops' && (
           <>
             <div className="where is-board"><Icon name="hand" size={16} />At your board</div>
-            <h1 className="display-m">Put a few drops of water on a clean, dry board.</h1>
-            <p className="body" style={{ margin: '8px 0 0' }}>Start with a board that is clean and completely dry. A few drops from your fingertips on the face you cut on most is enough.</p>
-            <div className="where is-screen" style={{ marginTop: 20 }}><Icon name="phone" size={16} />On this screen, only a picture</div>
-            <div className="water" onClick={addDrop} role="button" tabIndex={0} aria-label="Illustration. Tap to see how drops look on wood. It does not check your board.">
-              <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
-                <WaterDefs id="demo" />
-                <Wood id="demo" w={320} h={180} />
-                {drops.map((d) => (
-                  <g key={d.k} className="drop fall"><SurfaceWater b={d} id="demo" /></g>
-                ))}
-              </svg>
-              <span className="illus-tag">Illustration</span>
-              {drops.length === 0 && <div className="canvas-hint">Tap to see how drops look</div>}
-            </div>
-            <p className="small" style={{ marginTop: 8 }}>Tapping here doesn’t check your board. Only your eyes can.</p>
-            <Button block style={{ marginTop: 16 }} onClick={() => { setStep('watch'); setSecs(WATCH_SECONDS); }}>The drops are on my board</Button>
+            <h1 className="display-m">Put a few drops of water on the board.</h1>
+            <p className="body" style={{ margin: '8px 0 0' }}>A clean, dry board. A few drops are enough.</p>
+            <Button block style={{ marginTop: 22 }} onClick={() => { setStep('watch'); setSecs(WATCH_SECONDS); }}>Done</Button>
           </>
         )}
 
@@ -669,7 +650,7 @@ export function WaterTest({ params = {} }) {
             <ResultCompare />
             <div className="stack-8" style={{ marginTop: 18 }}>
               <Button block onClick={() => setStep('result')}>I can tell now</Button>
-              <Button block variant="ghost" onClick={() => { setDrops([]); setStep('drops'); }}>Try a fresh spot</Button>
+              <Button block variant="ghost" onClick={() => setStep('drops')}>Try a fresh spot</Button>
               <Button block variant="text" onClick={() => { nav.pop(); toast('Nothing saved. Try again whenever you like.'); }}>Leave without saving</Button>
             </div>
           </>
