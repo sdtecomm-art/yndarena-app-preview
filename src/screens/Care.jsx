@@ -23,8 +23,8 @@ const reduceMotion = () => typeof matchMedia === 'function' && matchMedia('(pref
 export function careView(care, today) {
   if (care.status !== 'active') {
     return care.status === 'notyet'
-      ? { key: 'notyet', kicker: 'When your boards arrive', title: 'Everything is ready for them.', text: 'Tell us the day they come home. Your plan starts that day.', primary: ['My boards are home', 'start'], secondary: ['See how to oil', 'oil-guide'] }
-      : { key: 'new', kicker: 'First step', title: 'Oil your boards the day they arrive.', text: 'After that, we’ll remind you to do a quick water test. It tells you when they need oil again.', primary: ['My boards are home', 'start'], secondary: ['See how to oil', 'oil-guide'] };
+      ? { key: 'notyet', kicker: 'When your boards arrive', title: 'Everything is ready for them.', text: 'Tell us the day they come home. Your plan starts that day.', primary: ['My boards are home', 'start'], secondary: null }
+      : { key: 'new', kicker: 'First step', title: 'Your boards arrive already oiled.', text: 'Tell us when they’re home. We’ll remind you to do a quick water test, and the water test tells you when they need oil.', primary: ['My boards are home', 'start'], secondary: null };
   }
   const cs = careStatus(care, today);
   const oil = oilPending(care);
@@ -40,10 +40,10 @@ export function careView(care, today) {
   const doneToday = last && (last.at === iso(today) || last.oiledAt === iso(today));
   if (doneToday) {
     return {
-      key: 'logged', kicker: 'Care logged today',
-      title: 'Your boards are cared for.',
-      text: `Next water test: ${fmtDate(cs.next)}. We’ll remind you.`,
-      primary: ['Browse the care guides', 'focus:oil'], secondary: null,
+      key: 'logged', kicker: last.oiledAt === iso(today) ? 'Oiled today' : 'Water test done today',
+      title: `Next water test: ${fmtDate(cs.next)}`,
+      text: 'We’ll remind you when it’s time.',
+      primary: ['Start water test', 'water-test'], secondary: null,
     };
   }
   if (cs.due) {
@@ -51,7 +51,7 @@ export function careView(care, today) {
       key: 'due', hot: true, kicker: cs.overdueDays > 0 ? `Water test due since ${fmtShort(cs.next)}` : 'Water test due today',
       title: 'Time for a quick water test.',
       text: 'A few drops on a clean, dry board, and a few seconds of watching. You tell us what you saw.',
-      primary: ['Start water test', 'water-test'], secondary: ['How the test works', 'focus:check'],
+      primary: ['Start water test', 'water-test'], secondary: null,
     };
   }
   const d = daysBetween(today, cs.next);
@@ -59,7 +59,7 @@ export function careView(care, today) {
     key: 'upcoming', kicker: 'Next water test',
     title: fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear()),
     text: `In ${d} day${d === 1 ? '' : 's'}. No oil until a water test says so. We’ll remind you.`,
-    primary: ['Browse the care guides', 'focus:oil'], secondary: ['Check now anyway', 'water-test'],
+    primary: ['Start water test', 'water-test'], secondary: null,
   };
 }
 
@@ -97,7 +97,8 @@ export function useCareActions() {
   };
 }
 
-export function NextStep({ care, today, compact }) {
+// In Care the water test has its own section right above, so the card doesn't repeat its button there.
+export function NextStep({ care, today, compact, hideWaterTest }) {
   const act = useCareActions();
   const v = careView(care, today);
   const facts = compact ? [] : planFacts(care, today);
@@ -106,10 +107,10 @@ export function NextStep({ care, today, compact }) {
       <div className="next-kicker"><span className="pulse-dot" aria-hidden="true" />{v.kicker}</div>
       <h2 className="next-title">{v.title}</h2>
       <p className="next-text">{v.text}</p>
-      <div className="next-actions">
+      {!(hideWaterTest && v.primary[1] === 'water-test') && <div className="next-actions">
         <Button block onClick={() => act(v.primary[1])}>{v.primary[0]}</Button>
         {v.secondary && <Button block variant="text" onClick={() => act(v.secondary[1])}>{v.secondary[0]}</Button>}
-      </div>
+      </div>}
       {facts.length > 0 && (
         <dl className="plan-facts">
           {facts.map(([k, val]) => <div key={k}><dt>{k}</dt><dd>{val}</dd></div>)}
@@ -273,7 +274,7 @@ function ResultCompare() {
 // Step wording and everyday care are drafts pending Yndarena's approval: see the review panel.
 export const OIL_FACTS = [
   ['What you need', 'The mineral oil and the cloth that came with your set, and a clean, dry board.'],
-  ['When', 'The day your boards arrive. After that, whenever the water test soaks in.'],
+  ['When', 'Only when the water test soaks in. Your boards arrive already oiled.'],
   ['Where', 'Every surface: both faces and all four edges.'],
 ];
 
@@ -420,7 +421,7 @@ function CarePlan({ params, root }) {
       </Section>
 
       <div className="pad">
-        <NextStep care={care} today={today} />
+        <NextStep care={care} today={today} hideWaterTest />
         <ReminderPlan care={care} today={today} />
       </div>
 
