@@ -355,7 +355,7 @@ export default function Designer({ params }) {
           </button>
         ))}
         {!items.length && <p className="body">Add groups to see the techniques they use.</p>}
-        <button className="link" style={{ marginTop: 14 }} onClick={() => { setSheet(null); nav.switchTab('discover', { name: 'discover', params: { seg: 'techniques' } }); }}>Browse all techniques</button>
+        <button className="link" style={{ marginTop: 14 }} onClick={() => { setSheet(null); nav.push('techniques'); }}>Browse all techniques</button>
       </Sheet>
     </div>
   );

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
 import { TopBar, Button, Kicker, Icon, Sheet, DemoNote, Sprig, Chip, Empty, useToast } from '../ui.jsx';
 import { MEDIA } from '../data/media.js';
 import {
   careStatus, oilPending, fmtDate, fmtShort, daysBetween, iso, fromIso, uid, DAY,
-  OCCASION_TYPES, giftInfo, giftWho, whenText, MONTHS, MONTHS_SHORT, CARE_FIRST_WEEK, CARE_EVERY, CARE_MAX,
+  OCCASION_TYPES, giftInfo, giftWho, whenText, MONTHS, MONTHS_SHORT, CARE_USAGE, usageOf, addUsageInterval,
 } from '../lib.js';
 
 const MAX_GIFTS = 3;
@@ -35,46 +35,42 @@ export function careView(care, today) {
       primary: ['How to oil', 'oil-guide'], secondary: ['I oiled my boards', 'oiled'],
     };
   }
-  if (cs.dueNow) {
+  const last = [...care.checks].sort((a, b) => ((a.oiledAt || a.at) < (b.oiledAt || b.at) ? -1 : 1)).pop();
+  const doneToday = last && (last.at === iso(today) || last.oiledAt === iso(today));
+  if (doneToday) {
     return {
-      key: 'due', hot: true, kicker: `Check ${cs.dueNow.n} of ${CARE_MAX} · today`,
+      key: 'logged', kicker: 'Care logged today',
+      title: 'Your boards are cared for.',
+      text: `Next check: ${fmtDate(cs.next)}. We’ll remind you.`,
+      primary: ['Browse the care guides', 'focus:oil'], secondary: null,
+    };
+  }
+  if (cs.due) {
+    return {
+      key: 'due', hot: true, kicker: cs.overdueDays > 0 ? `Check due since ${fmtShort(cs.next)}` : 'Check due today',
       title: 'Time for a quick water test.',
       text: 'A few drops on a clean, dry board, and a few seconds of watching. You tell us what you saw.',
       primary: ['Start water test', 'water-test'], secondary: ['How the test works', 'focus:check'],
     };
   }
-  const last = [...care.checks].sort((a, b) => (a.at < b.at ? -1 : 1)).pop();
-  const doneToday = last && (last.at === iso(today) || last.oiledAt === iso(today));
-  if (cs.next && doneToday) {
-    return {
-      key: 'logged', kicker: 'Care logged today',
-      title: 'Your boards are cared for.',
-      text: `Next water test: ${fmtDate(cs.next.date)}. We’ll remind you.`,
-      primary: ['Browse the care guides', 'focus:oil'], secondary: null,
-    };
-  }
-  if (cs.next) {
-    const d = daysBetween(today, cs.next.date);
-    return {
-      key: 'upcoming', kicker: `Next water test · check ${cs.next.n} of ${CARE_MAX}`,
-      title: fmtDate(cs.next.date, cs.next.date.getUTCFullYear() !== today.getUTCFullYear()),
-      text: `In ${d} day${d === 1 ? '' : 's'}. Nothing to do until then. We’ll remind you.`,
-      primary: ['Browse the care guides', 'focus:oil'], secondary: ['Check now anyway', 'water-test'],
-    };
-  }
-  return { key: 'complete', kicker: `All ${CARE_MAX} checks done`, title: 'Your plan is complete.', text: 'Do the water test whenever the wood looks dry or dull.', primary: ['Do the water test', 'water-test'], secondary: ['Browse the care guides', 'focus:oil'] };
+  const d = daysBetween(today, cs.next);
+  return {
+    key: 'upcoming', kicker: 'Next check',
+    title: fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear()),
+    text: `In ${d} day${d === 1 ? '' : 's'}. Nothing to do until then. We’ll remind you.`,
+    primary: ['Browse the care guides', 'focus:oil'], secondary: ['Check now anyway', 'water-test'],
+  };
 }
 
 // Facts the plan already holds, shown as they are.
 function planFacts(care, today) {
   if (care.status !== 'active') return [];
   const cs = careStatus(care, today);
-  const logged = care.checks.filter((c) => c.n).length;
-  const last = [...care.checks].sort((a, b) => (a.at < b.at ? -1 : 1)).pop();
+  const last = [...care.checks].sort((a, b) => ((a.oiledAt || a.at) < (b.oiledAt || b.at) ? -1 : 1)).pop();
   return [
-    ['Home since', fmtShort(fromIso(care.startedAt))],
-    ['Checks logged', `${logged} of ${CARE_MAX}`],
-    ['Last result', last ? `${last.result === 'beads' ? 'Beaded' : last.oiled ? 'Oiled' : 'Soaked in'}, ${fmtShort(fromIso(last.oiledAt || last.at))}` : cs.next ? 'None yet' : '—'],
+    ['Checks recorded', `${cs.recorded}`],
+    ['Last care', last ? `${last.oiledAt ? 'Oiled' : last.result === 'beads' ? 'Beaded' : 'Soaked in'}, ${fmtShort(fromIso(last.oiledAt || last.at))}` : 'None yet'],
+    ['Next check', fmtShort(cs.next)],
   ];
 }
 
@@ -134,33 +130,114 @@ export function ProductStrip({ className = '' }) {
 
 // ---------- Illustrations ----------
 // Drawn, labelled as illustrations: they explain what to look for, they never stand for the customer's board.
+// Modelled on the owner's reference of water held on a wooden surface: clear water in irregular, slightly lobed
+// drops and small pools, the grain visible through them, a fine edge and small reflections. Absorbed water uses
+// the same wood, light, places and amount: no volume, no edge, no reflections, only a diffuse darker patch.
+
+// Organic outline: a closed smooth curve around (cx, cy), stretched by sx and turned by rot (degrees).
+function blobPath({ cx, cy, r, sx = 1, rot = 0, seed = 1 }, grow = 1) {
+  const n = 24, pts = [];
+  const a = 0.08 + (seed % 3) * 0.035, b = 0.06 + (seed % 2) * 0.05, c = 0.035;
+  const p1 = seed * 1.7, p2 = seed * 2.3, p3 = seed * 0.9;
+  const t = (rot * Math.PI) / 180, ct = Math.cos(t), st = Math.sin(t);
+  for (let k = 0; k < n; k++) {
+    const th = (2 * Math.PI * k) / n;
+    const rr = r * grow * (1 + a * Math.sin(2 * th + p1) + b * Math.sin(3 * th + p2) + c * Math.sin(5 * th + p3));
+    const x = rr * Math.cos(th) * sx, y = rr * Math.sin(th);
+    pts.push([cx + x * ct - y * st, cy + x * st + y * ct]);
+  }
+  // Catmull-Rom through the points, as cubic Béziers.
+  let d = `M${pts[0][0].toFixed(2)} ${pts[0][1].toFixed(2)}`;
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n], q1 = pts[i], q2 = pts[(i + 1) % n], p3_ = pts[(i + 2) % n];
+    const c1 = [q1[0] + (q2[0] - p0[0]) / 6, q1[1] + (q2[1] - p0[1]) / 6], c2 = [q2[0] - (p3_[0] - q1[0]) / 6, q2[1] - (p3_[1] - q1[1]) / 6];
+    d += ` C${c1[0].toFixed(2)} ${c1[1].toFixed(2)} ${c2[0].toFixed(2)} ${c2[1].toFixed(2)} ${q2[0].toFixed(2)} ${q2[1].toFixed(2)}`;
+  }
+  return d + 'Z';
+}
+
+// The same water in both states: sizes vary, some drops have run together into small pools.
+const WATER = [
+  { cx: 48, cy: 40, r: 15, sx: 1.7, rot: -8, seed: 1 },
+  { cx: 110, cy: 33, r: 8, sx: 1.2, rot: 15, seed: 2 },
+  { cx: 121, cy: 73, r: 11, sx: 1.45, rot: 24, seed: 3 },
+  { cx: 70, cy: 80, r: 9, sx: 1.35, rot: -18, seed: 4 },
+  { cx: 29, cy: 86, r: 5, sx: 1.1, seed: 5 },
+  { cx: 95, cy: 57, r: 4.6, sx: 1.05, seed: 6 },
+  { cx: 142, cy: 27, r: 3.8, sx: 1.2, seed: 7 },
+  { cx: 140, cy: 96, r: 3.2, seed: 8 },
+];
+
+export function Wood({ id, w = 160, h = 110 }) {
+  const lines = Math.round(h / 4.2);
+  return (
+    <>
+      <defs>
+        <linearGradient id={id + 'wood'} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#b47a4e" /><stop offset=".55" stopColor="#a06a42" /><stop offset="1" stopColor="#8a5733" /></linearGradient>
+      </defs>
+      <rect width={w} height={h} fill={`url(#${id}wood)`} />
+      {Array.from({ length: lines }, (_, i) => {
+        const y = (i + 0.5) * (h / lines), wob = 1.6 + (i % 4) * 0.7;
+        return <path key={i} d={`M-6 ${y.toFixed(1)} C ${w * 0.3} ${(y - wob).toFixed(1)}, ${w * 0.62} ${(y + wob * 1.3).toFixed(1)}, ${w + 6} ${(y - wob * 0.4).toFixed(1)}`} stroke={i % 5 === 2 ? '#d29a6a' : '#5d3820'} strokeWidth={i % 3 ? 0.45 : 0.9} fill="none" opacity={i % 5 === 2 ? 0.28 : 0.3 + (i % 3) * 0.06} />;
+      })}
+    </>
+  );
+}
+
+// One body of water sitting on the wood: clear, the grain shows through, a fine edge and small reflections.
+export function SurfaceWater({ b, id }) {
+  const d = blobPath(b);
+  // Reflections sit inside the water, on its upper-left side, following the shape's own turn.
+  const t = ((b.rot || 0) * Math.PI) / 180, sx = b.sx || 1;
+  const at = (u, v) => [b.cx + u * Math.cos(t) - v * Math.sin(t), b.cy + u * Math.sin(t) + v * Math.cos(t)];
+  const [hx, hy] = at(-b.r * sx * 0.34, -b.r * 0.36), hr = Math.max(0.7, b.r * 0.12);
+  const [gx, gy] = at(b.r * sx * 0.38, b.r * 0.28);
+  // The dark line under the edge is only a crescent outside the water, so the wood inside keeps its own tone.
+  const mid = `${id}m${b.seed}${Math.round(b.cx)}${Math.round(b.cy)}`;
+  return (
+    <g>
+      <mask id={mid} maskUnits="userSpaceOnUse">
+        <path d={d} transform="translate(.7 1.1)" fill="#fff" />
+        <path d={d} fill="#000" />
+      </mask>
+      <path d={d} transform="translate(.7 1.1)" fill="#3a1d0b" opacity=".55" mask={`url(#${mid})`} />
+      <path d={d} fill={`url(#${id}water)`} />
+      <path d={d} fill="none" stroke="#4a2810" strokeOpacity=".4" strokeWidth=".45" />
+      <path d={blobPath(b, 0.78)} transform="translate(.6 .9)" fill="none" stroke="#ffe3c4" strokeOpacity=".1" strokeWidth={Math.max(0.6, b.r * 0.1)} />
+      <ellipse cx={hx} cy={hy} rx={hr * 1.6} ry={hr * 0.7} transform={`rotate(-30 ${hx} ${hy})`} fill="#fff" opacity=".7" />
+      {b.r > 7 && <circle cx={gx} cy={gy} r={hr * 0.45} fill="#fff" opacity=".45" />}
+    </g>
+  );
+}
+
+export function WaterDefs({ id }) {
+  return (
+    <defs>
+      <linearGradient id={id + 'water'} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor="#fff4e6" stopOpacity=".24" />
+        <stop offset=".55" stopColor="#ffd9b0" stopOpacity=".1" />
+        <stop offset="1" stopColor="#ffd9b0" stopOpacity=".04" />
+      </linearGradient>
+      <filter id={id + 'soak'} x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" /></filter>
+    </defs>
+  );
+}
+
 export function DropsArt({ kind, label = true, className = '' }) {
-  const id = 'w' + kind;
+  const id = 'w' + kind + useId().replace(/[^a-zA-Z0-9]/g, '');
   return (
     <div className={'drops-art ' + className} data-kind={kind}>
-      <svg viewBox="0 0 160 110" role="img" aria-label={kind === 'beads' ? 'Illustration: water drops staying round on the wood' : 'Illustration: water spreading into the wood and darkening it'}>
-        <defs>
-          <linearGradient id={id + 'g'} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#a8724c" /><stop offset="1" stopColor="#80522f" /></linearGradient>
-          <radialGradient id={id + 'd'} cx=".38" cy=".32" r=".8"><stop offset="0" stopColor="#ffffff" stopOpacity=".9" /><stop offset=".35" stopColor="#e8f1f6" stopOpacity=".55" /><stop offset="1" stopColor="#c9d8e0" stopOpacity=".25" /></radialGradient>
-        </defs>
-        <rect width="160" height="110" fill={`url(#${id}g)`} />
-        {Array.from({ length: 11 }, (_, i) => <path key={i} d={`M-5 ${6 + i * 10} C 50 ${1 + i * 10}, 100 ${12 + i * 10}, 165 ${4 + i * 10}`} stroke="#5d3820" strokeWidth={i % 3 ? 0.5 : 1} fill="none" opacity=".35" />)}
-        {kind === 'beads' ? (
-          [[44, 42, 13], [96, 34, 9], [118, 70, 12], [64, 78, 8], [30, 80, 6]].map(([x, y, r], i) => (
-            <g key={i}>
-              <ellipse cx={x + 2} cy={y + r * 0.75} rx={r * 0.95} ry={r * 0.3} fill="#2c180c" opacity=".28" />
-              <ellipse cx={x} cy={y} rx={r} ry={r * 0.86} fill={`url(#${id}d)`} stroke="#ffffff" strokeOpacity=".75" strokeWidth=".7" />
-              <ellipse cx={x - r * 0.35} cy={y - r * 0.35} rx={r * 0.26} ry={r * 0.18} fill="#fff" />
+      <svg viewBox="0 0 160 110" role="img" aria-label={kind === 'beads' ? 'Illustration: clear water staying on the surface of the wood in drops and small pools' : 'Illustration: water sinking into the wood, leaving darker patches'}>
+        <WaterDefs id={id} />
+        <Wood id={id} />
+        {kind === 'beads'
+          ? WATER.map((b) => <SurfaceWater key={b.seed} b={b} id={id} />)
+          : (
+            <g filter={`url(#${id}soak)`}>
+              {WATER.map((b) => <path key={b.seed} d={blobPath(b, 1.12)} fill="#4a260e" opacity=".36" />)}
+              {WATER.filter((b) => b.r > 6).map((b) => <path key={'c' + b.seed} d={blobPath(b, 0.7)} fill="#3a1d0b" opacity=".16" />)}
             </g>
-          ))
-        ) : (
-          [[48, 46, 24, 15], [110, 40, 18, 12], [92, 80, 26, 13]].map(([x, y, rx, ry], i) => (
-            <g key={i}>
-              <path d={`M${x - rx} ${y} C ${x - rx} ${y - ry * 1.2}, ${x + rx * 0.4} ${y - ry * 1.1}, ${x + rx} ${y - ry * 0.2} S ${x + rx * 0.2} ${y + ry * 1.2}, ${x - rx * 0.6} ${y + ry * 0.8} Z`} fill="#3a2010" opacity=".42" />
-              <path d={`M${x - rx * 0.6} ${y - ry * 0.2} C ${x - rx * 0.3} ${y - ry * 0.6}, ${x + rx * 0.3} ${y - ry * 0.5}, ${x + rx * 0.5} ${y}`} stroke="#ffffff" strokeOpacity=".18" strokeWidth="1.2" fill="none" />
-            </g>
-          ))
-        )}
+          )}
       </svg>
       {label && <span className="illus-tag">Illustration</span>}
     </div>
@@ -171,8 +248,8 @@ export function DropsArt({ kind, label = true, className = '' }) {
 const WATCH_SECONDS = 5;
 
 const RESULTS = {
-  beads: { title: 'It beads up', look: 'The drops stay rounded and sit on top of the wood.', means: 'The grain is still holding its oil.', todo: 'No oil needed today.' },
-  soaks: { title: 'It soaks in', look: 'The drops spread out and the wood turns darker.', means: 'The wood is asking for oil.', todo: 'Oil it when you can.' },
+  beads: { title: 'It beads up', look: 'The water stays on the surface in drops or small pools.', means: 'The grain is still holding its oil.', todo: 'No oil needed today.' },
+  soaks: { title: 'It soaks in', look: 'The water sinks into the wood, leaving a darker patch.', means: 'The wood is asking for oil.', todo: 'Oil it when you can.' },
 };
 
 function ResultCompare() {
@@ -228,13 +305,6 @@ export const EVERYDAY = [
   { icon: 'heat', title: 'Hot pans on a trivet', text: 'Hot pans and baking dishes rest on a trivet, never on the wood.' },
 ];
 
-const FAQ = [
-  ['I’m not sure what the water did.', 'Wipe the spot dry and try a fresh one in a few minutes, in good light. Nothing is saved until you choose a result, and you can leave the test without saving.'],
-  ['I missed a check.', 'That’s fine. Do the test whenever you can. The next reminder keeps its date.'],
-  ['Which oil should I use?', 'The mineral oil that came with your set. When it runs out, choose a food-safe mineral oil made for cutting boards.'],
-  ['Do all three boards need oil at the same time?', 'Test each one. They are different woods, so one may ask for oil before the others.'],
-  ['How often will you remind me?', `${CARE_FIRST_WEEK} weeks after your boards come home, then every ${CARE_EVERY} weeks, up to ${CARE_MAX} checks. Choose email, the app, or both.`],
-];
 
 function OilSheet({ open, onClose }) {
   return (
@@ -277,6 +347,44 @@ function Section({ id, n, title, lead, children }) {
   );
 }
 
+// How often we remind: part of the plan itself, next to the next check and the channels. No FAQ.
+function ReminderPlan({ care, today }) {
+  const { updateUser } = useStore();
+  const usage = usageOf(care);
+  const active = care.status === 'active';
+  const cs = active ? careStatus(care, today) : null;
+  const on = care.prefs.email || care.prefs.app;
+  return (
+    <section className="reminder-plan" aria-labelledby="remind-h">
+      <h2 id="remind-h" className="rp-title">How often will you remind me?</h2>
+      <p className="rp-lead">It depends on how often you use your boards.</p>
+      <div className="rp-options" role="radiogroup" aria-label="How often you use your boards">
+        {Object.entries(CARE_USAGE).map(([k, u]) => (
+          <button key={k} role="radio" aria-checked={usage === k} className={'rp-option' + (usage === k ? ' is-on' : '')} onClick={() => updateUser((x) => { x.care.usage = k; })}>
+            <span className="rp-radio" aria-hidden="true" />
+            <span className="rp-l">{u.label} use</span>
+            <span className="rp-h">{u.hint.replace(/^about /, 'About ')}</span>
+          </button>
+        ))}
+      </div>
+      <p className="rp-note">We’ll remind you to check your boards. Oil them when they need it.</p>
+      <div className="rp-next">
+        <Icon name="bell" size={16} />
+        <span>{!active ? 'Reminders start the day your boards come home.' : !on ? `Reminders are off. Next check: ${fmtDate(cs.next)}.` : cs.due ? 'A check is due now. We won’t send the missed ones.' : `Next reminder: ${fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear())}.`}</span>
+      </div>
+      <div className="rp-channels">
+        {[['email', 'By email'], ['app', 'In the app']].map(([k, t]) => (
+          <button key={k} className="list-row" onClick={() => updateUser((u) => { u.care.prefs[k] = !u.care.prefs[k]; })} role="switch" aria-checked={care.prefs[k]}>
+            <div className="grow"><div>{t}</div></div>
+            <span className={'switch' + (care.prefs[k] ? ' is-on' : '')} />
+          </button>
+        ))}
+      </div>
+      <DemoNote>Simulated in this preview. No emails or notifications are sent.</DemoNote>
+    </section>
+  );
+}
+
 function CarePlan({ params, root }) {
   const nav = useNav();
   const { user, updateUser, today, homeNo } = useStore();
@@ -291,8 +399,7 @@ function CarePlan({ params, root }) {
 
   const active = care.status === 'active';
   const cs = active ? careStatus(care, today) : null;
-  const results = Object.fromEntries(care.checks.filter((c) => c.n).map((c) => [c.n, c]));
-  const extra = care.checks.filter((c) => !c.n).length;
+  const history = [...care.checks].sort((a, b) => (a.at < b.at ? 1 : -1));
 
   return (
     <div className="care-screen">
@@ -305,9 +412,10 @@ function CarePlan({ params, root }) {
 
       <div className="pad">
         <NextStep care={care} today={today} />
+        <ReminderPlan care={care} today={today} />
       </div>
 
-      <Section id="check" n="01" title="Check your board" lead="Every few months, a water test helps you see whether the wood needs oil. A few drops on a clean, dry board, about 5 seconds of watching.">
+      <Section id="check" n="01" title="Check your board" lead="A water test helps you see whether the wood needs oil. A few drops on a clean, dry board, about 5 seconds of watching.">
         <ResultCompare />
         <div className="stack-8" style={{ marginTop: 16 }}>
           <Button block onClick={() => nav.push('water-test')}>Start water test</Button>
@@ -349,62 +457,30 @@ function CarePlan({ params, root }) {
         </div>
       </Section>
 
-      <Section id="help" n="04" title="Need a hand?">
-        <div className="faq">
-          {FAQ.map(([q, a]) => (
-            <details key={q}>
-              <summary><span>{q}</span><Icon name="plus" size={16} /></summary>
-              <p>{a}</p>
-            </details>
-          ))}
-        </div>
-        <a className="support-row" href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('Help with my boards')}`}>
-          <span className="round-ico"><Icon name="mail" size={18} /></span>
-          <span className="grow"><span className="t">Write to us</span><span className="s">{SUPPORT_EMAIL}</span></span>
-          <Icon name="chevron" size={18} />
-        </a>
-      </Section>
-
       <section className="care-sec" id="care-history">
         <details className="history" open={params.focus === 'history' || undefined}>
           <summary>
-            <span><span className="label">Care history & reminders</span><span className="history-sum">{active ? `${care.checks.filter((c) => c.n).length} of ${CARE_MAX} checks logged${cs.next ? ` · next ${fmtShort(cs.next.date)}` : ''}` : 'Starts when your boards are home'}</span></span>
+            <span><span className="label">Care history</span><span className="history-sum">{active ? `${cs.recorded} check${cs.recorded === 1 ? '' : 's'} recorded · next ${fmtShort(cs.next)}` : 'Starts when your boards are home'}</span></span>
             <Icon name="chevron" size={18} className="chev" />
           </summary>
           {active && (
-            <>
-              <p className="small" style={{ margin: '12px 0 14px' }}>From the day your boards came home ({fmtDate(fromIso(care.startedAt))}): a first check at week {CARE_FIRST_WEEK}, then every {CARE_EVERY} weeks.</p>
-              <div className="timeline">
-                {cs.sched.map((s) => {
-                  const r = results[s.n];
-                  const now = cs.dueNow?.n === s.n;
-                  return (
-                    <div key={s.n} className={'tl-item' + (r ? ' is-done' : '') + (now ? ' is-now' : '')}>
-                      <div className="row-between">
-                        <span style={{ fontSize: 16 }}>Check {s.n}</span>
-                        <span className="small">{fmtDate(s.date, s.date.getUTCFullYear() !== today.getUTCFullYear())}</span>
-                      </div>
-                      <div className="small">
-                        {r ? (r.result === 'beads' ? 'Water beaded up. No oil needed.' : r.oiled ? 'Water soaked in. Oiled.' : 'Water soaked in. Oil pending.') : now ? 'Due now' : s.date < today ? 'Missed. That’s fine, the next one is coming.' : 'Upcoming'}
-                      </div>
-                    </div>
-                  );
-                })}
+            <div className="timeline" style={{ marginTop: 12 }}>
+              <div className="tl-item is-now">
+                <div className="row-between"><span style={{ fontSize: 16 }}>Next check</span><span className="small">{fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear())}</span></div>
+                <div className="small">{cs.due ? 'Due now' : `${CARE_USAGE[cs.usage].label} use · ${CARE_USAGE[cs.usage].hint}`}</div>
               </div>
-              {extra > 0 && <p className="small" style={{ marginTop: 6 }}>Plus {extra} extra check{extra > 1 ? 's' : ''} you did on your own.</p>}
-            </>
+              {history.map((c, i) => (
+                <div key={c.at + i} className="tl-item is-done">
+                  <div className="row-between"><span style={{ fontSize: 16 }}>Water test</span><span className="small">{fmtDate(fromIso(c.at), fromIso(c.at).getUTCFullYear() !== today.getUTCFullYear())}</span></div>
+                  <div className="small">{c.result === 'beads' ? 'Water stayed on the surface. No oil needed.' : c.oiled ? `Water soaked in. Oiled${c.oiledAt ? ` ${fmtShort(fromIso(c.oiledAt))}` : ''}.` : 'Water soaked in. Oil pending.'}</div>
+                </div>
+              ))}
+              <div className="tl-item is-done">
+                <div className="row-between"><span style={{ fontSize: 16 }}>Boards came home</span><span className="small">{fmtDate(fromIso(care.startedAt), fromIso(care.startedAt).getUTCFullYear() !== today.getUTCFullYear())}</span></div>
+              </div>
+            </div>
           )}
-          <div style={{ marginTop: 16 }}>
-            <div className="label">Reminders</div>
-            {[['email', 'By email', 'The same reminders as your current care plan'], ['app', 'In the app', 'A gentle notification on your phone']].map(([k, t, d]) => (
-              <button key={k} className="list-row" onClick={() => updateUser((u) => { u.care.prefs[k] = !u.care.prefs[k]; })} role="switch" aria-checked={care.prefs[k]}>
-                <div className="grow"><div>{t}</div><div className="sub">{d}</div></div>
-                <span className={'switch' + (care.prefs[k] ? ' is-on' : '')} />
-              </button>
-            ))}
-          </div>
           {care.status === 'none' && <Button block variant="text" onClick={() => updateUser((u) => { u.care.status = 'notyet'; })}>My boards haven’t arrived yet</Button>}
-          <div style={{ marginTop: 10 }}><DemoNote>Simulated with demo data. No emails or notifications are sent. The real schedule comes from the existing care plan system.</DemoNote></div>
         </details>
       </section>
 
@@ -498,15 +574,17 @@ export function WaterTest({ params = {} }) {
 
   const log = (res) => {
     if (practice || !active) return;
-    updateUser((u) => { u.care.checks.push({ n: cs.dueNow ? cs.dueNow.n : 0, at: iso(today), result: res, oiled: false }); });
+    updateUser((u) => { u.care.checks.push({ n: u.care.checks.length + 1, at: iso(today), result: res, oiled: false, due: cs.due }); });
   };
   const choose = (res) => { log(res); setStep(res); };
-  const nextDate = cs.next ? fmtDate(cs.next.date) : null;
+  // After a check, the next one counts from today.
+  const nextDate = active ? fmtDate(addUsageInterval(today, usageOf(user.care))) : null;
 
   const addDrop = (e) => {
     if (drops.length >= 6) return;
     const r = e.currentTarget.getBoundingClientRect();
-    setDrops([...drops, { x: ((e.clientX - r.left) / r.width) * 320, y: ((e.clientY - r.top) / r.height) * 180, k: Date.now() }]);
+    const k = Date.now();
+    setDrops([...drops, { cx: ((e.clientX - r.left) / r.width) * 320, cy: ((e.clientY - r.top) / r.height) * 180, r: 7 + (k % 5), sx: 1 + (k % 4) * 0.15, rot: (k % 50) - 25, seed: 1 + (k % 9), k }]);
   };
   const order = ['drops', 'watch', 'result'];
   const idx = Math.min(order.indexOf(step) < 0 ? 3 : order.indexOf(step), 3);
@@ -528,13 +606,10 @@ export function WaterTest({ params = {} }) {
             <div className="where is-screen" style={{ marginTop: 20 }}><Icon name="phone" size={16} />On this screen, only a picture</div>
             <div className="water" onClick={addDrop} role="button" tabIndex={0} aria-label="Illustration. Tap to see how drops look on wood. It does not check your board.">
               <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
-                {Array.from({ length: 13 }, (_, i) => <path key={i} d={`M-10 ${8 + i * 14} C 90 ${2 + i * 14}, 200 ${16 + i * 14}, 330 ${6 + i * 14}`} stroke="#6a4029" strokeWidth={i % 3 ? 0.7 : 1.4} fill="none" opacity=".35" />)}
+                <WaterDefs id="demo" />
+                <Wood id="demo" w={320} h={180} />
                 {drops.map((d) => (
-                  <g key={d.k} className="drop fall" style={{ transformOrigin: `${d.x}px ${d.y}px` }}>
-                    <ellipse cx={d.x + 2} cy={d.y + 7} rx="10" ry="3" fill="#3b2416" opacity=".25" />
-                    <ellipse cx={d.x} cy={d.y} rx="11" ry="9" fill="rgba(235,244,250,.55)" stroke="rgba(255,255,255,.75)" strokeWidth="1" />
-                    <ellipse cx={d.x - 3} cy={d.y - 3} rx="3" ry="2" fill="#fff" opacity=".85" />
-                  </g>
+                  <g key={d.k} className="drop fall"><SurfaceWater b={d} id="demo" /></g>
                 ))}
               </svg>
               <span className="illus-tag">Illustration</span>

@@ -45,8 +45,8 @@ export default function Profile({ onSignOut }) {
         <div className="card card-pad" style={{ marginTop: 10 }}>
           <div className="small">Preview date: <strong style={{ fontWeight: 500, color: 'var(--c-black)' }}>{fmtDate(today, true)}</strong>{offset ? ` (${offset > 0 ? '+' : ''}${offset} days)` : ''}</div>
           <div className="row wrap" style={{ gap: 8, marginTop: 10 }}>
-            <Button small variant="ghost" onClick={() => { update((d) => { d.demo.dayOffset = (d.demo.dayOffset || 0) + 21; }); toast('Moved 3 weeks ahead.'); }}>+3 weeks</Button>
-            <Button small variant="ghost" onClick={() => { update((d) => { d.demo.dayOffset = (d.demo.dayOffset || 0) + 84; }); toast('Moved 12 weeks ahead.'); }}>+12 weeks</Button>
+            <Button small variant="ghost" onClick={() => { update((d) => { d.demo.dayOffset = (d.demo.dayOffset || 0) + 14; }); toast('Moved 2 weeks ahead.'); }}>+2 weeks</Button>
+            <Button small variant="ghost" onClick={() => { update((d) => { d.demo.dayOffset = (d.demo.dayOffset || 0) + 42; }); toast('Moved 6 weeks ahead.'); }}>+6 weeks</Button>
             {offset !== 0 && <Button small variant="text" onClick={() => update((d) => { d.demo.dayOffset = 0; })}>Back to today</Button>}
           </div>
           <p className="small muted" style={{ marginTop: 10 }}>Move the preview date to see care checks and gift reminders come due.</p>

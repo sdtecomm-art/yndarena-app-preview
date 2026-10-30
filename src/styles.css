@@ -808,3 +808,36 @@ button.tag { min-height: 36px; }
 .watch-count { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; height: 30px; padding: 0 10px; border-radius: 8px; background: var(--c-bone); border: 1px solid var(--c-line); font-family: var(--sans); font-size: 13px; color: var(--c-brown); font-variant-numeric: tabular-nums; }
 .wt-progress span { font-size: 12px; letter-spacing: 0; }
 .where { border-radius: 8px; font-size: 13px; letter-spacing: 0; }
+
+/* Water demo: drops appear, nothing bounces. */
+.drop.fall { animation: fade .5s var(--ease) both; }
+
+/* Home: three care shortcuts side by side, no hidden scroll. */
+.guide-rail.is-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; overflow: visible; padding: 14px var(--gut) 0; }
+.guide-rail.is-grid .guide-tile { width: auto; padding: 12px 10px 11px; }
+.guide-rail.is-grid .guide-tile .t { font-size: 15.5px; }
+.guide-rail.is-grid .guide-tile .s { font-size: 12px; line-height: 1.3; }
+.home .section[aria-label="Gift dates"] { margin-top: 26px; }
+
+.search-field { display: flex; align-items: center; gap: 10px; margin-top: 16px; height: 48px; padding: 0 14px; border-radius: 12px; background: var(--c-cream); border: 1px solid var(--c-line-strong); box-shadow: 0 1px 2px rgba(59, 42, 30, .05); }
+.search-field input { border: 0; background: transparent; outline: none; font-size: 16px; }
+.search-field:focus-within { border-color: var(--c-taupe); }
+
+/* Care plan frequency, part of the plan itself (no FAQ). */
+.reminder-plan { margin-top: 14px; padding: 18px 16px 14px; border-radius: 18px; background: var(--c-bone); border: 1px solid var(--c-line); }
+.rp-title { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.1; color: var(--c-black); }
+.rp-lead { margin: 6px 0 12px; font-size: 15.5px; line-height: 1.45; color: var(--c-brown); }
+.rp-options { display: grid; gap: 8px; }
+.rp-option { display: grid; grid-template-columns: 22px 1fr; grid-template-rows: auto auto; column-gap: 10px; align-items: center; width: 100%; min-height: 56px; padding: 9px 12px; text-align: left; border-radius: 12px; background: var(--c-cream); border: 1px solid var(--c-line); transition: border-color .15s ease, background-color .15s ease; }
+.rp-option:active { opacity: .75; }
+.rp-option.is-on { border-color: var(--c-black); box-shadow: 0 1px 2px rgba(59, 42, 30, .08); }
+.rp-radio { grid-row: 1 / 3; width: 20px; height: 20px; border-radius: 10px; border: 1.5px solid var(--c-taupe); position: relative; }
+.rp-option.is-on .rp-radio { border-color: var(--c-black); }
+.rp-option.is-on .rp-radio::after { content: ''; position: absolute; inset: 4px; border-radius: 6px; background: var(--c-black); }
+.rp-l { font-size: 16px; color: var(--c-black); line-height: 1.25; }
+.rp-h { font-family: var(--sans); font-size: 13px; color: var(--c-taupe); }
+.rp-note { margin: 12px 0 0; font-size: 15px; line-height: 1.45; color: var(--c-brown); }
+.rp-next { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: var(--c-cream); border: 1px solid var(--c-line); font-size: 14.5px; line-height: 1.4; color: var(--c-black); }
+.rp-next .icon { flex: none; margin-top: 2px; color: var(--c-taupe); }
+.rp-channels { margin: 6px 0 10px; }
+.rp-channels .list-row { padding: 10px 0; }

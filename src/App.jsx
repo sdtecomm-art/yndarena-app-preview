@@ -10,7 +10,7 @@ import Auth from './screens/Auth.jsx';
 import Welcome from './screens/Welcome.jsx';
 import Home from './screens/Home.jsx';
 import Meal from './screens/Meal.jsx';
-import Discover from './screens/Discover.jsx';
+import Discover, { TechniquesIndex } from './screens/Discover.jsx';
 import Presentation from './screens/Presentation.jsx';
 import Recipe from './screens/Recipe.jsx';
 import Technique from './screens/Technique.jsx';
@@ -49,6 +49,7 @@ function ScreenFor({ route, onSignOut, openProfile, root }) {
     case 'meal': return <Meal params={p} />;
     case 'recipe': return <Recipe params={p} />;
     case 'technique': return <Technique params={p} />;
+    case 'techniques': return <TechniquesIndex />;
     case 'community': return <Community params={p} />;
     case 'table': return <Table params={p} />;
     case 'shopping': return <Shopping params={p} />;
@@ -160,7 +161,7 @@ const JOURNEYS = [
   ['oil', 'How to oil, step by step'],
   ['meal', 'An everyday meal on the board'],
   ['meal-designer', 'Swap a side in Designer'],
-  ['catalog', 'Main dishes and snacks'],
+  ['catalog', 'Discover: ideas for your table'],
   ['presentation', 'Explore a presentation'],
   ['layouts', 'Switch layouts, same ingredients'],
   ['designer', 'Make it yours in Designer'],
@@ -217,7 +218,7 @@ function SidePanels({ children, setShared }) {
       if (k === 'review') nav.switchTab('home', { name: 'review', params: {} });
       if (k === 'gifts') nav.switchTab('home', { name: 'care', params: { seg: 'gifts' } });
       if (k === 'oil') nav.switchTab('care', { name: 'oil-guide', params: {} });
-      if (k === 'catalog') nav.switchTab('discover', { name: 'discover', params: { seg: 'recipes' } });
+      if (k === 'catalog') nav.switchTab('discover', { name: 'discover', params: { filter: 'mains' } });
     }, 30);
   };
 
