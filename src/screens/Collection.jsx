@@ -87,7 +87,7 @@ export default function Collection() {
           <div className="pad" style={{ marginTop: 8 }}>
             {saved.length === 0 && (
               <div style={{ marginTop: 12 }}>
-                <Empty title={filter === 'all' ? 'Nothing saved yet' : 'Nothing here yet'} action={<Button small arrow onClick={() => nav.switchTab('discover')}>Discover boards</Button>}>
+                <Empty title={filter === 'all' ? 'Nothing saved yet' : 'Nothing here yet'} action={<Button small onClick={() => nav.switchTab('discover')}>Discover boards</Button>}>
                   Save a board or a recipe you like, or make one your own. It will wait for you here.
                 </Empty>
               </div>
@@ -127,7 +127,7 @@ export default function Collection() {
       {seg === 'made' && (
         <div className="pad" style={{ marginTop: 14 }}>
           {user.made.length === 0 && (
-            <Empty title="Your first board is waiting" action={<Button small arrow onClick={() => nav.push('presentation', { id: 'love-like-rosemary' })}>Start with one for two</Button>}>
+            <Empty title="Your first board is waiting" action={<Button small onClick={() => nav.push('presentation', { id: 'love-like-rosemary' })}>Start with one for two</Button>}>
               When you bring a board to the table, mark it as made. Photos and notes are optional, and only yours.
             </Empty>
           )}
@@ -185,7 +185,7 @@ export function DesignItem({ params }) {
         )}
       </div>
       <div className="pad stack-8" style={{ marginTop: 16 }}>
-        <Button block arrow onClick={() => nav.push('table', { source: { kind: 'design', id: d.id } })}>{made.length ? 'Make it again' : 'Bring it to the table'}</Button>
+        <Button block onClick={() => nav.push('table', { source: { kind: 'design', id: d.id } })}>{made.length ? 'Make it again' : 'Bring it to the table'}</Button>
         <div className="row" style={{ gap: 8 }}>
           <Button variant="ghost" small className="grow" icon="edit" onClick={() => nav.push('designer', { id: d.id })}>Edit</Button>
           <Button variant="ghost" small className="grow" icon="copy" onClick={() => { const id = a.copyDesign(d.id); toast('Copy created. The original stays as it is.'); nav.push('designer', { id }); }}>Edit a copy</Button>
@@ -245,7 +245,7 @@ export function MadeItem({ params }) {
         {rv && <div style={{ marginTop: 8 }}><Stars value={rv.stars} size={18} />{rv.comment && <p className="small">{rv.comment}</p>}</div>}
       </div>
       <div className="pad stack-8" style={{ marginTop: 16 }}>
-        <Button block arrow onClick={() => nav.push('table', { source: isPres ? { kind: 'presentation', id: m.refId, compositionId: m.compositionId } : { kind: 'community', id: m.refId } })}>Make it again</Button>
+        <Button block onClick={() => nav.push('table', { source: isPres ? { kind: 'presentation', id: m.refId, compositionId: m.compositionId } : { kind: 'community', id: m.refId } })}>Make it again</Button>
         <Button block variant="ghost" icon="edit" onClick={() => { const id = isPres ? a.fromPresentation(m.refId, m.compositionId) : a.fromCommunity(m.refId); nav.push('designer', { id }); }}>Edit a copy</Button>
       </div>
       <div className="pad section"><NotesBlock noteKey={`${m.kind}:${m.refId}`} /></div>

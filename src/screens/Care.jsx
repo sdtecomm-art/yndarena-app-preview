@@ -39,8 +39,8 @@ export function careView(care, today) {
     return {
       key: 'due', hot: true, kicker: `Check ${cs.dueNow.n} of ${CARE_MAX} · today`,
       title: 'Time for a quick water test.',
-      text: 'A few drops of water and one minute. The wood shows what it needs.',
-      primary: ['Start the water test', 'water-test'], secondary: ['How the test works', 'focus:check'],
+      text: 'A few drops on a clean, dry board, and a few seconds of watching. You tell us what you saw.',
+      primary: ['Start water test', 'water-test'], secondary: ['How the test works', 'focus:check'],
     };
   }
   const last = [...care.checks].sort((a, b) => (a.at < b.at ? -1 : 1)).pop();
@@ -110,7 +110,7 @@ export function NextStep({ care, today, compact }) {
       <h2 className="next-title">{v.title}</h2>
       <p className="next-text">{v.text}</p>
       <div className="next-actions">
-        <Button block arrow onClick={() => act(v.primary[1])}>{v.primary[0]}</Button>
+        <Button block onClick={() => act(v.primary[1])}>{v.primary[0]}</Button>
         {v.secondary && <Button block variant="text" onClick={() => act(v.secondary[1])}>{v.secondary[0]}</Button>}
       </div>
       {facts.length > 0 && (
@@ -167,8 +167,11 @@ export function DropsArt({ kind, label = true, className = '' }) {
   );
 }
 
+// Seconds to watch the drops. Editorial guidance, to be confirmed on Yndarena's real boards.
+const WATCH_SECONDS = 5;
+
 const RESULTS = {
-  beads: { title: 'It beads up', look: 'The drops stay round and sit on top of the wood.', means: 'The grain is still holding its oil.', todo: 'No oil needed today.' },
+  beads: { title: 'It beads up', look: 'The drops stay rounded and sit on top of the wood.', means: 'The grain is still holding its oil.', todo: 'No oil needed today.' },
   soaks: { title: 'It soaks in', look: 'The drops spread out and the wood turns darker.', means: 'The wood is asking for oil.', todo: 'Oil it when you can.' },
 };
 
@@ -240,7 +243,7 @@ function OilSheet({ open, onClose }) {
       <div className="kit-card">
         <div className="label">Yndarena board oil and care kit</div>
         <p className="small" style={{ margin: '6px 0 12px' }}>It will be available in the Yndarena store.</p>
-        <Button block arrow disabled>Store link coming soon</Button>
+        <Button block disabled>Store link coming soon</Button>
       </div>
       <div style={{ marginTop: 12 }}><DemoNote>Store link pending. No purchases happen in this preview.</DemoNote></div>
     </Sheet>
@@ -304,10 +307,10 @@ function CarePlan({ params, root }) {
         <NextStep care={care} today={today} />
       </div>
 
-      <Section id="check" n="01" title="Check your board" lead="Every few months, a water test tells you whether the wood needs oil. It takes one minute at your board.">
+      <Section id="check" n="01" title="Check your board" lead="Every few months, a water test helps you see whether the wood needs oil. A few drops on a clean, dry board, about 5 seconds of watching.">
         <ResultCompare />
         <div className="stack-8" style={{ marginTop: 16 }}>
-          <Button block arrow onClick={() => nav.push('water-test')}>Start the water test</Button>
+          <Button block onClick={() => nav.push('water-test')}>Start water test</Button>
           <Button block variant="ghost" onClick={() => nav.push('water-test', { practice: true })}>Walk me through it, nothing saved</Button>
         </div>
       </Section>
@@ -321,7 +324,7 @@ function CarePlan({ params, root }) {
             {OIL_STEPS.slice(0, 3).map((s, i) => <li key={s.title}><span className="n">{i + 1}</span>{s.title}</li>)}
             <li className="more">+ {OIL_STEPS.length - 3} more steps</li>
           </ol>
-          <span className="guide-cta">Open the step-by-step guide <Icon name="arrow" size={16} /></span>
+          <span className="guide-cta">Open the step-by-step guide <Icon name="chevron" size={16} /></span>
         </button>
         <div className="oil-choice" role="group" aria-label="Board oil">
           <button className="choice" onClick={() => nav.push('oil-guide')}><Icon name="check" size={18} /><span>I already have board oil</span></button>
@@ -456,11 +459,11 @@ export function OilGuide() {
         <div className="stack-8" style={{ marginTop: 20 }}>
           {pending ? (
             <>
-              <Button block arrow onClick={markOiled}>I oiled my boards</Button>
+              <Button block onClick={markOiled}>I oiled my boards</Button>
               <Button block variant="text" onClick={() => { nav.pop(); toast('Saved. Oil them when you can.'); }}>I’ll do it later</Button>
             </>
           ) : (
-            <Button block arrow onClick={() => nav.pop()}>Done</Button>
+            <Button block onClick={() => nav.pop()}>Done</Button>
           )}
           <Button block variant="ghost" icon="bag" onClick={() => setKit(true)}>I need board oil</Button>
         </div>
@@ -481,13 +484,14 @@ export function WaterTest({ params = {} }) {
   const practice = !!params.practice;
   const [step, setStep] = useState('drops');
   const [drops, setDrops] = useState([]);
-  const [secs, setSecs] = useState(60);
+  // A small helper count, started only once the drops are on the board. It never decides anything.
+  const [secs, setSecs] = useState(WATCH_SECONDS);
   const [kit, setKit] = useState(false);
   const cs = careStatus(user.care, today);
   const active = user.care.status === 'active';
 
   useEffect(() => {
-    if (step !== 'wait' || secs <= 0) return;
+    if (step !== 'watch' || secs <= 0) return;
     const t = setTimeout(() => setSecs(secs - 1), 1000);
     return () => clearTimeout(t);
   }, [step, secs]);
@@ -504,7 +508,7 @@ export function WaterTest({ params = {} }) {
     const r = e.currentTarget.getBoundingClientRect();
     setDrops([...drops, { x: ((e.clientX - r.left) / r.width) * 320, y: ((e.clientY - r.top) / r.height) * 180, k: Date.now() }]);
   };
-  const order = ['drops', 'wait', 'result'];
+  const order = ['drops', 'watch', 'result'];
   const idx = Math.min(order.indexOf(step) < 0 ? 3 : order.indexOf(step), 3);
 
   return (
@@ -512,15 +516,15 @@ export function WaterTest({ params = {} }) {
       <TopBar close title={practice ? 'Water test · walkthrough' : 'Water test'} />
       <div className="pad wt">
         <div className="wt-progress" aria-label={`Step ${Math.min(idx + 1, 3)} of 3`}>
-          {['Drops', 'One minute', 'What you saw'].map((t, i) => <span key={t} className={idx >= i ? 'on' : ''}>{t}</span>)}
+          {['Drops', 'About 5 seconds', 'What you saw'].map((t, i) => <span key={t} className={idx >= i ? 'on' : ''}>{t}</span>)}
         </div>
         {practice && <div className="wt-practice">Walkthrough: nothing is saved to your care plan.</div>}
 
         {step === 'drops' && (
           <>
             <div className="where is-board"><Icon name="hand" size={16} />At your board</div>
-            <h1 className="display-m">Put a few drops of water on the board.</h1>
-            <p className="body" style={{ margin: '8px 0 0' }}>Use the face you cut on most. A few drops from your fingertips is enough.</p>
+            <h1 className="display-m">Put a few drops of water on a clean, dry board.</h1>
+            <p className="body" style={{ margin: '8px 0 0' }}>Start with a board that is clean and completely dry. A few drops from your fingertips on the face you cut on most is enough.</p>
             <div className="where is-screen" style={{ marginTop: 20 }}><Icon name="phone" size={16} />On this screen, only a picture</div>
             <div className="water" onClick={addDrop} role="button" tabIndex={0} aria-label="Illustration. Tap to see how drops look on wood. It does not check your board.">
               <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
@@ -537,20 +541,27 @@ export function WaterTest({ params = {} }) {
               {drops.length === 0 && <div className="canvas-hint">Tap to see how drops look</div>}
             </div>
             <p className="small" style={{ marginTop: 8 }}>Tapping here doesn’t check your board. Only your eyes can.</p>
-            <Button block arrow style={{ marginTop: 16 }} onClick={() => { setStep('wait'); setSecs(60); }}>The drops are on my board</Button>
+            <Button block style={{ marginTop: 16 }} onClick={() => { setStep('watch'); setSecs(WATCH_SECONDS); }}>The drops are on my board</Button>
           </>
         )}
 
-        {step === 'wait' && (
+        {step === 'watch' && (
           <>
             <div className="where is-board"><Icon name="hand" size={16} />At your board</div>
-            <h1 className="display-m">Now wait one minute.</h1>
-            <p className="body" style={{ margin: '8px 0 0' }}>Leave the drops alone. Watch whether they stay round or sink in.</p>
-            <div className="timer" role="timer" aria-live="polite" aria-label={`${secs} seconds left`}>
-              <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" className="timer-track" /><circle cx="60" cy="60" r="52" className="timer-bar" style={{ strokeDashoffset: 326.7 * (secs / 60) }} /></svg>
-              <div className="timer-v">{Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</div>
+            <h1 className="display-m">Watch the drops for about 5 seconds.</h1>
+            <p className="body" style={{ margin: '8px 0 0' }}>Do they stay rounded on top, or soak into the wood?</p>
+            <div className="watch-row">
+              <DropsArt kind="beads" label={false} className="mini" />
+              <span className="watch-or">or</span>
+              <DropsArt kind="soaks" label={false} className="mini" />
             </div>
-            <Button block arrow variant={secs > 0 ? 'ghost' : 'primary'} onClick={() => setStep('result')}>{secs > 0 ? 'I already waited a minute' : 'See what it means'}</Button>
+            <div className="watch-count" role="timer" aria-live="off" aria-label={secs > 0 ? `About ${secs} seconds` : 'About 5 seconds have passed'}>
+              <Icon name="clock" size={15} />
+              <span>{secs > 0 ? `${secs} s` : 'About 5 seconds have passed'}</span>
+            </div>
+            <span className="sr-only" aria-live="polite">{secs === 0 ? 'About 5 seconds have passed. Tell us what you saw.' : ''}</span>
+            <Button block style={{ marginTop: 14 }} onClick={() => setStep('result')}>Tell us what you saw</Button>
+            <p className="small" style={{ marginTop: 10, textAlign: 'center' }}>If it is already clear, answer now. The count is only a guide; it doesn’t check the wood.</p>
           </>
         )}
 
@@ -570,17 +581,18 @@ export function WaterTest({ params = {} }) {
                 </button>
               ))}
             </div>
-            <Button block variant="text" style={{ marginTop: 8 }} onClick={() => setStep('unsure')}>I’m not sure</Button>
+            <Button block variant="ghost" style={{ marginTop: 12 }} onClick={() => setStep('unsure')}>I’m not sure</Button>
+            <p className="small" style={{ marginTop: 12 }}>You choose the result. Nothing on this screen measures the wood.</p>
           </>
         )}
 
         {step === 'unsure' && (
           <>
             <h1 className="display-m">No need to guess.</h1>
-            <p className="body" style={{ margin: '8px 0 16px' }}>Nothing has been saved. Compare what you see with the two pictures, or try a fresh spot in good light.</p>
+            <p className="body" style={{ margin: '8px 0 16px' }}>Nothing has been saved. Compare what you see with the two pictures, or wipe the board dry and try a fresh spot in good light.</p>
             <ResultCompare />
             <div className="stack-8" style={{ marginTop: 18 }}>
-              <Button block arrow onClick={() => setStep('result')}>I can tell now</Button>
+              <Button block onClick={() => setStep('result')}>I can tell now</Button>
               <Button block variant="ghost" onClick={() => { setDrops([]); setStep('drops'); }}>Try a fresh spot</Button>
               <Button block variant="text" onClick={() => { nav.pop(); toast('Nothing saved. Try again whenever you like.'); }}>Leave without saving</Button>
             </div>
@@ -592,8 +604,9 @@ export function WaterTest({ params = {} }) {
             <DropsArt kind="beads" label={false} className="small" />
             <h1 className="display-m" style={{ marginTop: 18 }}>You’re all set.</h1>
             <p className="lead" style={{ margin: '8px 0 0' }}>{RESULTS.beads.means} No oil needed today.</p>
-            {practice ? <p className="small" style={{ marginTop: 10 }}>This was a walkthrough. Nothing was saved.</p> : nextDate && <p className="small" style={{ marginTop: 10 }}>Saved. We’ll remind you for the next check on {nextDate}.</p>}
-            <Button block arrow style={{ marginTop: 22 }} onClick={() => { nav.pop(); if (!practice && active) toast('Check saved to your care plan.'); }}>Done</Button>
+            <p className="small" style={{ marginTop: 10 }}>Wipe the water off the board with a dry cloth.</p>
+            {practice ? <p className="small" style={{ marginTop: 6 }}>This was a walkthrough. Nothing was saved.</p> : nextDate && <p className="small" style={{ marginTop: 6 }}>Saved. We’ll remind you for the next check on {nextDate}.</p>}
+            <Button block style={{ marginTop: 22 }} onClick={() => { nav.pop(); if (!practice && active) toast('Check saved to your care plan.'); }}>Done</Button>
           </div>
         )}
 
@@ -602,6 +615,7 @@ export function WaterTest({ params = {} }) {
             <DropsArt kind="soaks" label={false} className="small" />
             <h1 className="display-m" style={{ marginTop: 18 }}>The wood is asking for oil.</h1>
             <p className="body" style={{ margin: '8px 0 6px' }}>{practice ? 'This was a walkthrough. Nothing was saved.' : 'Saved to your care plan. Oil it when you can: today, or in the next few days.'}</p>
+            <p className="small" style={{ margin: '0 0 6px' }}>First, wipe the water off and let the board dry completely.</p>
             <div className="oil-choice" style={{ marginTop: 16 }}>
               <button className="choice" onClick={() => nav.replace('oil-guide')}><Icon name="check" size={18} /><span>I already have board oil</span></button>
               <button className="choice" onClick={() => setKit(true)}><Icon name="bag" size={18} /><span>I need board oil</span></button>
@@ -630,7 +644,7 @@ function GiftDates({ startAdd }) {
       <p className="body" style={{ marginTop: 0 }}>Keep special dates close. We’ll remind you 21 days before and again 10 days before, with time to plan a gift.</p>
       {gifts.length === 0 && (
         <div style={{ marginTop: 14 }}>
-          <Empty title="Keep a special date close" action={<Button small arrow onClick={() => setEdit({ id: null, name: '', occasion: 'Birthday', m: today.getUTCMonth() + 1, d: today.getUTCDate(), once: false, y: today.getUTCFullYear() })}>Add a date</Button>}>
+          <Empty title="Keep a special date close" action={<Button small onClick={() => setEdit({ id: null, name: '', occasion: 'Birthday', m: today.getUTCMonth() + 1, d: today.getUTCDate(), once: false, y: today.getUTCFullYear() })}>Add a date</Button>}>
             A birthday, an anniversary, a housewarming. Just a first name and a day.
           </Empty>
         </div>
@@ -763,7 +777,7 @@ function GiftEditor({ value, onClose, onSave, onDelete, today }) {
         )}
         {v.d > daysIn && <div className="err">That day doesn’t exist in {MONTHS[v.m - 1]}{v.once ? ' ' + v.y : ''}.</div>}
         {past && <div className="err">That date has already passed.</div>}
-        <Button block arrow disabled={!valid} onClick={() => onSave(v)}>{v.id ? 'Save changes' : 'Save date'}</Button>
+        <Button block disabled={!valid} onClick={() => onSave(v)}>{v.id ? 'Save changes' : 'Save date'}</Button>
         {v.id && <Button block variant="text" onClick={() => onDelete(v.id)}>Remove this date</Button>}
       </div>
     </Sheet>

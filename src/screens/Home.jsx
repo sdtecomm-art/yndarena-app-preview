@@ -59,7 +59,7 @@ function CareHero({ care, today }) {
 }
 
 const GUIDES = [
-  { id: 'check', icon: 'drop', title: 'Water test', sub: 'One minute at your board', go: 'focus:check' },
+  { id: 'check', icon: 'drop', title: 'Water test', sub: 'A few drops, a few seconds', go: 'focus:check' },
   { id: 'oil', icon: 'hand', title: 'How to oil', sub: 'Step by step', go: 'oil-guide' },
   { id: 'everyday', icon: 'wash', title: 'Everyday care', sub: 'Wash, dry, store', go: 'focus:everyday' },
   { id: 'help', icon: 'help', title: 'Need a hand?', sub: 'Answers and support', go: 'focus:help' },

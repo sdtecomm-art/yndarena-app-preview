@@ -735,3 +735,76 @@ details.quick-prep[open] .chev { transform: rotate(90deg); }
   body.is-entry .entry-backdrop { opacity: 1; }
   .stage { position: relative; isolation: isolate; }
 }
+
+/* =====================================================================
+   Controls, 2026-10-30. One quiet system for every screen.
+   Buttons: 48–52 px, moderate corners, sentence case, centred text, no arrows or inner circles,
+   no fill animations, halos or jumps. A touch answers with a short change of colour or opacity.
+   Labels that are not controls (kickers, eyebrows) keep the brand's small capitals.
+   ===================================================================== */
+.btn {
+  height: 50px; padding: 0 20px; gap: 8px; border-radius: 12px; isolation: auto; overflow: visible;
+  font-family: var(--sans); font-weight: 500; font-size: 15.5px; letter-spacing: 0; text-transform: none; line-height: 1.2; text-align: center;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, opacity .15s ease;
+}
+.btn::before { display: none; }
+.btn-arrow { display: none; }
+.btn-primary { background: var(--c-black); color: var(--c-cream); box-shadow: 0 1px 2px rgba(35, 31, 32, .18); }
+.btn-primary:active:not(:disabled) { background: var(--c-brown); }
+@media (hover: hover) { .btn-primary:hover:not(:disabled) { background: #3a3132; } }
+.btn-ghost { background: var(--c-cream); border: 1px solid var(--c-line-strong); color: var(--c-black); box-shadow: 0 1px 2px rgba(59, 42, 30, .06); }
+.btn-ghost:active:not(:disabled) { background: var(--c-bone); color: var(--c-black); }
+@media (hover: hover) { .btn-ghost:hover:not(:disabled) { background: var(--c-bone); color: var(--c-black); } }
+.btn-light { background: var(--c-cream); color: var(--c-black); border: 1px solid var(--c-line); }
+.btn-light:active { background: var(--c-bone); }
+.btn-text { height: 44px; padding: 0 8px; color: var(--c-brown); background: none; border-radius: 10px; font-size: 15px; }
+.btn-text span { border-bottom: 0; padding-bottom: 0; text-decoration: underline; text-decoration-color: rgba(120, 99, 80, .45); text-underline-offset: 4px; }
+.btn-text:active { opacity: .6; }
+.btn-sm { height: 42px; padding: 0 14px; border-radius: 10px; font-size: 14px; letter-spacing: 0; gap: 6px; }
+.btn:disabled { opacity: .38; }
+
+.link { font-size: 14px; letter-spacing: 0; text-transform: none; border-bottom: 0; text-decoration: underline; text-decoration-color: rgba(120, 99, 80, .45); text-underline-offset: 4px; padding: 10px 0; }
+.link:active { opacity: .6; }
+.chip { height: 38px; padding: 0 14px; border-radius: 10px; font-size: 14px; letter-spacing: 0; text-transform: none; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.chip:active { opacity: .7; }
+.segmented { border-radius: 12px; padding: 3px; }
+.segmented button { height: 36px; border-radius: 9px; font-size: 14px; letter-spacing: 0; text-transform: none; transition: background-color .15s ease, color .15s ease; }
+.tag { height: 28px; padding: 0 11px; border-radius: 8px; font-size: 13px; letter-spacing: 0; text-transform: none; }
+button.tag { min-height: 36px; }
+.tabbar button { font-size: 11.5px; letter-spacing: .01em; text-transform: none; transition: color .15s ease; }
+.tabbar button.is-active .icon path { fill: none; }
+.tabbar .is-active .tab-dot { background: var(--c-black); }
+.home-chip, .entry-home, .all-products { font-size: 13px; letter-spacing: 0; text-transform: none; border-radius: 10px; }
+.all-products { height: 34px; }
+.home-chip:active, .all-products:active { opacity: .7; }
+.tool, .inspector-actions button { text-transform: none; letter-spacing: 0; font-size: 12px; }
+.comp-card .comp-name { text-transform: none; letter-spacing: 0; font-size: 12.5px; }
+.guide-cta { text-transform: none; letter-spacing: 0; font-size: 15px; }
+.icon-btn { transition: background-color .15s ease; }
+
+/* Surfaces answer a touch with a little opacity; nothing scales or jumps. */
+.tap, .guide-tile, .result-card, .entry-set, .choice, .entry-card, .video-link, .support-row, .reminder-card { transition: opacity .15s ease, background-color .15s ease, border-color .15s ease; }
+.tap:active, .guide-tile:active, .result-card:active, .entry-set:active, .video-link:active, .support-row:active, .reminder-card:active { transform: none; opacity: .72; }
+.entry-set:hover { transform: none; }
+.result-card:active { border-color: var(--c-line-strong); }
+.guide-tile, .everyday-tile, .choice, .result-card { border-radius: 14px; box-shadow: 0 1px 2px rgba(59, 42, 30, .05); }
+
+/* No persistent halos or pulses. */
+.is-hot .pulse-dot { animation: none; }
+.next-step.is-hot { box-shadow: 0 14px 30px -22px rgba(59, 42, 30, .5); border-color: rgba(172, 162, 189, .9); }
+.board-item .pulse { animation: none; }
+.sprig.sprout { animation: sprigGrow 1.6s var(--ease-out) both; }
+
+/* Tech pills: a quiet link with a chevron, no circled arrow. */
+.tech-pill .round { display: none; }
+.tech-pill { padding: 0 10px 0 14px; border-radius: 10px; gap: 6px; }
+.tech-pill .icon { color: var(--c-taupe); }
+
+/* Water test: watch for about 5 seconds. A small helper count, no dial. */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.watch-row { display: flex; align-items: center; gap: 12px; margin: 18px 0 0; }
+.drops-art.mini { width: calc(50% - 22px); border-radius: 12px; }
+.watch-or { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--c-taupe); }
+.watch-count { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; height: 30px; padding: 0 10px; border-radius: 8px; background: var(--c-bone); border: 1px solid var(--c-line); font-family: var(--sans); font-size: 13px; color: var(--c-brown); font-variant-numeric: tabular-nums; }
+.wt-progress span { font-size: 12px; letter-spacing: 0; }
+.where { border-radius: 8px; font-size: 13px; letter-spacing: 0; }

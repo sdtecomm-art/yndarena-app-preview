@@ -335,7 +335,7 @@ export function AddToBoardSheet({ open, onClose, rid }) {
           </button>
         ))}
       </div>
-      <Button block arrow style={{ marginTop: 18 }} onClick={() => {
+      <Button block style={{ marginTop: 18 }} onClick={() => {
         const id = a.addRecipe(rid, target === 'new' ? null : target, style);
         onClose();
         nav.push('designer', { id, focus: r.item });

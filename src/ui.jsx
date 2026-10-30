@@ -79,9 +79,7 @@ export function Button({ children, variant = 'primary', arrow = false, small = f
     <button className={`btn btn-${variant}${small ? ' btn-sm' : ''}${block ? ' btn-block' : ''} ${className}`} {...rest}>
       {icon && <Icon name={icon} size={18} />}
       <span>{children}</span>
-      {arrow && (
-        <span className="btn-arrow"><Icon name="arrow" size={16} /></span>
-      )}
+      {/* `arrow` is accepted for compatibility; primary buttons no longer show one. */}
     </button>
   );
 }

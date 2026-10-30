@@ -143,7 +143,7 @@ export default function Table({ params }) {
             )}
           </div>
           <div className="sticky-cta" style={{ marginTop: 22 }}>
-            <Button block arrow onClick={() => { setPhase('build'); setStep(0); }}>Start building</Button>
+            <Button block onClick={() => { setPhase('build'); setStep(0); }}>Start building</Button>
           </div>
         </>
       )}
@@ -197,7 +197,7 @@ export default function Table({ params }) {
             {!finished ? (
               <>
                 <Button variant="ghost" small onClick={() => (step === 0 ? setPhase('ready') : setStep(step - 1))}>Back</Button>
-                <Button small className="grow" arrow onClick={() => (step < layers.length - 1 ? setStep(step + 1) : setPhase('finished'))}>{step < layers.length - 1 ? 'Next layer' : 'Finish'}</Button>
+                <Button small className="grow" onClick={() => (step < layers.length - 1 ? setStep(step + 1) : setPhase('finished'))}>{step < layers.length - 1 ? 'Next layer' : 'Finish'}</Button>
               </>
             ) : (
               <>

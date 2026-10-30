@@ -80,7 +80,7 @@ export default function Auth({ onSignedIn, initialEmail = '', onAllProducts }) {
                 <input className={'input' + (emailErr ? ' is-error' : '')} type="email" inputMode="email" autoComplete="email" placeholder="you@example.com" value={email} onChange={(e) => { setEmail(e.target.value); setEmailErr(''); }} />
                 {emailErr && <div className="err">{emailErr}</div>}
               </label>
-              <Button block arrow type="submit" disabled={sending}>{sending ? 'Sending code' : 'Continue with email'}</Button>
+              <Button block type="submit" disabled={sending}>{sending ? 'Sending code' : 'Continue with email'}</Button>
             </form>
             <p className="small muted" style={{ marginTop: 14 }}>No password. We’ll send you a one-time code.</p>
             <div style={{ marginTop: 'auto', paddingTop: 22 }}>
@@ -132,7 +132,7 @@ export default function Auth({ onSignedIn, initialEmail = '', onAllProducts }) {
             </div>
             <p className="small muted" style={{ marginTop: 14 }}>By creating your Home you agree to the Terms and Privacy Policy. The app is free. No memberships, no paywalls.</p>
             <div className="stack-12" style={{ marginTop: 'auto', paddingTop: 22 }}>
-              <Button block arrow onClick={create}>Create my Home</Button>
+              <Button block onClick={create}>Create my Home</Button>
               <Button block variant="text" onClick={() => setStep('email')}>Use a different email</Button>
               <DemoNote>Simulated. The next Home number comes from a local demo counter (next: No. {pad4(state.backend.counter + 1)}), not the production counter.</DemoNote>
             </div>

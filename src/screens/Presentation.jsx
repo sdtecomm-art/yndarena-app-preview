@@ -21,8 +21,8 @@ export function TechPills({ ids }) {
     <div className="row wrap" style={{ gap: 8 }}>
       {ids.map((t) => (
         <button key={t} className="tech-pill" onClick={() => nav.push('technique', { id: t })}>
-          <span className="round"><Icon name="arrow" size={12} /></span>
           {TECHNIQUES[t].name}
+          <Icon name="chevron" size={14} />
         </button>
       ))}
     </div>

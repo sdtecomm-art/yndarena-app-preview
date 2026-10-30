@@ -31,7 +31,7 @@ export default function Welcome({ onDone }) {
           ))}
         </div>
         <div style={{ marginTop: 'auto', paddingTop: 20 }}>
-          <Button block arrow onClick={() => { updateUser((u) => { u.welcomed = true; }); onDone?.(); }}>Explore your Home</Button>
+          <Button block onClick={() => { updateUser((u) => { u.welcomed = true; }); onDone?.(); }}>Explore your Home</Button>
         </div>
       </div>
     </div>

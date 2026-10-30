@@ -253,7 +253,7 @@ function SidePanels({ children, setShared }) {
         <Kicker>Journeys to try</Kicker>
         <ul className="side-list">
           {JOURNEYS.map(([k, label], i) => (
-            <li key={k}><button onClick={() => run(k)}><span className="num">{String(i + 1).padStart(2, '0')}</span>{label}<Icon name="arrow" size={16} /></button></li>
+            <li key={k}><button onClick={() => run(k)}><span className="num">{String(i + 1).padStart(2, '0')}</span>{label}<Icon name="chevron" size={16} /></button></li>
           ))}
         </ul>
         <div className="row" style={{ marginTop: 18, gap: 10 }}>

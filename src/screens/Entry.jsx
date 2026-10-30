@@ -47,7 +47,6 @@ export default function Entry({ onOpenSet }) {
             <span className="entry-card-s">Three boards, 33 × 24 × 1.8 cm each. Care plan, everyday meals and gift dates.</span>
             <button className="btn btn-primary btn-block entry-open" onClick={onOpenSet}>
               <span>Open your set</span>
-              <span className="btn-arrow"><Icon name="arrow" size={16} /></span>
             </button>
           </div>
           <p className="entry-note">{signedIn ? 'Your Home number belongs to your account, for all of Yndarena.' : 'One account for all of Yndarena.'}</p>
