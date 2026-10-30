@@ -1,0 +1,52 @@
+{
+  "version": "v7-20261029",
+  "source": "TABLAS.pdf supplied by the owner; original is unchanged",
+  "source_sha256": "9d34ef26ccde0e13cf54d2196d117f164643526320a91376106bdf3331e10f10",
+  "product_dimensions_mm": {
+    "height": 330,
+    "broad_face_width": 240,
+    "thickness_each": 18,
+    "three_touching_spines_width": 54
+  },
+  "left_to_right": [
+    "CHEESE & BREAD",
+    "FRUITS & VEGETABLES",
+    "MEAT & FISH"
+  ],
+  "artwork_rules": [
+    "Original PDF artwork, no regenerated labels or botanicals",
+    "Labels read top to bottom when upright",
+    "One botanical motif continues across the three spines at the top",
+    "One upright botanical with ground line at the bottom of each spine"
+  ],
+  "asset_method": "Native SVG composition from original PDF vector paths and embedded images; PNG/WebP exports are delivery formats, not generated product photos.",
+  "front_asset": {
+    "file": "assets/yndarena-upright-original-v7.svg",
+    "viewBox": [
+      0,
+      0,
+      54,
+      330
+    ],
+    "aspect_ratio": 0.16363636363636364,
+    "preserve_aspect_ratio": true
+  },
+  "teaser_asset": {
+    "file": "assets/yndarena-rosemary-question-v7.svg",
+    "decorative_only": true,
+    "background": "transparent",
+    "label": "More for your home",
+    "status": "Coming soon"
+  },
+  "supersedes": [
+    "yndarena-set-upright-v6.png",
+    "yndarena-set-upright-v6.webp",
+    "coming-soon-upright-v6.svg"
+  ],
+  "limits": [
+    "PDF is an artwork reference, not a dimensioned manufacturing drawing",
+    "330 × 240 × 18 mm are owner-confirmed outer dimensions",
+    "Stand, groove and useful serving area are not measured here",
+    "The upright view shows the 18 mm spines, not the 240 mm broad faces"
+  ]
+}
