@@ -249,8 +249,8 @@ export function DropsArt({ kind, label = true, className = '' }) {
 const WATCH_SECONDS = 5;
 
 const RESULTS = {
-  beads: { title: 'It beads up', look: 'The water stays on the surface in drops or small pools.', means: 'The grain is still holding its oil.', todo: 'No oil needed today.' },
-  soaks: { title: 'It soaks in', look: 'The water sinks into the wood, leaving a darker patch.', means: 'The wood is asking for oil.', todo: 'Oil it when you can.' },
+  beads: { title: 'It beads up', look: 'The water stays on the surface in drops or small pools.', means: 'The grain is still holding its oil.', todo: 'No oil needed today.', short: 'No oil needed.' },
+  soaks: { title: 'It soaks in', look: 'The water sinks into the wood, leaving a darker patch.', means: 'The wood is asking for oil.', todo: 'Oil it when you can.', short: 'Time to oil.' },
 };
 
 function ResultCompare() {
@@ -605,20 +605,12 @@ export function WaterTest({ params = {} }) {
         {step === 'watch' && (
           <>
             <div className="where is-board"><Icon name="hand" size={16} />At your board</div>
-            <h1 className="display-m">Watch the drops for about 5 seconds.</h1>
-            <p className="body" style={{ margin: '8px 0 0' }}>Do they stay rounded on top, or soak into the wood?</p>
-            <div className="watch-row">
-              <DropsArt kind="beads" label={false} className="mini" />
-              <span className="watch-or">or</span>
-              <DropsArt kind="soaks" label={false} className="mini" />
-            </div>
-            <div className="watch-count" role="timer" aria-live="off" aria-label={secs > 0 ? `About ${secs} seconds` : 'About 5 seconds have passed'}>
+            <h1 className="display-m">Wait about 5 seconds.</h1>
+            <div className="watch-count" role="timer" aria-live="off" aria-label={secs > 0 ? `About ${secs} seconds` : 'Ready'}>
               <Icon name="clock" size={15} />
-              <span>{secs > 0 ? `${secs} s` : 'About 5 seconds have passed'}</span>
+              <span>{secs > 0 ? `${secs} s` : 'Ready'}</span>
             </div>
-            <span className="sr-only" aria-live="polite">{secs === 0 ? 'About 5 seconds have passed. Tell us what you saw.' : ''}</span>
-            <Button block style={{ marginTop: 14 }} onClick={() => setStep('result')}>Tell us what you saw</Button>
-            <p className="small" style={{ marginTop: 10, textAlign: 'center' }}>If it is already clear, answer now. The count is only a guide; it doesn’t check the wood.</p>
+            <Button block style={{ marginTop: 22 }} onClick={() => setStep('result')}>Next</Button>
           </>
         )}
 
@@ -629,17 +621,15 @@ export function WaterTest({ params = {} }) {
             <div className="stack-12" style={{ marginTop: 16 }}>
               {['beads', 'soaks'].map((k) => (
                 <button key={k} className="result-card" onClick={() => choose(k)}>
-                  <DropsArt kind={k} />
+                  <DropsArt kind={k} label={false} />
                   <span className="rc-body">
                     <span className="rc-title">{RESULTS[k].title}</span>
-                    <span className="rc-look">{RESULTS[k].look}</span>
-                    <span className={'compare-todo' + (k === 'soaks' ? ' is-oil' : '')}>{RESULTS[k].todo}</span>
+                    <span className="rc-look">{RESULTS[k].short}</span>
                   </span>
                 </button>
               ))}
             </div>
             <Button block variant="ghost" style={{ marginTop: 12 }} onClick={() => setStep('unsure')}>I’m not sure</Button>
-            <p className="small" style={{ marginTop: 12 }}>You choose the result. Nothing on this screen measures the wood.</p>
           </>
         )}
 
