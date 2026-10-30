@@ -863,3 +863,7 @@ button.tag { min-height: 36px; }
 .remind-by legend + * { clear: both; }
 
 .rp-note strong { font-weight: 500; color: var(--c-black); }
+
+.care-sec.is-first { margin-top: 4px; }
+.care-sec.is-first .care-sec-head { border-top: 0; padding-top: 0; }
+.care-sec.is-first + .pad { margin-top: 30px; }
