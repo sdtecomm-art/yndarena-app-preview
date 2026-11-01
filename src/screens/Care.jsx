@@ -792,19 +792,19 @@ function GiftDates({ startAdd }) {
       }} onDelete={(id) => { updateUser((u) => { u.gifts = u.gifts.filter((x) => x.id !== id); }); setEdit(null); }} />
 
       <Sheet open={!!plan} onClose={() => setPlan(null)} title="Plan a gift">
-        {plan && <PlanGift g={plan} onShare={() => { setPlan(null); nav.switchTab('discover', { name: 'discover', params: { filter: 'all' } }); }} />}
+        {plan && <PlanGift g={plan} />}
       </Sheet>
     </div>
   );
 }
 
-// Plan a gift: Yndarena first, on Amazon; something to share as the alternative. Opening Amazon changes nothing here.
-function PlanGift({ g, onShare }) {
+// Plan a gift: one useful option, Yndarena on Amazon. Opening Amazon never marks a gift as bought.
+function PlanGift({ g }) {
   const url = LINKS.amazonStore;
   const ready = validAmazonUrl(url);
   return (
     <>
-      <p className="body" style={{ marginTop: 0 }}>Find a gift for {g.name}’s home, or plan something to share.</p>
+      <p className="body" style={{ marginTop: 0 }}>Find a thoughtful gift for {g.name}’s home.</p>
       <div className="gift-option is-primary">
         <div className="go-head">
           <span className="round-ico"><Icon name="gift" size={18} /></span>
@@ -817,11 +817,6 @@ function PlanGift({ g, onShare }) {
         )}
         {!ready && IS_PREVIEW && <p className="go-note" id="amazon-pending">Amazon link pending in this preview.</p>}
       </div>
-      <button className="gift-option is-secondary" onClick={onShare}>
-        <span className="round-ico"><Icon name="grid" size={18} /></span>
-        <span className="grow"><span className="go-t">Make something to share</span><span className="go-s">A recipe or serving idea for the day.</span></span>
-        <Icon name="chevron" size={18} />
-      </button>
     </>
   );
 }

@@ -44,7 +44,7 @@ export default function Entry({ onOpenSet }) {
           <div className="entry-card">
             <span className="entry-card-k">Available now</span>
             <span className="entry-card-t">Cutting Board Set</span>
-            <span className="entry-card-s">Three boards, 33 × 24 × 1.8 cm each. Care plan, everyday meals and gift dates.</span>
+            <span className="entry-card-s">Three boards, 33 × 24 × 1.8 cm each. Care plan, gift dates and gatherings.</span>
             <button className="btn btn-primary btn-block entry-open" onClick={onOpenSet}>
               <span>Open your set</span>
             </button>

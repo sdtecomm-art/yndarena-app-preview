@@ -2,8 +2,8 @@ import { useStore } from '../store.jsx';
 import { Button, Sprig } from '../ui.jsx';
 
 const BENEFITS = [
-  { title: 'Beautiful ways to share', text: 'Discover creative serving ideas, with everything you need to make them your own.' },
   { title: 'Care that stays with you', text: 'Know when and how to care for your board, with guidance and timely reminders.' },
+  { title: 'Gatherings, organized', text: 'Share one list and everyone picks what they’ll bring. Guests don’t need the app.' },
   { title: 'Thoughtful gifts, right on time', text: 'Keep special dates close, with reminders to help you plan your next gift.' },
 ];
 

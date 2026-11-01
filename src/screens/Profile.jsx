@@ -39,7 +39,7 @@ export default function Profile({ onSignOut }) {
       <div className="pad section">
         <Kicker>Preview tools</Kicker>
         <button className="list-row" onClick={() => nav.push('review')}>
-          <div className="grow"><div>Review panel</div><div className="sub">Image sources, checks and differences for reviewers</div></div>
+          <div className="grow"><div>Review panel</div><div className="sub">What is real, simulated and pending in this preview</div></div>
           <Icon name="chevron" size={18} />
         </button>
         <div className="card card-pad" style={{ marginTop: 10 }}>

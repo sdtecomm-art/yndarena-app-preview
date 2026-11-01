@@ -4,6 +4,10 @@ import { Icon, Kicker, Sprig, Button } from '../ui.jsx';
 import { NextStep, ProductStrip, useCareActions } from './Care.jsx';
 import { giftInfo, giftWho, fmtShort, whenText, giftChannelText } from '../lib.js';
 import { WORDMARK } from '../assets.js';
+import { GatheringCard } from './Gatherings.jsx';
+import { useShared } from '../gatherings/useShared.js';
+import { host } from '../gatherings/sim.js';
+import { startInstant } from '../gatherings/model.js';
 
 const MAX_GIFTS = 3;
 
@@ -91,6 +95,31 @@ function GiftBlock({ gifts, today }) {
   );
 }
 
+// A compact way into Gatherings: the next one if there is one, else the action to plan one.
+function GatheringsBlock() {
+  const nav = useNav();
+  const { email } = useStore();
+  const list = useShared(() => host.list(email));
+  const next = list.filter((g) => g.status === 'active' && startInstant(g.startsAt, g.tz) > Date.now() - 6 * 3600e3).sort((a, b) => startInstant(a.startsAt, a.tz) - startInstant(b.startsAt, b.tz))[0];
+  return (
+    <section className="section pad" aria-label="Gatherings">
+      <div className="section-head" style={{ padding: 0 }}>
+        <h2 className="h2">Gatherings</h2>
+        {next && <button className="link" onClick={() => nav.switchTab('gatherings')}>All</button>}
+      </div>
+      <div style={{ marginTop: 12 }}>
+        {next ? <GatheringCard g={next} compact /> : (
+          <button className="reminder-card tap" onClick={() => nav.switchTab('gatherings', { name: 'gathering-new' })}>
+            <div className="round-ico"><Icon name="people" size={18} /></div>
+            <div><div style={{ fontSize: 16, lineHeight: 1.3 }}>Plan a gathering</div><div className="small">Organize what everyone brings</div></div>
+            <Icon name="plus" size={18} />
+          </button>
+        )}
+      </div>
+    </section>
+  );
+}
+
 export default function Home({ openProfile }) {
   const { user, today } = useStore();
   const nav = useNav();
@@ -101,6 +130,7 @@ export default function Home({ openProfile }) {
       <AppHead onProfile={openProfile} />
       <CareHero care={user.care} today={today} />
 
+      <GatheringsBlock />
       <GiftBlock gifts={user.gifts} today={today} />
 
       <footer className="home-sign">

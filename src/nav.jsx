@@ -1,9 +1,9 @@
 // Minimal stack navigation: one stack per tab, full-screen routes hide the tab bar.
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-// Care is a tab again: the care plan is the main reason to open the app. Gift dates stay on the Home.
-export const TABS = ['home', 'discover', 'care', 'collection'];
-export const FULL = new Set(['designer', 'table', 'water-test', 'oil-guide', 'share']);
+// v11: Home, Care and Gatherings. Discover and Collection were retired. Gift dates stay on the Home.
+export const TABS = ['home', 'care', 'gatherings'];
+export const FULL = new Set(['water-test', 'oil-guide']);
 
 const roots = () => Object.fromEntries(TABS.map((t) => [t, [{ name: t, key: t }]]));
 let n = 0;
