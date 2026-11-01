@@ -4,6 +4,7 @@ import { useStore } from '../store.jsx';
 import { TopBar, Button, Icon, Sheet, Chip, DemoNote, useToast, ConfirmTap } from '../ui.jsx';
 import { useShared } from '../gatherings/useShared.js';
 import { host, links, SIMULATED } from '../gatherings/sim.js';
+import { VideoSlot } from './Gifts.jsx';
 import {
   TYPES, typeOf, starterList, amountText, amountShort, isComplete, isMajorChange, progress,
   whenText, dateText, timeText, startInstant, deviceTimeZone,
@@ -67,6 +68,10 @@ export default function Gatherings() {
           <div className="stack-8" style={{ marginTop: 10 }}>{earlier.map((g) => <GatheringCard key={g.id} g={g} />)}</div>
         </section>
       )}
+      <div className="pad">
+        <VideoSlot title="How Gatherings works" text="Make the list, share one link, and everyone picks what they’ll bring. Guests don’t need the app. About a minute." />
+        {SIMULATED && <p className="small muted" style={{ marginTop: 8 }}>Preview: space reserved for the video. It isn’t recorded yet.</p>}
+      </div>
     </div>
   );
 }

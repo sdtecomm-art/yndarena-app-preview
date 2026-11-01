@@ -1,8 +1,8 @@
 // Minimal stack navigation: one stack per tab, full-screen routes hide the tab bar.
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-// v11: Home, Care and Gatherings. Discover and Collection were retired. Gift dates stay on the Home.
-export const TABS = ['home', 'care', 'gatherings'];
+// Home, Care, Gatherings and Gifts. Discover and Collection were retired. The Home keeps a short Gift dates block.
+export const TABS = ['home', 'care', 'gatherings', 'gifts'];
 export const FULL = new Set(['water-test', 'oil-guide']);
 
 const roots = () => Object.fromEntries(TABS.map((t) => [t, [{ name: t, key: t }]]));

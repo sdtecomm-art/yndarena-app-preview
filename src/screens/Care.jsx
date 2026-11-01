@@ -710,7 +710,7 @@ export function WaterTest({ params = {} }) {
 }
 
 // ---------- Gift dates ----------
-function GiftDates({ startAdd }) {
+export function GiftDates({ startAdd }) {
   const { user, updateUser, today } = useStore();
   const nav = useNav();
   // New dates start with both channels; each Home can keep one or both.
@@ -720,8 +720,7 @@ function GiftDates({ startAdd }) {
   const gifts = user.gifts.map((g) => ({ g, ...giftInfo(g, today) })).sort((a, b) => (a.days ?? 9999) - (b.days ?? 9999));
 
   return (
-    <div className="pad" style={{ marginTop: 20 }}>
-      <p className="body" style={{ marginTop: 0 }}>Keep special dates close. We’ll remind you 21 days before and again 10 days before, with time to plan a gift.</p>
+    <div className="pad" style={{ marginTop: 8 }}>
       {gifts.length === 0 && (
         <div style={{ marginTop: 14 }}>
           <Empty title="Keep a special date close" action={<Button small onClick={() => setEdit(blank())}>Add a date</Button>}>
@@ -757,7 +756,7 @@ function GiftDates({ startAdd }) {
       {gifts.length > 0 && (
         <div style={{ marginTop: 16 }}>
           <Button block variant="ghost" icon="plus" disabled={gifts.length >= MAX_GIFTS} onClick={() => setEdit(blank())}>Add a date</Button>
-          {gifts.length >= MAX_GIFTS && <p className="small muted" style={{ marginTop: 8 }}>You can keep up to {MAX_GIFTS} dates, the same as your current care plan.</p>}
+          {gifts.length >= MAX_GIFTS && <p className="small muted" style={{ marginTop: 8 }}>You can keep up to {MAX_GIFTS} dates.</p>}
         </div>
       )}
       {gifts[0]?.date && (

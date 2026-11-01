@@ -9,6 +9,7 @@ import Home from './screens/Home.jsx';
 import Care, { WaterTest, OilGuide } from './screens/Care.jsx';
 import Gatherings, { GatheringNew, GatheringHost } from './screens/Gatherings.jsx';
 import Guest from './screens/Guest.jsx';
+import Gifts from './screens/Gifts.jsx';
 import Profile from './screens/Profile.jsx';
 import Review from './screens/Review.jsx';
 import Entry from './screens/Entry.jsx';
@@ -20,6 +21,7 @@ const TAB_META = {
   home: { label: 'Home', icon: 'home' },
   care: { label: 'Care', icon: 'care' },
   gatherings: { label: 'Gatherings', icon: 'people' },
+  gifts: { label: 'Gifts', icon: 'gift' },
 };
 
 // Links the app can be opened with. #/g/… is a gathering's guest page (and #/g/…/m/… a guest's private manage
@@ -50,6 +52,7 @@ function ScreenFor({ route, onSignOut, openProfile, root }) {
     case 'home': return <Home openProfile={openProfile} />;
     case 'care': return <Care params={p} root={root} />;
     case 'gatherings': return <Gatherings />;
+    case 'gifts': return <Gifts params={p} />;
     case 'gathering-new': return <GatheringNew params={p} />;
     case 'gathering': return <GatheringHost params={p} />;
     case 'water-test': return <WaterTest params={p} />;
@@ -161,7 +164,7 @@ function SidePanels({ children, setShared }) {
       if (k === 'care') nav.switchTab('care');
       if (k === 'oil') nav.switchTab('care', { name: 'oil-guide', params: {} });
       if (k === 'review') nav.switchTab('home', { name: 'review', params: {} });
-      if (k === 'gifts') nav.switchTab('home', { name: 'care', params: { seg: 'gifts' } });
+      if (k === 'gifts') nav.switchTab('gifts');
       if (k === 'plan') nav.switchTab('gatherings', { name: 'gathering-new', params: {} });
       if (k === 'host' || k === 'guest') {
         const g = await demoGathering(RETURNING_EMAIL);

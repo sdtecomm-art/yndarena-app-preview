@@ -4,7 +4,8 @@ export const REVIEW = {
   updated: '2026-11-01',
   scope: [
     'v11 (owner brief, 2026-11-01): recipes, everyday meals, boards to share, From home to home, Designer, techniques, Photo/Layout, Collection, saved items, notes, versions and shopping lists were removed from the app and from the code, with their food images and source packages (they remain in the git history). Discover and Collection left the tab bar.',
-    'Navigation: Home, Care, Gatherings. Gift dates stay on the Home. The Yndarena entrance for all products is unchanged.',
+    'Navigation: Home, Care, Gatherings and Gifts. Gifts explains the feature (save a date, two reminders, channels per date, Give Yndarena on Amazon) above the dates; the Home keeps a short Gift dates block that opens it. The Yndarena entrance for all products is unchanged.',
+    'Gatherings and Gifts end with a space for a short video on how each one works. No video exists yet: the frame says “Video coming soon”.',
     'Old links: #/s/… (shared boards) and any screen name from earlier versions open a short page with “Go to Home”. Nothing crashes.',
   ],
   data: [
@@ -24,6 +25,7 @@ export const REVIEW = {
     'Share uses the phone’s share sheet or copies the link. “You opened Share update” records only that the host opened it, not that anyone received or read it.',
   ],
   pending: [
+    'Two short videos: How Gatherings works and How Gifts works (about a minute each).',
     'A real backend for gatherings (accounts for hosts, public guest endpoint, conditional writes or transactions for reservations, secure manage tokens), then a test with two separate devices.',
     'Push notification and email providers, with the device permission for push, the 24-hour and 3-hour jobs and idempotent sending.',
     'Yndarena’s Amazon link for gifts: set LINKS.amazonStore in src/data/links.js to enable View on Amazon.',

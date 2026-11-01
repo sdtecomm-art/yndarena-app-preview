@@ -790,3 +790,22 @@ button.g-row:active { opacity: .65; }
 .btn-text:active { opacity: .6; }
 .g-actions .btn:first-child { flex-basis: 100%; }
 .g-actions .btn { flex: 1 1 40%; }
+
+/* Four tabs: Home, Care, Gatherings, Gifts. */
+.tabbar { grid-template-columns: repeat(4, 1fr); }
+
+/* Gifts section */
+.gifts-how ol { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--c-line); }
+.gifts-how li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; border-bottom: 1px solid var(--c-line); }
+.gifts-how .round-ico { flex: none; }
+.gh-t { display: block; font-size: 17px; line-height: 1.25; color: var(--c-black); }
+.gh-s { display: block; font-size: 14.5px; line-height: 1.45; color: var(--c-brown); margin-top: 2px; }
+.gifts-dates { margin-top: 28px; }
+
+/* Video slot at the end of Gatherings and Gifts */
+.video-slot { margin-top: 32px; }
+.vs-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; display: grid; place-items: center; background: linear-gradient(160deg, #e9dfd3, #d8c8b6); border: 1px solid var(--c-line); }
+.vs-play { width: 56px; height: 56px; border-radius: 28px; display: grid; place-items: center; background: rgba(250, 245, 239, .9); color: var(--c-taupe); box-shadow: 0 2px 8px rgba(59, 42, 30, .15); }
+.vs-soon { position: absolute; left: 12px; bottom: 12px; height: 26px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 8px; background: rgba(250, 245, 239, .9); font-family: var(--sans); font-size: 12.5px; color: var(--c-brown); }
+.vs-t { margin-top: 12px; font-family: var(--display); font-size: 22px; line-height: 1.15; color: var(--c-black); }
+.vs-s { margin: 4px 0 0; font-size: 15px; line-height: 1.45; color: var(--c-brown); }

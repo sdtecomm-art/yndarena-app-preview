@@ -65,10 +65,10 @@ function GiftBlock({ gifts, today }) {
     <section className="section pad" aria-label="Gift dates">
       <div className="section-head" style={{ padding: 0 }}>
         <h2 className="h2">Gift dates</h2>
-        {gifts.length > 0 && <button className="link" onClick={() => nav.push('care', { seg: 'gifts' })}>Manage</button>}
+        {gifts.length > 0 && <button className="link" onClick={() => nav.switchTab('gifts')}>Manage</button>}
       </div>
       {gifts.length === 0 ? (
-        <button className="reminder-card tap" style={{ marginTop: 12 }} onClick={() => nav.push('care', { seg: 'gifts', add: true })}>
+        <button className="reminder-card tap" style={{ marginTop: 12 }} onClick={() => nav.switchTab('gifts', { name: 'gifts', params: { add: true, t: Date.now() } })}>
           <div className="round-ico"><Icon name="gift" size={18} /></div>
           <div><div style={{ fontSize: 16, lineHeight: 1.3 }}>Keep a special date close</div><div className="small">We’ll remind you 21 and 10 days ahead</div></div>
           <Icon name="plus" size={18} />
@@ -78,7 +78,7 @@ function GiftBlock({ gifts, today }) {
           {next?.stage && <p className="small" style={{ margin: '6px 0 0' }}>Reminder sent: {giftWho(next.g)} is {whenText(next.days)}.</p>}
           <div className="stack-8" style={{ marginTop: 12 }}>
             {list.map((x) => (
-              <button key={x.g.id} className="reminder-card tap" onClick={() => nav.push('care', { seg: 'gifts' })}>
+              <button key={x.g.id} className="reminder-card tap" onClick={() => nav.switchTab('gifts')}>
                 <div className="round-ico" style={x.stage ? { background: 'rgba(172,162,189,.25)', borderColor: 'rgba(172,162,189,.6)' } : undefined}><Icon name="gift" size={18} /></div>
                 <div>
                   <div style={{ fontSize: 16, lineHeight: 1.3 }}>{giftWho(x.g)}</div>
@@ -88,7 +88,7 @@ function GiftBlock({ gifts, today }) {
               </button>
             ))}
           </div>
-          {gifts.length < MAX_GIFTS && <Button block variant="text" icon="plus" style={{ marginTop: 6 }} onClick={() => nav.push('care', { seg: 'gifts', add: true })}>Add a date</Button>}
+          {gifts.length < MAX_GIFTS && <Button block variant="text" icon="plus" style={{ marginTop: 6 }} onClick={() => nav.switchTab('gifts', { name: 'gifts', params: { add: true, t: Date.now() } })}>Add a date</Button>}
         </>
       )}
     </section>
