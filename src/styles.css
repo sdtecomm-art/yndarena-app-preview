@@ -809,3 +809,5 @@ button.g-row:active { opacity: .65; }
 .vs-soon { position: absolute; left: 12px; bottom: 12px; height: 26px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 8px; background: rgba(250, 245, 239, .9); font-family: var(--sans); font-size: 12.5px; color: var(--c-brown); }
 .vs-t { margin-top: 12px; font-family: var(--display); font-size: 22px; line-height: 1.15; color: var(--c-black); }
 .vs-s { margin: 4px 0 0; font-size: 15px; line-height: 1.45; color: var(--c-brown); }
+.g-start { margin-top: 20px; padding: 18px 16px 12px; border-radius: 16px; background: var(--c-bone); border: 1px solid var(--c-line); }
+.g-start .h2 { font-size: 26px; }

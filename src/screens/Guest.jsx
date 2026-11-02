@@ -51,7 +51,7 @@ export default function Guest({ publicId, token: tokenFromLink, onLeave }) {
       {!cancelled && (
         <section className="g-sec">
           <h2 className="h2">{me ? 'Still needed' : 'Pick something to bring.'}</h2>
-          {!me && <p className="small" style={{ margin: '4px 0 0' }}>Bring the full amount of the item you choose.</p>}
+          {!me && available.length > 0 && <p className="small" style={{ margin: '4px 0 0' }}>Bring the full amount of the item you choose.</p>}
           {available.length ? (
             <div className="g-rows" style={{ marginTop: 10 }}>
               {available.map((i) => (
@@ -61,7 +61,7 @@ export default function Guest({ publicId, token: tokenFromLink, onLeave }) {
                 </button>
               ))}
             </div>
-          ) : <p className="small muted" style={{ marginTop: 10 }}>Everything on the list has someone. Thank you.</p>}
+          ) : <p className="small muted" style={{ marginTop: 10 }}>{view.items.length ? 'Everything on the list has someone. Thank you.' : 'The host hasn’t added anything to the list yet. Check back soon.'}</p>}
         </section>
       )}
 

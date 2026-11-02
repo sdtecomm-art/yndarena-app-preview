@@ -6,7 +6,7 @@ import { useShared } from '../gatherings/useShared.js';
 import { host, links, SIMULATED } from '../gatherings/sim.js';
 import { VideoSlot } from './Gifts.jsx';
 import {
-  TYPES, typeOf, starterList, amountText, amountShort, isComplete, isMajorChange, progress,
+  TYPES, typeOf, amountText, amountShort, isComplete, isMajorChange, progress,
   whenText, dateText, timeText, startInstant, deviceTimeZone,
 } from '../gatherings/model.js';
 
@@ -22,6 +22,8 @@ function nextSaturday(hour) {
 
 export function ProgressLine({ g }) {
   const p = progress(g);
+  if (!g.items.length) return null;
+  if (!p.total) return <p className="small muted g-progress">Add an amount to each item. Guests see items once they have one.</p>;
   return (
     <div className="g-progress">
       <div className="g-bar" aria-hidden="true"><span style={{ width: p.total ? `${(p.covered / p.total) * 100}%` : 0 }} /></div>
@@ -115,10 +117,10 @@ export function GatheringNew({ params = {} }) {
     if (busy) return;
     setBusy(true);
     // Reusing a list copies only food, drinks and amounts: no guests, emails, confirmations or reminders.
-    const items = from ? from.items.map((i) => ({ name: i.name, kind: i.kind, qty: i.qty, unit: i.unit, size: i.size })) : starterList(type, people);
+    const items = from ? from.items.map((i) => ({ name: i.name, kind: i.kind, qty: i.qty, unit: i.unit, size: i.size })) : [];
     const id = await host.create(email, { type, name: name.trim() || typeOf(type).name, startsAt: `${date}T${time}`, tz: deviceTimeZone(), people, includeSelf, hostName: '', items });
     nav.replace('gathering', { id, fresh: true });
-    toast('Your list is ready to edit.');
+    toast('Now add what people can bring.');
   };
   return (
     <>
@@ -210,30 +212,38 @@ export function GatheringHost({ params }) {
         <p className="g-when">{whenText(g.startsAt)} · {g.people} people{g.location ? ` · ${g.location}` : ''}</p>
         {g.note && <p className="small" style={{ margin: '6px 0 0' }}>{g.note}</p>}
         <ProgressLine g={g} />
-        {!cancelled && (
+        {!cancelled && live.length === 0 && (
+          <div className="g-start">
+            <h2 className="h2">What should people bring?</h2>
+            <p className="small" style={{ margin: '6px 0 14px' }}>Add each food or drink with its amount, like ice, 2 bags, 5 lb each. Then share one link.</p>
+            <Button block onClick={() => setSheet({ kind: 'add' })}>Add the first item</Button>
+            <Button block variant="text" style={{ marginTop: 4 }} onClick={() => setSheet({ kind: 'details' })}>Edit details</Button>
+          </div>
+        )}
+        {!cancelled && live.length > 0 && (
           <div className="g-actions">
             <Button small className="grow" onClick={() => share(url, g.name, toast)}>Share gathering</Button>
             <Button small variant="ghost" className="grow" onClick={() => setSheet({ kind: 'add' })}>Add an item</Button>
             <Button small variant="ghost" className="grow" onClick={() => setSheet({ kind: 'details' })}>Edit details</Button>
           </div>
         )}
-        {params.fresh && !anyGuest && <p className="small g-hint">Suggested amounts are a starting point. Edit, remove or add items, and mark what you’ll provide before you share.</p>}
+        {live.length > 0 && <>
+          <Group title="Still needed" empty="Every item has someone.">{needed.map((it) => <ItemRow key={it.id} it={it} onOpen={open} />)}</Group>
+          <Group title="You’re providing" empty="Tap an item and choose “I’ll provide this”.">{mine.map((it) => <ItemRow key={it.id} it={it} onOpen={open} />)}</Group>
+          <Group title="Guests are bringing" empty="When guests pick something, it shows up here.">{guests.map((it) => <ItemRow key={it.id} it={it} onOpen={open} />)}</Group>
+        </>}
 
-        <Group title="Still needed" empty="Every item has someone.">{needed.map((it) => <ItemRow key={it.id} it={it} onOpen={open} />)}</Group>
-        <Group title="You’re providing" empty="Tap an item and choose “I’ll provide this”.">{mine.map((it) => <ItemRow key={it.id} it={it} onOpen={open} />)}</Group>
-        <Group title="Guests are bringing" empty="When guests pick something, it shows up here.">{guests.map((it) => <ItemRow key={it.id} it={it} onOpen={open} />)}</Group>
-
-        <section className="g-sec">
+        {live.length > 0 && <section className="g-sec">
           <div className="section-label"><span>Share</span></div>
           <div className="g-link"><code>{url}</code></div>
           <a className="link" href={url} target="_blank" rel="noreferrer">Open the guest page</a>
-        </section>
+        </section>}
 
         <HostReminders g={g} />
 
-        <section className="g-sec">
+        {live.length > 0 && <section className="g-sec">
           <Button block variant="ghost" onClick={() => nav.push('gathering-new', { from: g.id })}>Use this list again</Button>
-        </section>
+        </section>}
         {SIMULATED && <div style={{ marginTop: 16 }}><DemoNote>Preview: this list is saved in this browser only. Guests on other phones can’t see it yet, and nothing is sent.</DemoNote></div>}
       </div>
 
@@ -317,11 +327,13 @@ const blankItem = { name: '', kind: 'count', qty: '', unit: '', size: '' };
 
 function AddSheet({ g, open, onClose }) {
   const { email } = useStore();
+  const toast = useToast();
   const [v, setV] = useState(blankItem);
   return (
     <Sheet open={open} onClose={() => { setV(blankItem); onClose(); }} title="Add an item" tall>
       <AmountForm value={v} onChange={setV} />
       <Button block style={{ marginTop: 18 }} disabled={!v.name.trim()} onClick={async () => { await host.addItem(email, g.id, { ...v, qty: Number(v.qty) || '' }); setV(blankItem); onClose(); }}>Add to the list</Button>
+      <Button block variant="ghost" style={{ marginTop: 8 }} disabled={!v.name.trim()} onClick={async () => { await host.addItem(email, g.id, { ...v, qty: Number(v.qty) || '' }); setV(blankItem); toast(`${v.name.trim()} added. Add the next one.`); }}>Add and add another</Button>
       {!isComplete(v) && v.name.trim() && <p className="small muted" style={{ marginTop: 8 }}>You can add it now and the amount later. Guests won’t see it until it has one.</p>}
     </Sheet>
   );

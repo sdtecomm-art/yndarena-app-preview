@@ -1,7 +1,7 @@
 // Notes for the people reviewing the preview. Shown only in the review panel, never in the customer journey.
 
 export const REVIEW = {
-  updated: '2026-11-01',
+  updated: '2026-11-02',
   scope: [
     'v11 (owner brief, 2026-11-01): recipes, everyday meals, boards to share, From home to home, Designer, techniques, Photo/Layout, Collection, saved items, notes, versions and shopping lists were removed from the app and from the code, with their food images and source packages (they remain in the git history). Discover and Collection left the tab bar.',
     'Navigation: Home, Care, Gatherings and Gifts. Gifts explains the feature (save a date, two reminders, channels per date, Give Yndarena on Amazon) above the dates; the Home keeps a short Gift dates block that opens it. The Yndarena entrance for all products is unchanged.',
@@ -13,7 +13,7 @@ export const REVIEW = {
     'Removing that retired data for good is a separate, explicit operation for production. It is not part of this change.',
   ],
   gatherings: [
-    'Real in this build: the whole flow, the rules and the data model. A host creates a gathering (type, date and time, people), edits a starter list (editable suggestions, no AI), marks what they provide, records a confirmation received in person (“Confirmed by host”), shares one link, requests changes, reschedules, cancels and reuses a list without guests, emails or reminders.',
+    'Real in this build: the whole flow, the rules and the data model. A host creates a gathering (type, date and time, people), starts with an empty list and adds each item themselves (no suggested items since 2026-11-02), marks what they provide, records a confirmation received in person (“Confirmed by host”), shares one link, requests changes, reschedules, cancels and reuses a list without guests, emails or reminders.',
     'Guests open #/g/<id> with no app, account or Home number. They see only that gathering. Each reservation takes the whole row and returns a private manage token (128-bit random) in its own link; the public data never contains tokens or emails, so knowing a name cannot edit someone else’s item.',
     'Reservations run inside one exclusive lock (Web Locks API) shared by all tabs of the browser, so two reservations can’t both see “available”. Each sheet opening carries one request key, so a double tap books once. Switching items takes the new one first and only then frees the old one.',
     'Major changes (food or amount) and a new date or time keep what the guest agreed and ask them to confirm; the row stays theirs and doesn’t count as covered. They can confirm, or say they can’t, which frees it. With no answer nothing is released automatically; the host can record a confirmation or free the row.',
