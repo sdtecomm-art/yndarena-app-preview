@@ -33,6 +33,11 @@ export default function Gifts({ params = {} }) {
         <p className="lead" style={{ margin: '8px 0 0' }}>Keep the days that matter close. We’ll remind you in time to find a gift.</p>
       </header>
 
+      <div className="pad gifts-video">
+        <VideoSlot title="How Gifts works" text="Save a date, get two reminders ahead of it, and find a gift for their home. About a minute." />
+        {IS_PREVIEW && <p className="small muted" style={{ marginTop: 8 }}>Preview: space reserved for the video. It isn’t recorded yet.</p>}
+      </div>
+
       <section className="pad gifts-how" aria-label="How gift reminders work">
         <ol>
           {HOW.map((h) => (
@@ -48,11 +53,6 @@ export default function Gifts({ params = {} }) {
         <div className="pad"><div className="section-label"><span>Your dates · up to 3</span></div></div>
         <GiftDates startAdd={params.add} />
       </section>
-
-      <div className="pad">
-        <VideoSlot title="How Gifts works" text="Save a date, get two reminders ahead of it, and find a gift for their home. About a minute." />
-        {IS_PREVIEW && <p className="small muted" style={{ marginTop: 8 }}>Preview: space reserved for the video. It isn’t recorded yet.</p>}
-      </div>
     </div>
   );
 }

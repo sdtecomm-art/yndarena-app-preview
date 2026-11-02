@@ -811,3 +811,5 @@ button.g-row:active { opacity: .65; }
 .vs-s { margin: 4px 0 0; font-size: 15px; line-height: 1.45; color: var(--c-brown); }
 .g-start { margin-top: 20px; padding: 18px 16px 12px; border-radius: 16px; background: var(--c-bone); border: 1px solid var(--c-line); }
 .g-start .h2 { font-size: 26px; }
+.gifts-video .video-slot { margin-top: 20px; }
+.gifts { padding-bottom: 24px; }
