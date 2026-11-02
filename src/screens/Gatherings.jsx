@@ -6,7 +6,7 @@ import { useShared } from '../gatherings/useShared.js';
 import { host, links, SIMULATED } from '../gatherings/sim.js';
 import { VideoSlot } from './Gifts.jsx';
 import {
-  TYPES, typeOf, amountText, amountShort, isComplete, isMajorChange, progress,
+  TYPES, typeOf, amountText, itemLabel, isComplete, isMajorChange, progress,
   whenText, dateText, timeText, startInstant, deviceTimeZone,
 } from '../gatherings/model.js';
 
@@ -23,7 +23,6 @@ function nextSaturday(hour) {
 export function ProgressLine({ g }) {
   const p = progress(g);
   if (!g.items.length) return null;
-  if (!p.total) return <p className="small muted g-progress">Add an amount to each item. Guests see items once they have one.</p>;
   return (
     <div className="g-progress">
       <div className="g-bar" aria-hidden="true"><span style={{ width: p.total ? `${(p.covered / p.total) * 100}%` : 0 }} /></div>
@@ -117,7 +116,7 @@ export function GatheringNew({ params = {} }) {
     if (busy) return;
     setBusy(true);
     // Reusing a list copies only food, drinks and amounts: no guests, emails, confirmations or reminders.
-    const items = from ? from.items.map((i) => ({ name: i.name, kind: i.kind, qty: i.qty, unit: i.unit, size: i.size })) : [];
+    const items = from ? from.items.map((i) => ({ name: i.name, note: amountText(i) })) : [];
     const id = await host.create(email, { type, name: name.trim() || typeOf(type).name, startsAt: `${date}T${time}`, tz: deviceTimeZone(), people, includeSelf, hostName: '', items });
     nav.replace('gathering', { id, fresh: true });
     toast('Now add what people can bring.');
@@ -175,7 +174,7 @@ function ItemRow({ it, onOpen }) {
     <button className={'g-row' + (s.warn ? ' is-warn' : '')} onClick={() => onOpen(it.id)}>
       <span className="grow">
         <span className="g-row-t">{it.name}</span>
-        <span className="g-row-a">{amountText(it)}</span>
+        {amountText(it) && <span className="g-row-a">{amountText(it)}</span>}
       </span>
       {it.status === 'open' && isComplete(it) ? <Icon name="chevron" size={16} /> : (
         <span className="g-row-who">
@@ -215,7 +214,7 @@ export function GatheringHost({ params }) {
         {!cancelled && live.length === 0 && (
           <div className="g-start">
             <h2 className="h2">What should people bring?</h2>
-            <p className="small" style={{ margin: '6px 0 14px' }}>Add each food or drink with its amount, like ice, 2 bags, 5 lb each. Then share one link.</p>
+            <p className="small" style={{ margin: '6px 0 14px' }}>Add what you’d like people to bring. Then share one link and they pick.</p>
             <Button block onClick={() => setSheet({ kind: 'add' })}>Add the first item</Button>
             <Button block variant="text" style={{ marginTop: 4 }} onClick={() => setSheet({ kind: 'details' })}>Edit details</Button>
           </div>
@@ -303,27 +302,13 @@ function AmountForm({ value, onChange }) {
   const v = value;
   return (
     <div className="stack-16">
-      <label className="field"><span className="label">Food or drink</span><input className="input" value={v.name} maxLength={60} placeholder="Ice" onChange={(e) => onChange({ ...v, name: e.target.value })} /></label>
-      <div className="segmented" role="tablist" aria-label="Amount">
-        {[['count', 'Amount'], ['people', 'Enough for']].map(([k, l]) => <button key={k} role="tab" aria-selected={v.kind === k} className={v.kind === k ? 'is-active' : ''} onClick={() => onChange({ ...v, kind: k })}>{l}</button>)}
-      </div>
-      {v.kind === 'people' ? (
-        <label className="field"><span className="label">People</span><input className="input" type="number" inputMode="numeric" min="1" value={v.qty} onChange={(e) => onChange({ ...v, qty: e.target.value === '' ? '' : Math.max(0, Math.round(+e.target.value)) })} /></label>
-      ) : (
-        <>
-          <div className="row" style={{ gap: 12 }}>
-            <label className="field" style={{ width: 90 }}><span className="label">How many</span><input className="input" type="number" inputMode="numeric" min="1" value={v.qty} onChange={(e) => onChange({ ...v, qty: e.target.value === '' ? '' : Math.max(0, Math.round(+e.target.value)) })} /></label>
-            <label className="field grow"><span className="label">Unit</span><input className="input" value={v.unit} maxLength={20} placeholder="bag" onChange={(e) => onChange({ ...v, unit: e.target.value })} /></label>
-          </div>
-          <label className="field"><span className="label">Size of each, if it helps</span><input className="input" value={v.size} maxLength={30} placeholder="5 lb each" onChange={(e) => onChange({ ...v, size: e.target.value })} /></label>
-        </>
-      )}
-      <p className="small muted" style={{ margin: 0 }}>{isComplete(v) ? `Guests will see: ${amountText(v)}` : 'Add an amount so a guest knows exactly what to bring.'}</p>
+      <label className="field"><span className="label">What</span><input className="input" autoFocus value={v.name} maxLength={60} placeholder="Ice" onChange={(e) => onChange({ ...v, name: e.target.value })} /></label>
+      <label className="field"><span className="label">How much, optional</span><input className="input" value={v.note} maxLength={40} placeholder="2 bags" onChange={(e) => onChange({ ...v, note: e.target.value })} /></label>
     </div>
   );
 }
 
-const blankItem = { name: '', kind: 'count', qty: '', unit: '', size: '' };
+const blankItem = { name: '', note: '' };
 
 function AddSheet({ g, open, onClose }) {
   const { email } = useStore();
@@ -332,9 +317,8 @@ function AddSheet({ g, open, onClose }) {
   return (
     <Sheet open={open} onClose={() => { setV(blankItem); onClose(); }} title="Add an item" tall>
       <AmountForm value={v} onChange={setV} />
-      <Button block style={{ marginTop: 18 }} disabled={!v.name.trim()} onClick={async () => { await host.addItem(email, g.id, { ...v, qty: Number(v.qty) || '' }); setV(blankItem); onClose(); }}>Add to the list</Button>
-      <Button block variant="ghost" style={{ marginTop: 8 }} disabled={!v.name.trim()} onClick={async () => { await host.addItem(email, g.id, { ...v, qty: Number(v.qty) || '' }); setV(blankItem); toast(`${v.name.trim()} added. Add the next one.`); }}>Add and add another</Button>
-      {!isComplete(v) && v.name.trim() && <p className="small muted" style={{ marginTop: 8 }}>You can add it now and the amount later. Guests won’t see it until it has one.</p>}
+      <Button block style={{ marginTop: 18 }} disabled={!v.name.trim()} onClick={async () => { await host.addItem(email, g.id, v); setV(blankItem); onClose(); }}>Add to the list</Button>
+      <Button block variant="ghost" style={{ marginTop: 8 }} disabled={!v.name.trim()} onClick={async () => { await host.addItem(email, g.id, v); setV(blankItem); toast(`${v.name.trim()} added. Add the next one.`); }}>Add and add another</Button>
     </Sheet>
   );
 }
@@ -349,10 +333,10 @@ function ItemSheet({ g, id, onClose }) {
   const close = () => { setMode(null); setV(null); setWho(''); onClose(); };
   if (!it) return <Sheet open={false} onClose={close} />;
   const taken = it.claim && it.status !== 'host';
-  const cur = { name: it.name, kind: it.kind, qty: it.qty, unit: it.unit, size: it.size };
+  const cur = { name: it.name, note: amountText(it) };
   const startEdit = (m) => { setV({ ...cur }); setMode(m); };
   const save = async () => {
-    const r = { ...v, qty: Number(v.qty) };
+    const r = { name: v.name.trim(), note: v.note.trim() };
     if (taken && isMajorChange(it.claim.accepted, r)) { setMode('ask'); return; }
     await host.editItem(email, g.id, it.id, r); close();
   };
@@ -362,7 +346,7 @@ function ItemSheet({ g, id, onClose }) {
     <Sheet open={!!id} onClose={close} title={mode === 'ask' ? 'Request a change?' : it.name} tall>
       {!mode && (
         <>
-          <p className="g-sheet-a">{amountText(it)}</p>
+          {amountText(it) && <p className="g-sheet-a">{amountText(it)}</p>}
           <p className="small" style={{ margin: '2px 0 14px' }}>{s.tag}{taken ? ` · ${it.claim.name}` : ''}</p>
           {it.status === 'change' && <ChangeBox it={it} g={g} />}
           {g.status === 'active' && (
@@ -375,7 +359,7 @@ function ItemSheet({ g, id, onClose }) {
               {taken ? (
                 <>
                   <Button block variant="ghost" onClick={() => startEdit('typo')}>Fix a typo in the name</Button>
-                  <Button block variant="ghost" onClick={() => startEdit('edit')}>Change food or amount</Button>
+                  <Button block variant="ghost" onClick={() => startEdit('edit')}>Change the amount</Button>
                   <ConfirmTap onConfirm={() => run(() => host.release(email, g.id, it.id), `${it.name} is needed again. Let ${it.claim.name} know.`)} render={(armed, tap) => <Button block variant="text" onClick={tap}>{armed ? `Tap again. Remember to tell ${it.claim.name}.` : 'Free this item'}</Button>} />
                 </>
               ) : (
@@ -404,17 +388,17 @@ function ItemSheet({ g, id, onClose }) {
       )}
       {mode === 'edit' && (
         <>
-          {taken && <p className="small" style={{ marginTop: 0 }}>{it.claim.name} agreed to bring {amountShort(it.claim.accepted)}. A new food or amount asks them to confirm again.</p>}
+          {taken && <p className="small" style={{ marginTop: 0 }}>{it.claim.name} agreed to bring {itemLabel(it.claim.accepted)}. A new amount asks them to confirm again.</p>}
           <AmountForm value={v} onChange={setV} />
-          <Button block style={{ marginTop: 18 }} disabled={!v.name.trim() || (taken && !isComplete(v))} onClick={save}>Save</Button>
+          <Button block style={{ marginTop: 18 }} disabled={!v.name.trim()} onClick={save}>Save</Button>
         </>
       )}
       {mode === 'ask' && (
         <>
-          <p className="body" style={{ marginTop: 0 }}><strong>{it.claim.name} agreed to bring {amountShort(it.claim.accepted).toLowerCase()} {it.claim.accepted.name !== v.name ? `of ${it.claim.accepted.name}` : ''}.</strong> Request a change to {amountShort({ ...v, qty: Number(v.qty) }).toLowerCase()}{it.claim.accepted.name !== v.name ? ` of ${v.name}` : ''}?</p>
+          <p className="body" style={{ marginTop: 0 }}><strong>{it.claim.name} agreed to bring {itemLabel(it.claim.accepted)}.</strong> Ask for {itemLabel({ name: v.name.trim(), note: v.note.trim() })} instead?</p>
           <p className="small">Until {it.claim.name} says yes, this item shows “Needs confirmation” and doesn’t count as covered. Nobody else can take it.</p>
           <div className="stack-8" style={{ marginTop: 14 }}>
-            <Button block onClick={() => run(() => host.requestChange(email, g.id, it.id, { ...v, qty: Number(v.qty) }), 'Change requested.')}>Request change</Button>
+            <Button block onClick={() => run(() => host.requestChange(email, g.id, it.id, { name: v.name.trim(), note: v.note.trim() }), 'Change requested.')}>Request change</Button>
             <Button block variant="ghost" onClick={() => setMode(null)}>Cancel</Button>
           </div>
         </>
@@ -429,8 +413,8 @@ function ChangeBox({ it, g }) {
   const emailQueued = (g.outbox || []).some((e) => e.type === 'notice' && (e.key.startsWith(`change|${c.id}`) || e.key.startsWith(`time|${it.claim.id}|${g.startsAt}`)));
   return (
     <div className="g-change">
-      {(c.type === 'amount' || c.type === 'both') && <div><span className="label">Agreed</span><p>{c.from.name} · {amountShort(c.from)}</p></div>}
-      {(c.type === 'amount' || c.type === 'both') && <div><span className="label">Now asking</span><p>{it.name} · {amountShort(it)}</p></div>}
+      {(c.type === 'amount' || c.type === 'both') && <div><span className="label">Agreed</span><p>{itemLabel(c.from)}</p></div>}
+      {(c.type === 'amount' || c.type === 'both') && <div><span className="label">Now asking</span><p>{itemLabel(it)}</p></div>}
       {(c.type === 'time' || c.type === 'both') && <div><span className="label">New time</span><p>{whenText(c.toStart)} (was {whenText(c.fromStart)})</p></div>}
       <ul className="g-steps">
         <li className="on">Change requested</li>

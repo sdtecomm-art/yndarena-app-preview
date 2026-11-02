@@ -50,22 +50,23 @@ export const starterList = (type, people) => (T[type] || T.dinner)(Math.max(1, p
 const PLURAL = { loaf: 'loaves', dozen: 'dozen', box: 'boxes', person: 'people' };
 export const unitText = (qty, unit) => (qty === 1 ? unit : PLURAL[unit] || unit + 's');
 
-// A row is ready to publish when its amount is clear.
-export const isComplete = (it) => !!it.name?.trim() && Number(it.qty) > 0 && (it.kind === 'people' || !!it.unit?.trim());
+// A row is one thing to bring: a name, and if the host wants, a few words on how much ("2 bags", "for 6").
+// Free text on purpose: everyday gatherings don't need units and sizes.
+export const isComplete = (it) => !!it.name?.trim();
 
-export function amountText(it) {
-  if (!isComplete(it)) return 'Amount needed';
+function legacyAmount(it) {
+  if (!(Number(it.qty) > 0)) return '';
   if (it.kind === 'people') return `Enough for ${it.qty} ${it.qty === 1 ? 'person' : 'people'}`;
+  if (!it.unit?.trim()) return '';
   return `${it.qty} ${unitText(it.qty, it.unit)}${it.size ? `, ${it.size}` : ''}`;
 }
-// Short form for confirmations: "2 bags · 5 lb each".
-export function amountShort(it) {
-  if (it.kind === 'people') return `Enough for ${it.qty} ${it.qty === 1 ? 'person' : 'people'}`;
-  return `${it.qty} ${unitText(it.qty, it.unit)}${it.size ? ` · ${it.size}` : ''}`;
-}
-export const sameAmount = (a, b) => a.name === b.name && Number(a.qty) === Number(b.qty) && (a.unit || '') === (b.unit || '') && (a.size || '') === (b.size || '') && (a.kind || 'count') === (b.kind || 'count');
-// Only the food or the amount needs the guest to say yes again; a typo in the name does not.
-export const isMajorChange = (from, to) => Number(from.qty) !== Number(to.qty) || (from.unit || '') !== (to.unit || '') || (from.size || '') !== (to.size || '') || (from.kind || 'count') !== (to.kind || 'count');
+export const amountText = (it) => (it.note ?? '').trim() || (it.note === undefined ? legacyAmount(it) : '');
+export const amountShort = amountText;
+// "Ice, 2 bags" or just "Salad".
+export const itemLabel = (it) => { const a = amountText(it); return a ? `${it.name}, ${a}` : it.name; };
+export const sameAmount = (a, b) => a.name === b.name && amountText(a) === amountText(b);
+// A new amount asks the guest to say yes again; a small fix to the name does not.
+export const isMajorChange = (from, to) => amountText(from) !== amountText(to);
 
 // ---------- Time ----------
 // A gathering keeps its wall-clock time and its time zone; the instant is computed from both.

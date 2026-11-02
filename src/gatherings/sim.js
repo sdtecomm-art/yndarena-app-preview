@@ -3,7 +3,7 @@
 // only a public id or a private manage token). Here the "server" is this browser's localStorage, so tabs of the
 // same browser share it, but other phones do not: this is not sync between devices. Nothing is sent: reminders
 // and notices are written to an outbox and marked as simulated, never as delivered.
-import { isComplete, startInstant, typeOf, isMajorChange } from './model.js';
+import { isComplete, startInstant, typeOf, isMajorChange, amountText } from './model.js';
 
 const KEY = 'ynd-shared-sim-v1';
 export const SIMULATED = true;
@@ -79,7 +79,7 @@ function publicView(g) {
     publicId: g.publicId, name: g.name, type: g.type, startsAt: g.startsAt, tz: g.tz, people: g.people,
     location: g.location || '', note: g.note || '', status: g.status,
     items: g.items.filter((i) => isComplete(i) && !i.draft).map((i) => ({
-      id: i.id, name: i.name, kind: i.kind, qty: i.qty, unit: i.unit, size: i.size || '',
+      id: i.id, name: i.name, note: amountText(i),
       state: i.status === 'open' ? 'open' : i.status === 'change' ? 'pending' : 'taken',
       by: i.status === 'host' ? 'Host' : i.claim?.name || '',
     })),
@@ -88,7 +88,7 @@ function publicView(g) {
 
 // ---------- host ----------
 const own = (db, email, gid) => { const g = db.gatherings[gid]; if (!g || g.hostEmail !== email) throw new Error('not-found'); return g; };
-const amount = (i) => ({ name: i.name, kind: i.kind, qty: i.qty, unit: i.unit, size: i.size || '' });
+const amount = (i) => ({ name: i.name, note: amountText(i) });
 
 export const host = {
   list: (email) => Object.values(read().gatherings).filter((g) => g.hostEmail === email).map(clone),
@@ -100,7 +100,7 @@ export const host = {
       id, publicId, hostEmail: email, hostName: data.hostName || '', type: data.type, name: data.name || typeOf(data.type).name,
       startsAt: data.startsAt, tz: data.tz, people: data.people, includeSelf: data.includeSelf,
       location: '', note: '', status: 'active', createdAt: now(), hostChannels: { push: false, email: false }, outbox: [],
-      items: data.items.map((r) => ({ id: 'i' + shortId(), name: r.name, kind: r.kind || 'count', qty: r.qty, unit: r.unit || '', size: r.size || '', suggested: !!r.suggested, status: 'open', claim: null, change: null })),
+      items: data.items.map((r) => ({ id: 'i' + shortId(), name: r.name, note: amountText(r), status: 'open', claim: null, change: null })),
     };
     db.gatherings[id] = g; db.byPublic[publicId] = id;
     syncOutbox(g);
@@ -134,14 +134,14 @@ export const host = {
   }),
   channels: (email, gid, ch) => tx((db) => { const g = own(db, email, gid); g.hostChannels = { push: !!ch.push, email: !!ch.email }; syncOutbox(g); }),
 
-  addItem: (email, gid, r) => tx((db) => { const g = own(db, email, gid); g.items.push({ id: 'i' + shortId(), name: r.name, kind: r.kind || 'count', qty: r.qty, unit: r.unit || '', size: r.size || '', status: 'open', claim: null, change: null }); }),
+  addItem: (email, gid, r) => tx((db) => { const g = own(db, email, gid); g.items.push({ id: 'i' + shortId(), name: r.name.trim(), note: amountText(r), status: 'open', claim: null, change: null }); }),
   // Open or host rows change directly. A taken row only takes a correction of its name here.
   editItem: (email, gid, iid, r) => tx((db) => {
     const g = own(db, email, gid), it = g.items.find((x) => x.id === iid);
     if (it.claim && it.status !== 'host') {
       if (isMajorChange(amount(it), r)) throw new Error('needs-request');
       it.name = r.name; it.claim.accepted = { ...it.claim.accepted, name: r.name };
-    } else Object.assign(it, { name: r.name, kind: r.kind || 'count', qty: r.qty, unit: r.unit || '', size: r.size || '', suggested: false });
+    } else Object.assign(it, { name: r.name.trim(), note: amountText(r), suggested: false });
   }),
   removeItem: (email, gid, iid) => tx((db) => {
     const g = own(db, email, gid), it = g.items.find((x) => x.id === iid);
@@ -166,7 +166,7 @@ export const host = {
     if (!it.claim) throw new Error('not-taken');
     const pc = it.change;
     it.change = { id: shortId(), type: pc?.fromStart ? 'both' : 'amount', from: it.claim.accepted, fromStart: pc?.fromStart, toStart: pc?.toStart, requestedAt: now() };
-    Object.assign(it, { name: to.name, kind: to.kind, qty: to.qty, unit: to.unit, size: to.size });
+    Object.assign(it, { name: to.name, note: amountText(to) });
     it.status = 'change';
     if (it.claim.email) notice(g, `change|${it.change.id}`, `guest:${it.claim.name}`, ['email'], `Change requested: ${it.name}`);
     syncOutbox(g);
@@ -196,7 +196,7 @@ const byToken = (db, t) => {
 function mine(g, it) {
   return {
     gathering: publicView(g),
-    item: { id: it.id, name: it.name, kind: it.kind, qty: it.qty, unit: it.unit, size: it.size },
+    item: { id: it.id, name: it.name, note: amountText(it) },
     name: it.claim.name, accepted: it.claim.accepted, email: it.claim.email || null,
     change: it.status === 'change' ? { type: it.change.type, from: it.change.from, to: amount(it), fromStart: it.change.fromStart, toStart: it.change.toStart, amountChanged: isMajorChange(it.change.from, amount(it)) } : null,
   };

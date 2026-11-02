@@ -3,7 +3,7 @@ import { Button, Icon, Sheet, DemoNote, useToast, ConfirmTap } from '../ui.jsx';
 import { WORDMARK } from '../assets.js';
 import { useShared } from '../gatherings/useShared.js';
 import { guest, device, links, SIMULATED } from '../gatherings/sim.js';
-import { amountShort, amountText, whenText, shortWhen, startInstant } from '../gatherings/model.js';
+import { amountText, itemLabel, whenText, shortWhen, startInstant } from '../gatherings/model.js';
 
 const newReq = () => (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()));
 const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
@@ -51,12 +51,12 @@ export default function Guest({ publicId, token: tokenFromLink, onLeave }) {
       {!cancelled && (
         <section className="g-sec">
           <h2 className="h2">{me ? 'Still needed' : 'Pick something to bring.'}</h2>
-          {!me && available.length > 0 && <p className="small" style={{ margin: '4px 0 0' }}>Bring the full amount of the item you choose.</p>}
+          {!me && available.length > 0 && <p className="small" style={{ margin: '4px 0 0' }}>Tap what you’ll bring.</p>}
           {available.length ? (
             <div className="g-rows" style={{ marginTop: 10 }}>
               {available.map((i) => (
                 <button key={i.id} className="g-row" onClick={() => setPick(i.id)}>
-                  <span className="grow"><span className="g-row-t">{i.name}</span><span className="g-row-a">{amountText(i)}</span></span>
+                  <span className="grow"><span className="g-row-t">{i.name}</span>{amountText(i) && <span className="g-row-a">{amountText(i)}</span>}</span>
                   <span className="g-pick">{me ? 'Switch' : 'Bring this'}</span>
                 </button>
               ))}
@@ -71,7 +71,7 @@ export default function Guest({ publicId, token: tokenFromLink, onLeave }) {
           <div className="g-rows" style={{ marginTop: 10 }}>
             {covered.map((i) => (
               <div key={i.id} className="g-row is-static">
-                <span className="grow"><span className="g-row-t">{i.name}</span><span className="g-row-a">{amountText(i)}</span></span>
+                <span className="grow"><span className="g-row-t">{i.name}</span>{amountText(i) && <span className="g-row-a">{amountText(i)}</span>}</span>
                 <span className="g-row-who"><span className="g-row-name">{i.by}</span><span className="g-tag">{i.state === 'pending' ? 'Being confirmed' : 'Taken'}</span></span>
               </div>
             ))}
@@ -106,7 +106,7 @@ function PickSheet({ view, id, me, token, onClose, onBooked }) {
   return (
     <Sheet open={!!id} onClose={close} title={me ? 'Switch to this item?' : 'Bring this?'}>
       {it && <p className="g-sheet-big">{it.name}</p>}
-      {it && <p className="g-sheet-a">{amountText(it)}</p>}
+      {it && amountText(it) && <p className="g-sheet-a">{amountText(it)}</p>}
       {me && <p className="small" style={{ marginTop: 6 }}>Instead of {me.item.name.toLowerCase()}. Your current item stays yours until this one is confirmed.</p>}
       {!me && !gone && (
         <label className="field" style={{ marginTop: 14 }}>
@@ -136,13 +136,13 @@ function Mine({ me, token, publicId, fresh, onCancelled, onSwitch }) {
     <section className="g-mine" aria-live="polite">
       <div className="eyebrow">{fresh ? 'Thank you' : 'Your commitment'}</div>
       <h2 className="g-mine-t">You’re bringing {it.name.toLowerCase()}</h2>
-      <p className="g-mine-a">{amountShort(it)}</p>
+      {amountText(it) && <p className="g-mine-a">{amountText(it)}</p>}
       <p className="g-mine-w">{shortWhen(me.gathering.startsAt)}</p>
 
       {c && (
         <div className="g-change is-guest">
           <span className="label">The host asked for a change</span>
-          {c.amountChanged && <p>You agreed to {amountShort(c.from).toLowerCase()}{c.from.name !== c.to.name ? ` of ${c.from.name.toLowerCase()}` : ''}. Now: <strong>{amountShort(c.to).toLowerCase()}{c.from.name !== c.to.name ? ` of ${c.to.name.toLowerCase()}` : ''}</strong>.</p>}
+          {c.amountChanged && <p>You agreed to {itemLabel(c.from)}. Now: <strong>{itemLabel(c.to)}</strong>.</p>}
           {c.toStart && <p>New time: <strong>{whenText(c.toStart)}</strong> (was {whenText(c.fromStart)}).</p>}
           <div className="stack-8" style={{ marginTop: 10 }}>
             <Button block onClick={async () => { await guest.respond(token, true); toast('Thanks. Your commitment is updated.'); }}>Confirm change</Button>
