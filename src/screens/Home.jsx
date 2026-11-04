@@ -130,8 +130,8 @@ export default function Home({ openProfile }) {
       <AppHead onProfile={openProfile} />
       <CareHero care={user.care} today={today} />
 
-      <GatheringsBlock />
       <GiftBlock gifts={user.gifts} today={today} />
+      <GatheringsBlock />
 
       <footer className="home-sign">
         <Sprig style={{ height: 40 }} />
