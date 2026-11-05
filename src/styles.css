@@ -515,7 +515,7 @@ select.input { appearance: none; background: transparent; }
 .entry-copy p { font-size: 16px; line-height: 1.45; color: var(--ink-2); margin: 10px 0 0; max-width: 310px; }
 
 /* The two areas: the set, whole and upright; the symbol, smaller and with air. */
-.entry-stage { flex: 1 0 auto; display: grid; grid-template-columns: 1fr; justify-items: center; align-items: end; gap: 12px; padding: 18px 0 14px; min-height: calc(var(--set-h) + 40px); --set-h: clamp(200px, calc(100cqh - 500px), 420px); }
+.entry-stage { flex: 1 0 auto; display: grid; grid-template-columns: 1fr; justify-items: center; align-items: end; gap: 12px; padding: 18px 0 14px; min-height: calc(var(--set-h) + 40px); --set-h: clamp(220px, calc(100cqh - 300px), 470px); align-content: center; }
 .entry-set { justify-self: center; position: relative; padding: 0; cursor: pointer; animation: setIn 1.1s var(--ease-out) .2s both; transition: transform .45s var(--ease-out); }
 .entry-set img { display: block; height: var(--set-h); width: auto; aspect-ratio: 54 / 330; object-fit: contain; position: relative; z-index: 1; filter: drop-shadow(10px 6px 10px rgba(60, 38, 20, .28)) drop-shadow(1px 1px 1px rgba(60, 38, 20, .3)); }
 .entry-set:hover, .entry-set:active { transform: translateY(-3px); }
@@ -534,18 +534,15 @@ select.input { appearance: none; background: transparent; }
 @container entry (max-height: 720px) {
   .entry-copy { margin-top: 12px; }
   .entry-copy p { font-size: 15px; margin-top: 6px; }
-  .entry-stage { padding-top: 10px; --set-h: clamp(200px, calc(100cqh - 440px), 420px); }
+  .entry-stage { padding-top: 10px; --set-h: clamp(200px, calc(100cqh - 260px), 420px); }
   .entry-card-s { font-size: 14px; }
 }
 @container entry (aspect-ratio > 1) {
   .entry-bg.is-portrait { display: none; }
   .entry-bg.is-landscape { display: block; object-position: 50% 60%; }
   .entry::after { background: linear-gradient(90deg, rgba(250, 245, 239, .92) 0%, rgba(250, 245, 239, .7) 36%, rgba(250, 245, 239, 0) 60%); }
-  .entry-scroll { display: grid; grid-template-columns: minmax(0, 42%) 1fr; grid-template-rows: auto auto 1fr auto; column-gap: 24px; }
-  .entry-head, .entry-copy, .entry-foot { grid-column: 1; }
-  .entry-copy h1 { font-size: clamp(30px, min(5.4cqw, 10cqh), 60px); }
-  .entry-stage { grid-column: 2; grid-row: 1 / 5; padding-bottom: 22px; --set-h: clamp(180px, calc(100cqh - 120px), 520px); }
-  .entry-foot { align-self: end; }
+  .entry-stage { --set-h: clamp(180px, calc(100cqh - 220px), 520px); }
+  .entry-foot { width: min(100%, 360px); margin: 0 auto; }
 }
 
 /* All products: back to the entrance, from inside the set. */
@@ -808,3 +805,6 @@ button.g-row:active { opacity: .65; }
 .g-start .h2 { font-size: 26px; }
 .gifts-video .video-slot { margin-top: 20px; }
 .gifts { padding-bottom: 24px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.entry-foot .entry-open { margin-top: 0; box-shadow: 0 6px 18px rgba(40, 26, 16, .18); }

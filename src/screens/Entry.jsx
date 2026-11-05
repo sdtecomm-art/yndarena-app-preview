@@ -9,7 +9,8 @@ import set270 from '../media/product/yndarena-upright-original-v7-270.webp';
 // Yndarena's general entrance. The kitchen photos are background layers only; everything else is code.
 // The set is the owner's original artwork (media v7): a front view of three 18 mm spines, 330 mm tall, so the image
 // is always 54:330 and is only ever scaled as a whole (never stretched, cropped or put in perspective).
-// The set stands alone in the middle of the stage (the “More for your home · Coming soon” teaser was removed, 2026-11-05).
+// Clean entrance (owner, 2026-11-05): wordmark, Home number, the set in the middle and one button. No headline,
+// no product card. The set stands alone in the middle of the stage (the “More for your home · Coming soon” teaser was removed, 2026-11-05).
 export default function Entry({ onOpenSet }) {
   const { state, homeNo } = useStore();
   const signedIn = !!state.session;
@@ -22,10 +23,7 @@ export default function Entry({ onOpenSet }) {
           <img className="entry-wordmark" src={WORDMARK} alt="Yndarena, turning houses into homes" />
           {signedIn && <span className="entry-home"><Sprig />Home No. {homeNo}</span>}
         </header>
-        <div className="entry-copy">
-          <h1>Turning houses into homes.</h1>
-          <p>Kitchen pieces named after Yndarena, for the meals you’ll want to remember.</p>
-        </div>
+        <h1 className="sr-only">Yndarena</h1>
 
         <div className="entry-stage">
           <button className="entry-set" onClick={onOpenSet} tabIndex={-1} aria-label="Cutting Board Set: Cheese & Bread, Fruits & Vegetables, Meat & Fish. Open your set">
@@ -35,15 +33,9 @@ export default function Entry({ onOpenSet }) {
         </div>
 
         <div className="entry-foot">
-          <div className="entry-card">
-            <span className="entry-card-k">Available now</span>
-            <span className="entry-card-t">Cutting Board Set</span>
-            <span className="entry-card-s">Three boards, 33 × 24 × 1.8 cm each. Care plan, gift dates and gatherings.</span>
-            <button className="btn btn-primary btn-block entry-open" onClick={onOpenSet}>
-              <span>Open your set</span>
-            </button>
-          </div>
-          <p className="entry-note">{signedIn ? 'Your Home number belongs to your account, for all of Yndarena.' : 'One account for all of Yndarena.'}</p>
+          <button className="btn btn-primary btn-block entry-open" onClick={onOpenSet}>
+            <span>Open your set</span>
+          </button>
         </div>
       </div>
     </div>
