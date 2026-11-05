@@ -5,12 +5,11 @@ import kitchenMobile from '../media/kitchen/yndarena-kitchen-mobile.webp';
 import kitchenDesktop from '../media/kitchen/yndarena-kitchen-desktop.webp';
 import set540 from '../media/product/yndarena-upright-original-v7-540.webp';
 import set270 from '../media/product/yndarena-upright-original-v7-270.webp';
-import teaser from '../media/product/yndarena-rosemary-question-v7.webp';
 
 // Yndarena's general entrance. The kitchen photos are background layers only; everything else is code.
 // The set is the owner's original artwork (media v7): a front view of three 18 mm spines, 330 mm tall, so the image
 // is always 54:330 and is only ever scaled as a whole (never stretched, cropped or put in perspective).
-// The rosemary question mark is a decorative brand symbol for what comes next, not a product.
+// The set stands alone in the middle of the stage (the “More for your home · Coming soon” teaser was removed, 2026-11-05).
 export default function Entry({ onOpenSet }) {
   const { state, homeNo } = useStore();
   const signedIn = !!state.session;
@@ -33,11 +32,6 @@ export default function Entry({ onOpenSet }) {
             <img src={set540} srcSet={`${set270} 270w, ${set540} 540w`} sizes="80px" width="540" height="3300" alt="" decoding="async" />
             <span className="entry-ground" aria-hidden="true" />
           </button>
-          <div className="entry-soon">
-            <img src={teaser} width="720" height="1080" alt="" aria-hidden="true" decoding="async" />
-            <p className="soon-t">More for your home</p>
-            <p className="soon-s">Coming soon</p>
-          </div>
         </div>
 
         <div className="entry-foot">

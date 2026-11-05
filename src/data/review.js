@@ -4,7 +4,7 @@ export const REVIEW = {
   updated: '2026-11-02',
   scope: [
     'v11 (owner brief, 2026-11-01): recipes, everyday meals, boards to share, From home to home, Designer, techniques, Photo/Layout, Collection, saved items, notes, versions and shopping lists were removed from the app and from the code, with their food images and source packages (they remain in the git history). Discover and Collection left the tab bar.',
-    'Navigation: Home, Care, Gifts and Gatherings (order set by the owner 2026-11-04; the Home shows Gift dates above Gatherings). Gifts explains the feature (save a date, two reminders, channels per date, Give Yndarena on Amazon) above the dates; the Home keeps a short Gift dates block that opens it. The Yndarena entrance for all products is unchanged.',
+    'Navigation: Home, Care, Gifts and Gatherings (order set by the owner 2026-11-04; the Home shows Gift dates above Gatherings). Gifts explains the feature (save a date, two reminders, channels per date, Give Yndarena on Amazon) above the dates; the Home keeps a short Gift dates block that opens it. The Yndarena entrance now shows only the set, centred; the “More for your home · Coming soon” teaser was removed (2026-11-05).',
     'Gatherings ends with a space for a short video on how it works; in Gifts the video sits at the top, under the title (owner request 2026-11-02). No video exists yet: the frame says “Video coming soon”.',
     'Old links: #/s/… (shared boards) and any screen name from earlier versions open a short page with “Go to Home”. Nothing crashes.',
   ],
