@@ -54,7 +54,6 @@ function CareHero({ care, today }) {
 const GUIDES = [
   { id: 'check', icon: 'drop', title: 'Water test', sub: 'A few drops, a few seconds', go: 'water-test' },
   { id: 'oil', icon: 'hand', title: 'How to oil', sub: 'Step by step', go: 'oil-guide' },
-  { id: 'everyday', icon: 'wash', title: 'Everyday care', sub: 'Wash, dry, store', go: 'focus:everyday' },
 ];
 
 function GiftBlock({ gifts, today }) {

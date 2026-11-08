@@ -271,7 +271,8 @@ function ResultCompare() {
 
 // ---------- Oil and care content ----------
 // Materials, timing and the reminders schedule are approved facts (set contents, care plan emails, schedule).
-// Step wording and everyday care are drafts pending Yndarena's approval: see the review panel.
+// Step wording is a draft pending Yndarena's approval: see the review panel. Everyday care was removed (owner,
+// 2026-11-08): the care video covers it.
 export const OIL_FACTS = [
   ['What you need', 'The mineral oil and the cloth that came with your set, and a clean, dry board.'],
   ['When', 'Only when the water test soaks in. Your boards arrive already oiled.'],
@@ -300,12 +301,6 @@ function StepArt({ kind }) {
   );
 }
 
-export const EVERYDAY = [
-  { icon: 'wash', title: 'Wash by hand', text: 'Warm water and a little mild soap. Never soak it, never the dishwasher.' },
-  { icon: 'air', title: 'Dry it, then stand it up', text: 'Dry it with a cloth, then lean it on its edge against the wall so air reaches both faces.' },
-  { icon: 'stand', title: 'Back in the stand', text: 'Once it is completely dry, put it back in the stand, away from the stove and direct sun.' },
-  { icon: 'heat', title: 'Hot pans on a trivet', text: 'Hot pans and baking dishes rest on a trivet, never on the wood.' },
-];
 
 
 function OilSheet({ open, onClose }) {
@@ -474,18 +469,6 @@ function CarePlan({ params, root }) {
           <span className="grow"><span className="t">Watch Yndarena’s care video</span><span className="s">2 minutes · opens yndarenahome.com</span></span>
           <Icon name="external" size={16} />
         </a>
-      </Section>
-
-      <Section id="everyday" n="03" title="Everyday care" lead="After each use. No oil needed for this part.">
-        <div className="everyday-grid">
-          {EVERYDAY.map((e) => (
-            <div key={e.title} className="everyday-tile">
-              <span className="ico"><Icon name={e.icon} size={22} /></span>
-              <div className="t">{e.title}</div>
-              <p>{e.text}</p>
-            </div>
-          ))}
-        </div>
       </Section>
 
       <section className="care-sec" id="care-history">

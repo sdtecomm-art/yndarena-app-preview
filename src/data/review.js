@@ -29,11 +29,11 @@ export const REVIEW = {
     'A real backend for gatherings (accounts for hosts, public guest endpoint, conditional writes or transactions for reservations, secure manage tokens), then a test with two separate devices.',
     'Push notification and email providers, with the device permission for push, the 24-hour and 3-hour jobs and idempotent sending.',
     'Yndarena’s Amazon link for gifts: set LINKS.amazonStore in src/data/links.js to enable View on Amazon.',
-    'Approve the oiling steps and the everyday care tips; confirm on real boards that about 5 seconds is enough for the water test. The care emails still mention the old schedule.',
+    'Approve the oiling steps; confirm on real boards that about 5 seconds is enough for the water test. The care emails still mention the old schedule.',
     'Decide whether the retired data kept under retiredV11 should be removed in production, as a separate operation.',
   ],
   kept: [
-    'Care: plan, history, arrival, oil pending, reminders by usage (14 days, one calendar month, 42 days), the short water test and its illustrations, the oiling instructions. Need a hand stays removed.',
+    'Care: Everyday care (section 03 and its Home tile) was removed on 2026-11-08 at the owner’s request; the care video covers it. Plan, history, arrival, oil pending, reminders by usage (14 days, one calendar month, 42 days), the short water test and its illustrations, the oiling instructions. Need a hand stays removed.',
     'Gift dates: 21 and 10 days ahead, yearly or one-time, push/email/both per date. Plan a gift keeps only Give Yndarena · View on Amazon.',
     'Product: v7 original set artwork and the 33 × 24 × 1.8 cm dimensions.',
   ],
