@@ -335,7 +335,7 @@ function Section({ id, n, title, lead, children, first }) {
   return (
     <section className={'care-sec' + (first ? ' is-first' : '')} id={'care-' + id} aria-labelledby={'care-h-' + id}>
       <div className="care-sec-head">
-        <span className="care-sec-n">{n}</span>
+        {n && <span className="care-sec-n">{n}</span>}
         <h2 className="h2" id={'care-h-' + id}>{title}</h2>
       </div>
       {lead && <p className="care-lead">{lead}</p>}
@@ -435,7 +435,7 @@ function CarePlan({ params, root }) {
         </header>
       ) : <TopBar title="Your care plan" />}
 
-      <Section id="check" n="01" first title="Check your board" lead="A water test helps you see whether the wood needs oil. A few drops on a clean, dry board, about 5 seconds of watching.">
+      <Section id="check" first title="Check your board" lead="A water test helps you see whether the wood needs oil. A few drops on a clean, dry board, about 5 seconds of watching.">
         <ResultCompare />
         <div className="stack-8" style={{ marginTop: 16 }}>
           <Button block onClick={() => nav.push('water-test')}>Start water test</Button>
