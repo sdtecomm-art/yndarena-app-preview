@@ -414,7 +414,6 @@ function ReminderPlan({ care, today }) {
 function CarePlan({ params, root }) {
   const nav = useNav();
   const { user, updateUser, today, homeNo } = useStore();
-  const [oil, setOil] = useState(false);
   const care = user.care;
 
   useEffect(() => {
@@ -449,27 +448,6 @@ function CarePlan({ params, root }) {
         <ReminderPlan care={care} today={today} />
       </div>
 
-      <Section id="oil" n="02" title="How to oil" lead="A few minutes of work, then time for the wood to drink it in.">
-        <dl className="oil-facts">
-          {OIL_FACTS.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
-        </dl>
-        <button className="guide-open" onClick={() => nav.push('oil-guide')}>
-          <ol className="guide-peek">
-            {OIL_STEPS.slice(0, 3).map((s, i) => <li key={s.title}><span className="n">{i + 1}</span>{s.title}</li>)}
-            <li className="more">+ {OIL_STEPS.length - 3} more steps</li>
-          </ol>
-          <span className="guide-cta">Open the step-by-step guide <Icon name="chevron" size={16} /></span>
-        </button>
-        <div className="oil-choice" role="group" aria-label="Board oil">
-          <button className="choice" onClick={() => nav.push('oil-guide')}><Icon name="check" size={18} /><span>I already have board oil</span></button>
-          <button className="choice" onClick={() => setOil(true)}><Icon name="bag" size={18} /><span>I need board oil</span></button>
-        </div>
-        <a className="video-link" href={CARE_VIDEO_URL} target="_blank" rel="noreferrer">
-          <span className="play"><Icon name="play" size={14} fill="currentColor" /></span>
-          <span className="grow"><span className="t">Watch Yndarena’s care video</span><span className="s">2 minutes · opens yndarenahome.com</span></span>
-          <Icon name="external" size={16} />
-        </a>
-      </Section>
 
       <section className="care-sec" id="care-history">
         <details className="history" open={params.focus === 'history' || undefined}>
@@ -502,7 +480,6 @@ function CarePlan({ params, root }) {
         <Sprig style={{ height: 44 }} />
         <p>A board remembers how it is cared for.</p>
       </div>
-      <OilSheet open={oil} onClose={() => setOil(false)} />
     </div>
   );
 }
