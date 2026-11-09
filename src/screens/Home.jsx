@@ -2,6 +2,7 @@ import { useStore } from '../store.jsx';
 import { useNav } from '../nav.jsx';
 import { Icon, Kicker, Sprig, Button } from '../ui.jsx';
 import { NextStep, ProductStrip, useCareActions } from './Care.jsx';
+import { tonight } from './Cook.jsx';
 import { giftInfo, giftWho, fmtShort, whenText, giftChannelText } from '../lib.js';
 import { WORDMARK } from '../assets.js';
 import { GatheringCard } from './Gatherings.jsx';
@@ -54,7 +55,37 @@ function CareHero({ care, today }) {
 const GUIDES = [
   { id: 'check', icon: 'drop', title: 'Water test', sub: 'A few drops, a few seconds', go: 'water-test' },
   { id: 'oil', icon: 'hand', title: 'How to oil', sub: 'Step by step', go: 'oil-guide' },
+  { id: 'plan', icon: 'calendar', title: 'Care plan', sub: 'Reminders, history', go: 'care' },
 ];
+
+function CookBlock({ user, today }) {
+  const nav = useNav();
+  const r = tonight(user, today);
+  const people = user.cook?.prefs?.people || 4;
+  return (
+    <section className="section pad" aria-label="Dinner">
+      <div className="section-head" style={{ padding: 0 }}>
+        <h2 className="h2">{r ? 'Tonight' : 'This week’s dinners'}</h2>
+        <button className="link" onClick={() => nav.switchTab('cook')}>{user.cook?.plan ? 'Your week' : 'Cook'}</button>
+      </div>
+      <div style={{ marginTop: 12 }}>
+        {r ? (
+          <button className="reminder-card tap" onClick={() => nav.switchTab('cook', { name: 'recipe', params: { id: r.id, people } })}>
+            <div className="round-ico"><Icon name="cook" size={18} /></div>
+            <div><div style={{ fontSize: 16, lineHeight: 1.3 }}>{r.name}</div><div className="small">{r.time} min · for {people}</div></div>
+            <Icon name="chevron" size={18} />
+          </button>
+        ) : (
+          <button className="reminder-card tap" onClick={() => nav.switchTab('cook', { name: 'cook-setup' })}>
+            <div className="round-ico"><Icon name="calendar" size={18} /></div>
+            <div><div style={{ fontSize: 16, lineHeight: 1.3 }}>Plan my week</div><div className="small">Dinners, one shopping list, prep with your boards</div></div>
+            <Icon name="plus" size={18} />
+          </button>
+        )}
+      </div>
+    </section>
+  );
+}
 
 function GiftBlock({ gifts, today }) {
   const nav = useNav();
@@ -129,6 +160,7 @@ export default function Home({ openProfile }) {
       <AppHead onProfile={openProfile} />
       <CareHero care={user.care} today={today} />
 
+      <CookBlock user={user} today={today} />
       <GiftBlock gifts={user.gifts} today={today} />
       <GatheringsBlock />
 

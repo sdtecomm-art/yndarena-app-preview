@@ -89,8 +89,8 @@ export function useCareActions() {
     }
     if (go.startsWith('focus:')) {
       const focus = go.slice(6);
-      if (nav.tab === 'care' && nav.stack.length === 1) document.getElementById('care-' + focus)?.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
-      else nav.switchTab('care', { name: 'care', params: { focus, t: Date.now() } });
+      if (nav.top?.name === 'care') document.getElementById('care-' + focus)?.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+      else nav.push('care', { focus, t: Date.now() });
       return;
     }
     nav.push(go);

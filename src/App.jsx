@@ -7,6 +7,7 @@ import Auth from './screens/Auth.jsx';
 import Welcome from './screens/Welcome.jsx';
 import Home from './screens/Home.jsx';
 import Care, { WaterTest, OilGuide } from './screens/Care.jsx';
+import Cook, { CookSetup, Recipe, Shopping, Prep } from './screens/Cook.jsx';
 import Gatherings, { GatheringNew, GatheringHost } from './screens/Gatherings.jsx';
 import Guest from './screens/Guest.jsx';
 import Gifts from './screens/Gifts.jsx';
@@ -19,7 +20,7 @@ import kitchenDesktop from './media/kitchen/yndarena-kitchen-desktop.webp';
 
 const TAB_META = {
   home: { label: 'Home', icon: 'home' },
-  care: { label: 'Care', icon: 'care' },
+  cook: { label: 'Cook', icon: 'cook' },
   gatherings: { label: 'Gatherings', icon: 'people' },
   gifts: { label: 'Gifts', icon: 'gift' },
 };
@@ -39,7 +40,7 @@ function Retired({ onHome }) {
     <div className="pad retired">
       <Sprig style={{ height: 48 }} />
       <h1 className="display-m">This page is no longer in the app.</h1>
-      <p className="body">Recipes, boards and Collection were retired. Your care plan and gift dates are where you left them.</p>
+      <p className="body">It belonged to an earlier version. Your care plan, gift dates and dinners are where you left them.</p>
       <Button block style={{ marginTop: 18 }} onClick={onHome}>Go to Home</Button>
     </div>
   );
@@ -51,6 +52,11 @@ function ScreenFor({ route, onSignOut, openProfile, root }) {
   switch (route.name) {
     case 'home': return <Home openProfile={openProfile} />;
     case 'care': return <Care params={p} root={root} />;
+    case 'cook': return <Cook />;
+    case 'cook-setup': return <CookSetup />;
+    case 'recipe': return <Recipe params={p} />;
+    case 'shopping': return <Shopping />;
+    case 'prep': return <Prep />;
     case 'gatherings': return <Gatherings />;
     case 'gifts': return <Gifts params={p} />;
     case 'gathering-new': return <GatheringNew params={p} />;
@@ -77,7 +83,7 @@ function Main({ onSignOut }) {
             return (
               <div key={route.key} className={'screen' + (full ? ' is-full' : ' has-tabbar') + anim} hidden={!isTop}>
                 <div className="screen-scroll">
-                  <ScreenFor route={route} onSignOut={onSignOut} openProfile={openProfile} root={i === 0 && tab === 'care'} />
+                  <ScreenFor route={route} onSignOut={onSignOut} openProfile={openProfile} root={false} />
                 </div>
               </div>
             );
@@ -133,6 +139,7 @@ const JOURNEYS = [
   ['entry', 'Yndarena entrance and products'],
   ['new', 'Sign up as a new Home'],
   ['returning', 'Sign in as a returning Home'],
+  ['cook', 'Plan the week’s dinners'],
   ['care', 'Care plan and water test'],
   ['oil', 'How to oil, step by step'],
   ['plan', 'Plan a gathering'],
@@ -161,8 +168,9 @@ function SidePanels({ children, setShared }) {
     ensureSession();
     nav.resetAll();
     setTimeout(async () => {
-      if (k === 'care') nav.switchTab('care');
-      if (k === 'oil') nav.switchTab('care', { name: 'oil-guide', params: {} });
+      if (k === 'cook') nav.switchTab('cook');
+      if (k === 'care') nav.switchTab('home', { name: 'care', params: {} });
+      if (k === 'oil') nav.switchTab('home', { name: 'oil-guide', params: {} });
       if (k === 'review') nav.switchTab('home', { name: 'review', params: {} });
       if (k === 'gifts') nav.switchTab('gifts');
       if (k === 'plan') nav.switchTab('gatherings', { name: 'gathering-new', params: {} });
