@@ -4,6 +4,13 @@ import { useNav } from '../nav.jsx';
 import { TopBar, Button, Icon, Chip, useToast, DemoNote, PhotoSlot } from '../ui.jsx';
 import { iso, fromIso, DAY } from '../lib.js';
 import { IS_PREVIEW } from '../data/links.js';
+import spineM from '../media/product/yndarena-board-spine-m.webp';
+import spineV from '../media/product/yndarena-board-spine-v.webp';
+import spineC from '../media/product/yndarena-board-spine-c.webp';
+
+// Each board shown by its own engraved spine, cut from the set's product reference (owner, 2026-11-10).
+// To be replaced by photos of the real set.
+const SPINE = { m: spineM, v: spineV, c: spineC };
 import {
   RECIPES, AISLES, BOARDS, BOARD_ORDER, STAPLES, SAFE, LEFTOVERS, DIETS, AVOID, TIMES,
   byId, fits, pickDinners, ingText, qtyText, unitText, listQty,
@@ -224,7 +231,7 @@ export function Recipe({ params }) {
           <p className="small" style={{ margin: '4px 0 12px' }}>{boards.length > 1 ? 'Cut in this order, so nothing raw from the meat board touches food you eat fresh.' : 'Everything for this one goes on a single board.'}</p>
           {boards.map((b) => (
             <div key={b} className={'board-block is-' + b}>
-              <div className="board-name"><span className="board-swatch" aria-hidden="true" />{BOARDS[b].name}</div>
+              <img className="board-spine" src={SPINE[b]} alt={`${BOARDS[b].name} board`} width="1215" height="96" decoding="async" />
               <ul>{r.prep[b].map((t) => <li key={t}>{t}</li>)}</ul>
             </div>
           ))}

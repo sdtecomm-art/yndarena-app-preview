@@ -987,3 +987,9 @@ button.g-row:active { opacity: .65; }
 /* Oil guide: each step gets a full-width photo above its text. */
 .oil-steps li { grid-template-columns: minmax(0, 1fr); gap: 12px; align-items: start; padding: 18px 0; }
 .oil-steps .step-photo { padding: 14px 18px; }
+
+/* Engraved board spines heading each prep block. */
+.board-block { padding: 10px 12px 12px; }
+.board-spine { display: block; width: 100%; height: auto; aspect-ratio: 1215 / 96; object-fit: cover; object-position: left center; border-radius: 6px 4px 4px 6px;
+  box-shadow: 0 2px 5px rgba(60, 38, 20, .25), 0 1px 1px rgba(60, 38, 20, .3); }
+.board-block ul { margin-top: 10px; }
