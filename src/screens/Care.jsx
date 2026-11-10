@@ -254,6 +254,40 @@ const RESULTS = {
   soaks: { title: 'It soaks in', look: 'The water sinks into the wood, leaving a darker patch.', means: 'The wood is asking for oil.', todo: 'Oil it when you can.', short: 'Time to oil.' },
 };
 
+// The water test is the heart of the care plan (owner, 2026-11-10): on the Home it gets its own feature, with the
+// two outcomes side by side, the plan's own dates and one clear button.
+export function WaterTestFeature({ care, today }) {
+  const nav = useNav();
+  const active = care.status === 'active';
+  const cs = active ? careStatus(care, today) : null;
+  const last = active ? [...care.checks].sort((a, b) => (a.at < b.at ? -1 : 1)).pop() : null;
+  const status = !active ? 'Starts when your boards are home'
+    : cs.due ? (cs.overdueDays > 0 ? `Due since ${fmtShort(cs.next)}` : 'Due today')
+    : `Next test ${fmtShort(cs.next)}`;
+  return (
+    <section className={'wt-feature' + (cs?.due ? ' is-due' : '')} aria-label="The water test">
+      <div className="wt-f-head">
+        <span className="wt-f-kicker">The water test</span>
+        <span className="wt-f-status"><span className="pulse-dot" aria-hidden="true" />{status}</span>
+      </div>
+      <h2 className="wt-f-title">Ask the wood if it needs oil.</h2>
+      <div className="wt-f-art">
+        {['beads', 'soaks'].map((k) => (
+          <div key={k} className="wt-f-col">
+            <DropsArt kind={k} label={false} />
+            <span className="wt-f-res">{RESULTS[k].title}</span>
+            <span className={'wt-f-todo' + (k === 'soaks' ? ' is-oil' : '')}>{RESULTS[k].short}</span>
+          </div>
+        ))}
+      </div>
+      <p className="wt-f-text">A few drops on a clean, dry board. Watch for about {WATCH_SECONDS} seconds.</p>
+      <Button block onClick={() => (active ? nav.push('water-test') : nav.push('water-test', { practice: true }))}>{active ? 'Start water test' : 'Try it, nothing saved'}</Button>
+      {last && <p className="wt-f-last">Last test {fmtShort(fromIso(last.at))}: {last.result === 'beads' ? 'it beaded up' : 'it soaked in'}{last.result === 'soaks' ? (last.oiled ? ', boards oiled' : ', oil pending') : ''}.</p>}
+      <span className="illus-note">Illustrations</span>
+    </section>
+  );
+}
+
 function ResultCompare() {
   return (
     <div className="compare">

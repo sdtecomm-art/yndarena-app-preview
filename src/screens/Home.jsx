@@ -1,7 +1,7 @@
 import { useStore } from '../store.jsx';
 import { useNav } from '../nav.jsx';
 import { Icon, Kicker, Sprig, Button } from '../ui.jsx';
-import { NextStep, ProductStrip, useCareActions } from './Care.jsx';
+import { NextStep, ProductStrip, useCareActions, WaterTestFeature, careView } from './Care.jsx';
 import { tonight } from './Cook.jsx';
 import { giftInfo, giftWho, fmtShort, whenText, giftChannelText } from '../lib.js';
 import { WORDMARK } from '../assets.js';
@@ -36,8 +36,10 @@ function CareHero({ care, today }) {
         <p className="hero-lede">A quick water test tells you when to oil. We’ll remind you to do it.</p>
       </div>
       <ProductStrip className="hero-product" />
-      <div className="pad">
-        <NextStep care={care} today={today} compact />
+      <div className="pad stack-12">
+        {/* Oil pending or boards not home yet come first; otherwise the water test leads. */}
+        {careView(care, today).primary[1] !== 'water-test' && <NextStep care={care} today={today} compact />}
+        <WaterTestFeature care={care} today={today} />
       </div>
       <div className="guide-rail is-grid" role="list" aria-label="Care guides">
         {GUIDES.map((g) => (
@@ -53,7 +55,6 @@ function CareHero({ care, today }) {
 }
 
 const GUIDES = [
-  { id: 'check', icon: 'drop', title: 'Water test', sub: 'A few drops, a few seconds', go: 'water-test' },
   { id: 'oil', icon: 'hand', title: 'How to oil', sub: 'Step by step', go: 'oil-guide' },
   { id: 'plan', icon: 'calendar', title: 'Care plan', sub: 'Reminders, history', go: 'care' },
 ];
