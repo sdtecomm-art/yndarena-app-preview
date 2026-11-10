@@ -7,7 +7,7 @@ import Auth from './screens/Auth.jsx';
 import Welcome from './screens/Welcome.jsx';
 import Home from './screens/Home.jsx';
 import Care, { WaterTest, OilGuide } from './screens/Care.jsx';
-import Cook, { CookSetup, Recipe, Shopping, Prep } from './screens/Cook.jsx';
+import Cook, { CookSetup, Recipe, Recipes, Shopping, Prep } from './screens/Cook.jsx';
 import Gatherings, { GatheringNew, GatheringHost } from './screens/Gatherings.jsx';
 import Guest from './screens/Guest.jsx';
 import Gifts from './screens/Gifts.jsx';
@@ -54,6 +54,7 @@ function ScreenFor({ route, onSignOut, openProfile, root }) {
     case 'care': return <Care params={p} root={root} />;
     case 'cook': return <Cook />;
     case 'cook-setup': return <CookSetup />;
+    case 'recipes': return <Recipes />;
     case 'recipe': return <Recipe params={p} />;
     case 'shopping': return <Shopping />;
     case 'prep': return <Prep />;

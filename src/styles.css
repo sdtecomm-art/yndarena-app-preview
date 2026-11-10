@@ -1003,3 +1003,15 @@ button.g-row:active { opacity: .65; }
 @keyframes curtainOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes curtainMark { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-6px) scale(1.02); } }
 @media (prefers-reduced-motion: reduce) { .open-curtain { animation-duration: .4s; animation-delay: 0s; } .open-curtain img { animation-duration: .3s; } }
+
+/* Minimal pass (2026-11-10) */
+.wt-f-head { align-items: baseline; margin-bottom: 14px; }
+.wt-feature .wt-f-title { margin: 0; font-size: clamp(28px, 8vw, 34px); }
+.wt-f-res { font-size: 14px; color: var(--c-brown); margin-top: 6px; }
+.wt-feature .btn { margin-top: 16px; }
+.photo-slot { gap: 0; }
+.guide-tile .t { margin-top: 2px; }
+.oil-steps .step-t { display: flex; align-items: baseline; gap: 10px; }
+.oil-steps .step-t .step-n { font-family: var(--sans); font-size: 12px; color: var(--ink-2); letter-spacing: .06em; }
+.cook-browse { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 22px; padding: 16px 2px; border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); background: none; font-size: 17px; color: var(--c-black); }
+.cook-all { padding-bottom: 28px; margin-top: 4px; }

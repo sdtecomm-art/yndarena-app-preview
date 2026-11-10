@@ -137,7 +137,10 @@ export function Stars({ value, onChange, size = 26 }) {
   );
 }
 
-export function DemoNote({ children, className = '' }) {
+// Preview notes stay out of the customer screens (minimal pass, 2026-11-10): what is simulated is listed in the
+// review panel. Only notes a tester needs to get in (sign-in) or reset the demo keep showing, with `keep`.
+export function DemoNote({ children, className = '', keep }) {
+  if (!keep) return null;
   return (
     <div className={'demo-note ' + className}>
       <span className="demo-dot" />
@@ -237,10 +240,9 @@ export const useToast = () => useContext(ToastCtx).show;
 // photographer knows what goes there; it never pretends to be the photo.
 export function PhotoSlot({ shot, ratio = '4 / 3', className = '', small }) {
   return (
-    <figure className={'photo-slot' + (small ? ' is-small' : '') + ' ' + className} style={{ aspectRatio: ratio }} aria-label={`Photo coming: ${shot}`}>
+    <figure className={'photo-slot' + (small ? ' is-small' : '') + ' ' + className} style={{ aspectRatio: ratio }} aria-label={`Photo coming: ${shot}`} title={shot} data-shot={shot}>
       <span className="ps-ico" aria-hidden="true"><Icon name="camera" size={small ? 16 : 20} /></span>
-      {!small && <figcaption className="ps-shot">{shot}</figcaption>}
-      <span className="ps-tag">Photo coming</span>
+      <span className="ps-tag">Photo</span>
     </figure>
   );
 }

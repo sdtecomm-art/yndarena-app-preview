@@ -73,7 +73,6 @@ export default function Auth({ onSignedIn, initialEmail = '', onAllProducts }) {
             {onAllProducts && <button className="all-products" onClick={onAllProducts}><Icon name="back" size={14} />All products</button>}
             <Wordmark height={64} />
             <h1>Your Home starts here.</h1>
-            <p className="lead">Sign in or create your Yndarena account.</p>
             <form className="stack-16" style={{ marginTop: 26 }} onSubmit={(e) => { e.preventDefault(); sendCode(); }}>
               <label className="field">
                 <span className="label">Email address</span>
@@ -84,7 +83,7 @@ export default function Auth({ onSignedIn, initialEmail = '', onAllProducts }) {
             </form>
             <p className="small muted" style={{ marginTop: 14 }}>No password. We’ll send you a one-time code.</p>
             <div style={{ marginTop: 'auto', paddingTop: 22 }}>
-              <DemoNote>
+              <DemoNote keep>
                 Preview only. No email is sent. Any new address creates a demo Home. Use <button className="link" style={{ padding: 0 }} type="button" onClick={() => setEmail(RETURNING_EMAIL)}>{RETURNING_EMAIL}</button> to see a returning Home.
               </DemoNote>
             </div>
@@ -111,7 +110,7 @@ export default function Auth({ onSignedIn, initialEmail = '', onAllProducts }) {
               <button className="link" onClick={() => setStep('email')}>Change email</button>
             </div>
             <div style={{ marginTop: 'auto', paddingTop: 22 }} className="stack-8">
-              <DemoNote>
+              <DemoNote keep>
                 Demo code: <strong style={{ letterSpacing: '.18em' }}>{DEMO_CODE}</strong>. Try <strong>{EXPIRED_CODE}</strong> to see an expired code, or any other code to see an error.
               </DemoNote>
             </div>
@@ -134,7 +133,7 @@ export default function Auth({ onSignedIn, initialEmail = '', onAllProducts }) {
             <div className="stack-12" style={{ marginTop: 'auto', paddingTop: 22 }}>
               <Button block onClick={create}>Create my Home</Button>
               <Button block variant="text" onClick={() => setStep('email')}>Use a different email</Button>
-              <DemoNote>Simulated. The next Home number comes from a local demo counter (next: No. {pad4(state.backend.counter + 1)}), not the production counter.</DemoNote>
+              <DemoNote keep>Simulated. The next Home number comes from a local demo counter (next: No. {pad4(state.backend.counter + 1)}), not the production counter.</DemoNote>
             </div>
           </>
         )}

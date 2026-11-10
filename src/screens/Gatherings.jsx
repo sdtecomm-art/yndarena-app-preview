@@ -49,15 +49,9 @@ export default function Gatherings() {
     <div className="gatherings">
       <header className="care-head pad">
         <h1 className="display-l">Gatherings</h1>
-        <p className="lead" style={{ margin: '8px 0 0' }}>Organize what everyone brings.</p>
         <PhotoSlot shot="A shared table with the dishes guests brought, a Yndarena board in the middle." ratio="3 / 2" className="head-photo" />
         <Button block style={{ marginTop: 18 }} onClick={() => nav.push('gathering-new')}>Plan a gathering</Button>
       </header>
-      {upcoming.length === 0 && earlier.length === 0 && (
-        <div className="pad g-empty">
-          <p>Make a list of food and drinks, share one link, and everyone picks what they’ll bring. Guests don’t need the app or an account.</p>
-        </div>
-      )}
       {upcoming.length > 0 && (
         <section className="pad" style={{ marginTop: 26 }}>
           <div className="section-label"><span>Coming up</span></div>
@@ -72,7 +66,6 @@ export default function Gatherings() {
       )}
       <div className="pad">
         <VideoSlot title="How Gatherings works" text="Make the list, share one link, and everyone picks what they’ll bring. Guests don’t need the app. About a minute." />
-        {SIMULATED && <p className="small muted" style={{ marginTop: 8 }}>Preview: space reserved for the video. It isn’t recorded yet.</p>}
       </div>
     </div>
   );
@@ -153,7 +146,6 @@ export function GatheringNew({ params = {} }) {
           <span className="label">Name</span>
           <input className="input" value={name} maxLength={60} onChange={(e) => { setName(e.target.value); setNamed(true); }} />
         </label>
-        <p className="small muted" style={{ marginTop: 8 }}>You can add a place or a note later. No address needed.</p>
         <Button block style={{ marginTop: 18 }} disabled={busy || !date || !time} onClick={create}>Create my list</Button>
       </div>
     </>
@@ -215,7 +207,7 @@ export function GatheringHost({ params }) {
         {!cancelled && live.length === 0 && (
           <div className="g-start">
             <h2 className="h2">What should people bring?</h2>
-            <p className="small" style={{ margin: '6px 0 14px' }}>Add what you’d like people to bring. Then share one link and they pick.</p>
+            <div style={{ height: 14 }} />
             <Button block onClick={() => setSheet({ kind: 'add' })}>Add the first item</Button>
             <Button block variant="text" style={{ marginTop: 4 }} onClick={() => setSheet({ kind: 'details' })}>Edit details</Button>
           </div>
@@ -273,10 +265,9 @@ function HostReminders({ g }) {
   return (
     <section className="g-sec">
       <div className="section-label"><span>Remind me by</span></div>
-      <p className="small" style={{ margin: '8px 0 0' }}>A summary 24 hours before, and 3 hours before only if something is still needed. Choose one or both.</p>
-      {[['push', 'Push notifications', 'On this phone. It asks for permission the first time.'], ['email', 'Email', 'To the address on your account.']].map(([k, t, d]) => (
+      {[['push', 'Push notifications'], ['email', 'Email']].map(([k, t]) => (
         <button key={k} className="list-row" role="switch" aria-checked={!!ch[k]} disabled={g.status !== 'active'} onClick={() => host.channels(email, g.id, { ...ch, [k]: !ch[k] })}>
-          <div className="grow"><div>{t}</div><div className="sub">{d}</div></div>
+          <div className="grow"><div>{t}</div></div>
           <span className={'switch' + (ch[k] ? ' is-on' : '')} />
         </button>
       ))}
@@ -291,7 +282,6 @@ function HostReminders({ g }) {
               </li>
             ))}
           </ul>
-          <p className="small muted" style={{ margin: '6px 0 0' }}>Nothing is delivered from this preview. Real sending needs the notification and email services.</p>
         </details>
       )}
     </section>

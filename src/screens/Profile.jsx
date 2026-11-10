@@ -15,24 +15,23 @@ export default function Profile({ onSignOut }) {
         <Sprig className="sprout" style={{ height: 76 }} />
         <div className="kicker" style={{ marginTop: 10 }}>Home No.</div>
         <div style={{ fontFamily: 'var(--display)', fontWeight: 300, fontSize: 64, lineHeight: 1 }}>{homeNo}</div>
-        <p className="small" style={{ margin: '8px auto 0', maxWidth: 280 }}>Your number names your space in Yndarena. It stays yours, whatever boards you add.</p>
       </div>
 
       <div className="pad section">
         <Kicker>Account</Kicker>
         <div className="list-row"><div className="round-ico"><Icon name="mail" size={18} /></div><div className="grow"><div>{email}</div><div className="sub">Signed in with a one-time code</div></div></div>
         <button className="list-row" role="switch" aria-checked={account.marketing} onClick={() => update((d) => { d.backend.accounts[email].marketing = !d.backend.accounts[email].marketing; })}>
-          <div className="grow"><div>News and ideas by email</div><div className="sub">Optional. Separate from care and gift reminders.</div></div>
+          <div className="grow"><div>News and ideas by email</div></div>
           <span className={'switch' + (account.marketing ? ' is-on' : '')} />
         </button>
         <button className="list-row" onClick={nav.allProducts}>
           <div className="round-ico"><Icon name="grid" size={18} /></div>
-          <div className="grow"><div>All products</div><div className="sub">Back to Yndarena. Same account and Home number</div></div>
+          <div className="grow"><div>All products</div></div>
           <Icon name="chevron" size={18} />
         </button>
         <button className="list-row" onClick={onSignOut}>
           <div className="round-ico"><Icon name="back" size={18} /></div>
-          <div className="grow"><div>Sign out</div><div className="sub">Your Home and everything in it stay saved</div></div>
+          <div className="grow"><div>Sign out</div></div>
         </button>
       </div>
 
@@ -54,7 +53,7 @@ export default function Profile({ onSignOut }) {
         <ConfirmTap onConfirm={() => { resetDemo(); nav.resetAll(); }} render={(armed, tap) => (
           <Button block variant="ghost" style={{ marginTop: 12 }} onClick={tap}>{armed ? 'Tap again to clear everything' : 'Reset demo'}</Button>
         )} />
-        <div style={{ marginTop: 12 }}><DemoNote>Everything here is simulated and stored only in this browser. No production accounts, counters or emails are involved.</DemoNote></div>
+        <div style={{ marginTop: 12 }}><DemoNote keep>Everything here is simulated and stored only in this browser. No production accounts, counters or emails are involved.</DemoNote></div>
       </div>
     </>
   );

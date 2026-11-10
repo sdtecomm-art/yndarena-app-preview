@@ -46,37 +46,43 @@ export default function Cook() {
   const nav = useNav();
   const plan = activePlan(user, today);
   const people = cookOf(user).prefs?.people || 4;
-  const [filter, setFilter] = useState('all');
-  const list = RECIPES.filter((r) => filter === 'all' || r.diet === filter);
   return (
     <div className="cook">
       <header className="care-head pad">
         <h1 className="display-l">Cook</h1>
-        <p className="lead" style={{ margin: '8px 0 0' }}>Plan the week’s dinners, shop once, prep with the right board.</p>
       </header>
-
       {plan ? <WeekPlan plan={plan} people={people} /> : (
         <section className="pad cook-start">
-          <ol className="cook-how">
-            <li><span className="round-ico"><Icon name="calendar" size={18} /></span><span><span className="gh-t">Pick your nights</span><span className="gh-s">How many dinners, for how many people, what you eat.</span></span></li>
-            <li><span className="round-ico"><Icon name="list" size={18} /></span><span><span className="gh-t">One shopping list</span><span className="gh-s">Everything for the week, added up and sorted by aisle.</span></span></li>
-            <li><span className="round-ico"><Icon name="stand" size={18} /></span><span><span className="gh-t">Prep with your boards</span><span className="gh-s">Which board for each ingredient, and what to cut ahead.</span></span></li>
-          </ol>
-          <Button block onClick={() => nav.push('cook-setup')}>Plan my week</Button>
+          <PhotoSlot shot="A weeknight dinner on the table, the three boards nearby." ratio="3 / 2" />
+          <Button block style={{ marginTop: 16 }} onClick={() => nav.push('cook-setup')}>Plan my week</Button>
         </section>
       )}
+      <div className="pad">
+        <button className="cook-browse" onClick={() => nav.push('recipes')}><span>All dinners</span><Icon name="chevron" size={16} /></button>
+      </div>
+    </div>
+  );
+}
 
-      <section className="pad cook-all" aria-label="All recipes">
-        <div className="section-label"><span>All dinners · {RECIPES.length}</span></div>
-        <div className="g-types" style={{ marginTop: 10 }}>
+// All dinners, behind one link: browsing is not the main job of Cook.
+export function Recipes() {
+  const { user } = useStore();
+  const nav = useNav();
+  const people = cookOf(user).prefs?.people || 4;
+  const [filter, setFilter] = useState('all');
+  const list = RECIPES.filter((r) => filter === 'all' || r.diet === filter);
+  return (
+    <>
+      <TopBar title="All dinners" />
+      <section className="pad cook-all" aria-label="All dinners">
+        <div className="g-types">
           {[['all', 'All'], ['meat', 'Meat'], ['fish', 'Fish'], ['vegetarian', 'Vegetarian'], ['vegan', 'Vegan']].map(([id, l]) => <Chip key={id} active={filter === id} onClick={() => setFilter(id)}>{l}</Chip>)}
         </div>
         <div className="cook-rows">
           {list.map((r) => <RecipeRow key={r.id} r={r} onOpen={() => nav.push('recipe', { id: r.id, people })} />)}
         </div>
-        {IS_PREVIEW && <div style={{ marginTop: 18 }}><DemoNote>Preview: these are Yndarena kitchen drafts, written for the app and not cooked and tested yet. Amounts and times will be confirmed before launch.</DemoNote></div>}
       </section>
-    </div>
+    </>
   );
 }
 
@@ -86,7 +92,7 @@ function RecipeRow({ r, onOpen, right }) {
       <span className={'cook-dot is-' + r.diet} aria-hidden="true" />
       <span className="grow">
         <span className="cook-row-t">{r.name}</span>
-        <span className="cook-row-s">{r.time} min · {DIET_LABEL[r.diet]}{r.contains.length ? ` · contains ${r.contains.map((c) => CONTAINS_LABEL[c]).join(', ')}` : ''}</span>
+        <span className="cook-row-s">{r.time} min</span>
       </span>
       {right || <Icon name="chevron" size={16} />}
     </button>
@@ -112,7 +118,7 @@ function WeekPlan({ plan, people }) {
   return (
     <section className="pad cook-week" aria-label="This week">
       <div className="row-between">
-        <div className="section-label"><span>This week · {plan.days.length} dinners · {people} {people === 1 ? 'person' : 'people'}</span></div>
+        <div className="section-label"><span>This week</span></div>
       </div>
       <div className="cook-rows">
         {plan.days.map((d, i) => {
@@ -190,10 +196,10 @@ export function CookSetup() {
         <div className="g-types">{DIETS.map(([id, l]) => <Chip key={id} active={diet === id} onClick={() => setDiet(id)}>{l}</Chip>)}</div>
         <div className="g-q">Anything to leave out?</div>
         <div className="g-types">{AVOID.map(([id, l]) => <Chip key={id} active={avoid.includes(id)} onClick={() => toggleAvoid(id)}>{l}</Chip>)}</div>
-        <p className="small muted" style={{ marginTop: 8 }}>For allergies, always check the labels of what you buy.</p>
+        <p className="small muted" style={{ marginTop: 8 }}>Check labels for allergies.</p>
         <div className="g-q">Time to cook</div>
         <div className="g-types">{TIMES.map(([v, l]) => <Chip key={v} active={maxTime === v} onClick={() => setMaxTime(v)}>{l}</Chip>)}</div>
-        <p className="small" style={{ marginTop: 18 }}>{pool} {pool === 1 ? 'dinner fits' : 'dinners fit'} your choices.{pool < dates.length ? ' Some nights will repeat less variety: pick fewer nights or loosen a filter.' : ''}</p>
+        {pool < dates.length && <p className="small" style={{ marginTop: 18 }}>Only {pool} {pool === 1 ? 'dinner fits' : 'dinners fit'}. Pick fewer nights or loosen a filter.</p>}
         <Button block style={{ marginTop: 10 }} disabled={!dates.length || !pool} onClick={make}>{dates.length ? `Plan ${dates.length} ${dates.length === 1 ? 'dinner' : 'dinners'}` : 'Pick at least one night'}</Button>
       </div>
     </>
@@ -214,8 +220,7 @@ export function Recipe({ params }) {
         <PhotoSlot shot={`${r.name}, plated at home, with the board it was prepped on.`} ratio="4 / 3" />
         <div className="eyebrow" style={{ marginTop: 16 }}>{DIET_LABEL[r.diet]} · {r.time} min</div>
         <h1 className="display-m" style={{ marginTop: 6 }}>{r.name}</h1>
-        <p className="lead" style={{ margin: '8px 0 0' }}>{r.blurb}</p>
-        {r.contains.length > 0 && <p className="small" style={{ marginTop: 8 }}>Contains {r.contains.map((c) => CONTAINS_LABEL[c]).join(', ')}. Check labels for allergies.</p>}
+        {r.contains.length > 0 && <p className="small" style={{ marginTop: 8 }}>Contains {r.contains.map((c) => CONTAINS_LABEL[c]).join(', ')}.</p>}
 
         <div className="row-between" style={{ marginTop: 18 }}>
           <span className="g-q" style={{ margin: 0 }}>Serves</span>
@@ -228,14 +233,13 @@ export function Recipe({ params }) {
 
         <section className="recipe-sec">
           <h2 className="h2">Prep with your boards</h2>
-          <p className="small" style={{ margin: '4px 0 12px' }}>{boards.length > 1 ? 'Cut in this order, so nothing raw from the meat board touches food you eat fresh.' : 'Everything for this one goes on a single board.'}</p>
+          <div style={{ height: 8 }} />
           {boards.map((b) => (
             <div key={b} className={'board-block is-' + b}>
               <img className="board-spine" src={SPINE[b]} alt={`${BOARDS[b].name} board`} width="1215" height="96" decoding="async" />
               <ul>{r.prep[b].map((t) => <li key={t}>{t}</li>)}</ul>
             </div>
           ))}
-          {r.prep.m?.length > 0 && <p className="small muted" style={{ marginTop: 8 }}>After raw meat or fish, wash the Meat &amp; Fish board in hot, soapy water and let it dry standing up.</p>}
         </section>
 
         <section className="recipe-sec">
@@ -246,14 +250,9 @@ export function Recipe({ params }) {
         <section className="recipe-sec">
           <h2 className="h2">Steps</h2>
           <ol className="step-list">{r.steps.map((s) => <li key={s}>{s}</li>)}</ol>
-          {scale !== 1 && <p className="small muted">Amounts are scaled for {people}. Cooking times stay about the same; use a bigger pan or two if it gets crowded.</p>}
         </section>
 
-        <section className="recipe-sec recipe-safe">
-          {r.safe && <p className="small"><Icon name="info" size={14} /> {SAFE[r.safe]}</p>}
-          <p className="small">{LEFTOVERS}</p>
-        </section>
-        {IS_PREVIEW && <DemoNote>Preview: Yndarena kitchen draft, not yet cooked and tested. Food-safety temperatures follow USDA guidance.</DemoNote>}
+        {r.safe && <section className="recipe-sec recipe-safe"><p className="small"><Icon name="info" size={14} /> {SAFE[r.safe]}</p></section>}
       </article>
     </>
   );
@@ -302,7 +301,7 @@ export function Shopping() {
     <>
       <TopBar title="Shopping list" right={<button className="link" onClick={share}>Share</button>} />
       <div className="pad shop">
-        <p className="small" style={{ marginTop: 0 }}>{plan.days.length} dinners for {people}. Tap what you already have at home or once it’s in the cart. {left.length} left.</p>
+        <p className="small" style={{ marginTop: 0 }}>{left.length} to buy</p>
         {AISLES.map(([a, label]) => {
           const xs = buy.filter((i) => i.aisle === a);
           if (!xs.length) return null;
@@ -352,7 +351,7 @@ export function Prep() {
     <>
       <TopBar title="Prep ahead" />
       <div className="pad prep">
-        <p className="body" style={{ marginTop: 0 }}>Twenty minutes now saves time on busy nights. Vegetables first on the Fruits &amp; Vegetables board. Raw meat and fish stay for the day you cook them.</p>
+        <p className="body" style={{ marginTop: 0 }}>Vegetables only. Meat and fish on the day.</p>
         {soon.length === 0 && <p className="small">Nothing to prep ahead for your next dinners.</p>}
         {soon.map(({ d, r }) => {
           const date = fromIso(d.date);
@@ -364,7 +363,7 @@ export function Prep() {
             </section>
           );
         })}
-        <p className="small muted" style={{ marginTop: 16 }}>Keep prepped food covered in the fridge. {LEFTOVERS}</p>
+        <p className="small muted" style={{ marginTop: 16 }}>Keep it covered in the fridge.</p>
       </div>
     </>
   );

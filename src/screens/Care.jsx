@@ -248,29 +248,22 @@ export function WaterTestFeature({ care, today }) {
   const nav = useNav();
   const active = care.status === 'active';
   const cs = active ? careStatus(care, today) : null;
-  const last = active ? [...care.checks].sort((a, b) => (a.at < b.at ? -1 : 1)).pop() : null;
-  const status = !active ? 'Starts when your boards are home'
-    : cs.due ? (cs.overdueDays > 0 ? `Due since ${fmtShort(cs.next)}` : 'Due today')
-    : `Next test ${fmtShort(cs.next)}`;
+  const status = !active ? null : cs.due ? (cs.overdueDays > 0 ? `Due since ${fmtShort(cs.next)}` : 'Due today') : `Next ${fmtShort(cs.next)}`;
   return (
-    <section className={'wt-feature' + (cs?.due ? ' is-due' : '')} aria-label="The water test">
+    <section className={'wt-feature' + (cs?.due ? ' is-due' : '')} aria-label="Water test">
       <div className="wt-f-head">
-        <span className="wt-f-kicker">The water test</span>
-        <span className="wt-f-status"><span className="pulse-dot" aria-hidden="true" />{status}</span>
+        <h2 className="wt-f-title">Water test</h2>
+        {status && <span className="wt-f-status"><span className="pulse-dot" aria-hidden="true" />{status}</span>}
       </div>
-      <h2 className="wt-f-title">Ask the wood if it needs oil.</h2>
       <div className="wt-f-art">
         {['beads', 'soaks'].map((k) => (
           <div key={k} className="wt-f-col">
-            <DropsArt kind={k} label={false} />
-            <span className="wt-f-res">{RESULTS[k].title}</span>
-            <span className={'wt-f-todo' + (k === 'soaks' ? ' is-oil' : '')}>{RESULTS[k].short}</span>
+            <DropsArt kind={k} />
+            <span className="wt-f-res">{k === 'beads' ? 'Beads up: no oil' : 'Soaks in: oil it'}</span>
           </div>
         ))}
       </div>
-      <p className="wt-f-text">A few drops on a clean, dry board. Watch for about {WATCH_SECONDS} seconds.</p>
-      <Button block onClick={() => (active ? nav.push('water-test') : nav.push('water-test', { practice: true }))}>{active ? 'Start water test' : 'Try it, nothing saved'}</Button>
-      {last && <p className="wt-f-last">Last test {fmtShort(fromIso(last.at))}: {last.result === 'beads' ? 'it beaded up' : 'it soaked in'}{last.result === 'soaks' ? (last.oiled ? ', boards oiled' : ', oil pending') : ''}.</p>}
+      <Button block onClick={() => (active ? nav.push('water-test') : nav.push('water-test', { practice: true }))}>{active ? 'Start water test' : 'Try it'}</Button>
     </section>
   );
 }
@@ -282,7 +275,6 @@ function ResultCompare() {
         <div key={k} className="compare-col">
           <DropsArt kind={k} />
           <div className="compare-title">{RESULTS[k].title}</div>
-          <p className="compare-text">{RESULTS[k].look}</p>
           <div className={'compare-todo' + (k === 'soaks' ? ' is-oil' : '')}>{RESULTS[k].todo}</div>
         </div>
       ))}
@@ -301,11 +293,11 @@ export const OIL_FACTS = [
 ];
 
 export const OIL_STEPS = [
-  { title: 'Start clean and dry', text: 'Wash the board, wipe it and let it dry completely before any oil goes on.', art: 'dry' },
-  { title: 'Oil on the surface', text: 'Pour mineral oil onto one face, enough to cover it once you spread it.', art: 'pour' },
-  { title: 'Spread it with the cloth', text: 'Rub it in following the grain, in an even layer. Then the other face and the edges.', art: 'spread' },
-  { title: 'Let the wood drink it in', text: 'Leave the board standing on its edge while the oil soaks in.', art: 'rest' },
-  { title: 'Wipe off what is left', text: 'When the surface stops taking in oil, wipe away the excess with a dry part of the cloth.', art: 'wipe' },
+  { title: 'Start clean and dry', text: 'Wash, wipe and let it dry completely.', art: 'dry' },
+  { title: 'Oil on the surface', text: 'Enough to cover one face once spread.', art: 'pour' },
+  { title: 'Spread it with the cloth', text: 'Along the grain. Then the other face and the edges.', art: 'spread' },
+  { title: 'Let the wood drink it in', text: 'Stand it on its edge while the oil soaks in.', art: 'rest' },
+  { title: 'Wipe off what is left', text: 'With a dry part of the cloth.', art: 'wipe' },
 ];
 
 const STEP_SHOT = {
@@ -400,8 +392,7 @@ function ReminderPlan({ care, today }) {
   const on = care.prefs.email || care.prefs.app;
   return (
     <section className="reminder-plan" aria-labelledby="remind-h">
-      <h2 id="remind-h" className="rp-title">How often will you remind me?</h2>
-      <p className="rp-lead">It depends on how often you use your boards.</p>
+      <h2 id="remind-h" className="rp-title">How often you use your boards</h2>
       <div className="rp-options" role="radiogroup" aria-label="How often you use your boards">
         {Object.entries(CARE_USAGE).map(([k, u]) => (
           <button key={k} role="radio" aria-checked={usage === k} className={'rp-option' + (usage === k ? ' is-on' : '')} onClick={() => updateUser((x) => { x.care.usage = k; })}>
@@ -411,10 +402,9 @@ function ReminderPlan({ care, today }) {
           </button>
         ))}
       </div>
-      <p className="rp-note"><strong>Each reminder is for a water test, not for oil.</strong> Oil only if the water soaks in.</p>
       <div className="rp-next">
         <Icon name="bell" size={16} />
-        <span>{!active ? 'Reminders start the day your boards come home.' : !on ? `Reminders are off. Next water test: ${fmtDate(cs.next)}.` : cs.due ? 'A water test is due now. We won’t send the missed reminders.' : `Next water test reminder: ${fmtDate(cs.next, cs.next.getUTCFullYear() !== today.getUTCFullYear())}.`}</span>
+        <span>{!active ? 'Starts when your boards are home' : !on ? 'Reminders off' : cs.due ? 'Water test due now' : `Next water test ${fmtShort(cs.next)}`}</span>
       </div>
       <div className="rp-channels">
         {[['email', 'By email'], ['app', 'In the app']].map(([k, t]) => (
@@ -451,26 +441,16 @@ function CarePlan({ params, root }) {
           <div className="eyebrow">Your Yndarena Care Plan · Home No. {homeNo}</div>
           <h1 className="display-l">Care</h1>
         </header>
-      ) : <TopBar title="Your care plan" />}
-
-      <Section id="check" first title="Check your board" lead="A water test helps you see whether the wood needs oil. A few drops on a clean, dry board, about 5 seconds of watching.">
-        <ResultCompare />
-        <div className="stack-8" style={{ marginTop: 16 }}>
-          <Button block onClick={() => nav.push('water-test')}>Start water test</Button>
-          <Button block variant="ghost" onClick={() => nav.push('water-test', { practice: true })}>Walk me through it, nothing saved</Button>
-        </div>
-      </Section>
+      ) : <TopBar title="Care plan" />}
 
       <div className="pad">
-        <NextStep care={care} today={today} hideWaterTest />
         <ReminderPlan care={care} today={today} />
       </div>
-
 
       <section className="care-sec" id="care-history">
         <details className="history" open={params.focus === 'history' || undefined}>
           <summary>
-            <span><span className="label">Care history</span><span className="history-sum">{active ? `${cs.recorded} water test${cs.recorded === 1 ? '' : 's'} recorded · next ${fmtShort(cs.next)}` : 'Starts when your boards are home'}</span></span>
+            <span className="label">History</span>
             <Icon name="chevron" size={18} className="chev" />
           </summary>
           {active && (
@@ -494,10 +474,6 @@ function CarePlan({ params, root }) {
         </details>
       </section>
 
-      <div className="care-sign">
-        <Sprig style={{ height: 44 }} />
-        <p>A board remembers how it is cared for.</p>
-      </div>
     </div>
   );
 }
@@ -518,19 +494,14 @@ export function OilGuide() {
     <>
       <TopBar close title="How to oil" />
       <div className="pad oil-guide">
-        <div className="eyebrow">Step-by-step guide</div>
         <h1 className="display-m">Oil your boards.</h1>
-        <p className="lead" style={{ margin: '8px 0 0' }}>A few minutes of work, then time for the wood to drink it in.</p>
-        <dl className="oil-facts" style={{ marginTop: 18 }}>
-          {OIL_FACTS.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
-        </dl>
+        <p className="lead" style={{ margin: '8px 0 0' }}>The oil and cloth from your set. Both faces and all edges.</p>
         <ol className="oil-steps">
           {OIL_STEPS.map((s, i) => (
             <li key={s.title}>
               <StepArt kind={s.art} />
               <div>
-                <div className="step-n">Step {i + 1}</div>
-                <div className="step-t">{s.title}</div>
+                <div className="step-t"><span className="step-n">{i + 1}</span>{s.title}</div>
                 <p>{s.text}</p>
               </div>
             </li>
@@ -538,7 +509,7 @@ export function OilGuide() {
         </ol>
         <a className="video-link" href={CARE_VIDEO_URL} target="_blank" rel="noreferrer">
           <span className="play"><Icon name="play" size={14} fill="currentColor" /></span>
-          <span className="grow"><span className="t">See it in Yndarena’s care video</span><span className="s">2 minutes · opens yndarenahome.com</span></span>
+          <span className="grow"><span className="t">Watch the care video</span></span>
           <Icon name="external" size={16} />
         </a>
         <div className="stack-8" style={{ marginTop: 20 }}>
@@ -552,7 +523,6 @@ export function OilGuide() {
           )}
           <Button block variant="ghost" icon="bag" onClick={() => setKit(true)}>I need board oil</Button>
         </div>
-        {pending && <p className="small" style={{ marginTop: 10 }}>Oil pending since the water test on {fmtDate(fromIso(pending.at))}.</p>}
       </div>
       <OilSheet open={kit} onClose={() => setKit(false)} />
     </>
@@ -597,23 +567,20 @@ export function WaterTest({ params = {} }) {
       <TopBar close title={practice ? 'Water test · walkthrough' : 'Water test'} />
       <div className="pad wt">
         <div className="wt-progress" aria-label={`Step ${Math.min(idx + 1, 3)} of 3`}>
-          {['Drops', 'About 5 seconds', 'What you saw'].map((t, i) => <span key={t} className={idx >= i ? 'on' : ''}>{t}</span>)}
+          {['Drops', 'Wait', 'Result'].map((t, i) => <span key={t} className={idx >= i ? 'on' : ''}>{t}</span>)}
         </div>
         {practice && <div className="wt-practice">Walkthrough: nothing is saved to your care plan.</div>}
 
         {step === 'drops' && (
           <>
-            <div className="where is-board"><Icon name="hand" size={16} />At your board</div>
             <DropsArt kind="drops" />
             <h1 className="display-m" style={{ marginTop: 16 }}>Put a few drops of water on the board.</h1>
-            <p className="body" style={{ margin: '8px 0 0' }}>A clean, dry board. A few drops are enough.</p>
             <Button block style={{ marginTop: 22 }} onClick={() => { setStep('watch'); setSecs(WATCH_SECONDS); }}>Done</Button>
           </>
         )}
 
         {step === 'watch' && (
           <>
-            <div className="where is-board"><Icon name="hand" size={16} />At your board</div>
             <h1 className="display-m">Wait about 5 seconds.</h1>
             <div className="watch-count" role="timer" aria-live="off" aria-label={secs > 0 ? `About ${secs} seconds` : 'Ready'}>
               <Icon name="clock" size={15} />
@@ -625,7 +592,6 @@ export function WaterTest({ params = {} }) {
 
         {step === 'result' && (
           <>
-            <div className="where is-board"><Icon name="hand" size={16} />Look at your board</div>
             <h1 className="display-m">What did the water do?</h1>
             <div className="stack-12" style={{ marginTop: 16 }}>
               {['beads', 'soaks'].map((k) => (
@@ -645,7 +611,7 @@ export function WaterTest({ params = {} }) {
         {step === 'unsure' && (
           <>
             <h1 className="display-m">No need to guess.</h1>
-            <p className="body" style={{ margin: '8px 0 16px' }}>Nothing has been saved. Compare what you see with the two pictures, or wipe the board dry and try a fresh spot in good light.</p>
+            <p className="body" style={{ margin: '8px 0 16px' }}>Compare with the two photos, or try a fresh spot in good light.</p>
             <ResultCompare />
             <div className="stack-8" style={{ marginTop: 18 }}>
               <Button block onClick={() => setStep('result')}>I can tell now</Button>
@@ -659,9 +625,8 @@ export function WaterTest({ params = {} }) {
           <div className="wt-done">
             <DropsArt kind="beads" label={false} className="small" />
             <h1 className="display-m" style={{ marginTop: 18 }}>You’re all set.</h1>
-            <p className="lead" style={{ margin: '8px 0 0' }}>{RESULTS.beads.means} No oil needed today.</p>
-            <p className="small" style={{ marginTop: 10 }}>Wipe the water off the board with a dry cloth.</p>
-            {practice ? <p className="small" style={{ marginTop: 6 }}>This was a walkthrough. Nothing was saved.</p> : nextDate && <p className="small" style={{ marginTop: 6 }}>Saved. Next water test reminder: {nextDate}.</p>}
+            <p className="lead" style={{ margin: '8px 0 0' }}>No oil needed. Wipe the board dry.</p>
+            {!practice && nextDate && <p className="small" style={{ marginTop: 6 }}>Next test {nextDate}.</p>}
             <Button block style={{ marginTop: 22 }} onClick={() => { nav.pop(); if (!practice && active) toast('Water test saved to your care plan.'); }}>Done</Button>
             {!practice && active && <ReminderQuick />}
           </div>
@@ -671,8 +636,7 @@ export function WaterTest({ params = {} }) {
           <>
             <DropsArt kind="soaks" label={false} className="small" />
             <h1 className="display-m" style={{ marginTop: 18 }}>The wood is asking for oil.</h1>
-            <p className="body" style={{ margin: '8px 0 6px' }}>{practice ? 'This was a walkthrough. Nothing was saved.' : 'Saved to your care plan. Oil it when you can: today, or in the next few days.'}</p>
-            <p className="small" style={{ margin: '0 0 6px' }}>First, wipe the water off and let the board dry completely.</p>
+            <p className="body" style={{ margin: '8px 0 6px' }}>Let it dry, then oil it in the next few days.</p>
             <div className="oil-choice" style={{ marginTop: 16 }}>
               <button className="choice" onClick={() => nav.replace('oil-guide')}><Icon name="check" size={18} /><span>I already have board oil</span></button>
               <button className="choice" onClick={() => setKit(true)}><Icon name="bag" size={18} /><span>I need board oil</span></button>
@@ -702,9 +666,7 @@ export function GiftDates({ startAdd }) {
     <div className="pad" style={{ marginTop: 8 }}>
       {gifts.length === 0 && (
         <div style={{ marginTop: 14 }}>
-          <Empty title="Keep a special date close" action={<Button small onClick={() => setEdit(blank())}>Add a date</Button>}>
-            A birthday, an anniversary, a housewarming. Just a first name and a day.
-          </Empty>
+          <Empty title="Keep a special date close" action={<Button small onClick={() => setEdit(blank())}>Add a date</Button>} />
         </div>
       )}
       <div style={{ marginTop: 8 }}>
@@ -717,16 +679,13 @@ export function GiftDates({ startAdd }) {
               </div>
               <div>
                 <div style={{ fontSize: 16.5, lineHeight: 1.3 }}>{giftWho(g)}</div>
-                <div className="small">{date ? (days === 0 ? 'Today' : `In ${days} days`) : 'Date has passed'} · {g.y ? `One time, ${g.y}` : 'Every year'}</div>
-                <div className="gift-channels"><Icon name="bell" size={13} />{giftChannelText(g)}</div>
+                <div className="small">{date ? (days === 0 ? 'Today' : `In ${days} days`) : 'Date has passed'}</div>
               </div>
               <Icon name="edit" size={18} />
             </button>
             {date && (
               <div className="row wrap" style={{ gap: 6, padding: '0 0 14px 68px' }}>
-                <span className={'tag' + (stage ? ' is-lav' : '')}>{stage ? (sentOn >= today ? 'Reminder goes out today' : `Reminder sent ${fmtShort(sentOn)}`) : `First reminder ${fmtShort(first)}`}</span>
-                {stage !== 10 && <span className="tag">Second {fmtShort(second)}</span>}
-                <button className="tag is-dark" onClick={() => setPlan(g)}>Plan a gift</button>
+                <button className="link" onClick={() => setPlan(g)}>Plan a gift</button>
               </div>
             )}
           </div>
@@ -735,23 +694,8 @@ export function GiftDates({ startAdd }) {
       {gifts.length > 0 && (
         <div style={{ marginTop: 16 }}>
           <Button block variant="ghost" icon="plus" disabled={gifts.length >= MAX_GIFTS} onClick={() => setEdit(blank())}>Add a date</Button>
-          {gifts.length >= MAX_GIFTS && <p className="small muted" style={{ marginTop: 8 }}>You can keep up to {MAX_GIFTS} dates.</p>}
         </div>
       )}
-      {gifts[0]?.date && (
-        <div className="card card-pad" style={{ marginTop: 20 }}>
-          <div className="label">What the next reminder will say</div>
-          <p style={{ margin: '6px 0 0', fontSize: 15.5 }}>
-            <strong style={{ fontWeight: 500 }}>
-              {gifts[0].days >= 11
-                ? (gifts[0].g.occasion === 'Other' ? `A special day for ${gifts[0].g.name} is coming up` : `${giftWho(gifts[0].g)} is coming up`)
-                : (gifts[0].g.occasion === 'Other' ? `A special day for ${gifts[0].g.name} is ${whenText(gifts[0].days)}` : `${giftWho(gifts[0].g)} is ${whenText(gifts[0].days)}`)}
-            </strong>
-          </p>
-          <p className="small" style={{ margin: '4px 0 0' }}>{giftWho(gifts[0].g)} is on {fmtDate(gifts[0].date)}. There is no rush.</p>
-        </div>
-      )}
-      {IS_PREVIEW && <div style={{ marginTop: 16 }}><DemoNote>Simulated reminders: 21 and 10 days ahead, by the channels chosen for each date. No push notification or email is sent from this preview.</DemoNote></div>}
 
       <GiftEditor value={edit} onClose={() => setEdit(null)} today={today} onSave={(v) => {
         updateUser((u) => {
