@@ -5,7 +5,6 @@ import { WORDMARK } from '../assets.js';
 import kitchenMobile from '../media/kitchen/yndarena-kitchen-mobile.webp';
 import kitchenDesktop from '../media/kitchen/yndarena-kitchen-desktop.webp';
 import lidTop from '../media/package/yndarena-box-lid-top.webp';
-import lidInside from '../media/package/yndarena-box-lid-inside.webp';
 import flapFront from '../media/package/yndarena-box-flap-front.webp';
 import sprigSrc from '../media/package/yndarena-rosemary-sprig.webp';
 
@@ -138,7 +137,8 @@ function GiftBox({ onOpen }) {
         {/* Lid: printed top, story inside, magnetic flap with the rosemary */}
         <span className="pkg-lid">
           <span className="pkg-lid-out"><img src={lidTop} alt="" draggable="false" /></span>
-          <span className="pkg-lid-in"><img src={lidInside} alt="" draggable="false" /></span>
+          {/* Inside of the lid left plain white (owner, 2026-11-10): its small print can’t be sharp at this size. The story is shown full-size instead. */}
+          <span className="pkg-lid-in" />
           <span className="pkg-flap">
             <span className="pkg-flap-out"><img src={flapFront} alt="" draggable="false" /></span>
             <span className="pkg-flap-in" />
