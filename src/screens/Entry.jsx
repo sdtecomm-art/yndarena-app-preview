@@ -19,7 +19,7 @@ import sprigSrc from '../media/package/yndarena-rosemary-sprig.webp';
 // Slow on purpose (owner, 2026-11-10): the opening is the brand's moment. A tap anywhere skips it.
 const TIMES = { lift: 450, open: 2300, story: 6200, hold: 700, burst: 3500 };
 const STORY_KEY = 'ynd-story-seen';
-// The story printed inside the lid, word for word (Packaging_Yndarena.pdf, page 4).
+// The story printed inside the lid (Packaging_Yndarena.pdf, page 4), shortened: its sentences are verbatim, three are left out.
 const STORY = [
   'Yndarena was a woman we still hold dear. She was our grandmother’s companion in the kitchen.',
   'She taught us that rosemary is a symbol of love and memory.',
