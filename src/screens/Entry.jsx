@@ -7,28 +7,57 @@ import kitchenDesktop from '../media/kitchen/yndarena-kitchen-desktop.webp';
 import lidTop from '../media/package/yndarena-box-lid-top.webp';
 import lidInside from '../media/package/yndarena-box-lid-inside.webp';
 import flapFront from '../media/package/yndarena-box-flap-front.webp';
-import { MEDIA } from '../data/media.js';
+import sprigSrc from '../media/package/yndarena-rosemary-sprig.webp';
 
-// Yndarena's general entrance (owner, 2026-11-05): the real gift box on the kitchen counter, and one button.
+// Yndarena's general entrance: the real gift box on the kitchen counter, and one button.
 // The box is built in 3D from the packaging artwork (Packaging_Yndarena.pdf, Illustrator, Oct 2026): lid 44 × 27.7 cm,
-// 10 cm tall, magnetic front flap, story printed inside the lid, dark foam insert with the large cavity and the
-// narrow slot on the right, as in the owner's unboxing video. Nothing on it is invented: every print is the
-// supplied artwork. Inside, instead of the foam insert, sits the app itself (owner, 2026-11-10): the same box
-// carries every Yndarena product, so what it holds is the whole home: Home, Cook, Gifts and Gatherings.
-// “Open your set” opens the box like the real one: the flap lets go, the lid swings back on its hinge, the camera
-// comes closer, then dives into the Home screen inside the box, which grows into the real app. A tap skips it.
-const TIMES = { lift: 260, open: 1500, read: 1400, dive: 900 };
+// 10 cm tall, magnetic front flap, story printed inside the lid. Every print is the supplied artwork.
+// Inside (owner, 2026-11-10): no foam and no single product, because the same box carries every Yndarena product.
+// It is filled with rosemary, the brand's symbol, drawn from the rosemary illustration on the packaging.
+// “Open your set”: the flap lets go, the lid swings back on its hinge, the rosemary leaps out of the box toward
+// the screen, and a circle of the app's own paper opens behind it into the app. A tap skips it.
+const TIMES = { lift: 260, open: 1550, hold: 450, burst: 1500 };
 
 export default function Entry({ onOpenSet }) {
   const { state, homeNo } = useStore();
   const signedIn = !!state.session;
   const [phase, setPhase] = useState('closed');
-  const [grow, setGrow] = useState(null); // where the Home screen inside the box sits, to grow it from there
+  const [origin, setOrigin] = useState(null); // where the box sits on screen: the reveal opens from there
   const timers = useRef([]);
+  const flyRef = useRef(null);
   const done = useRef(false);
 
   const finish = () => { if (done.current) return; done.current = true; timers.current.forEach(clearTimeout); onOpenSet(); };
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
+
+  // Each sprig in the box is measured where it lies, then a flat copy leaps from that exact spot toward the viewer.
+  const burst = () => {
+    const root = document.querySelector('.entry'), layer = flyRef.current;
+    if (!root || !layer) return;
+    const o = root.getBoundingClientRect();
+    const box = document.querySelector('.pkg-inside')?.getBoundingClientRect();
+    if (box) setOrigin({ x: box.left - o.left + box.width / 2, y: box.top - o.top + box.height / 2 });
+    const cx = o.width / 2, cy = o.height * 0.42;
+    document.querySelectorAll('.pkg .ros').forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      const x = r.left - o.left + r.width / 2, y = r.top - o.top + r.height / 2;
+      const len = Math.max(r.width, r.height) * 0.92;
+      const rot = +el.dataset.rot;
+      const img = document.createElement('img');
+      img.src = sprigSrc; img.alt = ''; img.className = 'fly';
+      img.style.height = len + 'px'; img.style.left = x + 'px'; img.style.top = y + 'px';
+      layer.appendChild(img);
+      const rnd = (a, b) => a + ((Math.sin((i + 1) * 97.13) + 1) / 2) * (b - a); // stable per sprig
+      const dx = (x - cx) * rnd(2.2, 3.6) + rnd(-60, 60);
+      const dy = (y - cy) * rnd(1.6, 2.6) - o.height * rnd(0.25, 0.55);
+      const s = rnd(3.2, 5.5), turn = rnd(-70, 70);
+      img.animate([
+        { transform: `translate(-50%, -50%) rotate(${rot}deg) scale(1)`, opacity: 1, filter: 'blur(0px)' },
+        { transform: `translate(calc(-50% + ${dx * 0.35}px), calc(-50% + ${dy * 0.35}px)) rotate(${rot + turn * 0.4}deg) scale(${1 + (s - 1) * 0.3})`, opacity: 1, filter: 'blur(0px)', offset: 0.35 },
+        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${rot + turn}deg) scale(${s})`, opacity: 0, filter: 'blur(5px)' },
+      ], { duration: rnd(1000, 1350), delay: rnd(0, 260), easing: 'cubic-bezier(.25, .6, .3, 1)', fill: 'both' });
+    });
+  };
 
   const open = () => {
     if (phase !== 'closed') { finish(); return; }
@@ -37,16 +66,8 @@ export default function Entry({ onOpenSet }) {
     const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
     setPhase('lift');
     at(TIMES.lift, () => setPhase('open'));
-    at(TIMES.lift + TIMES.open + TIMES.read, () => {
-      const el = document.querySelector('.pkg .mini.is-home'), root = document.querySelector('.entry');
-      if (el && root) {
-        const r = el.getBoundingClientRect(), o = root.getBoundingClientRect();
-        setGrow({ x: r.left - o.left, y: r.top - o.top, s: r.width / o.width, go: false });
-        requestAnimationFrame(() => requestAnimationFrame(() => setGrow((g) => g && { ...g, go: true })));
-      }
-      setPhase('dive');
-    });
-    at(TIMES.lift + TIMES.open + TIMES.read + TIMES.dive, finish);
+    at(TIMES.lift + TIMES.open + TIMES.hold, () => { burst(); setPhase('burst'); });
+    at(TIMES.lift + TIMES.open + TIMES.hold + TIMES.burst, finish);
   };
 
   return (
@@ -71,11 +92,10 @@ export default function Entry({ onOpenSet }) {
         </div>
       </div>
       <div className="entry-veil" aria-hidden="true" />
-      {grow && (
-        <div className={'entry-grow' + (grow.go ? ' is-go' : '')} aria-hidden="true" style={{ '--gx': grow.x + 'px', '--gy': grow.y + 'px', '--gs': grow.s }}>
-          <MiniHome className="is-big" />
-        </div>
-      )}
+      <div className="entry-reveal" aria-hidden="true" style={origin ? { '--rx': origin.x + 'px', '--ry': origin.y + 'px' } : undefined}>
+        <img src={WORDMARK} alt="" />
+      </div>
+      <div className="entry-fly" ref={flyRef} aria-hidden="true" />
     </div>
   );
 }
@@ -91,7 +111,7 @@ function GiftBox({ onOpen }) {
         <span className="pkg-face pkg-left" />
         <span className="pkg-face pkg-right" />
         <span className="pkg-face pkg-inside">
-          <MiniApp />
+          <RosemaryBed />
         </span>
         {/* Lid: printed top, story inside, magnetic flap with the rosemary */}
         <span className="pkg-lid">
@@ -107,56 +127,20 @@ function GiftBox({ onOpen }) {
   );
 }
 
-// The app, small, inside the box: four screens side by side. Decorative (aria-hidden on the parent): the real
-// screens open right after. Copy matches the real app.
-const MINI_TABS = ['Home', 'Cook', 'Gifts', 'Gatherings'];
-function MiniTabs({ on }) {
-  return <span className="mini-tabs">{MINI_TABS.map((t) => <span key={t} className={t === on ? 'on' : ''}><i />{t}</span>)}</span>;
-}
-function MiniHome({ className = '' }) {
-  const spines = MEDIA['product-boards-spines'];
+// The rosemary bed: sprigs lying in the box, laid out by hand so the box looks full but not messy.
+// [left %, top %, length as % of the box depth, rotation°]
+const BED = [
+  [12, 30, 92, 78], [24, 62, 88, 102], [36, 28, 95, 84], [47, 66, 90, 96], [58, 32, 92, 80], [70, 64, 94, 104], [82, 30, 88, 86], [90, 66, 84, 98],
+  [18, 50, 86, 262], [41, 46, 90, 276], [63, 50, 88, 266], [86, 46, 86, 280],
+  [6, 70, 70, 112], [30, 80, 76, 70], [52, 18, 74, 108], [75, 16, 72, 72], [95, 22, 66, 118], [66, 84, 72, 252],
+];
+function RosemaryBed() {
   return (
-    <span className={'mini is-home ' + className}>
-      <img className="mini-mark" src={WORDMARK} alt="" />
-      <span className="mini-eyebrow">Your Yndarena care plan</span>
-      <span className="mini-h">Made with love.<em>Cared for with ease.</em></span>
-      <img className="mini-spines" src={spines.small} alt="" />
-      <span className="mini-card"><b>Time for a quick water test.</b><span className="mini-btn">Start water test</span></span>
-      <span className="mini-sec">Tonight</span>
-      <span className="mini-row">Sheet-pan salmon with asparagus<small>25 min</small></span>
-      <MiniTabs on="Home" />
-    </span>
-  );
-}
-function MiniApp() {
-  return (
-    <span className="pkg-app">
-      <MiniHome />
-      <span className="mini is-cook">
-        <span className="mini-title">Cook</span>
-        <span className="mini-sec">This week · 5 dinners</span>
-        {[['Mon', 'Lemon chicken with potatoes'], ['Tue', 'Chickpea and spinach curry'], ['Wed', 'Fish tacos with lime slaw'], ['Thu', 'Spaghetti with meat sauce'], ['Fri', 'Pasta primavera']].map(([d, n]) => (
-          <span key={d} className="mini-row"><small className="mini-day">{d}</small>{n}</span>
-        ))}
-        <span className="mini-btn is-block">Shopping list</span>
-        <MiniTabs on="Cook" />
-      </span>
-      <span className="mini is-gifts">
-        <span className="mini-title">Gifts</span>
-        <span className="mini-video"><i /></span>
-        <span className="mini-sec">Your dates</span>
-        <span className="mini-row">Ana’s birthday<small>in 16 days</small></span>
-        <span className="mini-row">Mom and Dad’s anniversary<small>in 54 days</small></span>
-        <MiniTabs on="Gifts" />
-      </span>
-      <span className="mini is-gather">
-        <span className="mini-title">Gatherings</span>
-        <span className="mini-card"><b>BBQ at home</b><span>Saturday at 1 PM · 6 people</span><span className="mini-bar"><i /></span></span>
-        <span className="mini-sec">Still needed</span>
-        <span className="mini-row">Ice<small>2 bags</small></span>
-        <span className="mini-row">Burger buns<small>Alex</small></span>
-        <MiniTabs on="Gatherings" />
-      </span>
+    <span className="pkg-bed">
+      {BED.map(([x, y, l, r], i) => (
+        <img key={i} className="ros" data-rot={r} src={sprigSrc} alt="" draggable="false"
+          style={{ left: x + '%', top: y + '%', height: `calc(var(--d) * ${l / 100})`, transform: `translate(-50%, -50%) rotate(${r}deg)`, animationDelay: `${(i % 6) * -0.7}s` }} />
+      ))}
     </span>
   );
 }

@@ -214,16 +214,21 @@ const ToastCtx = createContext({ show: () => {}, toast: null });
 export function ToastProvider({ children }) {
   const [toast, setToast] = useState(null);
   const t = useRef();
+  const t2 = useRef();
+  // Shown for 2.6 s, then it fades and sinks away over 0.6 s instead of vanishing.
   const show = useCallback((msg) => {
-    setToast({ msg, k: Date.now() });
-    clearTimeout(t.current);
-    t.current = setTimeout(() => setToast(null), 2600);
+    setToast({ msg, k: Date.now(), leaving: false });
+    clearTimeout(t.current); clearTimeout(t2.current);
+    t.current = setTimeout(() => {
+      setToast((x) => x && { ...x, leaving: true });
+      t2.current = setTimeout(() => setToast(null), 600);
+    }, 2600);
   }, []);
   return <ToastCtx.Provider value={{ show, toast }}>{children}</ToastCtx.Provider>;
 }
 export function ToastHost() {
   const { toast } = useContext(ToastCtx);
-  return toast ? <div key={toast.k} className="toast" role="status">{toast.msg}</div> : null;
+  return toast ? <div key={toast.k} className={'toast' + (toast.leaving ? ' is-leaving' : '')} role="status">{toast.msg}</div> : null;
 }
 export const useToast = () => useContext(ToastCtx).show;
 
