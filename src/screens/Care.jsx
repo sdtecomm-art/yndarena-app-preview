@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
-import { TopBar, Button, Kicker, Icon, Sheet, DemoNote, Sprig, Chip, Empty, useToast } from '../ui.jsx';
+import { TopBar, Button, Kicker, Icon, Sheet, DemoNote, Sprig, Chip, Empty, useToast, PhotoSlot } from '../ui.jsx';
 import { MEDIA } from '../data/media.js';
 import { LINKS, validAmazonUrl, IS_PREVIEW } from '../data/links.js';
 import {
@@ -225,25 +225,13 @@ export function WaterDefs({ id }) {
   );
 }
 
-export function DropsArt({ kind, label = true, className = '' }) {
-  const id = 'w' + kind + useId().replace(/[^a-zA-Z0-9]/g, '');
-  return (
-    <div className={'drops-art ' + className} data-kind={kind}>
-      <svg viewBox="0 0 160 110" role="img" aria-label={kind === 'beads' ? 'Illustration: clear water staying on the surface of the wood in drops and small pools' : 'Illustration: water sinking into the wood, leaving darker patches'}>
-        <WaterDefs id={id} />
-        <Wood id={id} />
-        {kind === 'beads'
-          ? WATER.map((b) => <SurfaceWater key={b.seed} b={b} id={id} />)
-          : (
-            <g filter={`url(#${id}soak)`}>
-              {WATER.map((b) => <path key={b.seed} d={blobPath(b, 1.12)} fill="#4a260e" opacity=".36" />)}
-              {WATER.filter((b) => b.r > 6).map((b) => <path key={'c' + b.seed} d={blobPath(b, 0.7)} fill="#3a1d0b" opacity=".16" />)}
-            </g>
-          )}
-      </svg>
-      {label && <span className="illus-tag">Illustration</span>}
-    </div>
-  );
+export const DROPS_SHOT = {
+  beads: 'Water beading on an oiled Yndarena board. Macro, soft side light.',
+  soaks: 'The same spot on a dry board: the water soaking in, darker patches.',
+  drops: 'A hand placing a few drops of water on a clean board.',
+};
+export function DropsArt({ kind, className = '' }) {
+  return <PhotoSlot shot={DROPS_SHOT[kind]} ratio="4 / 3" className={'drops-photo ' + className} small={className.includes('small')} />;
 }
 
 // Seconds to watch the drops. Editorial guidance, to be confirmed on Yndarena's real boards.
@@ -283,7 +271,6 @@ export function WaterTestFeature({ care, today }) {
       <p className="wt-f-text">A few drops on a clean, dry board. Watch for about {WATCH_SECONDS} seconds.</p>
       <Button block onClick={() => (active ? nav.push('water-test') : nav.push('water-test', { practice: true }))}>{active ? 'Start water test' : 'Try it, nothing saved'}</Button>
       {last && <p className="wt-f-last">Last test {fmtShort(fromIso(last.at))}: {last.result === 'beads' ? 'it beaded up' : 'it soaked in'}{last.result === 'soaks' ? (last.oiled ? ', boards oiled' : ', oil pending') : ''}.</p>}
-      <span className="illus-note">Illustrations</span>
     </section>
   );
 }
@@ -321,18 +308,15 @@ export const OIL_STEPS = [
   { title: 'Wipe off what is left', text: 'When the surface stops taking in oil, wipe away the excess with a dry part of the cloth.', art: 'wipe' },
 ];
 
+const STEP_SHOT = {
+  dry: 'A clean board drying on its edge against the wall.',
+  pour: 'Mineral oil pouring onto the face of the board.',
+  spread: 'A hand spreading the oil with the cloth, along the grain.',
+  rest: 'The oiled board standing on its edge while the oil soaks in.',
+  wipe: 'A dry part of the cloth wiping off the excess oil.',
+};
 function StepArt({ kind }) {
-  return (
-    <svg viewBox="0 0 120 80" className="step-art" aria-hidden="true">
-      <rect x="10" y={kind === 'rest' ? 10 : 30} width={kind === 'rest' ? 18 : 100} height={kind === 'rest' ? 62 : 40} rx="4" fill="#9a6644" />
-      {kind !== 'rest' && Array.from({ length: 5 }, (_, i) => <path key={i} d={`M14 ${36 + i * 7} C 45 ${33 + i * 7}, 75 ${39 + i * 7}, 106 ${35 + i * 7}`} stroke="#6a4029" strokeWidth=".6" fill="none" opacity=".5" />)}
-      {kind === 'dry' && <><path d="M30 18c8-6 16 6 24 0s16 6 24 0" stroke="#9b9f8e" strokeWidth="2" fill="none" strokeLinecap="round" /><path d="M42 10c8-6 16 6 24 0" stroke="#9b9f8e" strokeWidth="2" fill="none" strokeLinecap="round" /></>}
-      {kind === 'pour' && <><path d="M70 6h14l-3 12H73z" fill="#e8d9b0" stroke="#786350" strokeWidth="1" /><path d="M77 18c0 6 0 9-1 12" stroke="#d9b45a" strokeWidth="2.4" strokeLinecap="round" /><ellipse cx="74" cy="44" rx="12" ry="4" fill="#e3b85a" opacity=".75" /></>}
-      {kind === 'spread' && <><path d="M30 46c14-4 30 4 50-2" stroke="#e3b85a" strokeWidth="6" strokeLinecap="round" opacity=".55" /><rect x="70" y="34" width="26" height="16" rx="5" fill="#f4f1ec" stroke="#786350" strokeWidth="1" transform="rotate(-8 83 42)" /><path d="M58 60h30M80 56l8 4-8 4" stroke="#584234" strokeWidth="1.4" fill="none" strokeLinecap="round" /></>}
-      {kind === 'rest' && <><rect x="40" y="10" width="18" height="62" rx="4" fill="#d6b88d" /><rect x="70" y="10" width="18" height="62" rx="4" fill="#93603f" /><path d="M4 74h108" stroke="#786350" strokeWidth="1.4" /><circle cx="104" cy="22" r="9" fill="none" stroke="#786350" strokeWidth="1.2" /><path d="M104 16v6l4 3" stroke="#786350" strokeWidth="1.2" fill="none" strokeLinecap="round" /></>}
-      {kind === 'wipe' && <><rect x="52" y="30" width="30" height="18" rx="6" fill="#f4f1ec" stroke="#786350" strokeWidth="1" transform="rotate(10 67 39)" /><path d="M20 62h30" stroke="#584234" strokeWidth="1.4" strokeLinecap="round" /><path d="M28 58l-8 4 8 4" stroke="#584234" strokeWidth="1.4" fill="none" strokeLinecap="round" /></>}
-    </svg>
-  );
+  return <PhotoSlot shot={STEP_SHOT[kind]} ratio="3 / 2" className="step-photo" />;
 }
 
 
@@ -620,7 +604,8 @@ export function WaterTest({ params = {} }) {
         {step === 'drops' && (
           <>
             <div className="where is-board"><Icon name="hand" size={16} />At your board</div>
-            <h1 className="display-m">Put a few drops of water on the board.</h1>
+            <DropsArt kind="drops" />
+            <h1 className="display-m" style={{ marginTop: 16 }}>Put a few drops of water on the board.</h1>
             <p className="body" style={{ margin: '8px 0 0' }}>A clean, dry board. A few drops are enough.</p>
             <Button block style={{ marginTop: 22 }} onClick={() => { setStep('watch'); setSecs(WATCH_SECONDS); }}>Done</Button>
           </>
@@ -797,7 +782,8 @@ function PlanGift({ g }) {
   const ready = validAmazonUrl(url);
   return (
     <>
-      <p className="body" style={{ marginTop: 0 }}>Find a thoughtful gift for {g.name}’s home.</p>
+      <PhotoSlot shot="The Yndarena box, gift-wrapped, on a kitchen counter." ratio="16 / 10" />
+      <p className="body" style={{ marginTop: 14 }}>Find a thoughtful gift for {g.name}’s home.</p>
       <div className="gift-option is-primary">
         <div className="go-head">
           <span className="round-ico"><Icon name="gift" size={18} /></span>

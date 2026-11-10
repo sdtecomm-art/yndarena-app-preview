@@ -233,6 +233,17 @@ export function ToastHost() {
 export const useToast = () => useContext(ToastCtx).show;
 
 // ---------- Media ----------
+// A space reserved for a real photo (owner, 2026-11-10): no drawing in its place. It names the shot so the
+// photographer knows what goes there; it never pretends to be the photo.
+export function PhotoSlot({ shot, ratio = '4 / 3', className = '', small }) {
+  return (
+    <figure className={'photo-slot' + (small ? ' is-small' : '') + ' ' + className} style={{ aspectRatio: ratio }} aria-label={`Photo coming: ${shot}`}>
+      <span className="ps-ico" aria-hidden="true"><Icon name="camera" size={small ? 16 : 20} /></span>
+      {!small && <figcaption className="ps-shot">{shot}</figcaption>}
+      <span className="ps-tag">Photo coming</span>
+    </figure>
+  );
+}
 export function PhotoPending({ children, className = '', tag = 'Photo pending' }) {
   return (
     <div className={'photo-pending ' + className}>

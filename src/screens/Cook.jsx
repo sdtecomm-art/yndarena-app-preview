@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useStore } from '../store.jsx';
 import { useNav } from '../nav.jsx';
-import { TopBar, Button, Icon, Chip, useToast, DemoNote } from '../ui.jsx';
+import { TopBar, Button, Icon, Chip, useToast, DemoNote, PhotoSlot } from '../ui.jsx';
 import { iso, fromIso, DAY } from '../lib.js';
 import { IS_PREVIEW } from '../data/links.js';
 import {
@@ -204,7 +204,8 @@ export function Recipe({ params }) {
     <>
       <TopBar title="Recipe" />
       <article className="pad recipe">
-        <div className="eyebrow">{DIET_LABEL[r.diet]} · {r.time} min</div>
+        <PhotoSlot shot={`${r.name}, plated at home, with the board it was prepped on.`} ratio="4 / 3" />
+        <div className="eyebrow" style={{ marginTop: 16 }}>{DIET_LABEL[r.diet]} · {r.time} min</div>
         <h1 className="display-m" style={{ marginTop: 6 }}>{r.name}</h1>
         <p className="lead" style={{ margin: '8px 0 0' }}>{r.blurb}</p>
         {r.contains.length > 0 && <p className="small" style={{ marginTop: 8 }}>Contains {r.contains.map((c) => CONTAINS_LABEL[c]).join(', ')}. Check labels for allergies.</p>}

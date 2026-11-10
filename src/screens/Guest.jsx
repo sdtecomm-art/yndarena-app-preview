@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Button, Icon, Sheet, DemoNote, useToast, ConfirmTap } from '../ui.jsx';
+import { Button, Icon, Sheet, DemoNote, useToast, ConfirmTap, PhotoSlot } from '../ui.jsx';
 import { WORDMARK } from '../assets.js';
 import { useShared } from '../gatherings/useShared.js';
 import { guest, device, links, SIMULATED } from '../gatherings/sim.js';
@@ -38,6 +38,7 @@ export default function Guest({ publicId, token: tokenFromLink, onLeave }) {
   return (
     <div className="guest">
       <img className="guest-wordmark" src={WORDMARK} alt="Yndarena" />
+      <PhotoSlot shot="Friends around a table, passing dishes. Warm evening light." ratio="16 / 9" className="head-photo" />
       <div className="eyebrow" style={{ marginTop: 18 }}>You’re invited</div>
       <h1 className="display-m" style={{ marginTop: 6 }}>{view.name}</h1>
       <p className="g-when">{whenText(view.startsAt)}</p>

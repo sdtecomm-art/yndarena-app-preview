@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNav } from '../nav.jsx';
 import { useStore } from '../store.jsx';
-import { TopBar, Button, Icon, Sheet, Chip, DemoNote, useToast, ConfirmTap } from '../ui.jsx';
+import { TopBar, Button, Icon, Sheet, Chip, DemoNote, useToast, ConfirmTap, PhotoSlot } from '../ui.jsx';
 import { useShared } from '../gatherings/useShared.js';
 import { host, links, SIMULATED } from '../gatherings/sim.js';
 import { VideoSlot } from './Gifts.jsx';
@@ -50,6 +50,7 @@ export default function Gatherings() {
       <header className="care-head pad">
         <h1 className="display-l">Gatherings</h1>
         <p className="lead" style={{ margin: '8px 0 0' }}>Organize what everyone brings.</p>
+        <PhotoSlot shot="A shared table with the dishes guests brought, a Yndarena board in the middle." ratio="3 / 2" className="head-photo" />
         <Button block style={{ marginTop: 18 }} onClick={() => nav.push('gathering-new')}>Plan a gathering</Button>
       </header>
       {upcoming.length === 0 && earlier.length === 0 && (

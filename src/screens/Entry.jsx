@@ -16,7 +16,17 @@ import sprigSrc from '../media/package/yndarena-rosemary-sprig.webp';
 // It is filled with rosemary, the brand's symbol, drawn from the rosemary illustration on the packaging.
 // “Open your set”: the flap lets go, the lid swings back on its hinge, the rosemary leaps out of the box toward
 // the screen, and a circle of the app's own paper opens behind it into the app. A tap skips it.
-const TIMES = { lift: 260, open: 1550, hold: 450, burst: 1500 };
+// Slow on purpose (owner, 2026-11-10): the opening is the brand's moment. A tap anywhere skips it.
+const TIMES = { lift: 450, open: 2300, story: 6200, hold: 700, burst: 3500 };
+const STORY_KEY = 'ynd-story-seen';
+// The story printed inside the lid, word for word (Packaging_Yndarena.pdf, page 4).
+const STORY = [
+  'Yndarena was a woman we still hold dear. She was our grandmother’s companion in the kitchen.',
+  'She taught us that rosemary is a symbol of love and memory.',
+  'For her, cooking was an act of love. The kind that leaves its mark on memory.',
+  'In that same spirit, this brand was born, and it carries her name.',
+  'We believe that what is made with love endures. Like Yndarena and her rosemary.',
+];
 
 export default function Entry({ onOpenSet }) {
   const { state, homeNo } = useStore();
@@ -50,12 +60,13 @@ export default function Entry({ onOpenSet }) {
       const rnd = (a, b) => a + ((Math.sin((i + 1) * 97.13) + 1) / 2) * (b - a); // stable per sprig
       const dx = (x - cx) * rnd(2.2, 3.6) + rnd(-60, 60);
       const dy = (y - cy) * rnd(1.6, 2.6) - o.height * rnd(0.25, 0.55);
-      const s = rnd(3.2, 5.5), turn = rnd(-70, 70);
+      const s = rnd(2.6, 4.2), turn = rnd(-45, 45);
       img.animate([
         { transform: `translate(-50%, -50%) rotate(${rot}deg) scale(1)`, opacity: 1, filter: 'blur(0px)' },
-        { transform: `translate(calc(-50% + ${dx * 0.35}px), calc(-50% + ${dy * 0.35}px)) rotate(${rot + turn * 0.4}deg) scale(${1 + (s - 1) * 0.3})`, opacity: 1, filter: 'blur(0px)', offset: 0.35 },
-        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${rot + turn}deg) scale(${s})`, opacity: 0, filter: 'blur(5px)' },
-      ], { duration: rnd(1000, 1350), delay: rnd(0, 260), easing: 'cubic-bezier(.25, .6, .3, 1)', fill: 'both' });
+        { transform: `translate(calc(-50% + ${dx * 0.12}px), calc(-50% + ${dy * 0.18 - 14}px)) rotate(${rot + turn * 0.15}deg) scale(1.12)`, opacity: 1, filter: 'blur(0px)', offset: 0.22 },
+        { transform: `translate(calc(-50% + ${dx * 0.55}px), calc(-50% + ${dy * 0.55}px)) rotate(${rot + turn * 0.6}deg) scale(${1 + (s - 1) * 0.5})`, opacity: 0.95, filter: 'blur(0.5px)', offset: 0.62 },
+        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${rot + turn}deg) scale(${s})`, opacity: 0, filter: 'blur(3px)' },
+      ], { duration: rnd(2300, 2900), delay: rnd(0, 650), easing: 'cubic-bezier(.33, 0, .2, 1)', fill: 'both' });
     });
   };
 
@@ -64,10 +75,15 @@ export default function Entry({ onOpenSet }) {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduce) { setPhase('open'); timers.current.push(setTimeout(finish, 450)); return; }
     const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
+    // The story shows the first time on this device; after that the box opens straight to the rosemary.
+    let seen = false; try { seen = localStorage.getItem(STORY_KEY) === '1'; localStorage.setItem(STORY_KEY, '1'); } catch (e) { /* private mode */ }
+    const story = seen ? 0 : TIMES.story;
     setPhase('lift');
     at(TIMES.lift, () => setPhase('open'));
-    at(TIMES.lift + TIMES.open + TIMES.hold, () => { burst(); setPhase('burst'); });
-    at(TIMES.lift + TIMES.open + TIMES.hold + TIMES.burst, finish);
+    if (story) at(TIMES.lift + TIMES.open, () => setPhase('story'));
+    const b = TIMES.lift + TIMES.open + story + TIMES.hold;
+    at(b, () => { burst(); setPhase('burst'); });
+    at(b + TIMES.burst, finish);
   };
 
   return (
@@ -96,6 +112,12 @@ export default function Entry({ onOpenSet }) {
         <img src={WORDMARK} alt="" />
       </div>
       <div className="entry-fly" ref={flyRef} aria-hidden="true" />
+      <div className="entry-story" aria-hidden={phase !== 'story'}>
+        <img className="es-sprig" src={sprigSrc} alt="" />
+        {STORY.map((l, i) => <p key={i} style={{ transitionDelay: `${0.5 + i * 0.55}s` }}>{l}</p>)}
+        <img className="es-mark" src={WORDMARK} alt="Yndarena" style={{ transitionDelay: `${0.6 + STORY.length * 0.55}s` }} />
+      </div>
+      {phase !== 'closed' && <div className="entry-skip" aria-hidden="true">Tap to skip</div>}
     </div>
   );
 }

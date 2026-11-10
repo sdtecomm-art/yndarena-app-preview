@@ -3,6 +3,8 @@
 export const REVIEW = {
   updated: '2026-11-02',
   scope: [
+    'Photos (owner, 2026-11-10): every place where a real photo belongs now shows a “Photo coming” frame that names the shot, instead of a drawing: Home hero (the boards), the water test (beading, soaking, placing the drops; also in Care and in the test itself), the five oiling steps, each recipe, Gatherings, the guest page and Plan a gift. The kitchen behind the entrance box is still a render.',
+    'Entrance (2026-11-10): slower on purpose (about 13 seconds the first time, 7 after). The first time on a device, the story printed inside the lid appears in full, word for word, over the open box. Box artwork re-rendered at 3000 px. A tap skips everything.',
     'v12 (owner and partner, 2026-11-09): Cook is back as a tool, not a catalog. Tabs: Home · Cook · Gifts · Gatherings. Cook plans the week’s dinners (nights, people, diet, foods to leave out, time), builds one shopping list added up and sorted by aisle (I have this, own items, share), and shows for each recipe which Yndarena board to use and in what order. Prep ahead lists what can be cut for the next three dinners. Care moved inside Home (care plan tile, next step, water test).',
     'Recipes: 36 dinners for 4 in US units, written for Yndarena (src/data/recipes.js). They are KITCHEN DRAFTS: not cooked and tested yet. Food-safety temperatures and leftover times follow USDA FSIS guidance. No third-party recipe text, photo or layout was copied. No calories or budgets: deliberately left out of v1.',
     'Plans are picked by rules (diet, avoid list, time, no same protein two nights in a row), not by AI. AI swaps can come later on top of the same verified library.',
