@@ -839,7 +839,7 @@ button.g-row:active { opacity: .65; }
 .pkg-lid-in { transform: rotateX(180deg) translateZ(.6px); }
 .pkg img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
 .pkg-lid-out::after, .pkg-lid-in::after, .pkg-flap-out::after { content: ''; position: absolute; inset: 0; pointer-events: none; }
-.pkg-lid-out::after { background: linear-gradient(115deg, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 38%, rgba(120, 100, 80, .06) 100%); box-shadow: inset 0 0 0 1px rgba(150, 135, 120, .18); }
+.pkg-lid-out::after { background: linear-gradient(115deg, rgba(255, 255, 255, .18) 0%, rgba(255, 255, 255, 0) 38%, rgba(120, 100, 80, .05) 100%); box-shadow: inset 0 0 0 1px rgba(150, 135, 120, .18); }
 .pkg-lid-in::after { background: linear-gradient(180deg, rgba(70, 55, 40, .22), rgba(70, 55, 40, .05) 60%, rgba(70, 55, 40, .14)); transition: opacity 1.4s ease .4s; }
 .pkg-flap { position: absolute; left: 0; top: 100%; width: var(--w); height: var(--h); display: block; transform-style: preserve-3d; transform-origin: 50% 0; transform: rotateX(-90deg); }
 .pkg-flap-out { transform: translateZ(.6px); }
@@ -993,3 +993,13 @@ button.g-row:active { opacity: .65; }
 .board-spine { display: block; width: 100%; height: auto; aspect-ratio: 1215 / 96; object-fit: cover; object-position: left center; border-radius: 6px 4px 4px 6px;
   box-shadow: 0 2px 5px rgba(60, 38, 20, .25), 0 1px 1px rgba(60, 38, 20, .3); }
 .board-block ul { margin-top: 10px; }
+
+/* Closed box at rest: a sharp still exactly over the 3D box (made from it). Hidden as soon as the box moves. */
+.pkg .pkg-still { position: absolute; z-index: 3; left: calc(var(--w) * -.12); top: calc(var(--w) * -.22); width: calc(var(--w) * 1.24); height: auto; max-width: none; object-fit: contain; pointer-events: none; transition: opacity .25s ease; }
+.entry:not(.is-closed) .pkg .pkg-still { opacity: 0; }
+/* From the entrance to the app: the wordmark lingers, fades, then the paper lifts off the screen below. */
+.open-curtain { position: absolute; inset: 0; z-index: 200; display: grid; place-items: center; background: var(--c-cream); pointer-events: none; animation: curtainOut 1.6s cubic-bezier(.4, 0, .2, 1) .7s both; }
+.open-curtain img { width: min(46%, 220px); height: auto; animation: curtainMark 1.2s ease-in-out .25s both; }
+@keyframes curtainOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes curtainMark { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-6px) scale(1.02); } }
+@media (prefers-reduced-motion: reduce) { .open-curtain { animation-duration: .4s; animation-delay: 0s; } .open-curtain img { animation-duration: .3s; } }

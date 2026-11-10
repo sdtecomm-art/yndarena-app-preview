@@ -112,15 +112,20 @@ function AppScreen({ shared, setShared }) {
   // On desktop, the wide kitchen photo becomes the page backdrop while the entrance is open.
   useEffect(() => { document.body.classList.toggle('is-entry', nav.atEntry && !shared); }, [nav.atEntry, shared]);
 
+  // After the box opens, the wordmark stays a moment on the app's own paper, then fades and lets the screen show
+  // through (owner, 2026-11-10): no hard cut from the entrance to the app.
+  const [curtain, setCurtain] = useState(false);
+  const curtained = (el) => <>{el}{curtain && <div className="open-curtain" aria-hidden="true" onAnimationEnd={(e) => { if (e.target === e.currentTarget) setCurtain(false); }}><img src={WORDMARK} alt="" /></div>}</>;
+
   const signOut = () => { update((d) => { d.session = null; }); nav.resetAll(); };
   const closeShared = () => { history.replaceState(null, '', location.pathname); setShared(null); };
 
   // Guests open their page with no account and no Home number.
   if (shared?.kind === 'guest') return <div className="guest-wrap"><Guest key={shared.publicId + (shared.token || '')} publicId={shared.publicId} token={shared.token} onLeave={closeShared} /></div>;
   if (shared?.kind === 'retired') return <div className="guest-wrap"><Retired onHome={() => { closeShared(); nav.openSet(); nav.resetAll(); }} /></div>;
-  if (nav.atEntry) return <Entry onOpenSet={nav.openSet} />;
+  if (nav.atEntry) return <Entry onOpenSet={() => { setCurtain(true); nav.openSet(); }} />;
   if (!state.session) {
-    return (
+    return curtained(
       <Auth
         key="auth"
         onAllProducts={nav.allProducts}
@@ -131,8 +136,8 @@ function AppScreen({ shared, setShared }) {
       />
     );
   }
-  if (!user.welcomed) return <Welcome onDone={() => nav.resetAll()} />;
-  return <Main onSignOut={signOut} />;
+  if (!user.welcomed) return curtained(<Welcome onDone={() => nav.resetAll()} />);
+  return curtained(<Main onSignOut={signOut} />);
 }
 
 const JOURNEYS = [

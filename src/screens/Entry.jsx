@@ -4,8 +4,27 @@ import { Sprig } from '../ui.jsx';
 import { WORDMARK } from '../assets.js';
 import kitchenMobile from '../media/kitchen/yndarena-kitchen-mobile.webp';
 import kitchenDesktop from '../media/kitchen/yndarena-kitchen-desktop.webp';
-import lidTop from '../media/package/yndarena-box-lid-top.webp';
-import flapFront from '../media/package/yndarena-box-flap-front.webp';
+import lidTop640 from '../media/package/yndarena-box-lid-top-640.webp';
+import lidTop960 from '../media/package/yndarena-box-lid-top-960.webp';
+import lidTop1280 from '../media/package/yndarena-box-lid-top-1280.webp';
+import lidTop1920 from '../media/package/yndarena-box-lid-top-1920.webp';
+import flap640 from '../media/package/yndarena-box-flap-front-640.webp';
+import flap960 from '../media/package/yndarena-box-flap-front-960.webp';
+import flap1280 from '../media/package/yndarena-box-flap-front-1280.webp';
+import flap1920 from '../media/package/yndarena-box-flap-front-1920.webp';
+
+// The print is pre-scaled (Lanczos) to the size the box is drawn at, so the browser never has to shrink a large
+// image inside the 3D box: shrinking it there drops pixels and breaks up the logo and the tagline.
+const LID_SET = `${lidTop640} 640w, ${lidTop960} 960w, ${lidTop1280} 1280w, ${lidTop1920} 1920w`;
+const FLAP_SET = `${flap640} 640w, ${flap960} 960w, ${flap1280} 1280w, ${flap1920} 1920w`;
+const BOX_SIZES = '(max-width: 600px) 80vw, 520px';
+// At rest the closed box is a flat picture of this same 3D box, made once at 5× with the print projected in sharp
+// (the browser blurs small print inside 3D). It sits exactly on top; the 3D box takes over when the box opens.
+const STILL_SET = `${closed780} 780w, ${closed1160} 1160w, ${closed1560} 1560w`;
+const STILL_SIZES = '(max-width: 600px) 100vw, 645px';
+import closed780 from '../media/package/yndarena-box-closed-780.webp';
+import closed1160 from '../media/package/yndarena-box-closed-1160.webp';
+import closed1560 from '../media/package/yndarena-box-closed-1560.webp';
 import sprigSrc from '../media/package/yndarena-rosemary-sprig.webp';
 
 // Yndarena's general entrance: the real gift box on the kitchen counter, and one button.
@@ -125,6 +144,7 @@ function GiftBox({ onOpen }) {
   return (
     <button className="pkg" onClick={(e) => { e.stopPropagation(); onOpen(); }} tabIndex={-1} aria-label="Yndarena gift box with the Cutting Board Set. Open your set">
       <span className="pkg-shadow" aria-hidden="true" />
+      <img className="pkg-still" src={closed1160} srcSet={STILL_SET} sizes={STILL_SIZES} alt="" aria-hidden="true" draggable="false" />
       <span className="pkg-world" aria-hidden="true">
         {/* Base: four white walls and the foam insert */}
         <span className="pkg-face pkg-front" />
@@ -136,11 +156,11 @@ function GiftBox({ onOpen }) {
         </span>
         {/* Lid: printed top, story inside, magnetic flap with the rosemary */}
         <span className="pkg-lid">
-          <span className="pkg-lid-out"><img src={lidTop} alt="" draggable="false" /></span>
+          <span className="pkg-lid-out"><img src={lidTop1280} srcSet={LID_SET} sizes={BOX_SIZES} alt="" draggable="false" /></span>
           {/* Inside of the lid left plain white (owner, 2026-11-10): its small print can’t be sharp at this size. The story is shown full-size instead. */}
           <span className="pkg-lid-in" />
           <span className="pkg-flap">
-            <span className="pkg-flap-out"><img src={flapFront} alt="" draggable="false" /></span>
+            <span className="pkg-flap-out"><img src={flap1280} srcSet={FLAP_SET} sizes={BOX_SIZES} alt="" draggable="false" /></span>
             <span className="pkg-flap-in" />
           </span>
         </span>
