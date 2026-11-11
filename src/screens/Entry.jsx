@@ -1,188 +1,58 @@
-import { useEffect, useRef, useState } from 'react';
-import { useStore } from '../store.jsx';
-import { Sprig } from '../ui.jsx';
+import { useEffect, useRef } from 'react';
 import { WORDMARK } from '../assets.js';
-import kitchenMobile from '../media/kitchen/yndarena-kitchen-mobile.webp';
-import kitchenDesktop from '../media/kitchen/yndarena-kitchen-desktop.webp';
-import lidTop640 from '../media/package/yndarena-box-lid-top-640.webp';
-import lidTop960 from '../media/package/yndarena-box-lid-top-960.webp';
-import lidTop1280 from '../media/package/yndarena-box-lid-top-1280.webp';
-import lidTop1920 from '../media/package/yndarena-box-lid-top-1920.webp';
-import flap640 from '../media/package/yndarena-box-flap-front-640.webp';
-import flap960 from '../media/package/yndarena-box-flap-front-960.webp';
-import flap1280 from '../media/package/yndarena-box-flap-front-1280.webp';
-import flap1920 from '../media/package/yndarena-box-flap-front-1920.webp';
-
-// The print is pre-scaled (Lanczos) to the size the box is drawn at, so the browser never has to shrink a large
-// image inside the 3D box: shrinking it there drops pixels and breaks up the logo and the tagline.
-const LID_SET = `${lidTop640} 640w, ${lidTop960} 960w, ${lidTop1280} 1280w, ${lidTop1920} 1920w`;
-const FLAP_SET = `${flap640} 640w, ${flap960} 960w, ${flap1280} 1280w, ${flap1920} 1920w`;
-const BOX_SIZES = '(max-width: 600px) 80vw, 520px';
-// At rest the closed box is a flat picture of this same 3D box, made once at 5× with the print projected in sharp
-// (the browser blurs small print inside 3D). It sits exactly on top; the 3D box takes over when the box opens.
-const STILL_SET = `${closed780} 780w, ${closed1160} 1160w, ${closed1560} 1560w`;
-const STILL_SIZES = '(max-width: 600px) 100vw, 645px';
-import closed780 from '../media/package/yndarena-box-closed-780.webp';
-import closed1160 from '../media/package/yndarena-box-closed-1160.webp';
-import closed1560 from '../media/package/yndarena-box-closed-1560.webp';
 import sprigSrc from '../media/package/yndarena-rosemary-sprig.webp';
 
-// Yndarena's general entrance: the real gift box on the kitchen counter, and one button.
-// The box is built in 3D from the packaging artwork (Packaging_Yndarena.pdf, Illustrator, Oct 2026): lid 44 × 27.7 cm,
-// 10 cm tall, magnetic front flap, story printed inside the lid. Every print is the supplied artwork.
-// Inside (owner, 2026-11-10): no foam and no single product, because the same box carries every Yndarena product.
-// It is filled with rosemary, the brand's symbol, drawn from the rosemary illustration on the packaging.
-// “Open your set”: the flap lets go, the lid swings back on its hinge, the rosemary leaps out of the box toward
-// the screen, and a circle of the app's own paper opens behind it into the app. A tap skips it.
-// Slow on purpose (owner, 2026-11-10): the opening is the brand's moment. A tap anywhere skips it.
-const TIMES = { lift: 450, open: 2300, story: 6200, hold: 700, burst: 3500 };
-const STORY_KEY = 'ynd-story-seen';
-// The story printed inside the lid (Packaging_Yndarena.pdf, page 4), shortened: its sentences are verbatim, three are left out.
-const STORY = [
-  'Yndarena was a woman we still hold dear. She was our grandmother’s companion in the kitchen.',
-  'She taught us that rosemary is a symbol of love and memory.',
-  'For her, cooking was an act of love. The kind that leaves its mark on memory.',
-  'In that same spirit, this brand was born, and it carries her name.',
-  'We believe that what is made with love endures. Like Yndarena and her rosemary.',
+// The intro (owner, 2026-11-11): no box and no button. On the app's own paper, rosemary leaps toward the screen
+// while the wordmark settles softly in the middle; then the app shows through. A tap skips it.
+// The rosemary is the illustration from the packaging (Packaging_Yndarena.pdf).
+const TOTAL = 3900;
+
+// [start x %, start y %, rotation°, length as % of screen height, delay ms]: a loose bunch around the middle.
+const SPRIGS = [
+  [46, 52, -30, 22, 0], [54, 50, 28, 24, 80], [50, 46, 4, 20, 160], [42, 58, -62, 18, 220], [58, 58, 64, 19, 260],
+  [48, 60, 178, 17, 320], [53, 42, -8, 16, 380], [40, 47, -96, 17, 430], [61, 47, 98, 18, 470], [45, 40, -150, 15, 520],
+  [56, 38, 150, 15, 560], [38, 54, -120, 14, 600], [63, 55, 122, 14, 640], [50, 56, 200, 16, 690],
 ];
 
 export default function Entry({ onOpenSet }) {
-  const { state, homeNo } = useStore();
-  const signedIn = !!state.session;
-  const [phase, setPhase] = useState('closed');
-  const [origin, setOrigin] = useState(null); // where the box sits on screen: the reveal opens from there
-  const timers = useRef([]);
-  const flyRef = useRef(null);
+  const layer = useRef(null);
   const done = useRef(false);
+  const finish = () => { if (done.current) return; done.current = true; onOpenSet(); };
 
-  const finish = () => { if (done.current) return; done.current = true; timers.current.forEach(clearTimeout); onOpenSet(); };
-  useEffect(() => () => timers.current.forEach(clearTimeout), []);
-
-  // Each sprig in the box is measured where it lies, then a flat copy leaps from that exact spot toward the viewer.
-  const burst = () => {
-    const root = document.querySelector('.entry'), layer = flyRef.current;
-    if (!root || !layer) return;
-    const o = root.getBoundingClientRect();
-    const box = document.querySelector('.pkg-inside')?.getBoundingClientRect();
-    if (box) setOrigin({ x: box.left - o.left + box.width / 2, y: box.top - o.top + box.height / 2 });
-    const cx = o.width / 2, cy = o.height * 0.42;
-    document.querySelectorAll('.pkg .ros').forEach((el, i) => {
-      const r = el.getBoundingClientRect();
-      const x = r.left - o.left + r.width / 2, y = r.top - o.top + r.height / 2;
-      const len = Math.max(r.width, r.height) * 0.92;
-      const rot = +el.dataset.rot;
-      const img = document.createElement('img');
-      img.src = sprigSrc; img.alt = ''; img.className = 'fly';
-      img.style.height = len + 'px'; img.style.left = x + 'px'; img.style.top = y + 'px';
-      layer.appendChild(img);
-      const rnd = (a, b) => a + ((Math.sin((i + 1) * 97.13) + 1) / 2) * (b - a); // stable per sprig
-      const dx = (x - cx) * rnd(2.2, 3.6) + rnd(-60, 60);
-      const dy = (y - cy) * rnd(1.6, 2.6) - o.height * rnd(0.25, 0.55);
-      const s = rnd(2.6, 4.2), turn = rnd(-45, 45);
-      img.animate([
-        { transform: `translate(-50%, -50%) rotate(${rot}deg) scale(1)`, opacity: 1, filter: 'blur(0px)' },
-        { transform: `translate(calc(-50% + ${dx * 0.12}px), calc(-50% + ${dy * 0.18 - 14}px)) rotate(${rot + turn * 0.15}deg) scale(1.12)`, opacity: 1, filter: 'blur(0px)', offset: 0.22 },
-        { transform: `translate(calc(-50% + ${dx * 0.55}px), calc(-50% + ${dy * 0.55}px)) rotate(${rot + turn * 0.6}deg) scale(${1 + (s - 1) * 0.5})`, opacity: 0.95, filter: 'blur(0.5px)', offset: 0.62 },
-        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${rot + turn}deg) scale(${s})`, opacity: 0, filter: 'blur(3px)' },
-      ], { duration: rnd(2300, 2900), delay: rnd(0, 650), easing: 'cubic-bezier(.33, 0, .2, 1)', fill: 'both' });
-    });
-  };
-
-  const open = () => {
-    if (phase !== 'closed') { finish(); return; }
+  useEffect(() => {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) { setPhase('open'); timers.current.push(setTimeout(finish, 450)); return; }
-    const at = (ms, fn) => timers.current.push(setTimeout(fn, ms));
-    // The story shows the first time on this device; after that the box opens straight to the rosemary.
-    let seen = false; try { seen = localStorage.getItem(STORY_KEY) === '1'; localStorage.setItem(STORY_KEY, '1'); } catch (e) { /* private mode */ }
-    const story = seen ? 0 : TIMES.story;
-    setPhase('lift');
-    at(TIMES.lift, () => setPhase('open'));
-    if (story) at(TIMES.lift + TIMES.open, () => setPhase('story'));
-    const b = TIMES.lift + TIMES.open + story + TIMES.hold;
-    at(b, () => { burst(); setPhase('burst'); });
-    at(b + TIMES.burst, finish);
-  };
+    const el = layer.current;
+    if (!reduce && el) {
+      const { width: W, height: H } = el.getBoundingClientRect();
+      el.querySelectorAll('.fly').forEach((img, i) => {
+        const [x, y, rot, len, delay] = SPRIGS[i];
+        const rnd = (a, b) => a + ((Math.sin((i + 1) * 97.13) + 1) / 2) * (b - a); // stable per sprig
+        const sx = (x / 100) * W, sy = (y / 100) * H;
+        const dx = (sx - W / 2) * rnd(5, 8) + rnd(-40, 40);
+        const dy = (sy - H / 2) * rnd(4, 7) - H * rnd(0.05, 0.25);
+        const s = rnd(2.6, 4), turn = rnd(-40, 40);
+        img.style.height = `${(len / 100) * H}px`;
+        img.style.left = sx + 'px'; img.style.top = sy + 'px';
+        img.animate([
+          { transform: `translate(-50%, -50%) rotate(${rot}deg) scale(.25)`, opacity: 0, filter: 'blur(0px)' },
+          { transform: `translate(calc(-50% + ${dx * 0.08}px), calc(-50% + ${dy * 0.08}px)) rotate(${rot + turn * 0.1}deg) scale(.7)`, opacity: 1, filter: 'blur(0px)', offset: 0.2 },
+          { transform: `translate(calc(-50% + ${dx * 0.55}px), calc(-50% + ${dy * 0.55}px)) rotate(${rot + turn * 0.6}deg) scale(${1 + (s - 1) * 0.5})`, opacity: 0.9, filter: 'blur(1px)', offset: 0.62 },
+          { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${rot + turn}deg) scale(${s})`, opacity: 0, filter: 'blur(4px)' },
+        ], { duration: rnd(2500, 3000), delay, easing: 'cubic-bezier(.33, 0, .2, 1)', fill: 'both' });
+      });
+    }
+    const t = setTimeout(finish, reduce ? 900 : TOTAL);
+    return () => clearTimeout(t);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className={`entry is-${phase}`} onClick={phase !== 'closed' ? finish : undefined}>
-      <img className="entry-bg is-portrait" src={kitchenMobile} alt="" decoding="async" />
-      <img className="entry-bg is-landscape" src={kitchenDesktop} alt="" decoding="async" />
-      <div className="entry-scroll">
-        <header className="entry-head">
-          <img className="entry-wordmark" src={WORDMARK} alt="Yndarena, turning houses into homes" />
-          {signedIn && <span className="entry-home"><Sprig />Home No. {homeNo}</span>}
-        </header>
-        <h1 className="sr-only">Yndarena</h1>
-
-        <div className="entry-stage">
-          <GiftBox onOpen={open} />
-        </div>
-
-        <div className="entry-foot">
-          <button className="btn btn-primary btn-block entry-open" onClick={(e) => { e.stopPropagation(); open(); }}>
-            <span>Open your set</span>
-          </button>
-        </div>
+    <div className="intro" onClick={finish} role="button" tabIndex={0} aria-label="Yndarena. Tap to continue" onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') finish(); }}>
+      <h1 className="sr-only">Yndarena</h1>
+      <div className="intro-fly" ref={layer} aria-hidden="true">
+        {SPRIGS.map((_, i) => <img key={i} className="fly" src={sprigSrc} alt="" draggable="false" />)}
       </div>
-      <div className="entry-veil" aria-hidden="true" />
-      <div className="entry-reveal" aria-hidden="true" style={origin ? { '--rx': origin.x + 'px', '--ry': origin.y + 'px' } : undefined}>
-        <img src={WORDMARK} alt="" />
-      </div>
-      <div className="entry-fly" ref={flyRef} aria-hidden="true" />
-      <div className="entry-story" aria-hidden={phase !== 'story'}>
-        <img className="es-sprig" src={sprigSrc} alt="" />
-        {STORY.map((l, i) => <p key={i} style={{ transitionDelay: `${0.5 + i * 0.55}s` }}>{l}</p>)}
-        <img className="es-mark" src={WORDMARK} alt="Yndarena" style={{ transitionDelay: `${0.6 + STORY.length * 0.55}s` }} />
-      </div>
-      {phase !== 'closed' && <div className="entry-skip" aria-hidden="true">Tap to skip</div>}
+      <img className="intro-mark" src={WORDMARK} alt="" aria-hidden="true" />
+      <div className="intro-skip" aria-hidden="true">Tap to skip</div>
     </div>
-  );
-}
-
-function GiftBox({ onOpen }) {
-  return (
-    <button className="pkg" onClick={(e) => { e.stopPropagation(); onOpen(); }} tabIndex={-1} aria-label="Yndarena gift box with the Cutting Board Set. Open your set">
-      <span className="pkg-shadow" aria-hidden="true" />
-      <img className="pkg-still" src={closed1160} srcSet={STILL_SET} sizes={STILL_SIZES} alt="" aria-hidden="true" draggable="false" />
-      <span className="pkg-world" aria-hidden="true">
-        {/* Base: four white walls and the foam insert */}
-        <span className="pkg-face pkg-front" />
-        <span className="pkg-face pkg-back" />
-        <span className="pkg-face pkg-left" />
-        <span className="pkg-face pkg-right" />
-        <span className="pkg-face pkg-inside">
-          <RosemaryBed />
-        </span>
-        {/* Lid: printed top, story inside, magnetic flap with the rosemary */}
-        <span className="pkg-lid">
-          <span className="pkg-lid-out"><img src={lidTop1280} srcSet={LID_SET} sizes={BOX_SIZES} alt="" draggable="false" /></span>
-          {/* Inside of the lid left plain white (owner, 2026-11-10): its small print can’t be sharp at this size. The story is shown full-size instead. */}
-          <span className="pkg-lid-in" />
-          <span className="pkg-flap">
-            <span className="pkg-flap-out"><img src={flap1280} srcSet={FLAP_SET} sizes={BOX_SIZES} alt="" draggable="false" /></span>
-            <span className="pkg-flap-in" />
-          </span>
-        </span>
-      </span>
-    </button>
-  );
-}
-
-// The rosemary bed: sprigs lying in the box, laid out by hand so the box looks full but not messy.
-// [left %, top %, length as % of the box depth, rotation°]
-const BED = [
-  [12, 30, 92, 78], [24, 62, 88, 102], [36, 28, 95, 84], [47, 66, 90, 96], [58, 32, 92, 80], [70, 64, 94, 104], [82, 30, 88, 86], [90, 66, 84, 98],
-  [18, 50, 86, 262], [41, 46, 90, 276], [63, 50, 88, 266], [86, 46, 86, 280],
-  [6, 70, 70, 112], [30, 80, 76, 70], [52, 18, 74, 108], [75, 16, 72, 72], [95, 22, 66, 118], [66, 84, 72, 252],
-];
-function RosemaryBed() {
-  return (
-    <span className="pkg-bed">
-      {BED.map(([x, y, l, r], i) => (
-        <img key={i} className="ros" data-rot={r} src={sprigSrc} alt="" draggable="false"
-          style={{ left: x + '%', top: y + '%', height: `calc(var(--d) * ${l / 100})`, transform: `translate(-50%, -50%) rotate(${r}deg)`, animationDelay: `${(i % 6) * -0.7}s` }} />
-      ))}
-    </span>
   );
 }

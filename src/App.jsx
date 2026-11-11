@@ -111,7 +111,7 @@ function AppScreen({ shared, setShared }) {
   const nav = useNav();
   const toast = useToast();
   // On desktop, the wide kitchen photo becomes the page backdrop while the entrance is open.
-  useEffect(() => { document.body.classList.toggle('is-entry', nav.atEntry && !shared); }, [nav.atEntry, shared]);
+  useEffect(() => { document.body.classList.remove('is-entry'); }, []);
 
   // After the box opens, the wordmark stays a moment on the app's own paper, then fades and lets the screen show
   // through (owner, 2026-11-10): no hard cut from the entrance to the app.
