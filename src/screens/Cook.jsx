@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useStore } from '../store.jsx';
 import { useNav } from '../nav.jsx';
-import { TopBar, Button, Icon, Chip, useToast, DemoNote, PhotoSlot } from '../ui.jsx';
+import { TopBar, Button, Icon, Chip, useToast, DemoNote, PhotoSlot, ConfirmTap } from '../ui.jsx';
 import { iso, fromIso, DAY } from '../lib.js';
 import { IS_PREVIEW } from '../data/links.js';
 import spineM from '../media/product/yndarena-board-spine-m.webp';
@@ -139,6 +139,9 @@ function WeekPlan({ plan, people }) {
           <Button small variant="ghost" className="grow" onClick={() => nav.push('prep')}>Prep ahead</Button>
           <Button small variant="ghost" className="grow" onClick={() => nav.push('cook-setup')}>Change plan</Button>
         </div>
+        {/* Two taps, so a plan isn't lost by accident. The shopping list goes with it; your own items stay. */}
+        <ConfirmTap onConfirm={() => { updateUser((u) => { delete u.cook.plan; u.cook.have = {}; }); toast('Plan deleted.'); }}
+          render={(armed, tap) => <Button block variant="text" onClick={tap}>{armed ? 'Tap again to delete' : 'Delete plan'}</Button>} />
       </div>
     </section>
   );
